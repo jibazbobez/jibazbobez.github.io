@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Arrange Master Illustrator Plugin</title>
+    <meta name="description" content="Find answers to frequently asked questions about the Arrange Master plugin, covering installation, basic usage, troubleshooting common layout issues, and more.">
+
+    <link rel="canonical" href="https://andrewr.online/arrangemaster/faq.html" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <meta name="apple-mobile-web-app-title" content="Arrange Master">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How do I install the Arrange Master .zxp file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The .zxp file requires a dedicated installer. We recommend using Anastasiy's Extension Manager. Simply download it, launch it, and drag your ArrangeMaster.zxp file onto its window to install."
+        }
+      },{
+        "@type": "Question",
+        "name": "Why should I pay for this when free arranger scripts exist?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Arrange Master is a professional creative tool that offers advanced 'true-shape' algorithms, a non-destructive session-based workflow, a professional UI, and dedicated support—features that go far beyond what simple free scripts can do, ultimately saving you hours of manual work."
+        }
+      },{
+        "@type": "Question",
+        "name": "Does it support true-shape nesting or just bounding boxes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It does both! Standard modes use bounding boxes for speed, but enabling the 'Dense Packing' option in the Greedy panel activates a powerful true-shape nesting engine that analyzes the actual vector contours of your objects for a much tighter, organic fit."
+        }
+      },{
+        "@type": "Question",
+        "name": "Why are my items arranged in a rectangle even though my container is a circle?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You are likely using a layout method like Grid, Knolling, or Greedy, which operate on the container's rectangular bounding box. To arrange items inside a non-rectangular shape, you must use the 'Shape Respect Layout' method."
+        }
+      },{
+        "@type": "Question",
+        "name": "In Shape Respect, my items aren't arranging inside the shape at all. What's wrong?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This usually happens when your container is a Group instead of a single Compound Path. The Shape Respect algorithm requires a unified path to work. To fix this, select your container, ungroup it, and create a Compound Path by going to Object > Compound Path > Make (Cmd+8 / Ctrl+8)."
+        }
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <!-- =======================
+    NAVIGATION
+    ======================== -->
+    <header class="main-header">
+        <nav class="container">
+            <a href="index.html" class="logo-container">
+                <img src="assets/logo.svg" alt="Arrange Master Logo" class="logo-icon">
+                <span class="logo-text">Arrange Master</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#use-cases">Use Cases</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="demo.html">Demo</a></li>
+                <li><a href="documentation.html">Documentation</a></li>
+                <li><a href="faq.html" class="active">FAQ</a></li>
+            </ul>
+            <a class="cta-button primary js-show-payment-modal" role="button">Get Arrange Master</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="doc-page">
+            <div class="doc-page-background">
+                <img src="assets/faq-background.webp" alt="Question marks background">
+            </div>
+            <div class="container">
+                <h1>Frequently Asked Questions (FAQ)</h1>
+				
+              <ol>
+                    <li><a href="#installation"><strong>Installation & Setup</strong></a>
+                        <ul>
+                            <li><a href="#install-zxp">How do I install the Arrange Master `.zxp` file?</a></li>
+                            <li><a href="#find-panel">Where do I find the panel after installation?</a></li>
+                            <li><a href="#blank-panel">The panel is blank or shows an error. What should I do?</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#basic-usage"><strong>Basic Usage</strong></a>
+                        <ul>
+                            <li><a href="#why-paid">Why should I pay for this when free arranger scripts exist?</a></li>
+                            <li><a href="#container-detection">How does the plugin decide which object is the container?</a></li>
+                            <li><a href="#raster-images">How does Arrange Master handle raster images (photos)?</a></li>
+                            <li><a href="#true-shape-nesting">Does it support true-shape nesting or just bounding boxes?</a></li>
+                            <li><a href="#group-container">Can I use a group of objects as the container?</a></li>
+                            <li><a href="#layers">Does the plugin work with objects on different layers?</a></li>
+                            <li><a href="#rotation-in-shapes">Can the plugin rotate items to better fit inside a custom shape?</a></li>
+                        </ul>
+                    </li>
+                    </li>
+                    <li><a href="#troubleshooting-layouts"><strong>Troubleshooting Layouts</strong></a>
+                        <ul>
+                            <li><a href="#nothing-happens">I clicked "Arrange" but nothing happens, or I get an error. Why?</a></li>
+                            <li><a href="#wrong-method">Why are my items arranged in a rectangle even though my container is a circle?</a></li>
+                            <li><a href="#items-dont-fill">Why do my items only fill a small part of the container?</a></li>
+                            <li><a href="#overflow-items">Some of my items are placed outside the container. Why?</a></li>
+                            <li><a href="#shape-respect-fails">In Shape Respect, my items aren't arranging inside the shape at all. What's wrong?</a></li>
+                            <li><a href="#accurate-mode-slow">Why does Shape Respect (Accurate Mode) take so long to run?</a></li>
+                            <li><a href="#raster-image-error">Why do I get a "Please select at least 2 objects" error with raster images?</a></li>
+                            <li><a href="#cancel-fail">I clicked "Cancel", but my original objects are gone! How do I get them back?</a></li>
+							<li><a href="#not-enough-objects">Why can't Arrange Master create a beautiful composition with just a few objects?</a></li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3 id="installation">1. Installation & Setup</h3>
+                
+                <h4 id="install-zxp">Q: How do I install the Arrange Master `.zxp` file?</h4>
+                <p>A: The <code>.zxp</code> file is an extension package that needs a dedicated installer. You cannot open it directly. We highly recommend using <strong>Anastasiy's Extension Manager</strong>, a free and reliable industry-standard tool.</p>
+                <ol>
+                    <li>Download and install Anastasiy’s Extension Manager from: <a href="https://install.anastasiy.com/" target="_blank" rel="noopener noreferrer"><strong>install.anastasiy.com</strong></a></li>
+                    <li>Launch the Extension Manager.</li>
+                    <li>Simply drag and drop your <code>ArrangeMaster.zxp</code> file onto the Extension Manager window to install.</li>
+                </ol>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_001.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_001.webp" alt="Anastasiy's Extension Manager window">
+					</a>
+				</div>
+
+                <p><strong>Alternative Installers:</strong></p>
+                <p>If for any reason Anastasiy's Extension Manager doesn't work or fails to detect your Adobe applications, you can use one of these excellent alternatives:</p>
+                <ul>
+                    <li><strong>ZXPInstaller:</strong> A simple and effective alternative. Download from <a href="https://zxpinstaller.com/" target="_blank" rel="noopener noreferrer"><strong>zxpinstaller.com</strong></a></li>
+                    <li><strong>aescripts + aeplugins Manager App:</strong> A powerful manager app that is very good at detecting Adobe applications. Download from <a href="https://aescripts.com/learn/aescripts-aeplugins-manager-app/" target="_blank" rel="noopener noreferrer"><strong>aescripts.com/aescripts-aeplugins-manager-app/</strong></a> and use the <code>File > Install ZXP</code> menu option.</li>
+                </ul>
+
+                <h4 id="find-panel">Q: Where do I find the panel after installation?</h4>
+                <p>A: Once installed, you must <strong>restart Adobe Illustrator</strong>. After restarting, you can find the panel in the main menu under:<br><strong><code>Window > Extensions > Arrange Master</code></strong></p>
+
+                <h4 id="blank-panel">Q: The panel is blank or shows an error. What should I do?</h4>
+                <p>A: This is usually a one-time issue with the Creative Cloud syncing process. Please try these steps:</p>
+                <ol>
+                    <li>Completely quit Adobe Illustrator and the Creative Cloud Desktop app.</li>
+                    <li>Relaunch the Creative Cloud Desktop app and ensure you are logged in.</li>
+                    <li>Relaunch Adobe Illustrator. The panel should now load correctly.</li>
+                </ol>
+                
+                <h3 id="basic-usage">2. Basic Usage</h3>
+
+                <div class="screenshot-wrapper">
+                    <a href="assets/swiss-army-knife.webp" class="screenshot-preview">
+                        <img src="assets/swiss-army-knife.webp" alt="Swiss Army Knife">
+                    </a>
+                </div>
+                
+                <h4 id="why-paid">Q: Why should I pay for this when free arranger scripts exist?</h4>
+                <p>A: While free scripts can handle simple grid tasks, Arrange Master is a professional creative tool built for advanced results, stability, and speed. You are investing in:</p>
+                <ul>
+                    <li><strong>Save Time, Save Money:</strong> Arrange Master does in seconds what takes hours to do by hand. The price is set at roughly the cost of one hour of a professional designer's time. This means it pays for itself the very first time you use it on a project.</li>
+                    <li><strong>Advanced "True-Shape" Algorithms:</strong> Unlike free scripts that only see rectangular bounding boxes, our <strong>Dense Packing</strong> and <strong>Shape Respect</strong> engines analyze the actual vector contours of your objects. This allows them to organically fill concave areas (like the space inside a letter 'O'), creating far more natural and dense layouts.</li>
+                    <li><strong>A Non-Destructive Workflow:</strong> Our robust session-based system protects your original work. You can endlessly experiment with settings, randomize layouts, and cancel at any time, knowing your original objects are always safe. Most free scripts work destructively, permanently altering your art.</li>
+                    <li><strong>Professional UI & Stability:</strong> A clean, intuitive panel gives you real-time control, while built-in safeguards prevent Illustrator from freezing on complex tasks. This provides a reliable and efficient workflow that scripts cannot match.</li>
+                    <li><strong>Dedicated Support & Updates:</strong> This is a commercially supported product with ongoing development, not a "fire-and-forget" script. You get access to updates and dedicated user support.</li>
+                </ul>
+
+                <h4 id="container-detection">Q: How does the plugin decide which object is the container?</h4>
+                <p>A: Arrange Master keeps it simple: it automatically identifies the object with the <strong>largest visual area</strong> in your selection and treats it as the container. All other objects in the selection become the items to be arranged.</p>
+
+                <h4 id="raster-images">Q: How does Arrange Master handle raster images (photos)?</h4>
+                <p>A: All layout modes can arrange raster images based on their rectangular bounding boxes. However, the advanced <strong>Dense Packing</strong> mode is an exception. Because it needs to analyze the precise vector geometry of each object, it is <strong>vector-only</strong>. If you enable Dense Packing with a selection that includes raster images, the plugin will show an error and cancel the operation to ensure predictable results.</p>
+
+                <h4 id="true-shape-nesting">Q: Does it support true-shape nesting or just bounding boxes?</h4>
+                <p>A: It does both! This is a core strength of Arrange Master. By default, the <strong>Grid, Knolling, and standard Greedy</strong> layouts operate on rectangular bounding boxes for maximum speed and predictability. However, when you enable the <strong>Dense Packing</strong> option in the Greedy panel, you activate a powerful "true-shape" nesting engine that analyzes the actual vector contours of your objects, allowing for far more organic and efficient packing.</p>
+
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_013.webp" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_013.webp" alt="Greedy layout vs a Dense Packing">
+                    </a>
+                </div>
+
+                <h4 id="group-container">Q: Can I use a group of objects as the container?</h4>
+                <p>A: No. The container must be a <strong>single, continuous path object</strong>. This can be a simple shape (like a rectangle or ellipse) or a <strong>Compound Path</strong>. If your complex container shape is a Group, you must first convert it to a Compound Path.</p>
+                <p><strong>How to fix:</strong> Select your grouped container shape and go to <code>Object > Compound Path > Make</code> (or press <code>Cmd+8</code> / <code>Ctrl+8</code>).</p>
+
+                <h4 id="layers">Q: Does the plugin work with objects on different layers?</h4>
+                <p>A: Yes. Arrange Master operates on your current selection, regardless of what layers the objects are on. When the arrangement is finalized, the objects will remain on their original layers but will be positioned inside the container.</p>
+
+                <h4 id="rotation-in-shapes">Q: Can the plugin rotate items to better fit inside a custom shape?</h4>
+                <p>A: Yes. The <strong>Shape Respect</strong> layout has two rotation options. <strong>"Allow 90° turn"</strong> gives the algorithm permission to rotate items by 90 degrees if it finds a better fit. The new <strong>"Vary Rotation"</strong> setting adds organic randomness by rotating each item by a random angle *before* placement, which is perfect for creating natural-looking compositions.</p>
+
+                <h3 id="troubleshooting-layouts">3. Troubleshooting Layouts</h3>
+                
+                <h4 id="nothing-happens">Q: I clicked "Arrange" but nothing happens, or I get an error. Why?</h4>
+                <p>A: This is almost always due to the selection. To use Arrange Master, you must select <strong>at least two objects</strong>: one object to serve as the container, and at least one item to be arranged inside it.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/faq_screenshot_001.webp" class="screenshot-preview">
+						<img src="assets/screenshots/faq_screenshot_001.webp" alt="Basic Usage">
+					</a>
+				</div>
+
+                <h4 id="wrong-method">Q: Why are my items arranged in a rectangle even though my container is a circle?</h4>
+                <p>A: You are likely using a layout method that does not respect the container's shape, such as <strong>Grid, Knolling, or Greedy</strong>. These algorithms operate on the container's rectangular bounding box.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/faq_screenshot_002.webp" class="screenshot-preview">
+						<img src="assets/screenshots/faq_screenshot_002.webp" alt="Why are my items arranged in a rectangle?">
+					</a>
+				</div>
+				
+                <p><strong>Solution:</strong> To arrange items inside a non-rectangular shape, you <strong>must</strong> use the <strong>Shape Respect Layout</strong> method. Click the fourth icon (letter "S" with dots scattered inside) in the panel.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/faq_screenshot_003.webp" class="screenshot-preview">
+						<img src="assets/screenshots/faq_screenshot_003.webp" alt="Troubleshooting Layouts">
+					</a>
+				</div>
+
+                <h4 id="items-dont-fill">Q: Why do my items only fill a small part of the container?</h4>
+                <p>A: This usually means your <strong>"Min. Spacing"</strong> value is too small for the number of items you have. The algorithm places items, leaves the required spacing, and then runs out of items before it can fill the entire area.</p>
+                <p><strong>Solution:</strong> Try increasing the "Min. Spacing" value in the panel and click <code>Arrange</code> again.</p>
+
+                <h4 id="overflow-items">Q: Some of my items are placed outside the container. Why?</h4>
+                <p>A: These are "overflow" items. The plugin places any item that cannot fit inside the container in a neat row above it, so you never lose your work. This can happen for two main reasons:</p>
+                <ol>
+                    <li>There is physically not enough space left inside the container.</li>
+                    <li>In <strong>Grid Layout</strong>, the item (after rotation/scaling) is larger than the calculated size of a single grid cell.</li>
+                </ol>
+                <p><strong>Solution:</strong> To fit more items, either <strong>increase the size of your container object</strong> or <strong>decrease the "Min. Spacing"</strong> value.</p>
+                
+                <h4 id="shape-respect-fails">Q: In Shape Respect, my items aren't arranging inside the shape at all. What's wrong?</h4>
+                <p>A: This almost always happens when your complex container shape is a <strong>Group</strong> instead of a <strong>Compound Path</strong>. The Shape Respect algorithm requires a single, unified path to analyze.</p>
+                <p><strong>Solution:</strong> Select your container object. If it is a Group, ungroup it (<code>Cmd+Shift+G</code> / <code>Ctrl+Shift+G</code>) and then immediately create a Compound Path from its parts by going to <code>Object > Compound Path > Make</code> (<code>Cmd+8</code> / <code>Ctrl+8</code>). Now, re-select all your items and the new Compound Path container, and run Arrange Master again.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/faq_screenshot_004.webp" class="screenshot-preview">
+						<img src="assets/screenshots/faq_screenshot_004.webp" alt="Compound Path">
+					</a>
+				</div>
+
+                <h4 id="accurate-mode-slow">Q: Why does Shape Respect (Accurate Mode) take so long to run?</h4>
+                <p>A: <strong>Accurate Mode</strong> is an extremely powerful but computationally intensive algorithm. It creates a dense grid of thousands of potential placement points and checks each one for every item. This produces high-quality results but can be slow with many objects.</p>
+                <p><strong>Solution:</strong> For large numbers of items (>100), it is recommended to use the default "Fast" mode or the "Chaotic Mode" for much better performance. Use "Accurate Mode" when you have fewer items and need the most precise, grid-like placement possible.</p>
+
+                <h4 id="raster-image-error">Q: I selected raster images and a container, but Arrange Master still says "Please select at least 2 objects." Why?</h4>
+                <p>A: Sometimes when arranging raster objects (bitmaps) inside a container, Arrange Master may not correctly process the selection. This is often related to the stacking order of the objects.</p>
+                <p><strong>Solution:</strong> Select the container, right-click on it, and choose <strong><code>Arrange > Send to Back</code></strong> from the context menu. Then, try the arrangement again. Arrange Master should now correctly process the selection and place the objects according to your settings.</p>
+
+                <h4 id="cancel-fail">Q: I clicked "Cancel", but my original objects are gone! How do I get them back?</h4>
+                <p>A: Don't worry, your objects are safe! The "Cancel" function works by deleting the temporary arranged copies and then making your original, hidden items visible again. If you immediately perform another action or if Illustrator is under heavy load, there might be a slight delay in the screen redraw.</p>
+                <p><strong>Solution:</strong> Simply press <code>Cmd+Z</code> / <code>Ctrl+Z</code> (Undo) once. This will refresh the document state and your original objects will reappear.</p>
+				
+				<h4 id="not-enough-objects">Q: Why can't Arrange Master create a beautiful composition with just a few objects?</h4>
+                <p>A: Arrange Master is a powerful packing tool, but it is not a composition artist. For its algorithms to create a dense and harmonious layout, they need a sufficient number of items to work with. Trying to arrange just 5 or 10 large, awkwardly shaped objects will often result in a sparse and unbalanced composition.</p>
+                <ul>
+                    <li><strong>The "Main Dish and Garnish" Analogy:</strong> Think of your large, important items as the "main dish" of your composition. To arrange them beautifully, you need a "garnish" — a variety of smaller, simpler items (circles, squares, simple icons) that the algorithm can use to fill the empty spaces and smooth out the edges of the layout.</li>
+                    <li><strong>Solution:</strong> If your composition looks empty, try adding a set of smaller, decorative "filler" items to your selection. This will give the algorithm the material it needs to create a much tighter and more visually appealing result.</li>
+                </ul>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/faq_screenshot_005.webp" class="screenshot-preview">
+						<img src="assets/screenshots/faq_screenshot_005.webp" alt="The Main Dish and Garnish Analogy">
+					</a>
+				</div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- =======================
+    FOOTER
+    ======================== -->
+    <footer class="main-footer-bottom">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#use-cases">Use Cases</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="demo.html">Demo</a>
+                <a href="documentation.html">Documentation</a>
+                <a href="faq.html" class="active">FAQ</a>
+            </div>
+            <div class="social-links">
+                <a href="https://t.me/andrew_r_tools" target="_blank" rel="noopener noreferrer" title="Telegram" class="social-link-item">
+                    <img src="../assets/telegram-logo.svg" alt="Telegram Icon" class="social-icon">
+                    <span class="social-text">t.me/andrew_r_tools</span>
+                </a>
+                <a href="https://x.com/andrew_r_tools" target="_blank" rel="noopener noreferrer" title="X (Twitter)" class="social-link-item">
+                    <img src="../assets/x-logo.svg" alt="X (Twitter) Icon" class="social-icon">
+                    <span class="social-text">@andrew_r_tools</span>
+                </a>
+                <a href="mailto:andrewrybalko@yandex.ru" title="Email" class="social-link-item">
+                    <img src="../assets/email-icon.svg" alt="Email Icon" class="social-icon">
+                    <span class="social-text">andrewrybalko@yandex.ru</span>
+                </a>
+            </div>
+            <p>© <span id="copyright-year">2025</span> <a href="https://www.andrewr.online" target="_blank">Andrew R. Tools</a>. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+	<!-- =======================
+	LIGHTBOX
+	======================== -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-image">
+        <a class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous image"></a>
+        <a class="lightbox-nav next" id="lightbox-next" aria-label="Next image"></a>
+    </div>
+
+    <!-- =======================
+    PAYMENT MODAL
+    ======================== -->
+    <div id="payment-modal" class="payment-modal">
+        <div class="pricing-card">
+            <span class="modal-close">&times;</span>
+            <h2>Choose Your Payment Method</h2>
+            <p class="modal-description">All transactions are handled by trusted platforms. Please select the one you're most comfortable with:</p>
+            
+            <div class="payment-options">
+                <!-- Option 1: Hipolink -->
+                <a href="https://hipolink.net/andrewr/products/arrange-master" target="_blank" class="cta-button payment-option-btn primary">Buy on Hipolink</a>
+                <p class="author-cut-info">The author receives ~90% of the sale.</p>
+                
+                <!-- Option 2: Creative Market -->
+                <a href="https://creativemarket.com/Andrew_R/291885949-Arrange-Master-Illustrator-Plugin" target="_blank" class="cta-button payment-option-btn --cm">Buy on Creative Market</a>
+                <p class="author-cut-info">The author receives ~60% of the sale.</p>
+
+                <!-- Option 3: Envato -->
+                <a href="https://graphicriver.net/item/arrange-master-illustrator-plugin/60349389" target="_blank" class="cta-button payment-option-btn --envato">Buy on Envato Market</a>
+                <p class="author-cut-info">The author receives ~50% of the sale.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>

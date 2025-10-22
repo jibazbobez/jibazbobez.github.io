@@ -1,0 +1,77 @@
+/* =======================
+   СТИЛИ ДЛЯ СТРАНИЦЫ 404
+   ======================== */
+
+:root {
+    --bg-404: #C3BFD3;
+    --accent-404: #D98244;
+    --accent-hover-404: #C77237;
+    --text-primary-404: #4D1C19;
+    --text-secondary-404: #763B40;
+    --font-family: 'Inter', sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-404);
+    color: var(--text-primary-404);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.error-page-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.error-content {
+    max-width: 650px;
+    width: 100%;
+}
+
+.error-illustration {
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    margin-bottom: 40px;
+}
+
+.error-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary-404);
+}
+
+.error-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary-404);
+    margin-top: 15px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.error-button {
+    display: inline-block;
+    background-color: var(--accent-404);
+    color: #FFFFFF;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.error-button:hover {
+    background-color: var(--accent-hover-404);
+}

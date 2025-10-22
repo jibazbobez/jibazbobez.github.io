@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation — Arrange Master Illustrator Plugin</title>
+    <meta name="description" content="Complete documentation for the Arrange Master plugin. Learn about installation, the user interface, layout methods (Grid, Knolling, Shape Respect), and best practices.">
+
+    <link rel="canonical" href="https://andrewr.online/arrangemaster/documentation.html" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <meta name="apple-mobile-web-app-title" content="Arrange Master">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Install the Arrange Master plugin for Adobe Illustrator",
+      "description": "Step-by-step instructions for installing the Arrange Master plugin on Windows and macOS using an installer, extension manager, or manual method.",
+      "step": [
+        {
+          "@type": "HowToSection",
+          "name": "Windows Installer (Recommended)",
+          "itemListElement": [
+            {
+              "@type": "HowToStep",
+              "text": "Unzip the downloaded archive and open the 'Windows Install' folder."
+            },
+            {
+              "@type": "HowToStep",
+              "text": "Run the 'ArrangeMaster-v1.x.x-Setup.exe' file and follow the on-screen instructions."
+            }
+          ]
+        },
+        {
+          "@type": "HowToSection",
+          "name": "ZXP Installers (macOS & Advanced Windows)",
+          "itemListElement": [
+            {
+              "@type": "HowToStep",
+              "text": "Download and install a ZXP installer like Anastasiy’s Extension Manager."
+            },
+            {
+              "@type": "HowToStep",
+              "text": "Launch the extension manager."
+            },
+            {
+              "@type": "HowToStep",
+              "text": "Drag and drop the 'ArrangeMaster.zxp' file onto the manager's window to install."
+            }
+          ]
+        },
+        {
+          "@type": "HowToSection",
+          "name": "Manual Installation (macOS)",
+          "itemListElement": [
+            {
+              "@type": "HowToStep",
+              "text": "Find the 'com.andrewrybalko.arrangemaster' folder in the 'Manual Install' directory of your download."
+            },
+            {
+              "@type": "HowToStep",
+              "text": "Move this folder to the Adobe extensions directory: '~/Library/Application Support/Adobe/CEP/extensions/'."
+            }
+          ]
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Final Step: Finding the Panel",
+          "text": "After any installation method, restart Adobe Illustrator. Then, find the panel under the menu: Window > Extensions > Arrange Master."
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <!-- =======================
+    NAVIGATION
+    ======================== -->
+    <header class="main-header">
+        <nav class="container">
+            <a href="index.html" class="logo-container">
+                <img src="assets/logo.svg" alt="Arrange Master Logo" class="logo-icon">
+                <span class="logo-text">Arrange Master</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#use-cases">Use Cases</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="demo.html">Demo</a></li>
+                <li><a href="documentation.html" class="active">Documentation</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+            <a class="cta-button primary js-show-payment-modal" role="button">Get Arrange Master</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="doc-page">
+            <div class="doc-page-background">
+                <img src="assets/doc-background.webp" alt="Technical illustration background">
+            </div>
+            <div class="container">
+                <h1>Arrange Master Documentation</h1>
+                <ol>
+                    <li><a href="#installation">Installation</a>
+                        <ul>
+                            <li><a href="#install-windows">Windows Installer</a></li>
+                            <li><a href="#extension-managers">Extension Managers</a></li>
+                            <li><a href="#manual-install-mac">Manual Installation (macOS)</a></li>
+                            <li><a href="#find-panel">Finding the Panel in Illustrator</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#the-main-interface">The Main Interface</a></li>
+                    <li><a href="#preparing-for-arrangement">Preparing Items for Arrangement</a></li>
+                    <li><a href="#the-arrangement-workflow">The Arrangement Workflow: Understanding Sessions</a></li>
+                    <li><a href="#layout-methods">Layout Methods</a>
+                        <ul>
+                            <li><a href="#grid-layout">Grid Layout</a></li>
+                            <li><a href="#knolling-layout">Knolling Layout</a></li>
+                            <li><a href="#greedy-layout">Greedy Layout (and Dense Packing)</a></li>
+                            <li><a href="#shape-respect-layout">Shape Respect Layout</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#overflow-placement">Overflow Placement: Handling Unplaced Items</a></li>
+                    <li><a href="#common-features">Common Features & Best Practices</a></li>
+                    <li><a href="#changelog">Changelog</a>
+                        <ul>
+                            <li><a href="#version-1-1-1">Version 1.1.1</a></li>
+                            <li><a href="#version-1-0-1">Version 1.0.1</a></li>
+                            <li><a href="#version-1-0-0">Version 1.0.0</a></li>
+                        </ul>
+                    </li>
+                </ol>
+				
+				<h3 id="installation">1. Installation</h3>
+
+                <h4 id="install-windows">Windows Installer (Recommended)</h4>
+                <p>For Windows users, the easiest and most reliable way to install Arrange Master is by using the provided installer.</p>
+                <ol>
+                    <li>Unzip the archive you downloaded after purchase.</li>
+                    <li>Open the folder named <strong><code>Windows Install</code></strong>.</li>
+                    <li>Run the <strong><code>ArrangeMaster-v1.x.x-Setup.exe</code></strong> file.</li>
+                    <li>Follow the on-screen instructions. The installation is fully automatic.</li>
+                </ol>
+
+                <h4 id="extension-managers">ZXP Installers (macOS & Advanced Windows)</h4>
+                <p>If you are a macOS user or an advanced Windows user who prefers to use a ZXP package, you will need a dedicated extension manager application. We strongly recommend using one of the two reliable options below.</p>
+
+                <h4 id="install-options">Installation Options</h4>
+                <p>To install the <code>ArrangeMaster.zxp</code> file, you need a dedicated extension manager application. We strongly recommend using one of the two reliable options below.</p>
+                
+                <p><strong>Option 1: Anastasiy’s Extension Manager (Recommended)</strong></p>
+                <p>This is the most popular and reliable tool for managing Adobe extensions.</p>
+                <ol>
+                    <li>Download and install Anastasiy’s Extension Manager from: <a href="https://install.anastasiy.com/" target="_blank" rel="noopener noreferrer"><strong>install.anastasiy.com</strong></a></li>
+                    <li>Launch the Extension Manager.</li>
+                    <li>Simply drag and drop your <code>ArrangeMaster.zxp</code> file onto the Extension Manager window.</li>
+                    <li>The installation will complete automatically.</li>
+                </ol>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_001.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_001.webp" alt="Anastasiy's Extension Manager window">
+					</a>
+				</div>
+
+                <p><strong>Option 2: ZXPInstaller</strong></p>
+                <p>A great alternative if you encounter any issues with the first option.</p>
+                <ol>
+                    <li>Download and install ZXPInstaller from: <a href="https://zxpinstaller.com/" target="_blank" rel="noopener noreferrer"><strong>zxpinstaller.com</strong></a></li>
+                    <li>Launch ZXPInstaller.</li>
+                    <li>Drag and drop your <code>ArrangeMaster.zxp</code> file onto its window to install.</li>
+                </ol>
+
+                <p><strong>Option 3: aescripts + aeplugins Manager App</strong></p>
+                <p>If the other installers cannot detect your Adobe applications for any reason, the aescripts manager is a powerful alternative that often succeeds.</p>
+                <ol>
+                    <li>Download and install the manager app from: <a href="https://aescripts.com/learn/aescripts-aeplugins-manager-app/" target="_blank" rel="noopener noreferrer"><strong>aescripts.com/learn/aescripts-aeplugins-manager-app/</strong></a></li>
+                    <li>Launch the app and log in or create an account.</li>
+                    <li>In the top menu, go to <code>File > Install ZXP</code>.</li>
+                    <li>Select your <code>ArrangeMaster.zxp</code> file to install it.</li>
+                </ol>
+
+                <h4 id="manual-install-mac">Manual Installation (macOS)</h4>
+                <p><strong>Important Note:</strong> If you are a macOS user and have intentionally disabled the Creative Cloud Desktop app from auto-launching, do not use the installers above, as they will force Creative Cloud to start. Instead, follow these steps for a manual installation:</p>
+                <ol>
+                    <li>Open <strong>Manual Install</strong> in the downloaded archive and find the <code>com.andrewrybalko.arrangemaster</code> folder in it.</li>
+                    <li>Move this folder to the user extensions directory. The easiest way to find it is:
+                        <ul>
+                            <li>Open Finder.</li>
+                            <li>In the top menu, click <strong>Go → Go to Folder...</strong></li>
+                            <li>Paste this path and press Enter: <code>~/Library/Application Support/Adobe/CEP/extensions/</code></li>
+                        </ul>
+                    </li>
+                    <li>Restart Adobe Illustrator.</li>
+                </ol>
+
+                <h4 id="find-panel">Finding the Panel in Illustrator</h4>
+                <p>After the installation is complete, you <strong>must restart Adobe Illustrator</strong>.<br>Once restarted, you can find the panel in the main menu under:<br><strong><code>Window > Extensions > Arrange Master</code></strong></p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_002.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_002.webp" alt="A screenshot of Illustrator's main menu">
+					</a>
+				</div>
+				
+                <h3 id="introduction">2. Introduction</h3>
+                <p>Welcome to Arrange Master! This guide will walk you through all the features of the plugin to help you transform chaotic object sets into perfectly organized compositions.</p>
+                
+                <h4>How it Works:</h4>
+                <p>Arrange Master works by identifying two types of objects in your selection:</p>
+                <ul>
+                    <li><strong>The Container:</strong> The largest object in your selection is automatically treated as the container.</li>
+                    <li><strong>The Items:</strong> All other selected objects are treated as items to be arranged inside the container.</li>
+                </ul>
+                <p>The plugin then uses one of four powerful algorithms to place the items within the container's boundaries.</p>
+
+                <h3 id="the-main-interface">3. The Main Interface</h3>
+                <p>The Arrange Master panel is clean and intuitive, designed to give you powerful control without clutter.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_003.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_003.webp" alt="Arrange Master panel">
+					</a>
+				</div>
+				
+                <ol>
+                    <li><strong>Method Icons:</strong> At the top of the panel, you will find four icons. Each icon represents a different arrangement algorithm. Clicking an icon selects that method and reveals its specific settings below.</li>
+                    <li><strong>Dynamic Settings Area:</strong> This central part of the panel changes based on the selected method, showing only the relevant controls for your current task.</li>
+                    <li><strong>Action Buttons & Status Bar:</strong> The bottom section contains the main control buttons (<code>Arrange</code>, <code>Randomize</code>, <code>Ok</code>, <code>Cancel</code>) and a status bar that provides feedback on the current operation.</li>
+                </ol>
+				
+                <h3 id="preparing-for-arrangement">4. Preparing Items for Arrangement</h3>
+                <p>For most layout methods, arrangement is based on the rectangular <strong>bounding box</strong> of each item. For items with a lot of empty space within their bounds (like a table, a chair, or an L-shaped lamp post), this can lead to unexpectedly large gaps.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_004.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_004.webp" alt="Preparing Items for Arrangement">
+					</a>
+				</div>
+                <p><strong>Pro Tip:</strong> To achieve a tighter fit with such items, you can either pre-arrange them into more compact, rectangular groups before running Arrange Master, or use the powerful <strong>Dense Packing</strong> mode in the Greedy Layout, which analyzes the true shape of objects.</p>
+
+                <h3 id="the-arrangement-workflow">5. The Arrangement Workflow: Understanding Sessions</h3>
+                <p>Arrange Master uses a <strong>session-based workflow</strong> to give you maximum flexibility and control. A session is a safe, temporary workspace that protects your original objects.</p>
+                
+                <h4>Starting a Session:</h4>
+                <p>A session begins the very first time you click the <code>Arrange</code> button after making a selection. At this moment, Arrange Master does two things:</p>
+                <ol>
+                    <li>It securely hides your original selected items.</li>
+                    <li>It creates temporary working copies of your items to perform all arrangement operations on.</li>
+                </ol>
+                <p>This ensures your original work is always safe and can be restored at any time.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_005.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_005.webp" alt="The Arrangement Workflow">
+					</a>
+				</div>
+                
+                <h4>Working within a Session:</h4>
+                <p>Once a session is active, you can freely experiment:</p>
+                <ul>
+                    <li>Clicking <code>Arrange</code> again will re-apply the layout with any new settings you've chosen.</li>
+                    <li>Clicking <code>Randomize</code> will re-apply the layout using the same settings but with a different random order for the largest items, giving you a new variation instantly.</li>
+                </ul>
+
+                <h4>Ending a Session (Very Important!):</h4>
+                <p>A session must be properly ended to finalize your work or revert your changes.</p>
+                <ul>
+                    <li><code>Ok</code> <strong>(Finalize):</strong> Click this button when you are satisfied with the arrangement. This will <strong>delete your original hidden items</strong> and make the arranged copies permanent. This is the correct way to complete your work.</li>
+                    <li><code>Cancel</code> <strong>(Revert):</strong> Click this button to discard all changes. This will <strong>delete the temporary arranged copies</strong> and restore your original, untouched items to their initial positions.</li>
+                </ul>
+                <p><strong>Why is this important?</strong> Until you click <code>Ok</code> or <code>Cancel</code>, your original items remain hidden and the arranged items are temporary. Properly ending the session ensures your document remains clean and contains only the objects you intend to keep. A session will also automatically end if you switch documents.</p>
+
+                <h3 id="layout-methods">6. Layout Methods</h3>
+
+                <h4 id="grid-layout">Grid Layout</h4>
+                <p>This method arranges items in a structured, uniform grid. It is perfect for organizing icon sets, creating charts, or generating complex patterns.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_006.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_006.webp" alt="Grid Layout">
+					</a>
+				</div>
+				
+                <p><strong>Standard Settings:</strong></p>
+                <ul>
+                    <li><strong>Rows & Columns:</strong> Defines the dimensions of the grid.</li>
+                    <li><strong>Vary Rotation:</strong> Adds a degree of randomness by rotating each item. For example: a value of <code>90°</code> will rotate each item by a random angle between -90° and +90°.</li>
+                    <li><strong>Vary Size:</strong> Randomly scales each item. A value of <code>x2</code> will scale each item by a random factor between x1 (original size) and x2.</li>
+                    <li><strong>Offset Odd/Even Rows:</strong> Creates a staggered, "checkerboard" pattern by shifting odd (1st, 3rd...) or even (2nd, 4th...) rows to the right by half a cell's width.</li>
+                    <li><strong>Size Limit OFF:</strong> By default, items larger than a single grid cell are considered "overflow". Check this box to allow larger items to be placed, centered in their cell, even if they overlap.</li>
+                </ul>
+
+                <p><strong>Special Mode: Single Item Fill</strong></p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_015.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_015.webp" alt="Single Item Fill">
+					</a>
+				</div>
+                <p>When the <strong>Single Item Fill</strong> checkbox is enabled, the panel switches to a powerful new mode. Instead of arranging your selection, it fills the container with as many copies of a single selected item as possible. This mode secretly uses the highly efficient <strong>Skyline</strong> algorithm for a dense, organic fill.</p>
+                <ul>
+                    <li><strong>Min. Spacing:</strong> Controls the minimum distance between the duplicated items.</li>
+                    <li><strong>Allow 90° turn:</strong> Allows the item to be rotated for a better fit.</li>
+                </ul>
+
+                <h4 id="knolling-layout">Knolling Layout</h4>
+                <p>Based on the "Maximal Empty Rectangles" algorithm, this method packs items with extreme efficiency and order. It's ideal for creating dense, visually satisfying compositions that look meticulously organized.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_007.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_007.webp" alt="Knolling Layout">
+					</a>
+				</div>
+				
+                <p><strong>Settings:</strong></p>
+                <ul>
+                    <li><strong>Fill Direction:</strong> Sets the primary direction of the packing flow (<code>Left-to-Right</code> or <code>Right-to-Left</code>).</li>
+                    <li><strong>Min. Spacing:</strong> The minimum distance guaranteed between any two items.</li>
+                    <li><strong>Outer Padding OFF:</strong> By default, a padding equal to the "Min. Spacing" is applied between items and the container's edge. Check this box to disable it, allowing items to touch the container's border.</li>
+                    <li><strong>Allow 90° turn:</strong> Allows the algorithm to rotate items by 90 degrees if it results in a better fit.</li>
+                </ul>
+
+                <h4 id="greedy-layout">Greedy Layout (and Dense Packing)</h4>
+                <p>This is a powerful and versatile packing method. In its standard form, it uses a high-density candidate grid for fast and effective layouts based on bounding boxes. When <strong>Dense Packing</strong> is enabled, it transforms into an advanced true-shape nesting engine.</p>
+                
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_012.webp" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_012.webp" alt="Dense Packing Mode">
+                    </a>
+                </div>
+				
+                <p><strong>Standard Settings:</strong></p>
+                <ul>
+                    <li><strong>Fill Direction:</strong> Sets the packing direction (<code>Top-Down</code> or <code>Bottom-Up</code>).</li>
+                    <li><strong>Min. Spacing:</strong> The minimum distance between any two items.</li>
+                    <li><strong>Outer Padding OFF:</strong> Disables the padding between items and the container's edge.</li>
+                    <li><strong>Allow 90° turn:</strong> Allows items to be rotated by 90 degrees to find a better fit.</li>
+                </ul>
+
+                <p><strong>Dense Packing (True-Shape Nesting):</strong></p>
+                <p>When the <strong>Dense Packing</strong> checkbox is enabled, Arrange Master switches to a powerful "true-shape" nesting engine. This mode analyzes the actual shape of your vector objects - including gaps between them and holes within them - and places items with maximum density. It is the most advanced packing method in the plugin, ideal for creating organic, collage-like compositions.</p>
+                
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_013.webp" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_013.webp" alt="Greedy layout vs a Dense Packing">
+                    </a>
+                </div>
+
+                <p><strong>Note:</strong> This mode is computationally intensive and works with vector objects only. For stability, the algorithm includes safety limits; if a layout is too complex, it will throw an error asking you to either increase the 'Analysis Precision' value or select fewer items.</p>
+                <ul>
+                    <li><strong>Analysis Precision:</strong> This setting controls the quality-vs-performance trade-off.
+                        <ul>
+                            <li><strong>Lower values (e.g., 1-4)</strong> provide higher accuracy and a tighter fit but can be significantly slower.</li>
+                            <li><strong>Higher values (e.g., 5-10+)</strong> provide faster performance but may result in a less dense layout.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Align Final Edge:</strong> An optional post-processing step that cleans up the layout by aligning the final "ragged" edge of items for a tidier result.</li>
+                </ul>
+
+                <h4 id="shape-respect-layout">Shape Respect Layout</h4>
+                <p>Arrange Master's most unique feature. This method arranges items inside <strong>any non-rectangular, complex shape</strong>, including text outlines and shapes with holes.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_009.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_009.webp" alt="Shape Respect Layout">
+					</a>
+				</div>
+				
+                <p><strong>Settings:</strong></p>
+                <ul>
+                    <li><strong>Fill Direction:</strong> Sets the placement priority (<code>Top-Down</code> or <code>Bottom-Up</code>). Only available in Fast and Accurate modes.</li>
+                    <li><strong>Min. Spacing:</strong> The minimum distance between any two items.</li>
+                    <li><strong>Vary Rotation:</strong> Adds a degree of organic randomness by rotating each item before placement. For example: a value of <code>90°</code> will rotate each item by a random angle between -90° and +90°.</li>
+                    <li><strong>Outer Padding OFF:</strong> Disables padding between items and the container's edge.</li>
+                    <li><strong>Allow 90° turn:</strong> Allows items to be rotated for a better fit.</li>
+                    <li><strong>Accurate Mode:</strong> Uses a high-quality, grid-based algorithm for precise, ordered placement. <strong>Warning:</strong> This can be slow with a large number of items.</li>
+                    <li><strong>Chaotic Mode:</strong> Uses a fast, random placement algorithm to create organic, natural-looking patterns. When this is active, <code>Fill Direction</code> is ignored.</li>
+                </ul>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_010.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_010.webp" alt="Shape Respect Layout. Accurate Mode">
+					</a>
+				</div>
+                <p><em>If neither <code>Accurate Mode</code> nor <code>Chaotic Mode</code> is checked, the plugin uses its default "Fast" mode, which provides a balance of speed and quality.</em></p>
+
+                <h3 id="overflow-placement">7. Overflow Placement: Handling Unplaced Items</h3>
+                <p>Arrange Master never loses your work. If an item cannot fit inside the container (either because there is no space, or it exceeds the cell size in Grid Layout), it is considered an "overflow" item.</p>
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_011.webp" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_011.webp" alt="Overflow Placement">
+					</a>
+				</div>
+				
+                <p>All overflow items are automatically placed in a single row <strong>directly above the container</strong>. They are arranged according to these rules:</p>
+                <ul>
+                    <li>They are sorted by <strong>height</strong>, from tallest to shortest.</li>
+                    <li>They are aligned along their <strong>bottom edge</strong>.</li>
+                    <li>A consistent spacing is maintained between them.</li>
+                </ul>
+                <p><strong>How to fit overflow items:</strong></p>
+                <p>If you have items in the overflow area that you want inside the container, try one of these solutions:</p>
+                <ul>
+                    <li><strong>Increase the size</strong> of the container object.</li>
+                    <li><strong>Decrease the "Min. Spacing"</strong> value in the panel settings.</li>
+                    <li>For Grid Layout, increase the number of <strong>Rows/Columns</strong> or enable <strong>"Size Limit OFF"</strong>.</li>
+                    <li>For Greedy Layout, try enabling <strong>Dense Packing</strong> for a more efficient fit.</li>
+                </ul>
+                <p>Then, simply click <code>Arrange</code> again to re-run the layout.</p>
+
+                <h3 id="common-features">8. Common Features &amp; Best Practices</h3>
+                <ul>
+                  <li><strong>Automatic Container Detection:</strong> You don't need to tell Arrange Master which object is the container. It automatically detects the largest object in your selection.</li>
+                    <li><strong>Automatic Z-Order:</strong> The container is always sent to the back, ensuring all arranged items appear on top of it.</li>
+                    <li><strong>Freedom during a Session:</strong> While a session is active, you are free to interact with your document. You can:
+                        <ul>
+                            <li><strong>Deselect everything</strong> to get a better view.</li>
+                            <li><strong>Zoom and pan</strong> around your artboard.</li>
+                            <li><strong>Manually resize or recolor the container object.</strong> After making changes, just click <code>Arrange</code> again to see how the layout adapts.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3 id="changelog">9. Changelog</h3>
+
+                <h4 id="version-1-1-1">Version 1.1.1 (October 17, 2025)</h4>
+                <p>This is a major update focused on radical algorithm improvements, new features, and overall stability, making Arrange Master a truly professional-grade tool.</p>
+                <ul>
+                    <li><strong>Complete Overhaul: Dense Packing Algorithm.</strong> The true-shape nesting engine has been rewritten from the ground up. It now uses a "Global Free Space Analysis" architecture, allowing it to see and utilize not only holes inside objects but also the complex empty spaces that form <em>between</em> multiple objects. This results in significantly denser and more intelligent layouts.</li>
+                    <li><strong>New Feature: Dynamic Simplification.</strong> The Dense Packing algorithm is now equipped with a powerful safety valve ("Pre-emptive Complexity Control") that detects and prevents computational explosions. This makes the algorithm robust and stable, eliminating freezes even on extremely complex layouts or with high 'Analysis Precision' settings.</li>
+                    <li><strong>New Feature: Single Item Fill.</strong> The Grid Layout panel now includes a powerful mode to fill the container with copies of a single selected item, using the efficient Skyline algorithm for a dense, organic pattern.</li>
+                    <li><strong>New Feature: Staggered Grid Offsets.</strong> The Grid Layout now includes "Offset Even/Odd Rows" options to easily create staggered, checkerboard-style patterns.</li>
+                    <li><strong>Major Bug Fix: Dense Packing "Bottom-Up" Mode.</strong> The "Bottom-Up" direction for Dense Packing has been completely fixed using a robust "Flip Trick" architecture. It now produces a perfectly mirrored, high-quality layout that correctly utilizes all internal and external cavities.</li>
+                    <li><strong>UI/UX Improvements:</strong> The Grid and Greedy layout panels have been significantly redesigned for better clarity, compactness, and usability. Controls are now contextually disabled/enabled based on the selected mode.</li>
+                    <li><strong>Infrastructure: Windows & macOS Installers.</strong> The project now includes a professional, digitally-signed installer for Windows and a clear manual installation package for macOS, ensuring a smooth setup process for all users.</li>
+                </ul>
+
+                <h4 id="version-1-0-1">Version 1.0.1 (October 10, 2025)</h4>
+                <p>This update focuses on adding powerful new features for organic layouts and significant performance optimizations.</p>
+                <ul>
+                    <li><strong>New Feature: Dense Packing ("True-Shape Nesting").</strong> The Greedy Layout now includes an advanced mode that analyzes the true vector shape of objects, allowing for incredibly tight and natural-looking packing that fills concave areas.</li>
+                    <li><strong>New Feature: Analysis Precision.</strong> A new control for Dense Packing that allows users to balance performance versus packing quality.</li>
+                    <li><strong>New Feature: Align Final Edge.</strong> An optional post-processing step for Greedy and Dense Packing modes to clean up the final "ragged" edge of the layout.</li>
+                    <li><strong>New Feature: Vary Rotation for Shape Respect.</strong> The Shape Respect layout now includes a "Vary Rotation" setting to add organic randomness to placements inside complex shapes.</li>
+                    <li><strong>Optimization:</strong> The Dense Packing algorithm now caches the complex geometry analysis. Subsequent clicks on "Arrange" or "Randomize" within the same session are now significantly faster.</li>
+                    <li><strong>UI/UX Improvements:</strong> The user interface for all panels has been polished for better alignment, spacing, and clarity. Tooltips have been updated to be more descriptive.</li>
+                    <li><strong>Bug Fixes:</strong> Fixed numerous bugs related to session management, object transformation, and UI rendering to improve overall stability.</li>
+                </ul>
+
+                <h4 id="version-1-0-0">Version 1.0.0 (September 15, 2025)</h4>
+                <ul>
+                    <li>Initial public release.</li>
+                    <li>Introduced the four core layout methods: <strong>Grid</strong>, <strong>Knolling</strong>, <strong>Greedy</strong>, and <strong>Shape Respect</strong>.</li>
+                    <li>Established the robust session-based workflow with "Ok" and "Cancel" states to protect user's original artwork.</li>
+                    <li>Implemented basic controls for each layout method, including spacing, rotation, and fill direction.</li>
+                </ul>
+
+            </div>
+        </section>
+    </main>
+    
+    <!-- =======================
+    FOOTER
+    ======================== -->
+    <footer class="main-footer-bottom">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#use-cases">Use Cases</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="demo.html">Demo</a>
+                <a href="documentation.html" class="active">Documentation</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="social-links">
+                <a href="https://t.me/andrew_r_tools" target="_blank" rel="noopener noreferrer" title="Telegram" class="social-link-item">
+                    <img src="../assets/telegram-logo.svg" alt="Telegram Icon" class="social-icon">
+                    <span class="social-text">t.me/andrew_r_tools</span>
+                </a>
+                <a href="https://x.com/andrew_r_tools" target="_blank" rel="noopener noreferrer" title="X (Twitter)" class="social-link-item">
+                    <img src="../assets/x-logo.svg" alt="X (Twitter) Icon" class="social-icon">
+                    <span class="social-text">@andrew_r_tools</span>
+                </a>
+                <a href="mailto:andrewrybalko@yandex.ru" title="Email" class="social-link-item">
+                    <img src="../assets/email-icon.svg" alt="Email Icon" class="social-icon">
+                    <span class="social-text">andrewrybalko@yandex.ru</span>
+                </a>
+            </div>
+            <p>© <span id="copyright-year">2025</span> <a href="https://www.andrewr.online" target="_blank">Andrew R. Tools</a>. All Rights Reserved.</p>
+        </div>
+
+	<!-- =======================
+	LIGHTBOX
+	======================== -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-image">
+        <a class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous image"></a>
+        <a class="lightbox-nav next" id="lightbox-next" aria-label="Next image"></a>
+    </div>
+
+    <!-- =======================
+    PAYMENT MODAL
+    ======================== -->
+    <div id="payment-modal" class="payment-modal">
+        <div class="pricing-card">
+            <span class="modal-close">&times;</span>
+            <h2>Choose Your Payment Method</h2>
+            <p class="modal-description">All transactions are handled by trusted platforms. Please select the one you're most comfortable with:</p>
+            
+            <div class="payment-options">
+                <!-- Option 1: Hipolink -->
+                <a href="https://hipolink.net/andrewr/products/arrange-master" target="_blank" class="cta-button payment-option-btn primary">Buy on Hipolink</a>
+                <p class="author-cut-info">The author receives ~90% of the sale.</p>
+                
+                <!-- Option 2: Creative Market -->
+                <a href="https://creativemarket.com/Andrew_R/291885949-Arrange-Master-Illustrator-Plugin" target="_blank" class="cta-button payment-option-btn --cm">Buy on Creative Market</a>
+                <p class="author-cut-info">The author receives ~60% of the sale.</p>
+
+                <!-- Option 3: Envato -->
+                <a href="https://graphicriver.net/item/arrange-master-illustrator-plugin/60349389" target="_blank" class="cta-button payment-option-btn --envato">Buy on Envato Market</a>
+                <p class="author-cut-info">The author receives ~50% of the sale.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>
