@@ -218,9 +218,27 @@
             padding-top: 10px; 
             text-align: left; 
         }
+        .support-button {
+            display: inline-block;
+            background-color: #e4e6eb;
+            color: var(--text-secondary) !important;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none !important;
+            margin-bottom: 20px;
+            transition: background-color 0.2s;
+        }
+        .support-button:hover {
+            background-color: #d8dade;
+        }
         .copyright {
-            margin-top: 30px;
-            padding-top: 15px;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
             font-size: 13px;
             color: var(--text-secondary);
             text-align: center;
@@ -228,6 +246,9 @@
         .copyright a {
             color: var(--accent-color);
             text-decoration: none;
+        }
+        .copyright p {
+            margin: 0;
         }
         .copyright a:hover {
             text-decoration: underline;
@@ -293,6 +314,8 @@
         </div>
         
         <div class="copyright">
+            <a href="https://hipolink.net/andrewr/tips" target="_blank" rel="noopener noreferrer" class="support-button">Support the Project</a>
+            
             <p>© <span id="copyright-year"></span> <a href="https://www.andrewr.online" target="_blank">Andrew R. Tools</a>. All Rights Reserved.</p>
         </div>
     </div>
