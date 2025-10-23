@@ -634,3 +634,13 @@ video {
     color: var(--text-secondary);
     text-decoration: underline;
 }
+
+#join-section[style*="display: none"] ~ .main-footer .donate-button,
+#join-section[style*="display: none"] ~ .main-footer .social-links {
+    display: none;
+}
+
+#join-section[style*="display: none"] ~ .main-footer {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
