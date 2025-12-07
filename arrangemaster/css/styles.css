@@ -1,3 +1,31 @@
+
+/* =======================
+   ПОДКЛЮЧЕНИЕ ШРИФТОВ (RUBIK)
+   ======================== */
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v28-latin_cyrillic-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v28-latin_cyrillic-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v28-latin_cyrillic-700.woff2') format('woff2');
+}
+
 /* =======================
    GLOBAL STYLES AND VARIABLES
    ======================== */
