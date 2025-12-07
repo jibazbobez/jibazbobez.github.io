@@ -1,5 +1,5 @@
 /* =======================
-   ПОДКЛЮЧЕНИЕ ШРИФТОВ (RUBIK)
+   RUBIK FONT
    ======================== */
 
 @font-face {
@@ -171,7 +171,7 @@ section {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
     text-decoration: none;
     border-radius: 50px;
@@ -473,7 +473,7 @@ section {
 .feature-overlay {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    padding: 30px;
+    padding: 30px 30px 10px; 
     
     background: linear-gradient(to top, rgba(5, 5, 7, 1) 0%, rgba(5, 5, 7, 0.7) 50%, transparent 100%);
     
@@ -543,7 +543,7 @@ section {
     background: var(--surface-color);
     border: 1px solid var(--surface-border);
     border-radius: var(--radius-md);
-    padding: 40px 30px;
+    padding: 30px 30px 20px;
     text-align: left;
     transition: all 0.3s ease;
 }
@@ -667,7 +667,7 @@ section {
 .use-case-overlay {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    padding: 30px;
+    padding: 30px 30px 10px;
     background: linear-gradient(to top, #050507 10%, transparent);
     z-index: 2;
     pointer-events: none;
@@ -1405,9 +1405,74 @@ section,
 }
 
 @media (max-width: 768px) {
-    .hero-section {
-        padding-top: 120px;
+    .payment-option-btn {
+        white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+        font-size: 0.95rem;  /* Чуть уменьшаем шрифт, чтобы точно влезало */
+        padding: 15px 10px;  /* Уменьшаем боковые отступы */
+        display: flex;       /* Гарантируем правильное выравнивание */
+        justify-content: center;
+        align-items: center;
+    }
+    .feature-card {
+        background: transparent;
+        border: none;
+        overflow: visible; /* Разрешаем тексту выходить за пределы */
+    }
+
+    .feature-visual {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        aspect-ratio: unset;
+        background: transparent; /* Убираем фон-продолжение */
+        overflow: visible; 
+    }
+
+    /* Стилизуем Изображение/Видео как отдельный блок */
+    .feature-preview, 
+    .feature-video {
+        order: 1; /* Картинка сверху */
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        border-radius: 12px; /* Скругление только у картинки */
+        overflow: hidden;
+    }
+
+    /* Кнопку Play привязываем к размеру картинки */
+    .play-button-overlay {
+        order: 1;
+        top: 35%;
+        aspect-ratio: 1 / 1;
+    }
+
+    /* Текст просто перемещаем вниз */
+    .feature-overlay {
+        position: relative; /* Возвращаем в поток */
+        order: 2; /* Текст снизу */
+        
+        /* Убираем все фоны и градиенты */
+        background: transparent; 
+        background-image: none;
+        
+        /* Отступы: сверху от картинки, снизу от следующего блока */
+        padding: 30px 30px 10px; 
+        
+        opacity: 1 !important; /* Всегда видим */
+        pointer-events: auto;
+        text-align: left;
+    }
+
+    /* Немного корректируем типографику для мобильных */
+    .feature-overlay h3 {
+        font-size: 1.4rem;
         margin-top: 0;
+        margin-bottom: 5px;
+    }
+    
+    .feature-overlay p {
+        font-size: 0.95rem;
+        color: var(--text-secondary); /* Убеждаемся, что цвет читаемый */
+        margin: 0;
     }
     .main-header {
         top: 10px;
