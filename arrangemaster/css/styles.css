@@ -1,4 +1,40 @@
 /* =======================
+   ПОДКЛЮЧЕНИЕ ШРИФТОВ (RUBIK)
+   ======================== */
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v31-cyrillic_latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v31-cyrillic_latin-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v31-cyrillic_latin-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v31-cyrillic_latin-700.woff2') format('woff2');
+}
+
+/* =======================
    GLOBAL STYLES AND VARIABLES
    ======================== */
 :root {
@@ -25,12 +61,6 @@
     
     --glass-bg: rgba(5, 5, 7, 0.7);
     --glass-blur: blur(12px);
-}
-
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 *, *::before, *::after {
