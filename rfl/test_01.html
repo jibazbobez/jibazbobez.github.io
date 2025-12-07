@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Русские имена: Полные и Короткие</title>
+    <style>
+        :root {
+            --primary-color: #10134F;
+            --accent-color: #3182CE;
+            --success-color: #48BB78;
+            --error-color: #F56565;
+            --bg-color: #F7FAFC;
+            --card-bg: #ffffff;
+            --text-color: #2D3748;
+            --radius: 16px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        header h1 { font-size: 1.5rem; font-weight: 700; }
+
+        main {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .step { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .step.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Theory Cards for Names */
+        .theory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover { transform: translateY(-5px); }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .name-pair {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .name-full { font-weight: 600; color: var(--text-color); }
+        .name-short { color: var(--accent-color); font-weight: 700; }
+
+        .info-box {
+            background: #EBF8FF;
+            border: 1px solid #BEE3F8;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            color: #2C5282;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 14px 0 rgba(49, 130, 206, 0.39);
+        }
+
+        .btn:hover { background: var(--primary-color); transform: translateY(-2px); }
+        .btn:active { transform: translateY(0); }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            box-shadow: none;
+        }
+        .btn-outline:hover { background: var(--accent-color); color: white; }
+
+        /* Quiz Layout */
+        .quiz-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .progress-bar-wrapper {
+            width: 100%;
+            height: 10px;
+            background: #EDF2F7;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-label {
+            color: #718096; 
+            margin-bottom: 0.5rem; 
+            font-size: 0.9rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .question-word {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1.2rem;
+            border: 2px solid #E2E8F0;
+            background: white;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            color: var(--text-color);
+            width: 100%;
+        }
+
+        .option-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .option-btn.correct { background-color: var(--success-color); color: white; border-color: var(--success-color); }
+        .option-btn.wrong { background-color: var(--error-color); color: white; border-color: var(--error-color); opacity: 0.6; }
+
+        .feedback-msg {
+            min-height: 24px;
+            margin-top: 1rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .feedback-msg.visible { opacity: 1; }
+
+        /* Results */
+        .results-container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent-color) 0%, #EDF2F7 0%);
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .score-circle::before { content: ''; position: absolute; width: 120px; height: 120px; background: white; border-radius: 50%; }
+        .score-text { position: relative; font-size: 2.5rem; font-weight: 700; color: var(--primary-color); }
+        .start-btn-container { text-align: center; margin-top: 2rem; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Имена</h1>
+</header>
+
+<main id="app">
+    <!-- STEP 1: THEORY -->
+    <section id="step-theory" class="step active">
+        
+        <div class="info-box">
+            <strong>ℹ️ Правило:</strong> Короткие мужские имена часто заканчиваются на <b>-А</b> или <b>-Я</b> (как <i>Мама</i>), но они всё равно относятся к <b>Мужскому роду</b> (ОН).
+        </div>
+
+        <div class="theory-grid">
+            <!-- Male Names -->
+            <div class="card">
+                <h3>Мужские имена (ОН)</h3>
+                <div class="name-pair"><span class="name-full">Александр</span> <span class="name-short">Саша</span></div>
+                <div class="name-pair"><span class="name-full">Алексей</span> <span class="name-short">Лёша</span></div>
+                <div class="name-pair"><span class="name-full">Сергей</span> <span class="name-short">Серёжа</span></div>
+                <div class="name-pair"><span class="name-full">Иван</span> <span class="name-short">Ваня</span></div>
+                <div class="name-pair"><span class="name-full">Николай</span> <span class="name-short">Коля</span></div>
+                <div class="name-pair"><span class="name-full">Пётр</span> <span class="name-short">Петя</span></div>
+                <div class="name-pair"><span class="name-full">Дмитрий</span> <span class="name-short">Дима</span></div>
+                <div class="name-pair"><span class="name-full">Владимир</span> <span class="name-short">Володя</span></div>
+            </div>
+
+            <!-- Female Names -->
+            <div class="card" style="border-left-color: #ED64A6;">
+                <h3>Женские имена (ОНА)</h3>
+                <div class="name-pair"><span class="name-full">Мария</span> <span class="name-short">Маша</span></div>
+                <div class="name-pair"><span class="name-full">Екатерина</span> <span class="name-short">Катя</span></div>
+                <div class="name-pair"><span class="name-full">Светлана</span> <span class="name-short">Света</span></div>
+                <div class="name-pair"><span class="name-full">Ольга</span> <span class="name-short">Оля</span></div>
+                <div class="name-pair"><span class="name-full">Наталья</span> <span class="name-short">Наташа</span></div>
+                <div class="name-pair"><span class="name-full">Дарья</span> <span class="name-short">Даша</span></div>
+            </div>
+        </div>
+
+        <div class="start-btn-container">
+            <button class="btn" onclick="startQuiz()">Начать тест</button>
+        </div>
+    </section>
+
+    <!-- STEP 2: QUIZ -->
+    <section id="step-quiz" class="step">
+        <div class="quiz-container">
+            <div class="progress-bar-wrapper">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+
+            <div class="question-area">
+                <div class="question-label">Как сказать коротко?</div>
+                <div class="question-word" id="word-display">...</div>
+                
+                <div class="options-grid" id="options-container">
+                    <!-- Buttons generated via JS -->
+                </div>
+
+                <div id="feedback" class="feedback-msg"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 3: RESULTS -->
+    <section id="step-results" class="step">
+        <div class="results-container">
+            <h2>Ваш результат</h2>
+            <br>
+            <div class="score-circle" id="score-circle">
+                <span class="score-text" id="score-text">0%</span>
+            </div>
+            
+            <p class="result-message" id="result-message">Отлично!</p>
+            
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn btn-outline" onclick="resetQuiz()">Ещё раз</button>
+                <button class="btn" onclick="showTheory()">Учить имена</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // Database extracted from the provided HTML file
+    const namesDatabase = [
+        { full: "Александр", short: "Саша" },
+        { full: "Константин", short: "Костя" },
+        { full: "Алексей", short: "Лёша" },
+        { full: "Дмитрий", short: "Дима" },
+        { full: "Сергей", short: "Серёжа" },
+        { full: "Владимир", short: "Володя" },
+        { full: "Иван", short: "Ваня" },
+        { full: "Вячеслав", short: "Слава" },
+        { full: "Николай", short: "Коля" },
+        { full: "Роман", short: "Рома" },
+        { full: "Пётр", short: "Петя" },
+        { full: "Виктор", short: "Витя" },
+        { full: "Мария", short: "Маша" },
+        { full: "Екатерина", short: "Катя" },
+        { full: "Светлана", short: "Света" },
+        { full: "Ольга", short: "Оля" },
+        { full: "Наталья", short: "Наташа" },
+        { full: "Дарья", short: "Даша" }
+    ];
+
+    let currentQuestions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let isAnswering = false;
+
+    const steps = {
+        theory: document.getElementById('step-theory'),
+        quiz: document.getElementById('step-quiz'),
+        results: document.getElementById('step-results')
+    };
+
+    const ui = {
+        word: document.getElementById('word-display'),
+        progress: document.getElementById('progress'),
+        feedback: document.getElementById('feedback'),
+        optionsContainer: document.getElementById('options-container'),
+        scoreText: document.getElementById('score-text'),
+        scoreCircle: document.getElementById('score-circle'),
+        resultMessage: document.getElementById('result-message')
+    };
+
+    function switchStep(stepName) {
+        Object.values(steps).forEach(el => el.classList.remove('active'));
+        steps[stepName].classList.add('active');
+    }
+
+    function showTheory() {
+        switchStep('theory');
+    }
+
+    function startQuiz() {
+        // 1. Shuffle database and pick 10 questions (or less if db is small)
+        const shuffled = [...namesDatabase].sort(() => Math.random() - 0.5);
+        currentQuestions = shuffled.slice(0, 10); 
+
+        currentQuestionIndex = 0;
+        score = 0;
+        switchStep('quiz');
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        isAnswering = false;
+        const q = currentQuestions[currentQuestionIndex];
+        
+        // Display Full Name
+        ui.word.textContent = q.full;
+        ui.word.style.animation = 'none';
+        ui.word.offsetHeight; 
+        ui.word.style.animation = 'fadeIn 0.5s';
+        
+        // Reset UI
+        ui.feedback.className = 'feedback-msg';
+        ui.feedback.textContent = '';
+        ui.optionsContainer.innerHTML = '';
+
+        // Generate Options (1 correct + 2 wrong)
+        let options = [q.short];
+        
+        // Get distractors (wrong answers)
+        const distractors = namesDatabase
+            .filter(item => item.short !== q.short) // Exclude correct answer
+            .sort(() => Math.random() - 0.5) // Shuffle
+            .slice(0, 2) // Take 2
+            .map(item => item.short);
+
+        options = options.concat(distractors);
+        options.sort(() => Math.random() - 0.5); // Shuffle options
+
+        // Create Buttons
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.textContent = opt;
+            btn.onclick = () => checkAnswer(opt, q.short, btn);
+            ui.optionsContainer.appendChild(btn);
+        });
+
+        // Update progress
+        const progressPercent = (currentQuestionIndex / currentQuestions.length) * 100;
+        ui.progress.style.width = `${progressPercent}%`;
+    }
+
+    function checkAnswer(selected, correct, btnElement) {
+        if (isAnswering) return;
+        isAnswering = true;
+
+        const isCorrect = selected === correct;
+        const allButtons = ui.optionsContainer.querySelectorAll('.option-btn');
+        
+        // Visual feedback
+        allButtons.forEach(btn => {
+            btn.disabled = true;
+            if (btn.textContent === correct) {
+                btn.classList.add('correct');
+            } else if (btn === btnElement && !isCorrect) {
+                btn.classList.add('wrong');
+            }
+        });
+
+        // Text feedback
+        ui.feedback.classList.add('visible');
+        if (isCorrect) {
+            score++;
+            ui.feedback.style.color = 'var(--success-color)';
+            ui.feedback.textContent = "Верно!";
+        } else {
+            ui.feedback.style.color = 'var(--error-color)';
+            ui.feedback.textContent = `Ошибка. Полное имя: ${currentQuestions[currentQuestionIndex].full} = ${correct}`;
+        }
+
+        // Next question delay
+        setTimeout(() => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuestions.length) {
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }, 1500);
+    }
+
+    function finishQuiz() {
+        const percent = Math.round((score / currentQuestions.length) * 100);
+        
+        ui.scoreText.textContent = `${percent}%`;
+        ui.scoreCircle.style.background = `conic-gradient(var(--success-color) ${percent}%, #EDF2F7 ${percent}%)`;
+
+        if (percent === 100) {
+            ui.resultMessage.textContent = "Идеально! Вы знаете все имена! 🎉";
+        } else if (percent >= 80) {
+            ui.resultMessage.textContent = "Отличный результат! 👍";
+        } else {
+            ui.resultMessage.textContent = "Можно повторить имена ещё раз. 😉";
+        }
+
+        switchStep('results');
+    }
+
+    function resetQuiz() {
+        startQuiz();
+    }
+</script>
+
+</body>
+</html>
