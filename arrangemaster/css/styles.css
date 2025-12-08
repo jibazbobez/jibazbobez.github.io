@@ -35,6 +35,42 @@
 }
 
 /* =======================
+   ROBOTO FONT
+   ======================== */
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/roboto-v50-cyrillic_latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../assets/fonts/roboto-v50-cyrillic_latin-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../assets/fonts/roboto-v50-cyrillic_latin-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/roboto-v50-cyrillic_latin-700.woff2') format('woff2');
+}
+
+/* =======================
    GLOBAL STYLES AND VARIABLES
    ======================== */
 :root {
@@ -53,7 +89,7 @@
     --text-secondary: #9ca3af;
     --text-tertiary: #6b7280;
     
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-family: 'Roboto', sans-serif;
     --font-heading: 'Rubik', sans-serif;
     --radius-sm: 8px;
     --radius-md: 16px;
@@ -812,8 +848,9 @@ section {
 }
 
 .current-price {
+    font-family: 'Rubik', sans-serif;
     font-size: 4.5rem;
-    font-weight: 800;
+    font-weight: 600;
     background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1406,17 +1443,17 @@ section,
 
 @media (max-width: 768px) {
     .payment-option-btn {
-        white-space: nowrap; /* Запрещаем перенос текста на новую строку */
-        font-size: 0.95rem;  /* Чуть уменьшаем шрифт, чтобы точно влезало */
-        padding: 15px 10px;  /* Уменьшаем боковые отступы */
-        display: flex;       /* Гарантируем правильное выравнивание */
+        white-space: nowrap;
+        font-size: 0.95rem;
+        padding: 15px 10px;
+        display: flex;
         justify-content: center;
         align-items: center;
     }
     .feature-card {
         background: transparent;
         border: none;
-        overflow: visible; /* Разрешаем тексту выходить за пределы */
+        overflow: visible;
     }
 
     .feature-visual {
@@ -1424,45 +1461,39 @@ section,
         flex-direction: column;
         height: auto;
         aspect-ratio: unset;
-        background: transparent; /* Убираем фон-продолжение */
+        background: transparent;
         overflow: visible; 
     }
 
-    /* Стилизуем Изображение/Видео как отдельный блок */
     .feature-preview, 
     .feature-video {
-        order: 1; /* Картинка сверху */
+        order: 1;
         width: 100%;
         aspect-ratio: 16 / 10;
-        border-radius: 12px; /* Скругление только у картинки */
+        border-radius: 12px;
         overflow: hidden;
     }
 
-    /* Кнопку Play привязываем к размеру картинки */
     .play-button-overlay {
         order: 1;
         top: 35%;
         aspect-ratio: 1 / 1;
     }
 
-    /* Текст просто перемещаем вниз */
     .feature-overlay {
-        position: relative; /* Возвращаем в поток */
-        order: 2; /* Текст снизу */
-        
-        /* Убираем все фоны и градиенты */
+        position: relative;
+        order: 2;
+
         background: transparent; 
         background-image: none;
-        
-        /* Отступы: сверху от картинки, снизу от следующего блока */
+
         padding: 30px 30px 10px; 
         
-        opacity: 1 !important; /* Всегда видим */
+        opacity: 1 !important;
         pointer-events: auto;
         text-align: left;
     }
 
-    /* Немного корректируем типографику для мобильных */
     .feature-overlay h3 {
         font-size: 1.4rem;
         margin-top: 0;
@@ -1471,7 +1502,7 @@ section,
     
     .feature-overlay p {
         font-size: 0.95rem;
-        color: var(--text-secondary); /* Убеждаемся, что цвет читаемый */
+        color: var(--text-secondary);
         margin: 0;
     }
     .main-header {
