@@ -152,25 +152,78 @@
                 <p>A: Once installed, you must <strong>restart Adobe Illustrator</strong>. After restarting, you can find the panel in the main menu under:<br><strong><code>Window > Extensions > Arrange Master</code></strong></p>
 
                 <h4 id="blank-panel">Q: The panel is blank or shows an error. What should I do?</h4>
-                <p>A: This is usually caused by a sync issue with the Creative Cloud app or a restriction in the Windows Registry. Please try these solutions in order:</p>
+                <p>A: This is usually caused by a sync issue with the Creative Cloud app or a security restriction that prevents the extension interface from loading (often called the "PlayerDebugMode" issue). Please try these solutions:</p>
                 
-                <p><strong>Solution 1: Restart Creative Cloud</strong></p>
+                <p><strong>Solution 1: Restart Creative Cloud (Mac & Windows)</strong></p>
                 <ol>
                     <li>Completely quit Adobe Illustrator and the Creative Cloud Desktop app.</li>
                     <li>Relaunch the Creative Cloud Desktop app and ensure you are logged in.</li>
                     <li>Relaunch Adobe Illustrator.</li>
                 </ol>
 
-                <p><strong>Solution 2: Apply the Registry Fix (Windows)</strong></p>
-                <p>If the first solution didn't help, you need to manually enable the extension panel in the system registry.</p>
+                <p><strong>Solution 2: Fix for macOS (Terminal)</strong></p>
+                <p>If you are on a Mac, you need to enable the debug mode manually using the Terminal. This ensures compatibility with current and future versions of Illustrator.</p>
                 <ol>
-                    <li>Open the archive you downloaded after purchase.</li>
-                    <li>Navigate to the folder: <strong><code>03-Manual Install</code></strong>.</li>
-                    <li>Find and double-click the file named <strong><code>fix.reg</code></strong>.</li>
-                    <li>Confirm any prompts to add the data to your Registry.</li>
+                    <li>Quit Adobe Illustrator.</li>
+                    <li>Open the <strong>Terminal</strong> app (Command+Space, type "Terminal").</li>
+                    <li>Copy and paste the following code block into the Terminal and press <strong>Enter</strong>:</li>
+                </ol>
+                <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--surface-border); border-radius: var(--radius-sm); padding: 15px; font-family: monospace; font-size: 0.9rem; color: #e5e7eb; overflow-x: auto; margin-bottom: 1em;">
+                defaults write com.adobe.CSXS.10 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.11 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.12 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.13 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.14 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.15 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.16 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.17 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.18 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.19 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.20 PlayerDebugMode 1<br>
+                killall -u `whoami` cfprefsd
+                </div>
+                <ol start="4">
                     <li>Restart Adobe Illustrator.</li>
                 </ol>
-                <p><em>Note: This file simply adds standard "PlayerDebugMode" keys to your registry (HKCU\Software\Adobe\CSXS...), which forces Adobe applications to load the extension panel correctly even if local verification fails.</em></p>
+
+                <p><strong>Solution 3: Fix for Windows (Registry)</strong></p>
+                <p>If you are on Windows, you need to create a registry key to unlock the panel. Follow these steps to create the fix file yourself:</p>
+                <ol>
+                    <li>Open <strong>Notepad</strong>.</li>
+                    <li>Copy the code below and paste it into the empty text file:</li>
+                </ol>
+                <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--surface-border); border-radius: var(--radius-sm); padding: 15px; font-family: monospace; font-size: 0.9rem; color: #e5e7eb; overflow-x: auto; margin-bottom: 1em;">
+                Windows Registry Editor Version 5.00<br>
+                <br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.10]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.11]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.12]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.13]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.14]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.15]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.16]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.17]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.18]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.19]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.20]<br>
+                "PlayerDebugMode"="1"
+                </div>
+                <ol start="3">
+                    <li>Click <strong>File > Save As</strong>.</li>
+                    <li>Name the file <strong>fix.reg</strong> (make sure to select "All Files" in the "Save as type" dropdown so it doesn't save as .txt).</li>
+                    <li>Double-click the created fix.reg file and click <strong>Yes</strong> to confirm adding the data to your Registry.</li>
+                    <li>Restart Adobe Illustrator.</li>
+                </ol>
                 
                 <h3 id="basic-usage">2. Basic Usage</h3>
 
