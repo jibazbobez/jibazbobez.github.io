@@ -160,7 +160,7 @@ h2 {
     font-size: 2.75rem;
     text-align: center;
     margin-bottom: 60px;
-    background: linear-gradient(to right, #fff, #9ca3af);
+    background: linear-gradient(to right, #fff, #adb4be);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -240,7 +240,7 @@ section {
 
 .cta-button.secondary:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: var(--text-primary);
+    border-color: var(--text-secondary);
     transform: translateY(-2px);
 }
 
@@ -383,7 +383,7 @@ section {
 }
 
 .hero-content h1 {
-    background: linear-gradient(to bottom right, #ffffff 30%, #94a3b8 100%);
+    background: linear-gradient(to bottom right, #ffffff 30%, #adb4be 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
