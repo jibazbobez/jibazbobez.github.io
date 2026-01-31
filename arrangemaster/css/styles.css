@@ -1274,6 +1274,17 @@ section {
     box-shadow: 0 8px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
+.payment-option-btn.--lava {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25), inset 0 1px 0 rgba(255,255,255,1);
+}
+.payment-option-btn.--lava:hover {
+    transform: translateY(-2px);
+    background: #f2f2f2;
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4), inset 0 1px 0 rgba(255,255,255,1);
+}
+
 .payment-option-btn.--cm {
     background: linear-gradient(135deg, #39b4ac 0%, #67e0d8 100%);
     color: white;
