@@ -838,7 +838,6 @@ section {
     .hero-cta-buttons {
         flex-direction: column;
         width: 100%;
-        max-width: 300px;
     }
     
     .hero-cta-buttons .cta-button {
