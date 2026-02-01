@@ -228,12 +228,7 @@ section {
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.1);
     transition: border-color 0.3s ease;
-}
-
-.logo-container:hover .logo-icon {
-    border-color: var(--primary-accent);
 }
 
 .logo-text {
@@ -400,8 +395,7 @@ section {
    FEATURED PRODUCT (Glass Card)
    ======================== */
 .featured-section {
-    padding: 10px 0;
-    margin-top: 100px;
+    padding: 100px 0 10px;
 }
 
 .featured-card {
@@ -632,7 +626,7 @@ section {
    ABOUT THE AUTHOR (Glass Card)
    ======================== */
 .about-section {
-    padding: 80px 0 100px;
+    padding: 10px 0 100px;
 }
 
 .about-card {
@@ -670,7 +664,6 @@ section {
     height: 150px;
     border-radius: 50%;
     flex-shrink: 0;
-    border: 3px solid var(--surface-border);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 1;
@@ -718,34 +711,30 @@ section {
 .social-links {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 20px 40px;
+    gap: 20px 30px;
+    margin: 10px 0;
 }
 
 .social-link-item {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 12px 20px;
-    border-radius: var(--radius-sm);
-    background: transparent;
-    border: none;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .social-link-item:hover {
     color: var(--text-primary);
-    transform: translateY(-2px);
 }
 
 .social-icon {
-    height: 22px;
-    width: 22px;
-    filter: brightness(0) invert(1);
-    opacity: 0.6;
-    transition: all 0.3s ease;
+    height: 24px;
+    width: 24px;
+    opacity: 0.7;
+    transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
 .social-link-item:hover .social-icon {
@@ -797,11 +786,11 @@ section {
     }
     
     .featured-description {
-        text-align: center;
+        text-align: left;
     }
     
     .featured-description h2 {
-        text-align: center;
+        text-align: left;
     }
     
     .nav-links {
@@ -810,11 +799,11 @@ section {
     
     .about-card {
         flex-direction: column;
-        text-align: center;
+        text-align: left;
     }
     
     .author-info h2 {
-        text-align: center;
+        text-align: left;
     }
 }
 
