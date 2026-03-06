@@ -299,7 +299,7 @@
                     <li><code>Cancel</code> <strong>(Revert):</strong> Click this button to discard all changes. This will <strong>delete the temporary arranged copies</strong> and restore your original, untouched items to their initial positions.</li>
                 </ul>
                 <p><strong>Why is this important?</strong> Until you click <code>Ok</code> or <code>Cancel</code>, your original items remain hidden and the arranged items are temporary. Properly ending the session ensures your document remains clean and contains only the objects you intend to keep.</p>
-                <p><em>Note: Deselecting objects or switching to a different Illustrator document will force the plugin to auto-terminate the session to prevent data corruption.</em></p>
+                <p><em>Note: Switching to a different Illustrator document will force the plugin to auto-terminate the session to prevent data corruption.</em></p>
 
                 <h3 id="layout-methods">7. Layout Methods</h3>
 
@@ -326,7 +326,7 @@
 						<img src="assets/screenshots/documentation_screenshot_015.webp" alt="Single Item Fill">
 					</a>
 				</div>
-                <p>When the <strong>Single Item Fill</strong> checkbox is enabled, the panel switches to a powerful new mode. Instead of arranging your selection, it fills the container with as many copies of a single selected item as possible. This mode secretly uses the highly efficient <strong>Skyline</strong> algorithm for a dense, organic fill.</p>
+                <p>When the <strong>Single Item Fill</strong> checkbox is enabled, the panel switches to a special mode. Instead of arranging your selection, it fills the container with as many copies of a single selected item as possible. This mode secretly uses the highly efficient <strong>Skyline</strong> algorithm for a dense, organic fill.</p>
                 <ul>
                     <li><strong>Min. Spacing:</strong> Controls the minimum distance between the duplicated items.</li>
                     <li><strong>Allow 90° turn:</strong> Allows the item to be rotated for a better fit.</li>
@@ -367,7 +367,7 @@
                     <li><strong>Allow 90° turn:</strong> Allows items to be rotated orthogonally (90° or 0°, 90°, 180°, 270° in Dense Packing) to find a better fit.</li>
                 </ul>
 
-                <p><strong>Dense Packing (True-Shape Nesting):</strong></p>
+                <h4 id="dense-packing">Dense Packing (True-Shape Nesting):</h4>
                 <p>When the <strong>Dense Packing</strong> checkbox is enabled, Arrange Master switches to a true-shape nesting engine. This mode analyzes the actual shape of your vector objects - including gaps between and holes within them - and places items with maximum density. It uses a Two-Pass architecture: first placing large objects to form the landscape, then filling the remaining cavities with smaller details.</p>
                 
                 <div class="screenshot-wrapper">
