@@ -300,3 +300,96 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ===================================================================
+//  7. COOKIE CONSENT (NATIVE IMPLEMENTATION)
+// ===================================================================
+(function() {
+    // Проверяем, давал ли пользователь согласие ранее
+    if (localStorage.getItem('am_cookies_accepted')) return;
+
+    // Создаем стили для окна (используем переменные из вашего styles.css)
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .am-cookie-banner {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            width: 90%;
+            max-width: 600px;
+            background-color: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            z-index: 99999;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0;
+        }
+        .am-cookie-banner.visible {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        .am-cookie-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.4;
+        }
+        .am-cookie-text a {
+            color: var(--primary-accent);
+            text-decoration: underline;
+        }
+        .am-cookie-btn {
+            white-space: nowrap;
+            padding: 10px 24px !important;
+            font-size: 0.85rem !important;
+        }
+        @media (max-width: 600px) {
+            .am-cookie-banner {
+                flex-direction: column;
+                text-align: center;
+                bottom: 20px;
+                border-radius: 24px;
+            }
+            .am-cookie-btn {
+                width: 100%;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Создаем HTML структуру
+    const banner = document.createElement('div');
+    banner.className = 'am-cookie-banner';
+    banner.innerHTML = `
+        <p class="am-cookie-text">
+            This website uses cookies to ensure you get the best experience and to analyze traffic. 
+            <a href="privacy.html">Learn more</a>
+        </p>
+        <button class="cta-button primary am-cookie-btn" id="accept-cookies">Got it!</button>
+    `;
+
+    document.body.appendChild(banner);
+
+    // Показываем окно с небольшой задержкой
+    setTimeout(() => {
+        banner.classList.add('visible');
+    }, 1000);
+
+    // Логика кнопки
+    document.getElementById('accept-cookies').addEventListener('click', function() {
+        localStorage.setItem('am_cookies_accepted', 'true');
+        banner.classList.remove('visible');
+        setTimeout(() => {
+            banner.remove();
+        }, 600);
+    });
+})();
