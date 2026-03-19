@@ -2,7 +2,7 @@
 #targetengine "main"
 
 // Arrange Master Demo - v2.0 (Based on Arrange Master v1.2.1 Core)
-// Authors: Adobe Creative Cloud Extension Architect & Andrew Rybalko
+// Authors: Andrew Rybalko
 // Date: March 19, 2026
 //
 // Description:
