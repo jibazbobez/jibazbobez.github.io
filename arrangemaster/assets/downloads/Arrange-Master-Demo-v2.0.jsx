@@ -2,13 +2,13 @@
 #targetengine "main"
 
 // Arrange Master Demo - v2.0 (Based on Arrange Master v1.2.1 Core)
-// Authors: Andrew Rybalko
+// Author: Andrew Rybalko (www.andrewr.online)
 // Date: March 19, 2026
 //
 // Description:
 // This is a demonstration script showcasing the core arrangement capabilities of the
 // "Arrange Master" Adobe Illustrator extension. It operates as a standalone .jsx file
-// without the session-based safety features of the full CEP plugin.
+// with the session-based safety features of the full CEP plugin.
 //
 // Features two powerful layout methods from the full version:
 // 1. Grid Layout: Arranges objects in a structured grid with an option to ignore size limits.
