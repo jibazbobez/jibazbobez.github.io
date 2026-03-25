@@ -137,14 +137,6 @@
                     <li><a href="#overflow-placement">Overflow Placement</a></li>
                     <li><a href="#common-features">Common Features & Best Practices</a></li>
                     <li><a href="#changelog">Changelog</a>
-                        <ul>
-                            <li><a href="#version-1-2-1">Version 1.2.1</a></li>
-                            <li><a href="#version-1-2-0">Version 1.2.0</a></li>
-                            <li><a href="#version-1-1-2">Version 1.1.2</a></li>
-                            <li><a href="#version-1-1-1">Version 1.1.1</a></li>
-                            <li><a href="#version-1-0-1">Version 1.0.1</a></li>
-                            <li><a href="#version-1-0-0">Version 1.0.0</a></li>
-                        </ul>
                 </ol>
 				
 				<h3 id="installation">1. Installation</h3>
@@ -260,9 +252,13 @@
 
                 <h4>Supported Object Types</h4>
                 <p>Arrange Master processes standard Illustrator objects including <strong>Paths, Compound Paths, Groups, Text Objects, Symbols, and Raster Images (Embedded or Linked)</strong>. The plugin uses robust fallback mechanisms to correctly identify bounds even for complex Linked objects or items with missing visible bounds.</p>
-                <ul>
-                    <li><strong>⚠️ Problematic Geometry:</strong> Avoid using complex groups of "Gradient Meshes" or objects with "Opacity Masks" as containers or primary nesting items, as Illustrator API often misreports their true coordinates. Expand these elements to basic paths if precise nesting is required.</li>
-                </ul>
+
+                <div class="offer-banner">
+                    <h4>⚠️ Problematic Geometry:</h4>
+                    <p>
+                        Avoid using complex groups of "Gradient Meshes" or objects with "Opacity Masks" as containers or primary nesting items, as Illustrator API often misreports their true coordinates. Expand these elements to basic paths if precise nesting is required.
+                    </p>
+                </div>
                 
                 <h4>Preparation for Standard Methods</h4>
                 <p>Standard algorithms calculate placement based exclusively on the <strong>Bounding Boxes</strong> (rectangular perimeter) of the items. </p>
@@ -300,12 +296,15 @@
                     <li>Clicking <code>Randomize</code> will re-apply the layout using the same settings but with a different random order for the largest items, giving you a new variation instantly.</li>
                 </ul>
 
-                <h4>⚠️ Ending a Session (Very Important!):</h4>
-                <p>A session must be properly ended to finalize your work or revert your changes.</p>
-                <ul>
-                    <li><code>Ok</code> <strong>(Finalize):</strong> Click this button when you are satisfied with the arrangement. This will <strong>delete your original hidden items</strong> and make the arranged copies permanent. This is the correct way to complete your work.</li>
-                    <li><code>Cancel</code> <strong>(Revert):</strong> Click this button to discard all changes. This will <strong>delete the temporary arranged copies</strong> and restore your original, untouched items to their initial positions.</li>
-                </ul>
+                <div class="offer-banner">
+                    <h4>⚠️ Ending a Session (Very Important!):</h4>
+                    <p>A session must be properly ended to finalize your work or revert your changes.</p>
+                    <ul>
+                        <li><code>Ok</code> <strong>(Finalize):</strong> Click this button when you are satisfied with the arrangement. This will <strong>delete your original hidden items</strong> and make the arranged copies permanent. This is the correct way to complete your work.</li>
+                        <li><code>Cancel</code> <strong>(Revert):</strong> Click this button to discard all changes. This will <strong>delete the temporary arranged copies</strong> and restore your original, untouched items to their initial positions.</li>
+                    </ul>
+                </div>
+
                 <p><strong>Why is this important?</strong> Until you click <code>Ok</code> or <code>Cancel</code>, your original items remain hidden and the arranged items are temporary. Properly ending the session ensures your document remains clean and contains only the objects you intend to keep.</p>
                 <p><em>Note: Switching to a different Illustrator document will force the plugin to auto-terminate the session to prevent data corruption.</em></p>
 
@@ -384,9 +383,12 @@
                     </a>
                 </div>
 
-                <div class="technical-disclaimer">
+                <div class="offer-banner">
                     <h4>⚠️ Important Technical Context: Performance vs. Price</h4>
                     <p>Industrial CNC nesting software often costs upwards of $1,000 and utilizes compiled multi-threaded C++ engines. Arrange Master operates within the strict conditions of Adobe's ExtendScript environment, which is single-threaded and computationally constrained.</p>
+                </div>
+
+                <div class="technical-disclaimer">
                     <p>While our RLE Math Engine is highly optimized, processing 100+ complex vector shapes with 'Free Rotation' enabled may take from seconds to several minutes and briefly freeze the Illustrator interface. <strong>At just $39 - roughly the cost of a single meter of premium vinyl wrap</strong> - Arrange Master pushes the absolute boundaries of CEP architecture, providing a powerful alternative to industrial plugins that quickly pays for itself in saved material and time.</p>
                 </div>
 
@@ -482,7 +484,7 @@
 
                 <h3 id="changelog">10. Changelog</h3>
 
-                <h4 id="version-1-2-1">Version 1.2.1 (March 19, 2026)</h4>
+                <h4>Version 1.2.1 (March 19, 2026)</h4>
                 <p>Maintenance update focusing on precision geometry handling and Clipping Mask support across the entire plugin.</p>
                 <ul>
                     <li><strong>Universal Clipping Mask Support.</strong> All arrangement methods (Grid, Knolling, Greedy and Shape Respect) now correctly process objects with Clipping Masks. The engine no longer considers hidden elements outside the mask area, focusing strictly on the mask's true bounding box.</li>
@@ -491,7 +493,7 @@
                     <li><strong>Stability Fixes:</strong> Minor adjustments to the Knolling "Fit to Container" math to ensure more consistent scaling with very small objects.</li>
                 </ul>
 
-                <h4 id="version-1-2-0">Version 1.2.0 (March 1, 2026)</h4>
+                <h4>Version 1.2.0 (March 1, 2026)</h4>
                 <p>A massive update transforming the plugin into an industrial-grade nesting engine, featuring entirely new mathematics, real-time UI feedback, and intelligent scaling.</p>
                 <ul>
                     <li><strong>New Feature: Visual Progress Bar.</strong> The Status Bar now features a smooth, animated background progress filler. Long operations like Dense Packing now provide clear visual feedback that the engine is working.</li>
@@ -506,7 +508,7 @@
                     <li><strong>Major Bug Fix:</strong> Fixed a bug with memory leaks and uneven filling of cells when using Offset Odd/Even Rows in Grid Layout.</li>
                 </ul>
 
-                <h4 id="version-1-1-2">Version 1.1.2 (November 22, 2025)</h4>
+                <h4>Version 1.1.2 (November 22, 2025)</h4>
                 <p>This update focuses on maximizing packing density, refining algorithm precision, and unifying rotation logic for Dense Packing.</p>
                 <ul>
                     <li><strong>Dense Packing Optimization & Quality Boost.</strong> The True-Shape nesting engine received a major upgrade. Geometry decomposition now merges adjacent sectors, speeding up calculations by 5-10x. The "Safety Valve" (fallback to coarse packing) has been removed, ensuring the algorithm always performs a full-quality analysis regardless of complexity.</li>
@@ -516,7 +518,7 @@
                     <li><strong>Raster & Placed Item Support.</strong> Fixed "Select at least 2 objects" errors when working with images. The plugin now includes robust fallback mechanisms to correctly detect bounds for Raster and Placed items.</li>
                 </ul>
 
-                <h4 id="version-1-1-1">Version 1.1.1 (October 17, 2025)</h4>
+                <h4>Version 1.1.1 (October 17, 2025)</h4>
                 <p>This is a major update focused on radical algorithm improvements, new features, and overall stability, making Arrange Master a truly professional-grade tool.</p>
                 <ul>
                     <li><strong>Complete Overhaul: Dense Packing Algorithm.</strong> The true-shape nesting engine has been rewritten from the ground up. It now uses a "Global Free Space Analysis" architecture, allowing it to see and utilize not only holes inside objects but also the complex empty spaces that form <em>between</em> multiple objects. This results in significantly denser and more intelligent layouts.</li>
@@ -528,7 +530,7 @@
                     <li><strong>Infrastructure: Windows & macOS Installers.</strong> The project now includes a professional, digitally-signed installer for Windows and a clear manual installation package for macOS, ensuring a smooth setup process for all users.</li>
                 </ul>
 
-                <h4 id="version-1-0-1">Version 1.0.1 (October 10, 2025)</h4>
+                <h4>Version 1.0.1 (October 10, 2025)</h4>
                 <p>This update focuses on adding powerful new features for organic layouts and significant performance optimizations.</p>
                 <ul>
                     <li><strong>New Feature: Dense Packing ("True-Shape Nesting").</strong> The Greedy Layout now includes an advanced mode that analyzes the true vector shape of objects, allowing for incredibly tight and natural-looking packing that fills concave areas.</li>
@@ -540,7 +542,7 @@
                     <li><strong>Bug Fixes:</strong> Fixed numerous bugs related to session management, object transformation, and UI rendering to improve overall stability.</li>
                 </ul>
 
-                <h4 id="version-1-0-0">Version 1.0.0 (September 15, 2025)</h4>
+                <h4>Version 1.0.0 (September 15, 2025)</h4>
                 <ul>
                     <li>Initial public release.</li>
                     <li>Introduced the four core layout methods: <strong>Grid</strong>, <strong>Knolling</strong>, <strong>Greedy</strong>, and <strong>Shape Respect</strong>.</li>
