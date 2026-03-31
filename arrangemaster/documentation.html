@@ -117,7 +117,7 @@
             </div>
             <div class="container">
                 <h1>Arrange Master Documentation</h1>
-                <p class="doc-version-note">Current Version: 1.2.1</p>
+                <p class="doc-version-note">Current Version: 1.2.2</p>
                 <ol>
                     <li><a href="#installation">Installation</a></li>
                     <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
@@ -484,13 +484,16 @@
 
                 <h3 id="changelog">10. Changelog</h3>
 
+                <h4>Version 1.2.2 (March 31, 2026)</h4>
+                <p>Maintenance update.</p>
+                <ul>
+                    <li><strong>Dense Packing Optimization.</strong> Improved packing density and more accurate response to "Min. Spacing" settings.</li>
+                </ul>
+
                 <h4>Version 1.2.1 (March 19, 2026)</h4>
-                <p>Maintenance update focusing on precision geometry handling and Clipping Mask support across the entire plugin.</p>
+                <p>Maintenance update.</p>
                 <ul>
                     <li><strong>Universal Clipping Mask Support.</strong> All arrangement methods (Grid, Knolling, Greedy and Shape Respect) now correctly process objects with Clipping Masks. The engine no longer considers hidden elements outside the mask area, focusing strictly on the mask's true bounding box.</li>
-                    <li><strong>New "True Bounds" Scanning Logic.</strong> Implemented a recursive boundary analyzer that bypasses Adobe Illustrator's native BBox inflation bug. This ensures perfectly tight packing for clipped groups, symbols, and complex nested objects in every layout mode.</li>
-                    <li><strong>Improved Container Detection.</strong> You can now use a Clipping Mask object as a container. The plugin will accurately identify its visible boundaries for the layout area.</li>
-                    <li><strong>Stability Fixes:</strong> Minor adjustments to the Knolling "Fit to Container" math to ensure more consistent scaling with very small objects.</li>
                 </ul>
 
                 <h4>Version 1.2.0 (March 1, 2026)</h4>
