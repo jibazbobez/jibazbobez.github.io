@@ -125,6 +125,7 @@
                             <li><a href="#wrong-method">Why are my items arranged in a rectangle even though my container is a circle?</a></li>
                             <li><a href="#items-dont-fill">Why do my items only fill a small part of the container?</a></li>
                             <li><a href="#overflow-items">Some of my items are placed outside the container. Why?</a></li>
+                            <li><a href="#target-layer-error">I get the error "Target layer cannot be modified." How do I fix it?</a></li>
                             <li><a href="#shape-respect-fails">In Shape Respect, my items aren't arranging inside the shape at all. What's wrong?</a></li>
                             <li><a href="#accurate-mode-slow">Why does Shape Respect (Accurate Mode) take so long to run?</a></li>
                             <li><a href="#raster-image-error">Why do I get a "Please select at least 2 objects" error with raster images?</a></li>
@@ -271,7 +272,7 @@
                 <p><strong>How to fix:</strong> Select your grouped container shape and go to <code>Object > Compound Path > Make</code> (or press <code>Cmd+8</code> / <code>Ctrl+8</code>).</p>
 
                 <h4 id="layers">Q: Does the plugin work with objects on different layers?</h4>
-                <p>A: Yes. Arrange Master operates on your current selection, regardless of what layers the objects are on. When the arrangement is finalized, the objects will remain on their original layers but will be positioned inside the container.</p>
+                <p>A: Yes. Arrange Master operates on your current selection, regardless of what layers the objects are on. When the arrangement is finalized, the objects will remain on their original layers but will be positioned inside the container. However, please ensure that none of these layers (or the currently active layer) are locked or hidden, as this may block the plugin from making necessary modifications.</p>
 
                 <h4 id="rotation-in-shapes">Q: Can the plugin rotate items to better fit inside a custom shape?</h4>
                 <p>A: Yes. The <strong>Shape Respect</strong> layout has two rotation options. <strong>"Allow 90° turn"</strong> gives the algorithm permission to rotate items by 90 degrees if it finds a better fit. The new <strong>"Vary Rotation"</strong> setting adds organic randomness by rotating each item by a random angle *before* placement, which is perfect for creating natural-looking compositions.</p>
@@ -313,6 +314,15 @@
                 </ol>
                 <p><strong>Solution:</strong> To fit more items, either <strong>increase the size of your container object</strong> or <strong>decrease the "Min. Spacing"</strong> value.</p>
                 
+                <h4 id="target-layer-error">Q: I get the error "Target layer cannot be modified." How do I fix it?</h4>
+                <p>A: This is a standard Adobe Illustrator restriction. It occurs when the script tries to move or duplicate objects, but the layer they belong to (or the currently active layer) is restricted. To fix this:</p>
+                <ul>
+                    <li>Make sure all layers and sublayers are <strong>visible</strong> (eye icon on) and <strong>unlocked</strong> (padlock icon off).</li>
+                    <li>Check that the <strong>Active Layer</strong> in your Layers panel is not locked or hidden.</li>
+                    <li>Ensure you are not working on a <strong>Template layer</strong>.</li>
+                </ul>
+                <p>If the error persists, try unlocking all objects (<code>Alt+Ctrl+2</code>) and ensuring they are all on a standard, editable layer before clicking Arrange.</p>
+
                 <h4 id="shape-respect-fails">Q: In Shape Respect, my items aren't arranging inside the shape at all. What's wrong?</h4>
                 <p>A: This almost always happens when your complex container shape is a <strong>Group</strong> instead of a <strong>Compound Path</strong>. The Shape Respect algorithm requires a single, unified path to analyze.</p>
                 <p><strong>Solution:</strong> Select your container object. If it is a Group, ungroup it (<code>Cmd+Shift+G</code> / <code>Ctrl+Shift+G</code>) and then immediately create a Compound Path from its parts by going to <code>Object > Compound Path > Make</code> (<code>Cmd+8</code> / <code>Ctrl+8</code>). Now, re-select all your items and the new Compound Path container, and run Arrange Master again.</p>
