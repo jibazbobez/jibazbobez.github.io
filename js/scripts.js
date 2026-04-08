@@ -137,7 +137,7 @@ banner.className = 'am-cookie-banner';
 banner.innerHTML = `
     <p class="am-cookie-text">
         This website uses cookies to ensure you get the best experience and to analyze traffic. 
-        <a href="/arrangemaster/privacy.html">Privacy Policy</a>
+        <a href="https://andrewr.online/privacy.html">Privacy Policy</a>
     </p>
     <button class="cta-button primary am-cookie-btn" id="accept-global-cookies">Got it!</button>
 `;
