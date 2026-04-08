@@ -411,7 +411,6 @@ section {
     overflow: hidden;
 }
 
-/* Decorative Glow */
 .featured-card::before {
     content: '';
     position: absolute;
@@ -599,7 +598,6 @@ section {
     transform: translateX(4px);
 }
 
-/* Card Badge */
 .card-badge {
     position: absolute;
     top: 20px;
