@@ -1,4 +1,76 @@
 /* =======================
+   RUBIK FONT
+   ======================== */
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v31-cyrillic_latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v31-cyrillic_latin-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v31-cyrillic_latin-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/rubik-v31-cyrillic_latin-700.woff2') format('woff2');
+}
+
+/* =======================
+   ROBOTO FONT
+   ======================== */
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/roboto-v50-cyrillic_latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../assets/fonts/roboto-v50-cyrillic_latin-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../assets/fonts/roboto-v50-cyrillic_latin-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/roboto-v50-cyrillic_latin-700.woff2') format('woff2');
+}
+
+/* =======================
    CSS VARIABLES
    ======================== */
 :root {
@@ -23,8 +95,8 @@
     
     /* Text Colors */
     --text-primary: #FFFFFF;
-    --text-secondary: #A499E8;
-    --text-tertiary: #a4aab6;
+    --text-secondary: #a4aab6;
+    --text-tertiary: #A499E8;
     
     /* Typography */
     --font-family: 'Inter', sans-serif;
@@ -132,6 +204,11 @@ section {
     position: relative;
 }
 
+strong {
+    color: var(--text-primary); /* Белый #FFFFFF */
+    font-weight: 600;
+}
+
 /* =======================
    BUTTONS
    ======================== */
@@ -174,7 +251,7 @@ section {
 
 .cta-button.secondary:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: var(--text-tertiary);
+    border-color: var(--text-secondary);
     transform: translateY(-3px);
 }
 
@@ -251,7 +328,7 @@ section {
 }
 
 .nav-links a {
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
@@ -470,7 +547,7 @@ section {
     font-size: 1.75rem;
     font-weight: 500;
     margin-bottom: 20px;
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
 }
 
 .featured-description p {
@@ -573,6 +650,7 @@ section {
     margin-top: 12px;
     font-size: 0.95rem;
     line-height: 1.5;
+    color: var(--text-tertiary);
 }
 
 .project-card-link {
@@ -722,10 +800,11 @@ section {
     color: var(--text-secondary);
     text-decoration: none;
     transition: transform 0.2s ease, color 0.2s ease;
+    color: var(--text-tertiary) !important;
 }
 
 .social-link-item:hover {
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
 }
 
 .social-icon {
@@ -751,7 +830,7 @@ section {
 
 .footer-bottom p {
     font-size: 0.9rem;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     margin: 0;
 }
 
@@ -763,7 +842,7 @@ section {
 }
 
 .footer-links a {
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
     text-decoration: none;
     transition: color 0.2s;
     font-size: 0.95rem;
@@ -779,6 +858,62 @@ section {
     pointer-events: none;
     text-decoration: none;
     opacity: 1;
+}
+
+/* =======================
+   PRIVACY POLICY
+   ======================== */
+
+.policy-content {
+    padding: 40px 0 100px;
+}
+.policy-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    padding: 60px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+.policy-card h1 {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+}
+.last-updated {
+    color: var(--primary-accent);
+    font-weight: 600;
+    margin-bottom: 40px;
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.policy-card h3 {
+    margin-top: 40px;
+    color: var(--text-primary);
+    border-left: 3px solid var(--primary-accent);
+    padding-left: 15px;
+}
+.policy-card p, .policy-card ul {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+.policy-card ul {
+    padding-left: 20px;
+}
+.policy-card li {
+    margin-bottom: 10px;
+}
+.policy-card a {
+    color: var(--primary-accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+.policy-card a:hover {
+    text-decoration: underline;
 }
 
 /* =======================
@@ -908,6 +1043,12 @@ section {
     
     .about-card {
         padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .policy-card {
+        padding: 30px;
     }
 }
 
