@@ -372,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
     banner.innerHTML = `
         <p class="am-cookie-text">
             This website uses cookies to ensure you get the best experience and to analyze traffic. 
-            <a href="privacy.html">Learn more</a>
+            <a href="https://andrewr.online/privacy.html">Learn more</a>
         </p>
         <button class="cta-button primary am-cookie-btn" id="accept-cookies">Got it!</button>
     `;
