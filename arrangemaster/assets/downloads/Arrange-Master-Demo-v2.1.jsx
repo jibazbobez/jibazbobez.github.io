@@ -8,13 +8,12 @@
 // Description:
 // This is a demonstration script showcasing the core arrangement capabilities of the
 // "Arrange Master" Adobe Illustrator extension. It operates as a standalone .jsx file
-// without the session-based safety features of the full CEP plugin.
+// with the session-based safety features of the full CEP plugin.
 //
 // Features two powerful layout methods from the full version:
 // 1. Grid Layout: Arranges objects in a structured grid with an option to ignore size limits.
 // 2. Knolling Layout: Utilizes a sophisticated "Maximal Empty Rectangles" (MER)
 //    packer with a Best Short-Side Fit (BSSF) heuristic and Two-Pass gap filling.
-//    (Note: Intelligent Auto-Resizing is exclusive to the full version).
 //
 // Changes made directly affect the selected objects. Use the 'Cancel' button
 // to revert all objects to their state before the script was run.
