@@ -117,7 +117,7 @@
             </div>
             <div class="container">
                 <h1>Arrange Master Documentation</h1>
-                <p class="doc-version-note">Current Version: 1.2.2</p>
+                <p class="doc-version-note">Current Version: 1.2.3</p>
                 <ol>
                     <li><a href="#installation">Installation</a></li>
                     <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
@@ -376,16 +376,11 @@
 
                 <h4 id="dense-packing">Dense Packing (True-Shape Nesting):</h4>
                 <p>When the <strong>Dense Packing</strong> checkbox is enabled, Arrange Master switches to a true-shape nesting engine. This mode analyzes the actual shape of your vector objects - including gaps between and holes within them - and places items with maximum density. It uses a Two-Pass architecture: first placing large objects to form the landscape, then filling the remaining cavities with smaller details.</p>
-                
-                <div class="screenshot-wrapper">
-                    <a href="assets/screenshots/documentation_screenshot_016.webp" class="screenshot-preview">
-                        <img src="assets/screenshots/documentation_screenshot_016.webp" alt="Dense Packing Mode">
-                    </a>
-                </div>
 
-                <div class="offer-banner">
-                    <h4>⚠️ Important Technical Context: Performance vs. Price</h4>
-                    <p>Industrial CNC nesting software often costs upwards of $1,000 and utilizes compiled multi-threaded C++ engines. Arrange Master operates within the strict conditions of Adobe's ExtendScript environment, which is single-threaded and computationally constrained.</p>
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_012.webp" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_012.webp" alt="Dense Packing Mode">
+                    </a>
                 </div>
 
                 <div class="technical-disclaimer">
@@ -393,8 +388,8 @@
                 </div>
 
                 <div class="screenshot-wrapper">
-                    <a href="assets/screenshots/documentation_screenshot_012.webp" class="screenshot-preview">
-                        <img src="assets/screenshots/documentation_screenshot_012.webp" alt="Dense Packing Mode">
+                    <a href="assets/screenshots/documentation_screenshot_016.webp" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_016.webp" alt="Dense Packing Mode">
                     </a>
                 </div>
 
@@ -483,6 +478,17 @@
                 </ul>
 
                 <h3 id="changelog">10. Changelog</h3>
+
+                <h4>Version 1.2.3 (April 17, 2026)</h4>
+                <p>Maintenance performance and precision update.</p>
+                <ul>
+                    <li><strong>Architecture Upgrade: Chromium Math Engine.</strong> Dense Packing calculations have been moved to the high-performance background engine. This provides a massive speed boost, especially when arranging hundreds of objects.</li>
+                    <li><strong>High-Precision Spacing & Gravity Snap.</strong> Decoupled "Analysis Precision" from physical spacing. "Min. Spacing" is now pixel-perfect (1pt resolution) regardless of speed settings, while an intelligent "Gravity Snap" feature eliminates empty gaps.</li>
+                    <li><strong>Improved Clipping & Compound Mask Support.</strong> Resolved coordinate shifts in complex masks and fixed issues where hidden content affected the layout density of Compound Path masks.</li>
+                    <li><strong>Target Layer Protection.</strong> Fixed the "Target layer cannot be modified" error. Temporary groups are now strictly created on the layer containing your selection, even if other layers are locked or hidden.</li>
+                    <li><strong>Global Input Support.</strong> All numeric fields now support both dot (<code>.</code>) and comma (<code>,</code>) as decimal separators for better international usability.</li>
+                    <li><strong>Large-Scale Stability.</strong> Implemented "Memory Tagging" to ensure 100% accurate object mapping and stability when processing large selections of 300+ items.</li>
+                </ul>
 
                 <h4>Version 1.2.2 (March 31, 2026)</h4>
                 <p>Maintenance update.</p>
