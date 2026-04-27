@@ -226,7 +226,7 @@ section {
 }
 
 .cta-button.primary:hover {
-    transform: translateY(-2px);
+    filter: brightness(1.15);
     box-shadow: 0 8px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
@@ -239,9 +239,9 @@ section {
 }
 
 .cta-button.secondary:hover {
+    filter: brightness(1.2);
     background: rgba(255, 255, 255, 0.1);
-    border-color: var(--text-secondary);
-    transform: translateY(-2px);
+    border-color: var(--text-tertiary);
 }
 
 .cta-button.large {
@@ -254,6 +254,67 @@ section {
     padding: 20px;
     font-size: 1.25rem;
     border-radius: var(--radius-md);
+}
+
+/* =======================
+   DYNAMIC IMAGE GLOW EFFECT
+   ======================== */
+.has-dynamic-glow {
+    position: relative;
+    overflow: visible !important;
+    z-index: 1;
+}
+
+.has-dynamic-glow:hover {
+    z-index: 10;
+}
+
+.has-dynamic-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--glow-bg);
+    background-size: cover;
+    background-position: center;
+    filter: blur(35px) saturate(1.2) brightness(0.8);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+    border-radius: inherit;
+}
+.has-dynamic-glow:hover::before {
+    opacity: 0.5;
+}
+
+.feature-card.has-dynamic-glow .feature-visual {
+    overflow: hidden !important;
+    border-radius: inherit;
+}
+
+.use-case-card.has-dynamic-glow .screenshot-preview {
+    overflow: hidden !important;
+    border-radius: inherit;
+    border: none;
+}
+.use-case-card.has-dynamic-glow .use-case-overlay {
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+}
+
+.screenshot-wrapper.has-dynamic-glow {
+    border-radius: 8px; 
+}
+
+.gallery-item.has-dynamic-glow {
+    border: none;
+}
+.gallery-img-wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+    border: 1px solid var(--surface-border);
 }
 
 /* =======================
@@ -576,35 +637,65 @@ section {
 }
 
 .what-is-item {
+    position: relative; 
+    z-index: 1;
     background: var(--surface-color);
     border: 1px solid var(--surface-border);
     border-radius: var(--radius-md);
     padding: 30px 30px 20px;
     text-align: left;
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.what-is-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--hover-color, transparent);
+    filter: blur(25px);
+    opacity: 0;
+    z-index: -1;
+    border-radius: inherit;
+    transform: translateY(5px);
+    transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .what-is-item:hover {
-    background: var(--surface-hover);
-    border-color: rgba(255,255,255,0.1);
-    transform: translateY(-3px);
+    background-color: var(--hover-color);
+    border-color: transparent;
+}
+
+.what-is-item:hover::before {
+    opacity: 0.7; 
 }
 
 .what-is-icon {
     height: 40px;
     margin-bottom: 24px;
     filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.3));
+    transition: filter 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.what-is-item:hover .what-is-icon {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)) brightness(0) invert(1);
 }
 
 .what-is-item h3 {
     font-size: 1.25rem;
     margin-bottom: 12px;
     color: var(--text-primary);
+    transition: color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .what-is-item p {
     font-size: 0.95rem;
     line-height: 1.6;
+    transition: color 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.what-is-item:hover h3,
+.what-is-item:hover p {
+    color: #ffffff;
 }
 
 /* =======================
@@ -749,7 +840,10 @@ section {
     max-width: 200px;
     filter: grayscale(100%) brightness(0.7);
     opacity: 0.7;
-    transition: filter 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                filter 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: transform;
 }
 
 .logo-carousel-item:hover img {
@@ -777,12 +871,13 @@ section {
 }
 
 .gallery-item img {
-    width: 100%; height: 100%;
+    width: 100%; 
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     opacity: 0.8;
 }
-
 .gallery-item:hover img {
     transform: scale(1.05);
     opacity: 1;
@@ -1308,39 +1403,51 @@ section {
     box-shadow: 0 4px 20px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 .payment-option-btn.primary:hover {
-    transform: translateY(-2px);
     box-shadow: 0 8px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
+/* 1. Lava.Top (#2680EB - Bright Blue) */
 .payment-option-btn.--lava {
-    background: #ffffff;
-    color: #000000;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25), inset 0 1px 0 rgba(255,255,255,1);
+    background: #2680EB;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(38, 128, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .payment-option-btn.--lava:hover {
-    transform: translateY(-2px);
-    background: #f2f2f2;
-    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4), inset 0 1px 0 rgba(255,255,255,1);
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(38, 128, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
+/* 2. Hipolink (#3FBBFF - Light Blue) */
+.payment-option-btn.--hipolink {
+    background: #3FBBFF;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(63, 187, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.payment-option-btn.--hipolink:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 8px 30px rgba(63, 187, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* 3. Creative Market (#6254A9 - Purple) */
 .payment-option-btn.--cm {
-    background: linear-gradient(135deg, #39b4ac 0%, #67e0d8 100%);
-    color: white;
-    box-shadow: 0 4px 20px rgba(57, 180, 172, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    background: #6254A9;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(98, 84, 169, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .payment-option-btn.--cm:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(57, 180, 172, 0.6), inset 0 1px 0 rgba(255,255,255,0.2);
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(98, 84, 169, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
+/* 4. Envato Market (#E69358 - Orange) */
 .payment-option-btn.--envato {
-    background: linear-gradient(135deg, #9cee69 0%, #c5ff9e 100%);
-    color: #1a330c; 
-    box-shadow: 0 4px 20px rgba(156, 238, 105, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+    background: #E69358;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(230, 147, 88, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .payment-option-btn.--envato:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(156, 238, 105, 0.6), inset 0 1px 0 rgba(255,255,255,0.4);
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(230, 147, 88, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* =======================

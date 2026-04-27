@@ -290,14 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.head.appendChild(styleSheet);
 
         track.style.animation = `${animationName} ${duration}s linear infinite`;
-
-        viewport.addEventListener('mouseenter', () => {
-            track.style.animationPlayState = 'paused';
-        });
-
-        viewport.addEventListener('mouseleave', () => {
-            track.style.animationPlayState = 'running';
-        });
     }
 });
 
@@ -393,3 +385,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 600);
     });
 })();
+
+// ===================================================================
+//  8. DYNAMIC IMAGE GLOW EFFECT
+// ===================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Target specific containers safely, explicitly excluding all carousels
+    const glowTargets = document.querySelectorAll(`
+        .features-grid .feature-card, 
+        .use-cases-gallery .use-case-card, 
+        .knolling-gallery .gallery-item,
+        .doc-page .screenshot-wrapper
+    `);
+    
+    glowTargets.forEach(target => {
+        const img = target.querySelector('img');
+        if (img && img.src) {
+            if (target.classList.contains('gallery-item')) {
+                if (!img.parentElement.classList.contains('gallery-img-wrap')) {
+                    const wrap = document.createElement('div');
+                    wrap.className = 'gallery-img-wrap';
+                    target.insertBefore(wrap, img);
+                    wrap.appendChild(img);
+                }
+            }
+
+            // Apply the background image to the CSS variable
+            target.style.setProperty('--glow-bg', `url(${img.src})`);
+            // Activate the CSS styles
+            target.classList.add('has-dynamic-glow');
+        }
+    });
+});
+
+// ===================================================================
+//  8. DYNAMIC WHAT-IS-ITEM HOVER COLORS
+// ===================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const whatIsItems = document.querySelectorAll('.what-is-item');
+    
+    // Array of your requested vibrant colors
+    const hoverColors =[
+        '#2680EB', // Bright Blue
+        '#3FBBFF', // Light Blue
+        '#6254A9', // Purple
+        '#E69358'  // Orange
+    ];
+
+    whatIsItems.forEach(item => {
+        // Trigger calculation exactly when the mouse enters the card
+        item.addEventListener('mouseenter', () => {
+            // Pick a random color from the array
+            const randomColor = hoverColors[Math.floor(Math.random() * hoverColors.length)];
+            
+            // Inject the selected color into the CSS variable of this specific card
+            item.style.setProperty('--hover-color', randomColor);
+        });
+    });
+});
