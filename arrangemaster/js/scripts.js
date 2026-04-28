@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ===================================================================
-    //  1. ПЛАВНАЯ ПРОКРУТКА К ЯКОРЯМ С УЧЕТОМ "ЛИПКОЙ" ШАПКИ
+    //  1. SMOOTH SCROLLING TO ANCHORS WITH A STICKY HEADER
     // ===================================================================
     const internalLinks = document.querySelectorAll('a[href^="#"]');
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===================================================================
-    //  2. ЛОГИКА ДЛЯ ЛАЙТБОКСА (ПРОСМОТР СКРИНШОТОВ)
+    //  2. LIGHTBOX LOGIC (SCREENSHOTS VIEWING)
     // ===================================================================
     const lightbox = document.getElementById('lightbox');
 
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===================================================================
-    //  3. ЛОГИКА ДЛЯ ИНТЕРАКТИВНОЙ ГАЛЕРЕИ ФИЧЕЙ
+    //  3. LOGIC FOR AN INTERACTIVE FEATURE GALLERY
     // ===================================================================
     const featureVisuals = document.querySelectorAll('.feature-visual');
 
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===================================================================
-    //  4. АВТОМАТИЧЕСКОЕ ОБНОВЛЕНИЕ ГОДА В КОПИРАЙТЕ
+    //  4. AUTOMATIC UPDATE OF THE YEAR IN COPYRIGHT
     // ===================================================================
     const copyrightYearSpan = document.getElementById('copyright-year');
     
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===================================================================
-//  5. ЛОГИКА ДЛЯ МОДАЛЬНОГО ОКНА ОПЛАТЫ
+//  5. LOGIC FOR A MODAL PAYMENT WINDOW
 // ===================================================================
 const paymentModal = document.getElementById('payment-modal');
 
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===================================================================
-//  8. DYNAMIC WHAT-IS-ITEM HOVER COLORS
+//  9. DYNAMIC WHAT-IS-ITEM HOVER COLORS
 // ===================================================================
 document.addEventListener('DOMContentLoaded', () => {
     const whatIsItems = document.querySelectorAll('.what-is-item');
