@@ -136,6 +136,7 @@
                     </li>
                     <li><a href="#overflow-placement">Overflow Placement</a></li>
                     <li><a href="#common-features">Common Features & Best Practices</a></li>
+                    <li><a href="#prepress-splitter">Prepress Splitter Script</a></li>
                     <li><a href="#changelog">Changelog</a>
                 </ol>
 				
@@ -477,7 +478,53 @@
                     <li><strong>Iterative Container Tuning:</strong> You can treat the container as a live bounding box. Feel free to shrink or expand your container object from the bottom or right edges to refine your composition's density after the next click on the Arrange button. If you make the container tighter, the plugin will intelligently push objects "out" into the Overflow area. Simply expand the container slightly to the right or bottom to reclaim those items back into the layout.</li>
                 </ul>
 
-                <h3 id="changelog">10. Changelog</h3>
+                <h3 id="prepress-splitter">10. Prepress Splitter Script</h3>
+                <p>The <a href="assets/downloads/Prepress-Splitter.jsx" target="_blank"><strong>Prepress Splitter.jsx</strong></a> is a specialized companion script designed to bridge the gap between automated nesting and production. While Arrange Master handles the placement of objects, this script automates the distribution of nested components into production-ready layers for wide-format printing and cutting.</p>
+                
+                <h4>Purpose and Workflow</h4>
+                <p>In a standard print-and-cut workflow, design elements, cut contours, and technical marks (like QR codes) must be separated into different layers. Prepress Splitter analyzes your selection—typically hundreds of nested groups—and redistributes their internal components based on object type and Z-order stacking.</p>
+
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_017.webp" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_017.webp" alt="The Prepress Splitter UI">
+                    </a>
+                </div>
+
+                <h4>UI Elements & Layer Distribution</h4>
+                <ul>
+                    <li><strong>CUT Layer:</strong> Identifies the primary vector clipping mask of each group and duplicates it as a non-clipping path. The script automatically enforces a 100% Magenta (E6007E) 1pt stroke, even for complex Compound Paths.</li>
+                    <li><strong>PRINT Layer:</strong> Collects the base (bottom-most) raster images or embedded files. If a group is vector-only, its original components are moved here.</li>
+                    <li><strong>QR Layer (PRINT 2):</strong> Collects all raster elements stacked above the base image. This is used for variable data, QR codes, or spot varnish rasters.</li>
+                    <li><strong>MARKS Layer:</strong> Collects any auxiliary vector elements found within the group that are not used as clipping masks.</li>
+                </ul>
+
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_018.webp" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_018.webp" alt="Layer Distribution Result">
+                    </a>
+                </div>
+
+                <h4>How to Use the Script</h4>
+                <ol>
+                    <li><strong>Prepare Your Objects:</strong> Before running Arrange Master, ensure each individual object is a <strong>Group</strong> or a <strong>Clipping Mask</strong> containing the design (raster/vector), cut line (clipping mask by itself), and any marks.</li>
+                    <li><strong>Run the Arrangement:</strong> Select all your objects and a container. Use Arrange Master to nest them perfectly using your preferred method (e.g., <strong>Dense Packing</strong>). Click <strong>Ok</strong> to finalize the session.</li>
+                    <li><strong>Select Nested Items:</strong> Select all the nested groups on your artboard that you wish to process.</li>
+                    <li><strong>Launch the Script:</strong> Go to <code>File > Scripts > Other Script...</code> and select the <code>Prepress-Splitter.jsx</code> file.</li>
+                    <li><strong>Configure Layers:</strong> In the dialog box, check the layers you want to generate.
+                        <ul>
+                            <li>Enable <strong>"Keep Clipping Masks"</strong> if your images have non-transparent backgrounds and require precise masking on the print layers.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Execute Split:</strong> Click <strong>Split</strong>. The script will redistribute all internal elements to their respective layers and delete the original source groups to keep the file clean.</li>
+                </ol>
+
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_019.webp" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_019.webp" alt="Production-Ready Layers">
+                    </a>
+                </div>
+
+                <h3 id="changelog">11. Changelog</h3>
 
                 <h4>Version 1.2.4 (April 20, 2026)</h4>
                 <p>Maintenance update.</p>
