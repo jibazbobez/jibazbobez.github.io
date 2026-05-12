@@ -1,7 +1,7 @@
 #target illustrator
 #targetengine "main"
 
-// Prepress Splitter - v1.1 (Companion Script for Arrange Master Plugin)
+// Prepress Splitter - v1.2 (Companion Script for Arrange Master Plugin)
 // Authors: Andrew Rybalko
 // Date: May 10, 2026
 //
