@@ -572,7 +572,7 @@ section {
     position: relative;
     cursor: pointer;
     width: 100%;
-    aspect-ratio: 15 / 9;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
     background-color: #000;
 }
