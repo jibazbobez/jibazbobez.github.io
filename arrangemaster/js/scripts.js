@@ -252,44 +252,62 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Only run if the viewport exists
     if (viewport) {
-        const track = viewport.querySelector('.logo-carousel-track');
-        if (!track) return;
+        // --- Find all tracks instead of just the first one ---
+        const tracks = viewport.querySelectorAll('.logo-carousel-track');
+        if (!tracks.length) return;
 
-        const logos = Array.from(track.children);
-        
-        // 1. Duplicate logos to create the seamless loop effect
-        logos.forEach(logo => {
-            const clone = logo.cloneNode(true);
-            clone.setAttribute('aria-hidden', 'true');
-            track.appendChild(clone);
-        });
+        tracks.forEach((track, index) => {
+            const logos = Array.from(track.children);
+            
+            // 1. Duplicate logos to create the seamless loop effect
+            logos.forEach(logo => {
+                const clone = logo.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+            });
 
-        // 2. Calculate the total width of the original logos
-        let totalWidth = 0;
-        logos.forEach(logo => {
-            const style = window.getComputedStyle(logo);
-            const marginRight = parseInt(style.marginRight, 10);
-            const marginLeft = parseInt(style.marginLeft, 10);
-            totalWidth += logo.offsetWidth + marginLeft + marginRight;
-        });
+            // 2. Calculate the total width of the original logos
+            let totalWidth = 0;
+            logos.forEach(logo => {
+                const style = window.getComputedStyle(logo);
+                const marginRight = parseInt(style.marginRight, 10);
+                const marginLeft = parseInt(style.marginLeft, 10);
+                totalWidth += logo.offsetWidth + marginLeft + marginRight;
+            });
 
-        // 3. Set the dynamic animation based on the calculated width
-        const speed = 40; // pixels per second. Adjust for faster/slower scroll.
-        const duration = totalWidth / speed;
+            // 3. Set the dynamic animation based on the calculated width
+            const speed = 40; // pixels per second. Adjust for faster/slower scroll.
+            const duration = totalWidth / speed;
 
-        track.style.width = `${totalWidth * 2}px`;
+            track.style.width = `${totalWidth * 2}px`;
 
-        const animationName = 'scrollLogosDynamic';
-        const styleSheet = document.createElement('style');
-        styleSheet.innerHTML = `
-            @keyframes ${animationName} {
-                from { transform: translateX(0); }
-                to { transform: translateX(-${totalWidth}px); }
+            const isReverse = track.classList.contains('reverse');
+            const animationName = `scrollLogosDynamic_${index}`;
+            const styleSheet = document.createElement('style');
+            
+            // --- Directional Animation Logic ---
+            // Standard: from 0 to -totalWidth (scrolls Right to Left)
+            // Reverse: from -totalWidth to 0 (scrolls Left to Right)
+            if (isReverse) {
+                styleSheet.innerHTML = `
+                    @keyframes ${animationName} {
+                        from { transform: translateX(-${totalWidth}px); }
+                        to { transform: translateX(0); }
+                    }
+                `;
+            } else {
+                styleSheet.innerHTML = `
+                    @keyframes ${animationName} {
+                        from { transform: translateX(0); }
+                        to { transform: translateX(-${totalWidth}px); }
+                    }
+                `;
             }
-        `;
-        document.head.appendChild(styleSheet);
+            
+            document.head.appendChild(styleSheet);
 
-        track.style.animation = `${animationName} ${duration}s linear infinite`;
+            track.style.animation = `${animationName} ${duration}s linear infinite`;
+        });
     }
 });
 

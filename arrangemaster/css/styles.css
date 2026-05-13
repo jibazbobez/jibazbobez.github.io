@@ -861,6 +861,10 @@ section {
     display: flex;
 }
 
+.logo-carousel-track + .logo-carousel-track {
+    margin-top: 40px;
+}
+
 .logo-carousel-item {
     width: 200px;
     margin: 0 50px;
@@ -1441,26 +1445,26 @@ section {
     box-shadow: 0 8px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* 1. Lava.Top (#2680EB - Bright Blue) */
+/* 1. Lava.Top (#E69358 - Orange) */
 .payment-option-btn.--lava {
+    background: #E69358;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(230, 147, 88, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--lava:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(230, 147, 88, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 2. Hipolink (#2680EB - Bright Blue) */
+.payment-option-btn.--hipolink {
     background: #2680EB;
     color: #ffffff;
     box-shadow: 0 4px 20px rgba(38, 128, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
-.payment-option-btn.--lava:hover {
-    filter: brightness(1.15);
-    box-shadow: 0 8px 30px rgba(38, 128, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* 2. Hipolink (#3FBBFF - Light Blue) */
-.payment-option-btn.--hipolink {
-    background: #3FBBFF;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(63, 187, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
 .payment-option-btn.--hipolink:hover {
     filter: brightness(1.1);
-    box-shadow: 0 8px 30px rgba(63, 187, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 30px rgba(38, 128, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* 3. Creative Market (#6254A9 - Purple) */
@@ -1472,17 +1476,6 @@ section {
 .payment-option-btn.--cm:hover {
     filter: brightness(1.15);
     box-shadow: 0 8px 30px rgba(98, 84, 169, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* 4. Envato Market (#E69358 - Orange) */
-.payment-option-btn.--envato {
-    background: #E69358;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(230, 147, 88, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-option-btn.--envato:hover {
-    filter: brightness(1.15);
-    box-shadow: 0 8px 30px rgba(230, 147, 88, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* =======================
@@ -1687,7 +1680,7 @@ section,
     .feature-video {
         order: 1;
         width: 100%;
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 4 / 3;
         border-radius: 12px;
         overflow: hidden;
     }
