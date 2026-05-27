@@ -117,7 +117,7 @@
             </div>
             <div class="container">
                 <h1>Arrange Master Documentation</h1>
-                <p class="doc-version-note">Current Version: 1.3.0</p>
+                <p class="doc-version-note">Current Version: 1.3.1</p>
                 <ol>
                     <li><a href="#installation">Installation</a></li>
                     <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
@@ -274,6 +274,15 @@
                         Avoid using groups of "Gradient Meshes" or objects with "Opacity Masks" as containers or primary items, as the Illustrator API misreports their true coordinates. Expand these elements to basic paths if precise layout is required.
                     </p>
                 </div>
+
+                <h4>Multi-Layer Retention (Prepress Workflow)</h4>
+                <p>
+                    Arrange Master supports arranging complex multi-layer designs (such as files divided into <strong>CUT, PRINT, MARKS</strong>, etc.) without flattening your layer hierarchy:
+                </p>
+                <ul>
+                    <li><strong>Auto-Clustering:</strong> The plugin automatically identifies overlapping objects across different layers. It groups them mathematically during the session so they are moved and rotated as a single, cohesive unit.</li>
+                    <li><strong>Layer Restoration:</strong> When you finalize the layout (clicking <code>Ok</code>) or cancel the session, Arrange Master automatically unpacks the clusters and distributes each child object back to its originating layer while maintaining relative stacking order.</li>
+                </ul>
 
                 <h3 id="the-arrangement-workflow">6. The Arrangement Workflow: Understanding Sessions</h3>
                 <p>Arrange Master uses a <strong>Session-Based Workflow</strong> to protect your original objects and maintain stability during complex calculations.</p>
@@ -519,6 +528,12 @@
                 </div>
 
                 <h3 id="changelog">11. Changelog</h3>
+
+                <h4>Version 1.3.1 (May 27, 2026)</h4>
+                <p>Maintenance improving prepress automation.</p>
+                <ul>
+                    <li><strong>Multi-Layer Retention:</strong> Added full native support for preserving layer structures (e.g., CUT, PRINT, QR layers) during and after arrangement across all algorithms.</li>
+                </ul>
                 
                 <h4>Version 1.3.0 (May 10, 2026)</h4>
                 <p>Major architectural update focusing on performance and precision.</p>
