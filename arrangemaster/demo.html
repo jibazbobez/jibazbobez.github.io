@@ -130,12 +130,12 @@
             <div class="hero-content container">
                 <h1>Arrange Master:&nbsp;</h1>
                 <h1>Free Demo Version</h1>
-                <h2>Try the core algorithms with this simple JSX script.</h2>
+                <h2>Test file compatibility and core workflows before upgrading.</h2>
                 
                 <a href="assets/downloads/Arrange-Master-Demo.zip" class="cta-button primary large" download>Download Demo Version</a>
                 <p class="sub-cta">No installation required. Just run it from the Scripts menu.</p>
             </div>
-            <a href="#features" class="scroll-down-arrow" aria-label="Scroll to Features"></a>
+            <a href="#demo-purpose" class="scroll-down-arrow" aria-label="Scroll to Content"></a>
         </section>
 
         <!-- =======================
@@ -144,20 +144,24 @@
         <section class="doc-page" style="padding-top: 60px;">
             <div class="container">
 
-                <h3 id="features">Demo Version Features</h3>
+                <h3 id="demo-purpose">The Purpose of the Demo</h3>
                 <p>
-                    The free demo is designed to test the core logic and ensure compatibility with your specific files. If the demo handles your objects without errors, you can be absolutely confident that the Full Version will work flawlessly.
+                    The primary objective of this demo is to allow you to test file compatibility. It demonstrates how robustly Arrange Master processes your specific files - including heavy prepress vectors, compound clipping masks, dynamic symbols, and multi-layer structures - without freezing or crashing Adobe Illustrator.
                 </p>
 
-                <h4>Included in the Demo:</h4>
+                <h3 id="features">Included Demo Features</h3>
                 <ul>
-                    <li><strong>Two Layout Methods:</strong> Experience the standard <strong>Grid Layout</strong> and the advanced <strong>Knolling Layout</strong> (MER algorithm).</li>
-                    <li><strong>Multi-Layer Retention:</strong> Preserves complex multi-layer prepress files (such as separate CUT, PRINT, QR layers) by automatically clustering overlapping objects during arrangement and restoring them back to their original layers upon completion.</li>
-                    <li><strong>Clipping Mask Support:</strong> The script correctly detects the boundaries of masks, ignoring hidden contents.</li>
-                    <li><strong>Smart Container Detection:</strong> Automatically identifies the container by the largest area in your selection.</li>
-                    <li><strong>Non-destructive:</strong> Includes a built-in Undo system to restore your original positions.</li>
+                    <li><strong>Two Layout Methods:</strong> Test the standard <strong>Grid Layout</strong> and the bounding-box based <strong>Knolling Layout</strong> (MER algorithm).</li>
+                    <li><strong>Multi-Layer Retention:</strong> Preserves complex prepress files (separate CUT, PRINT, QR layers) by temporarily clustering overlapping objects and safely restoring them to their original layers upon clicking OK.</li>
+                    <li><strong>Clipping Mask Support:</strong> Detects accurate boundaries of masked objects, ignoring hidden bleeding contents.</li>
+                    <li><strong>Smart Container Detection:</strong> Automatically identifies the layout container by calculating the largest area in your selection.</li>
                 </ul>
 
+                <h3 id="bounding-box-vs-true-shape">Why are there empty spaces between arranged objects?</h3>
+                <p>
+                    When using the demo, you will notice empty gaps between irregularly shaped objects instead of a tightly interlocked layout. This occurs because the demo version uses a simplified <strong>Knolling Layout</strong> algorithm. It arranges objects based strictly on their rectangular bounding boxes (<code>geometricBounds</code>) and cannot analyze physical, irregular contours.
+                </p>
+                
                 <div class="offer-banner">
                     <h4>Experience Dense Packing (True-Shape Nesting)</h4>
                     <p>
@@ -176,6 +180,14 @@
                         allowfullscreen>
                     </iframe>
                 </div>
+
+                <h3 id="session-workflow">The Session Workflow: Why you must click "OK"</h3>
+                <p>
+                    Arrange Master operates on a strict, non-destructive session model. When you click <strong>Arrange</strong>, the script does not modify your original objects. Instead, it hides them and creates a temporary working group containing duplicates. This allows you to safely test different parameters or click <strong>Randomize</strong> without losing your original layout.
+                </p>
+                <p>
+                    To finalize the process, <strong>you must click OK</strong>. This action deletes your hidden originals, ungroups the temporary items, and automatically redistributes them back to their initial Z-order and specific layers (e.g., CUT, PRINT). If you close the window or click <strong>Cancel</strong>, the script simply deletes the temporary group and unhides your original artwork, reverting everything to its initial state.
+                </p>
 
                 <h4>Demo User Interface:</h4>
                 <div class="screenshot-wrapper">
