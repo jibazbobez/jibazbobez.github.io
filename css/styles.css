@@ -225,7 +225,7 @@ strong {
     padding: 14px 32px;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     letter-spacing: -0.01em;
 }
 
@@ -237,7 +237,7 @@ strong {
 }
 
 .cta-button.primary:hover {
-    transform: translateY(-3px);
+    filter: brightness(1.1);
     box-shadow: 0 8px 30px var(--primary-glow), 
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
@@ -250,9 +250,9 @@ strong {
 }
 
 .cta-button.secondary:hover {
+    filter: brightness(1.2);
     background: rgba(255, 255, 255, 0.1);
-    border-color: var(--text-secondary);
-    transform: translateY(-3px);
+    border-color: var(--text-tertiary);
 }
 
 .cta-button.large {
@@ -514,7 +514,7 @@ strong {
     height: auto;
     border-radius: var(--radius-md);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    transition: transform 0.5s ease;
+    transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .featured-visual:hover img {
@@ -599,7 +599,8 @@ strong {
     object-fit: cover;
     object-position: top left;
     z-index: 0;
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease;
+    transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
     opacity: 0.8;
 }
 
@@ -619,6 +620,7 @@ strong {
         rgba(10, 10, 18, 0.9) 30%,
         transparent 100%);
     z-index: 1;
+    border-radius: inherit; 
 }
 
 .project-card-content {
@@ -696,6 +698,53 @@ strong {
     background: var(--secondary-gradient);
     box-shadow: 0 4px 15px var(--secondary-glow);
     color: var(--text-primary);
+}
+
+/* ===================================================================
+   DYNAMIC IMAGE GLOW EFFECT (SUBTLE & REFINED)
+   =================================================================== */
+.has-dynamic-glow {
+    position: relative;
+    overflow: visible !important;
+    z-index: 1; 
+}
+
+.has-dynamic-glow:hover {
+    z-index: 10;
+}
+
+.has-dynamic-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0; 
+    background-image: var(--glow-bg);
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px) saturate(1.2) brightness(0.8);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+    border-radius: inherit;
+    transform: translateY(10px);
+}
+
+.has-dynamic-glow:hover::before {
+    opacity: 0.4; 
+}
+
+.card-img-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+    z-index: 0;
+}
+
+.featured-visual {
+    border-radius: var(--radius-md);
 }
 
 /* =======================

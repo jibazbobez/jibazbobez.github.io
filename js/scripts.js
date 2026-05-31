@@ -154,3 +154,35 @@ document.getElementById('accept-global-cookies').addEventListener('click', funct
     setTimeout(() => banner.remove(), 600);
 });
 })();
+
+// ===================================================================
+//  3. DYNAMIC IMAGE GLOW EFFECT (PRODUCT SHOWCASE & FEATURED)
+// ===================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Target the product showcase cards and the main featured visual
+    const glowTargets = document.querySelectorAll('.project-card, .featured-visual');
+    
+    glowTargets.forEach(target => {
+        const img = target.querySelector('img');
+        if (img && img.src) {
+            
+            // SPECIAL FIX FOR PROJECT CARDS: 
+            // To allow the background image to scale (zoom effect) without spilling out of the rounded corners,
+            // and simultaneously allow the parent card to emit a glow (overflow: visible),
+            // we safely wrap the background image in a clipping div without touching your source HTML.
+            if (target.classList.contains('project-card')) {
+                if (!img.parentElement.classList.contains('card-img-wrap')) {
+                    const wrap = document.createElement('div');
+                    wrap.className = 'card-img-wrap';
+                    target.insertBefore(wrap, img);
+                    wrap.appendChild(img);
+                }
+            }
+
+            // Apply the background image to the CSS variable
+            target.style.setProperty('--glow-bg', `url(${img.src})`);
+            // Activate the CSS styles
+            target.classList.add('has-dynamic-glow');
+        }
+    });
+});
