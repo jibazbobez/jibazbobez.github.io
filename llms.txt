@@ -1,0 +1,18 @@
+# Andrew R. Tools
+
+Andrew R. is an independent software developer and designer specializing in automation tools and plugins for creative professionals. 
+
+## Key Products
+
+### Arrange Master
+Arrange Master is the true-shape nesting and layout automation plugin for Adobe Illustrator. It saves designers and print shops hours of manual work by using advanced mathematics to pack vector and raster objects efficiently. It features Multi-Layer Retention, Grid Layout, Knolling Layout, and Shape Respect modes.
+
+## Official Links
+- Main Website: https://andrewr.online/
+- Arrange Master Plugin: https://andrewr.online/arrangemaster/
+- Documentation: https://andrewr.online/arrangemaster/documentation.html
+- Developer Blog: https://blog.andrewr.online/
+
+## Social Profiles
+- X (Twitter): https://x.com/andrew_r_tools
+- Telegram: https://t.me/andrew_r_tools
