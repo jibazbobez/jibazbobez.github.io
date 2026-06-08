@@ -203,7 +203,49 @@ const copyrightYearSpan = document.getElementById('copyright-year');
 });
 
 // ===================================================================
-//  5. DYNAMIC INFINITE CAROUSEL FOR LOGOS
+//  5. LOGIC FOR A MODAL PAYMENT WINDOW
+// ===================================================================
+const paymentModal = document.getElementById('payment-modal');
+
+if (paymentModal) {
+    const showModalButtons = document.querySelectorAll('.js-show-payment-modal');
+    const modalCloseButton = paymentModal.querySelector('.modal-close');
+
+    const openPaymentModal = (event) => {
+        event.preventDefault();
+        paymentModal.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closePaymentModal = () => {
+        paymentModal.classList.remove('visible');
+        document.body.style.overflow = 'auto';
+    };
+
+    showModalButtons.forEach(button => {
+        button.addEventListener('click', openPaymentModal);
+    });
+
+    if (modalCloseButton) {
+        modalCloseButton.addEventListener('click', closePaymentModal);
+    }
+
+    paymentModal.addEventListener('click', (event) => {
+        // Закрываем по клику на фон (оверлей)
+        if (event.target === paymentModal) {
+            closePaymentModal();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && paymentModal.classList.contains('visible')) {
+            closePaymentModal();
+        }
+    });
+}
+
+// ===================================================================
+//  6. DYNAMIC INFINITE CAROUSEL FOR LOGOS
 // ===================================================================
 document.addEventListener('DOMContentLoaded', () => {
     const viewport = document.querySelector('.logo-carousel-viewport');
@@ -270,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===================================================================
-//  6. COOKIE CONSENT (NATIVE IMPLEMENTATION)
+//  7. COOKIE CONSENT (NATIVE IMPLEMENTATION)
 // ===================================================================
 (function() {
     // Проверяем, давал ли пользователь согласие ранее
@@ -363,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 // ===================================================================
-//  7. DYNAMIC IMAGE GLOW EFFECT
+//  8. DYNAMIC IMAGE GLOW EFFECT
 // ===================================================================
 document.addEventListener('DOMContentLoaded', () => {
     // Target specific containers safely, explicitly excluding all carousels
@@ -395,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===================================================================
-//  8. DYNAMIC WHAT-IS-ITEM HOVER COLORS
+//  9. DYNAMIC WHAT-IS-ITEM HOVER COLORS
 // ===================================================================
 document.addEventListener('DOMContentLoaded', () => {
     const whatIsItems = document.querySelectorAll('.what-is-item');

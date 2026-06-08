@@ -1312,7 +1312,7 @@ section {
 }
 
 /* =======================
-   LIGHTBOX
+   MODALS & LIGHTBOX
    ======================== */
 .lightbox {
     display: none;
@@ -1358,6 +1358,125 @@ section {
 .lightbox-nav:hover { border-color: #fff; }
 .lightbox-nav.prev { left: 40px; transform: translateY(-50%) rotate(45deg); }
 .lightbox-nav.next { right: 40px; transform: translateY(-50%) rotate(-135deg); }
+
+.payment-modal {
+    display: none;
+    position: fixed;
+    z-index: 9998;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(5, 5, 7, 0.8);
+    backdrop-filter: blur(15px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.payment-modal.visible {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.payment-modal .pricing-card {
+    background: #121216;
+    max-width: 500px;
+    animation: zoomIn 0.3s ease;
+    padding: 40px 40px 30px;
+    border: 1px solid var(--surface-border);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px; right: 25px;
+    color: var(--text-secondary);
+    font-size: 28px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.modal-close:hover { color: #fff; }
+
+.modal-description {
+    margin-bottom: 30px;
+    color: var(--text-secondary);
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.author-cut-info {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.payment-option-btn {
+    width: 100%;
+    padding: 16px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+}
+
+.payment-option-btn.primary {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: 0 4px 20px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.payment-option-btn.primary:hover {
+    box-shadow: 0 8px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* 1. Lava.Top (#E69358 - Orange) */
+.payment-option-btn.--lava {
+    background: #E69358;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(230, 147, 88, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--lava:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(230, 147, 88, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 2. Hipolink (#2680EB - Bright Blue) */
+.payment-option-btn.--hipolink {
+    background: #2680EB;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(38, 128, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--hipolink:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 8px 30px rgba(38, 128, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 3. Creative Market (#6254A9 - Purple) */
+.payment-option-btn.--cm {
+    background: #6254A9;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(98, 84, 169, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--cm:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(98, 84, 169, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
 
 /* =======================
    SEO HIDDEN BLOCK
