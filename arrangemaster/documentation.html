@@ -106,7 +106,7 @@
                 <li><a href="documentation.html" class="active">Documentation</a></li>
                 <li><a href="https://blog.andrewr.online/" target="_blank">Blog</a></li>
             </ul>
-            <a class="cta-button primary js-show-payment-modal" role="button">Get Arrange Master</a>
+            <a href="https://app.lava.top/products/17f31a30-2b04-4c7e-8adf-f4e28ef8a0be" target="_blank" rel="noopener noreferrer" class="cta-button primary">Get Arrange Master</a>
         </nav>
     </header>
 
@@ -117,12 +117,14 @@
             </div>
             <div class="container">
                 <h1>Arrange Master Documentation</h1>
-                <p class="doc-version-note">Current Version: 1.3.2</p>
+                <p class="doc-version-note">Current Version: 1.4.0</p>
                 <ol>
                     <li><a href="#installation">Installation</a></li>
                     <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
                     <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#activation">Activation & Connectivity Requirements</a></li>
                     <li><a href="#the-main-interface">The Main Interface</a></li>
+                    <li><a href="#the-container-tool">The Container as an Active Tool</a></li>
                     <li><a href="#preparing-for-arrangement">Preparing Items for Arrangement</a></li>
                     <li><a href="#the-arrangement-workflow">The Arrangement Workflow: Understanding Sessions</a></li>
                     <li><a href="#layout-methods">Layout Methods</a>
@@ -137,7 +139,7 @@
                     <li><a href="#overflow-placement">Overflow Placement</a></li>
                     <li><a href="#common-features">Common Features & Best Practices</a></li>
                     <li><a href="#prepress-splitter">Prepress Splitter Script</a></li>
-                    <li><a href="#changelog">Changelog</a>
+                    <li><a href="#changelog">Changelog</a></li>
                 </ol>
 				
 				<h3 id="installation">1. Installation</h3>
@@ -220,17 +222,33 @@
                 </ul>
 
                 <h3 id="introduction">3. Introduction</h3>
-                <p>Welcome to Arrange Master! This guide will walk you through all the features of the plugin to help you transform chaotic object sets into structured compositions.</p>
+                <p>Arrange Master is a professional <strong>True-Shape Nesting Plugin for Adobe Illustrator</strong>. This guide explains how to operate the software to transform raw design elements into structured compositions for print production, CNC, and Laser Cutting preparation.</p>
                 
                 <h4>Core Principles:</h4>
                 <ul>
-                    <li><strong>The Container:</strong> The largest object in your selection is automatically treated as the container.</li>
-                    <li><strong>The Items:</strong> All other selected objects are treated as items to be arranged inside the container.</li>
-                    <li><strong>Non-Destructive Environment:</strong> Arrange Master operates entirely within a strict <strong>Session-Based Workflow</strong>. Original objects are hidden and preserved, while algorithmic operations are performed only on generated duplicates.</li>
+                    <li><strong>The Container:</strong> The largest object in your selection is automatically treated as the layout boundary constraint.</li>
+                    <li><strong>The Items:</strong> All other selected objects are treated as the target dataset to be processed by the nesting algorithm.</li>
+                    <li><strong>Non-Destructive Environment:</strong> The plugin operates within a strict Session-Based Workflow. Original vectors remain intact while calculations execute entirely on generated instances.</li>
                 </ul>
 
-                <h3 id="the-main-interface">4. The Main Interface</h3>
-                <p>The interface is modular, exposing settings only relevant to the currently selected layout method. The active panel is indicated by distinct color themes.</p>
+                <h3 id="activation">4. Activation & Connectivity Requirements</h3>
+                <p>Arrange Master utilizes an external <strong>Chromium Math Engine</strong> to calculate True-Shape Nesting coordinates without freezing Illustrator. Due to the proprietary nature of this algorithm, the core mathematics module is fetched from a secure cloud server upon initialization.</p>
+                
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_023.png" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_023.png" alt="Activation Panel UI showing the license key input field and the 'Activate Device' button.">
+					</a>
+				</div>
+
+                <p><strong>Authorization Protocol:</strong></p>
+                <ul>
+                    <li>During the first launch you need to enter your personal <strong>License Key</strong> (provided after purchase).</li>
+                    <li>An <strong>active internet connection is mandatory</strong> to authenticate the key and load the Dense Packing engine into your device's memory.</li>
+                    <li>Once activated, the algorithm remains cached securely on your machine for the duration of the Illustrator session.</li>
+                </ul>
+
+                <h3 id="the-main-interface">5. The Main Interface</h3>
+                <p>The interface is modular, exposing parameters relevant only to the active layout method. Panel states are clearly mapped with designated color themes.</p>
 				<div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_003.png" class="screenshot-preview">
 						<img src="assets/screenshots/documentation_screenshot_003.png" alt="Arrange Master panel">
@@ -241,9 +259,24 @@
                     <li><strong>Dynamic Settings Area:</strong> This central part of the panel changes based on the selected method, showing only the relevant controls for your current task.</li>
                     <li><strong>Action Buttons & Status Bar:</strong> The bottom section contains the main control buttons (<code>Arrange</code>, <code>Randomize</code>, <code>Ok</code>, <code>Cancel</code>) and a status bar that provides progress feedback.</li>
                 </ol>
-				
-                <h3 id="preparing-for-arrangement">5. Preparing Items for Arrangement</h3>
-                <p>The efficiency of the layout depends on how your artwork is structured before initialization.</p>
+
+                <h3 id="the-container-tool">6. The Container as an Active Tool</h3>
+                <p>One of the most important concepts to understand in Arrange Master is that the container is not a passive artboard boundary.  It is an active mechanical component of the nesting process, functioning identically to a <strong>piston</strong>.</p>
+                
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_008.png" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_008.png" alt="Dense Packing Mode Cache and Iterative Tuning">
+                    </a>
+                </div>
+
+                <p>Because the algorithm prioritizes density according to the provided boundaries, manipulating the physical edges of the container directly forces the algorithm to reconsider the layout pressure:</p>
+                <ul>
+                    <li><strong>Squeezing the Layout:</strong> By narrowing the width of the container using Illustrator's Selection Tool and clicking <code>Arrange</code> again, you increase the horizontal pressure. The algorithm will automatically push objects upward or downward, filling gaps to maintain the set minimal spacing.</li>
+                    <li><strong>Relaxing the Layout:</strong> Expanding the container reduces pressure, allowing objects to spread out naturally or accommodating previously rejected overflow items.</li>
+                </ul>
+
+                <h3 id="preparing-for-arrangement">7. Preparing Items for Arrangement</h3>
+                <p>The efficiency of the material optimization depends on how your artwork is structured before initialization.</p>
                 
                 <div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_004.png" class="screenshot-preview">
@@ -284,7 +317,7 @@
                     <li><strong>Layer Restoration:</strong> When you finalize the layout (clicking <code>Ok</code>) or cancel the session, Arrange Master automatically unpacks the clusters and distributes each child object back to its originating layer while maintaining relative stacking order.</li>
                 </ul>
 
-                <h3 id="the-arrangement-workflow">6. The Arrangement Workflow: Understanding Sessions</h3>
+                <h3 id="the-arrangement-workflow">8. The Arrangement Workflow: Understanding Sessions</h3>
                 <p>Arrange Master uses a <strong>Session-Based Workflow</strong> to protect your original objects and maintain stability during complex calculations.</p>
                 
                 <h4>Starting a Session:</h4>
@@ -311,16 +344,16 @@
                     <p>A session must be properly concluded to finalize your work or revert your changes.</p>
                     <ul>
                         <li><code>Ok</code> <strong>(Finalize):</strong> Click this button when you are satisfied with the arrangement. This deletes your original hidden items and makes the arranged copies permanent.</li>
-                        <li><code>Cancel</code> <strong>(Revert):</strong> Click this button to discard all changes. This deletes the temporary arranged copies and restores your original items to their initial positions.</li>
+                        <li><code>Cancel</code> <strong>(Revert / Abort):</strong> Click this button to discard all changes and restore your original items to their initial positions. This button remains active during heavy layout calculations (such as Dense Packing), allowing you to safely abort the processing at any time without freezing Illustrator.</li>
                     </ul>
                 </div>
 
                 <p><em>Note: Switching to a different Illustrator document will force the plugin to auto-terminate the session to prevent data corruption.</em></p>
 
-                <h3 id="layout-methods">7. Layout Methods</h3>
+                <h3 id="layout-methods">9. Layout Methods</h3>
 
                 <h4 id="grid-layout">Grid Layout</h4>
-                <p>This method arranges items in a structured, uniform grid based on their bounding boxes. It is used for organizing icon sets or generating patterns.</p>
+                <p>Divides the container into a structured grid, centering items within designated cells. Ideal for object sets and icon sheets.</p>
 				<div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_006.png" class="screenshot-preview">
 						<img src="assets/screenshots/documentation_screenshot_006.png" alt="Grid Layout">
@@ -334,6 +367,7 @@
                     <li><strong>Vary Size:</strong> Randomly scales each item. A value of <code>x2</code> scales between x1 and x2.</li>
                     <li><strong>Offset Odd/Even Rows:</strong> Creates a staggered, "checkerboard" pattern.</li>
                     <li><strong>Size Limit OFF:</strong> By default, items larger than a grid cell are considered "overflow". Check this to force large items into the grid, centering them in their respective cells.</li>
+                    <li><strong>Square Cells:</strong> Overrides proportional cell mapping, forcing cells into perfect squares and mathematically centering the resulting grid within the parent container.</li>
                 </ul>
 
                 <p><strong>Special Mode: Single Item Fill</strong></p>
@@ -344,7 +378,7 @@
 				</div>
                 <p>When the <strong>Single Item Fill</strong> checkbox is enabled, the panel switches to a specialized mode. Instead of arranging a selection of different objects, it calculates the maximum capacity and fills the container with copies of one selected item.</p>
                 <ul>
-                    <li><strong>Min. Spacing:</strong> Sets the distance between duplicated items. Decimal values (e.g., <code>0.5</code>) are supported.</li>
+                    <li><strong>Spacing:</strong> The distance between duplicated items (allows <code>0</code>).</li>
                     <li><strong>Allow 90° turn:</strong> Allows the item to be rotated orthogonally to maximize capacity.</li>
                 </ul>
 
@@ -381,7 +415,7 @@
                     <li><strong>Min. Spacing:</strong> Distance between items.</li>
                     <li><strong>Allow 90° turn:</strong> Orthogonal rotation support.</li>
                     <li><strong>Outer Padding OFF:</strong> Disables container edge padding.</li>
-                    <li><strong>Align Final Edge:</strong> Aligns the final ragged edge of the layout. Note: This feature is not recommended for sets containing fewer than 50 objects or when using very low Min. Spacing values, as the stretching logic may cause overlaps in extremely tight nesting scenarios.</li>
+                    <li><strong>Align Final Edge:</strong> Executes a recursive accordion stretch to align the ragged perimeter of the final layout. <em>Not recommended for tight nesting parameters or datasets smaller than 50 items.</em></li>
                 </ul>
 
                 <h4 id="shape-respect-layout">Shape Respect Layout</h4>
@@ -432,10 +466,18 @@
 					</a>
 				</div>
 
-                <p><strong>Dense Packing Settings:</strong></p>
+                <p><strong>Dense Packing Specific Parameters:</strong></p>
                 <ul>
-                    <li><strong>Analysis Precision:</strong> Controls the scanning step of the engine (range 1 to 50, default is 5). The internal grid operates at a strict 1pt resolution for exact padding, but this slider determines how fast the algorithm searches. Lower values yield tighter interlocks. Higher values increase calculation speed for massive object counts.</li>
-                    <li><strong>Free Rotation:</strong> <em>(Replaces "Allow 90° turn")</em>. The Chromium engine evaluates 24 different angles (15° steps) for every vector path to find the absolute maximum density fit.</li>
+                    <li><strong>Evolution Stepper (1-50):</strong> Replaces the old Analysis Precision tool. It is located to the right of the Dense Packaging checkbox. This controls the <strong>Genetic Algorithm (GA)</strong>. Higher values instruct the engine to evolve the packing sequence over more generations, mathematically searching for the highest density score. Values above 20 take longer but yield tighter interlocking geometry.</li>
+                    <li><strong>Vector Gravity Control:</strong> Dense Packing allows you to control how gravity pulls items into position during placement.
+                        <ul>
+                            <li><strong>X-Gravitation</strong> pulls items vertically (perpendicular to the X-axis).</li>
+                            <li><strong>Y-Gravitation</strong> pulls items horizontally (perpendicular to the Y-axis), which is recommended for long, rolled media workflows.</li>
+                            <li><strong>Selecting both</strong> pulls items diagonally at a 45-degree angle toward the origin corner. This produces very tight and dense clusters. Resize the container to compensate for the diagonal edge created by dual gravity.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Allow 90° turn:</strong> Orthogonal placement (0°, 90°, 180°, 270°). Recommended for rectangular or regular shaped objects.</li>
+                    <li><strong>Free Rotation:</strong> Allows 360° rotation with 15° steps during the collision calculation phase. Essential for complex, organic shapes.</li>
                 </ul>
 
 				<div class="screenshot-wrapper">
@@ -443,8 +485,30 @@
 						<img src="assets/screenshots/documentation_screenshot_016.png" alt="Smart Euclidean Bin Packing (< 50 Objects)">
 					</a>
 				</div>
-                
-                <p><strong>Smart Mode vs. Fast Mode:</strong> If you select fewer than 50 objects, the engine automatically switches to a <em>Smart Euclidean Mode</em>. Rather than placing an object in the first available slot, it analyzes all possible coordinates to minimize the total radial footprint, ensuring identical asymmetrical parts interlock perfectly. For over 50 objects, it uses a high-speed lexicographical line-packing algorithm.</p>
+
+                <p><strong>Understanding the Genetic Algorithm (Evolution Stepper)</strong></p>
+                <p>Arrange Master handles True-Shape Nesting via a Genetic Algorithm executed directly within the Chromium Math Engine. Rather than stopping at the first valid placement, the nesting algorithm generates multiple placement sequences (generations), mutates them, and calculates the density of each using exact Vector Path Analysis. The sequence resulting in the highest material optimization is selected for the final output.</p>
+
+                <p>Finding the optimal layout for CNC/Laser Cutting preparation requires an iterative approach. Use the <code>Evolution Stepper</code> in the panel as follows:</p>
+                <ol>
+                    <li>Begin with a low value, such as <strong>3</strong> or <strong>5</strong> generations.</li>
+                    <li>If objects are pushed to the Overflow area, or if the layout contains noticeable gaps, increase the parameter to <strong>7–10</strong>.</li>
+                    <li>Observe the output. If the visual result stops changing around <strong>10–15</strong> generations, the algorithm has reached the optimal placement limit for the current constraints.</li>
+                </ol>
+                <p>To improve the layout beyond this mathematical limit, you must alter the physical boundaries. Change the Vector Gravity controls (switching between X-Gravitation, Y-Gravitation, or enabling both simultaneously) or manually resize the container shape. This resets the coordinate limits and forces the engine to build completely new structural patterns.</p>
+                <p>It is not recommended to use high Evolution Stepper values for complex layouts containing <strong>300-600</strong> or more objects, as this significantly increases processing time. For large datasets of this scale, setting the Evolution Stepper on <strong>2 or 3</strong> is entirely sufficient to achieve an optimized layout without unnecessary delays.</p>
+
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_022.png" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_022.png" alt="Table comparing placement results at 1, 5, 10, 15, 25, and 50 generations.">
+					</a>
+				</div>
+
+                <p><strong>Hidden Engine Capabilities:</strong></p>
+                <ul>
+                    <li><strong>Adaptive Memory Lock:</strong> The Chromium Math Engine dynamically analyzes container dimensions. For exceptionally large artboards (e.g., 5000pt+ vehicle wrap files), it automatically downscales the internal matrix resolution. This guarantees processing stability and prevents RAM overflow while strictly enforcing the requested <code>Min. Spacing</code> parameter.</li>
+                    <li><strong>Smart Caching:</strong> Once the initial <code>Arrange</code> execution compiles, the detailed pixel matrix (RLE) representation of your vectors is preserved in a local memory cache. Subsequent clicks on <code>Arrange</code> or <code>Randomize</code> bypass the heavy vector path extraction process, allowing you to iterate instantly with different packing sequences or genetic generations without any computational delays.</li>
+                </ul>
 
                 <div class="screenshot-wrapper">
                     <a href="assets/screenshots/documentation_screenshot_012.png" class="screenshot-preview">
@@ -452,8 +516,9 @@
                     </a>
                 </div>
 
-                <h3 id="overflow-placement">8. Overflow Placement: Handling Unplaced Items</h3>
+                <h3 id="overflow-placement">10. Overflow Placement: Handling Unplaced Items</h3>
                 <p>If an item cannot fit inside the container, it is processed as an "overflow" item.</p>
+
 				<div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_011.png" class="screenshot-preview">
 						<img src="assets/screenshots/documentation_screenshot_011.png" alt="Overflow Placement Grid">
@@ -468,8 +533,9 @@
                 </ul>
                 <p>To fit remaining items, increase the container size, lower the "Min. Spacing", or activate Dense Packing, then click <code>Arrange</code> again.</p>
 
-                <h3 id="common-features">9. Common Features &amp; Best Practices</h3>
+                <h3 id="common-features">11. Common Features &amp; Best Practices</h3>
                 <ul>
+                    <li><strong>Dynamic Document Units:</strong> The <code>Min. Spacing</code> parameter automatically reads and displays the active measurement units of your current Illustrator document (e.g., pt, mm, cm).</li>
                     <li><strong>Automatic Container Detection:</strong> You don't need to manually assign the container. The plugin automatically identifies the object with the largest area in your selection to act as the boundary.</li>
                     <li><strong>Automatic Z-Order:</strong> The container is automatically sent to the back of the layer stack, ensuring all arranged items remain visible on top.</li>
                     <li><strong>Freedom during a Session:</strong> While a session is active, your Illustrator document remains fully interactive. You can:
@@ -479,18 +545,9 @@
                             <li><strong>Manually resize or recolor the container object.</strong> After making changes, simply click <code>Arrange</code> again to immediately recalculate the layout within the updated parameters.</li>
                         </ul>
                     </li>
-                    <li><strong>Smart Caching for Dense Packing:</strong> The Chromium Engine stores the complex mathematical geometry of your vector paths in local memory. After the initial <code>Arrange</code> execution, subsequent adjustments—such as changing the "Min. Spacing" or altering the "Analysis Precision" step—are processed almost instantly without re-reading the Illustrator DOM. <em>Note: The cache only triggers a rebuild if you modify structural rotation rules (like toggling "Free Rotation") or begin a completely new session.</em></li>
-                    
-                <div class="screenshot-wrapper">
-                    <a href="assets/screenshots/documentation_screenshot_008.png" class="screenshot-preview">
-                        <img src="assets/screenshots/documentation_screenshot_008.png" alt="Dense Packing Mode Cache and Iterative Tuning">
-                    </a>
-                </div>
-
-                    <li><strong>Iterative Container Tuning:</strong> You can treat the container as a live bounding box. Feel free to shrink or expand your container object from the bottom or right edges to physically refine your composition's density. If you make the container tighter, the plugin will intelligently push excess objects out into the Overflow block on the next <code>Arrange</code> click. Simply expand the container slightly to reclaim those items back into the main layout.</li>
                 </ul>
 
-                <h3 id="prepress-splitter">10. Prepress Splitter Script</h3>
+                <h3 id="prepress-splitter">12. Prepress Splitter Script</h3>
                 <p>The <a href="assets/downloads/Prepress-Splitter.jsx" target="_blank"><strong>Prepress Splitter.jsx</strong></a> is a specialized script designed to bridge the gap between automated nesting and wide-format printing production. It distributes nested components into dedicated layers based on object type and Z-order.</p>
                 
                 <div class="screenshot-wrapper">
@@ -527,7 +584,18 @@
                     </a>
                 </div>
 
-                <h3 id="changelog">11. Changelog</h3>
+                <h3 id="changelog">13. Changelog</h3>
+
+                <h4>Version 1.4.0 (June 15, 2026)</h4>
+                <p>Major architectural and mathematical update introducing cloud integration and advanced nesting heuristics.</p>
+                <ul>
+                    <li><strong>Cloud Engine & Authentication:</strong> Introduced a secure Chromium Math Engine. Accessing Dense Packing algorithms now requires an active internet connection and a verified personal license key.</li>
+                    <li><strong>Separated Gravitation Vectors:</strong> Replaced standard sequential filling with independent X-Gravitation and Y-Gravitation vectors, allowing precise directional packing controls.</li>
+                    <li><strong>Genetic Algorithm:</strong> Replaced Analysis Precision with the Evolution Stepper (1-50). The nesting algorithm now mathematically mutates and evolves placement sequences over multiple generations to discover maximum density.</li>
+                    <li><strong>Grid Layout "Square Cells":</strong> Added a constraint toggle to force proportional grids centered automatically within the parent container.</li>
+                    <li><strong>Adaptive Memory Lock:</strong> The math engine automatically scales down RLE-matrix resolution when calculating massive artboards (e.g., > 5000pt), permanently resolving out-of-memory crashes while strictly enforcing minimum spacing rules.</li>
+                    <li><strong>Asynchronous Optimization:</strong> The calculation queue has been exposed to the UI thread, allowing users to abort long packing processes using the Cancel button.</li>
+                </ul>
 
                 <h4>Version 1.3.2 (June 5, 2026)</h4>
                 <p>Maintenance update.</p>
@@ -545,9 +613,9 @@
                 <h4>Version 1.3.0 (May 10, 2026)</h4>
                 <p>Major architectural update focusing on performance and precision.</p>
                 <ul>
-                    <li><strong>Shape Respect True-Shape Support:</strong> Dense packing is now natively supported within custom non-rectangular containers, perfectly wrapping around isolated internal cavities and holes.</li>
+                    <li><strong>Shape Respect True-Shape Support:</strong> Dense packing is now natively supported within custom non-rectangular containers, wrapping around isolated internal cavities and holes.</li>
                     <li><strong>Chromium Engine Offloading:</strong> Shape Respect (Accurate Mode) and Dense Packing mathematics are now fully processed in the Chromium Engine, increasing speed exponentially for complex documents.</li>
-                    <li><strong>True-Shape Nesting Upgrade:</strong> Replaced bounding box optimization with a Smart Euclidean Bin Packing system for small batches (<50 items), achieving mathematically perfect interlocking geometry.</li>
+                    <li><strong>True-Shape Nesting Upgrade:</strong> Replaced bounding box optimization with a Euclidean Bin Packing system for small batches (<50 items), achieving mathematically perfect interlocking geometry.</li>
                     <li><strong>UI Enhancement:</strong> Introduced dynamic theme color coding linked to active layout panels.</li>
                 </ul>
 
@@ -555,7 +623,7 @@
                 <p>Maintenance update.</p>
                 <ul>
                     <li><strong>Overflow Wrapping.</strong> Overflow items no longer form a single infinite line that exceeds Illustrator's canvas limits. They now wrap to new rows (forming a compact block) based on the container's width, making it much easier to select and manage unplaced items.</li>
-                    <li><strong>Advanced Silhouette Recognition.</strong> Speed boost for complex vector groups (e.g., Image Trace results). Dense Packing now automatically filters out thousands of internal micro-paths and "enclosed" details to focus strictly on the object's outer contour, preventing long freezes and crashes.</li>
+                    <li><strong>Silhouette Recognition.</strong> Speed boost for complex vector groups (e.g., Image Trace results). Dense Packing now automatically filters out thousands of internal micro-paths and "enclosed" details to focus strictly on the object's outer contour, preventing long freezes and crashes.</li>
                 </ul>
 
                 <h4>Version 1.2.3 (April 17, 2026)</h4>
@@ -580,51 +648,45 @@
                 </ul>
 
                 <h4>Version 1.2.0 (March 1, 2026)</h4>
-                <p>Major update transforming the plugin into an industrial-grade nesting engine, featuring entirely new mathematics, real-time UI feedback, and intelligent scaling.</p>
+                <p>Major update featuring entirely new mathematics, real-time UI feedback and intelligent scaling.</p>
                 <ul>
                     <li><strong>New Feature: Visual Progress Bar.</strong> The Status Bar now features a smooth, animated background progress filler. Long operations like Dense Packing now provide clear visual feedback that the engine is working.</li>
-                    <li><strong>New Feature: Intelligent Auto-Resizing ("Fit to Container").</strong> Knolling Layout now includes a powerful math engine that solves a quadratic equation to perfectly scale your items up or down to fill 100% of the container's usable area, automatically accounting for Min. Spacing. Includes a dynamic "Efficiency Factor" stepper (0.75 - 1.00) for tight control over the scaling aggressiveness.</li>
-                    <li><strong>New Feature: Free Rotation (360°).</strong> Dense Packing now supports true arbitrary rotation. The algorithm evaluates 24 different angles (15° steps) for every single item to achieve maximum density. It uses "Rational Fallback" logic: items stay orthogonally straight by default, and only tilt if it mathematically saves significant space.</li>
+                    <li><strong>New Feature: "Fit to Container".</strong> Knolling Layout now includes a math engine that solves a quadratic equation to scale your items up or down to fill 100% of the container's usable area, automatically accounting for Min. Spacing. Includes a dynamic "Efficiency Factor" stepper (0.75 - 1.00) for tight control over the scaling aggressiveness.</li>
+                    <li><strong>New Feature: Free Rotation (360°).</strong> Dense Packing now supports true arbitrary rotation. The algorithm evaluates 24 different angles (15° steps) for every single item to achieve maximum density.</li>
                     <li><strong>Architecture Upgrade: True-Shape Engine v2.</strong> The Dense Packing algorithm has been entirely rebuilt:
                         <ul>
-                            <li><strong>Math Engine Rasterization:</strong> Completely bypasses Illustrator's infamous bounding box inflation bug. Objects are now rotated mathematically in memory, ensuring perfect contour hugging without false collisions.</li>
-                            <li><strong>Two-Pass Placement:</strong> The system now acts like an intelligent mason: Pass 1 places large objects to build the structural landscape, and Pass 2 executes a fine-search to pour tiny objects into the remaining gaps.</li>
+                            <li><strong>Math Engine Rasterization:</strong> Completely bypasses Illustrator's infamous bounding box inflation bug. Objects are now rotated mathematically in memory, ensuring contour hugging without false collisions.</li>
+                            <li><strong>Two-Pass Placement:</strong> The system now acts like an intelligent mason: Pass 1 places large objects to build the structural landscape, and Pass 2 executes a search to pour tiny objects into the remaining gaps.</li>
                         </ul>
                     </li>
-                    <li><strong>Major Bug Fix:</strong> Fixed a bug with memory leaks and uneven filling of cells when using Offset Odd/Even Rows in Grid Layout.</li>
                 </ul>
 
                 <h4>Version 1.1.2 (November 22, 2025)</h4>
                 <p>This update focuses on maximizing packing density, refining algorithm precision, and unifying rotation logic for Dense Packing.</p>
                 <ul>
-                    <li><strong>Dense Packing Optimization & Quality Boost.</strong> The True-Shape nesting engine received a major upgrade. Geometry decomposition now merges adjacent sectors, speeding up calculations by 5-10x. The "Safety Valve" (fallback to coarse packing) has been removed, ensuring the algorithm always performs a full-quality analysis regardless of complexity.</li>
+                    <li><strong>Dense Packing Optimization & Quality Boost.</strong> The True-Shape nesting engine received a major upgrade. Geometry decomposition now merges adjacent sectors, speeding up calculations by 5-10x. The "Safety Valve" has been removed, ensuring the algorithm always performs a full-quality analysis regardless of complexity.</li>
                     <li><strong>Enhanced Rotation Logic.</strong> The "Allow 90° turn" feature now evaluates three orientations (0°, 90°, and 270°) instead of just two, providing better fitting opportunities in Dense Packing.</li>
                     <li><strong>Grid Layout Fixes.</strong> Fixed a coordinate drift issue where objects would shift visually when using "Size Limit OFF" combined with large "Vary Size" values. Scaling now occurs relative to object centers to ensure perfect alignment.</li>
-                    <li><strong>Raster & Placed Item Support.</strong> Fixed "Select at least 2 objects" errors when working with images. The plugin now includes robust fallback mechanisms to correctly detect bounds for Raster and Placed items.</li>
+                    <li><strong>Raster & Placed Item Support.</strong> Fixed "Select at least 2 objects" errors when working with images. The plugin now includes fallback mechanisms to correctly detect bounds for Raster and Placed items.</li>
                 </ul>
 
                 <h4>Version 1.1.1 (October 17, 2025)</h4>
-                <p>This is a major update focused on radical algorithm improvements, new features, and overall stability, making Arrange Master a truly professional-grade tool.</p>
+                <p>This is a major update focused on radical algorithm improvements, new features, and overall stability.</p>
                 <ul>
-                    <li><strong>Complete Overhaul: Dense Packing Algorithm.</strong> The true-shape nesting engine has been rewritten from the ground up. It now uses a "Global Free Space Analysis" architecture, allowing it to see and utilize not only holes inside objects but also the complex empty spaces that form <em>between</em> multiple objects. This results in significantly denser and more intelligent layouts.</li>
-                    <li><strong>New Feature: Dynamic Simplification.</strong> The Dense Packing algorithm is now equipped with a powerful safety valve ("Pre-emptive Complexity Control") that detects and prevents computational explosions. This makes the algorithm robust and stable, eliminating freezes even on extremely complex layouts or with high 'Analysis Precision' settings.</li>
-                    <li><strong>New Feature: Single Item Fill.</strong> The Grid Layout panel now includes a powerful mode to fill the container with copies of a single selected item, using the efficient Skyline algorithm for a dense, organic pattern.</li>
-                    <li><strong>New Feature: Staggered Grid Offsets.</strong> The Grid Layout now includes "Offset Even/Odd Rows" options to easily create staggered, checkerboard-style patterns.</li>
-                    <li><strong>Major Bug Fix: Dense Packing "Bottom-Up" Mode.</strong> The "Bottom-Up" direction for Dense Packing has been completely fixed using a robust "Flip Trick" architecture. It now produces a perfectly mirrored, high-quality layout that correctly utilizes all internal and external cavities.</li>
-                    <li><strong>UI/UX Improvements:</strong> The Grid and Greedy layout panels have been significantly redesigned for better clarity, compactness, and usability. Controls are now contextually disabled/enabled based on the selected mode.</li>
-                    <li><strong>Infrastructure: Windows & macOS Installers.</strong> The project now includes a professional, digitally-signed installer for Windows and a clear manual installation package for macOS, ensuring a smooth setup process for all users.</li>
+                    <li><strong>Complete Overhaul: Dense Packing Algorithm.</strong> The true-shape nesting engine has been rewritten. It now uses a "Global Free Space Analysis" architecture, allowing it to see and utilize not only holes inside objects but also the complex empty spaces that form <em>between</em> multiple objects.</li>
+                    <li><strong>New Feature: Dynamic Simplification.</strong> The Dense Packing algorithm is now equipped with a safety valve that detects and prevents computational explosions. This makes the algorithm more stable, eliminating freezes even on complex layouts or with high 'Analysis Precision' settings.</li>
+                    <li><strong>New Feature: Single Item Fill.</strong> The Grid Layout panel now includes a special mode to fill the container with copies of a single selected item, using the Skyline algorithm for a dense pattern.</li>
+                    <li><strong>New Feature: Staggered Grid Offsets.</strong> The Grid Layout now includes "Offset Even/Odd Rows" options to create staggered, checkerboard-style patterns.</li>
                 </ul>
 
                 <h4>Version 1.0.1 (October 10, 2025)</h4>
-                <p>This update focuses on adding powerful new features for organic layouts and significant performance optimizations.</p>
+                <p>This update focuses on adding new features for organic layouts and significant performance optimizations.</p>
                 <ul>
-                    <li><strong>New Feature: Dense Packing ("True-Shape Nesting").</strong> The Greedy Layout now includes an advanced mode that analyzes the true vector shape of objects, allowing for incredibly tight and natural-looking packing that fills concave areas.</li>
+                    <li><strong>New Feature: Dense Packing ("True-Shape Nesting").</strong> The Greedy Layout now includes an advanced mode that analyzes the true vector shape of objects, allowing for tight packing that fills concave areas.</li>
                     <li><strong>New Feature: Analysis Precision.</strong> A new control for Dense Packing that allows users to balance performance versus packing quality.</li>
                     <li><strong>New Feature: Align Final Edge.</strong> An optional post-processing step for Greedy and Dense Packing modes to clean up the final "ragged" edge of the layout.</li>
                     <li><strong>New Feature: Vary Rotation for Shape Respect.</strong> The Shape Respect layout now includes a "Vary Rotation" setting to add organic randomness to placements inside complex shapes.</li>
-                    <li><strong>Optimization:</strong> The Dense Packing algorithm now caches the complex geometry analysis. Subsequent clicks on "Arrange" or "Randomize" within the same session are now significantly faster.</li>
-                    <li><strong>UI/UX Improvements:</strong> The user interface for all panels has been polished for better alignment, spacing, and clarity. Tooltips have been updated to be more descriptive.</li>
-                    <li><strong>Bug Fixes:</strong> Fixed numerous bugs related to session management, object transformation, and UI rendering to improve overall stability.</li>
+                    <li><strong>Optimization:</strong> The Dense Packing algorithm caches the complex geometry analysis. Subsequent clicks on "Arrange" or "Randomize" within the same session are now significantly faster.</li>
                 </ul>
 
                 <h4>Version 1.0.0 (September 15, 2025)</h4>
@@ -651,7 +713,6 @@
                 <a href="demo.html">Demo</a>
                 <a href="documentation.html" class="active">Documentation</a>
                 <a href="https://blog.andrewr.online/" target="_blank">Blog</a>
-                <a href="faq.html">FAQ</a>
                 <a href="https://andrewr.online/privacy.html">Privacy</a>
             </div>
             <div class="social-links">
@@ -692,31 +753,6 @@
         <img class="lightbox-content" id="lightbox-image">
         <a class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous image"></a>
         <a class="lightbox-nav next" id="lightbox-next" aria-label="Next image"></a>
-    </div>
-
-    <!-- =======================
-    PAYMENT MODAL
-    ======================== -->
-    <div id="payment-modal" class="payment-modal">
-        <div class="pricing-card">
-            <span class="modal-close">&times;</span>
-            <h2>Choose Your Payment Method</h2>
-            <p class="modal-description">All transactions are handled by trusted platforms. Please select the one you're most comfortable with:</p>
-            <div class="payment-options">
-                
-                <!-- Option 1: Lava.Top -->
-                <a href="https://app.lava.top/products/17f31a30-2b04-4c7e-8adf-f4e28ef8a0be" target="_blank" class="cta-button payment-option-btn --lava">Buy on Lava.Top</span></a>
-                <p class="author-cut-info">The author receives ~90% of the sale.</p>
-
-                <!-- Option 2: Hipolink -->
-                <a href="https://hipolink.net/andrewr/products/arrange-master" target="_blank" class="cta-button payment-option-btn --hipolink">Buy on Hipolink</span></a>
-                <p class="author-cut-info">The author receives ~85% of the sale.</p>
-                
-                <!-- Option 3: Creative Market -->
-                <a href="https://creativemarket.com/Andrew_R/291885949-Arrange-Master-Illustrator-Plugin" target="_blank" class="cta-button payment-option-btn --cm">Buy on Creative Market</a>
-                <p class="author-cut-info">The author receives ~50% of the sale.</p>
-            </div>
-        </div>
     </div>
     
     <!-- JavaScript -->
