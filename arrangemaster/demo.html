@@ -129,11 +129,11 @@
             </div>
             <div class="hero-content container">
                 <h1>Arrange Master:&nbsp;</h1>
-                <h1>Free Demo Version</h1>
-                <h2>Test file compatibility and core workflows before purchasing.</h2>
+                <h1>Free Demo Panel</h1>
+                <h2>Evaluate hardware compatibility and the Dense Packing Engine before purchasing.</h2>
                 
                 <a href="assets/downloads/Arrange-Master-Demo.zip" class="cta-button primary large" download>Download Demo Version</a>
-                <p class="sub-cta">No installation required. Just run it from the Scripts menu.</p>
+                <p class="sub-cta">Installs as a native Adobe Illustrator CEP Extension.</p>
             </div>
             <a href="#demo-purpose" class="scroll-down-arrow" aria-label="Scroll to Content"></a>
         </section>
@@ -146,97 +146,112 @@
 
                 <h3 id="demo-purpose">The Purpose of the Demo</h3>
                 <p>
-                    The primary objective of this demo is to allow you to test file compatibility. It demonstrates how robustly Arrange Master processes your specific files - including heavy prepress vectors, compound clipping masks, dynamic symbols, and multi-layer structures - without freezing or crashing Adobe Illustrator.
+                    The Arrange Master Demo is a functional evaluation tool for Adobe Illustrator. Previously distributed as a basic JSX script, the demo is now a fully integrated CEP panel. It allows users to test the performance of the True-Shape Nesting algorithm, verify compatibility with complex prepress vector files, and understand the core session workflow.
                 </p>
 
-                <h3 id="features">Included Demo Features</h3>
+                <h3 id="features">Available Functionality</h3>
+
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/demo-ui.png" class="screenshot-preview">
+						<img src="assets/screenshots/demo-ui.png" alt="Arrange Master Demo UI">
+					</a>
+				</div>
+                
+                <p>The demo provides access to four primary layout engines with restricted parameters:</p>
                 <ul>
-                    <li><strong>Two Layout Methods:</strong> Test the standard <strong>Grid Layout</strong> and the bounding-box based <strong>Knolling Layout</strong> (MER algorithm).</li>
-                    <li><strong>Multi-Layer Retention:</strong> Preserves complex prepress files (separate CUT, PRINT, QR layers) by temporarily clustering overlapping objects and safely restoring them to their original layers upon clicking OK.</li>
-                    <li><strong>Clipping Mask Support:</strong> Detects accurate boundaries of masked objects, ignoring hidden bleeding contents.</li>
-                    <li><strong>Smart Container Detection:</strong> Automatically identifies the layout container by calculating the largest area in your selection.</li>
+                    <li><strong>Grid Layout:</strong> Distributes objects into a structured grid. Controls for Rows, Columns, Size Limit OFF, and Square Cells (proportional centering) are active.</li>
+                    <li><strong>Knolling Layout:</strong> Evaluates bounding boxes using the Maximal Empty Rectangles heuristic. Fill Direction, Min. Spacing, Allow 90° turn, and Outer Padding OFF are active.</li>
+                    <li><strong>Greedy Layout & Shape Respect:</strong> Sequential placement algorithms. In the demo, you can control Fill Direction, Min. Spacing, Allow 90° turn, and toggle the Dense Packing mode.</li>
                 </ul>
 
-                <h3 id="bounding-box-vs-true-shape">Why are there empty spaces between arranged objects?</h3>
-                <p>
-                    When using the demo, you will notice empty gaps between irregularly shaped objects instead of a tightly interlocked layout. This occurs because the demo version uses a simplified <strong>Knolling Layout</strong> algorithm. It arranges objects based strictly on their rectangular bounding boxes (<code>geometricBounds</code>) and cannot analyze physical, irregular contours.
-                </p>
-                
                 <div class="offer-banner">
-                    <h4>Experience Dense Packing (True-Shape Nesting)</h4>
+                    <h4>⚠️ Active Internet Connection Required</h4>
                     <p>
-                        Please note that the free demo <strong>does not</strong> include the advanced Dense Packing algorithm. To help you evaluate its true capabilities, we have recorded a raw, real-time video demonstration below. Watch the plugin tackle various complex true-shape nesting tasks - completely unedited, without any cuts or time-lapses.
+                        An active internet connection is mandatory to initialize the Arrange Master Demo. To protect the proprietary code, the core Chromium Math Engine is not bundled locally within the installation files. It is securely fetched from our cloud servers directly into your device's active memory each time the CEP panel is launched.
                     </p>
                 </div>
 
-                <!-- YouTube Embed -->
-                <div class="video-wrapper has-dynamic-glow" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin: 30px 0; border: 1px solid var(--surface-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                    <iframe 
-                        src="https://www.youtube.com/embed/a91jQegMMCY?rel=0&modestbranding=1" 
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-                        title="Arrange Master Raw Dense Packing Demonstration" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
+                <h3 id="genetic-algorithm">Dense Packing & The Evolution Stepper</h3>
+                <p>
+                    When the <strong>Dense Packing</strong> checkbox is enabled, the plugin shifts from standard bounding-box calculations to exact True-Shape Nesting. This process is handled by the <strong>Chromium Math Engine</strong> running in the background.
+                </p>
+                <p>
+                    The <strong>Evolution Stepper</strong> parameter controls the Genetic Algorithm used for this task. Instead of accepting the first valid placement, the engine generates multiple placement sequences, mutates them, and evaluates the density of each layout using Vector Path Analysis.
+                </p>
+
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/demo-generations.png" class="screenshot-preview">
+						<img src="assets/screenshots/demo-generations.png" alt="Comparison of arrangement results for different generation counts">
+					</a>
+				</div>
+
+                <ul>
+                    <li>A value of <code>1</code> executes a single, fast pass.</li>
+                    <li>Increasing the value forces the algorithm to compute more generations, finding tighter interlocking coordinates for material optimization.</li>
+                    <li><strong>In the demo version, the Evolution Stepper is capped at <code>15</code> generations.</strong></li>
+                </ul>
+                <p>
+                    <em>Note: To protect the proprietary nesting algorithm, Dense Packing results in the demo version are finalized as a 150 PPI raster image with a watermark. Standard layout methods (Grid, Knolling) remain as editable vectors.</em>
+                </p>
+
+                <h3 id="hidden-capabilities">Hidden Capabilities</h3>
+                <p>While the interface parameters are restricted, the core engine processes files with the exact same logic as the full version. The demo actively supports:</p>
+                <ul>
+                    <li><strong>Multi-Layer Retention:</strong> The engine temporarily groups objects that overlap across different layers (e.g., CUT, PRINT, and MARKS layers). It moves them as a single unit during the nesting process and restores them to their specific original layers upon finalization. This is critical for CNC/Laser Cutting preparation.</li>
+                    <li><strong>Clipping Mask Detection:</strong> The algorithm correctly reads the true visible boundaries of clipping masks, ignoring hidden bleeding paths.</li>
+                </ul>
 
                 <h3 id="session-workflow">The Session Workflow: Why you must click "OK"</h3>
                 <p>
-                    Arrange Master operates on a strict, non-destructive session model. When you click <strong>Arrange</strong>, the script does not modify your original objects. Instead, it hides them and creates a temporary working group containing duplicates. This allows you to safely test different parameters or click <strong>Randomize</strong> without losing your original layout.
+                    Arrange Master operates entirely on a non-destructive session model. When you click the <strong>Arrange</strong> button, the plugin hides your original selected vectors and creates a temporary working layer. This allows you to adjust spacing, change settings, and recalculate the layout instantly without permanently modifying the document.
                 </p>
-                <p>
-                    To finalize the process, <strong>you must click OK</strong>. This action deletes your hidden originals, ungroups the temporary items, and automatically redistributes them back to their initial Z-order and specific layers (e.g., CUT, PRINT). If you close the window or click <strong>Cancel</strong>, the script simply deletes the temporary group and unhides your original artwork, reverting everything to its initial state.
-                </p>
-
-                <h4>Demo User Interface:</h4>
-                <div class="screenshot-wrapper">
-                    <a href="assets/screenshots/demo-ui.png" class="screenshot-preview">
-                        <img src="assets/screenshots/demo-ui.png" alt="Arrange Master Demo UI">
-                    </a>
-                </div>
                 
-                <p>
-                    <strong>Limitations:</strong> To unlock <strong>Dense Packing</strong> (True-Shape Nesting), <strong>Shape Respect</strong>, <strong>Fit to Container</strong> (Auto-Resize) and other premium features, please <a href="https://app.lava.top/products/17f31a30-2b04-4c7e-8adf-f4e28ef8a0be" target="_blank" rel="noopener noreferrer">purchase the full version</a>.
-                </p>
-
-                <h3 id="what-is-jsx">What is a JSX Script?</h3>
-                <p>
-                    A <code>.jsx</code> file is a simple script for Adobe applications. Unlike a full plugin (<code>.zxp</code>), it doesn't require a special installer. You can run it directly from Illustrator's menu.
-                </p>
-
-                <h3>How to Install and Run</h3>
-                <p>
-                    You can try Arrange Master in seconds without any installation. For regular use, we recommend placing the script in the Illustrator folder.
-                </p>
-
-                <h4>Quick Run (No Installation)</h4>
-                <ol>
-                    <li><strong>Download the script</strong> using the button in the header to get the <code>Arrange Master Demo.jsx</code> file.</li>
-                    <li>In Adobe Illustrator, select your objects (a container and some items).</li>
-                    <li>Go to the menu: <strong><code>File > Scripts > Other Script...</code></strong> (or press <code>Cmd+F12 / Ctrl+F12</code>).</li>
-                    <li>Navigate to and select the downloaded <code>Arrange Master Demo.jsx</code> file to run it.</li>
-                </ol>
-
-                <h4>Recommended for Regular Use (Installation)</h4>
-                <p>
-                    To have the script always available in your menu:
-                </p>
-                <ol>
-                    <li><strong>Place the downloaded script</strong> into your Adobe Illustrator Scripts folder. Common locations are:
-                        <ul>
-                            <li><strong>Windows:</strong> <code>C:/Program Files/Adobe/Adobe Illustrator [Version]/Presets/en_US/Scripts/</code></li>
-                            <li><strong>macOS:</strong> <code>/Applications/Adobe Illustrator [Version]/Presets.localized/en_US/Scripts/</code></li>
-                        </ul>
-                    </li>
-                    <li><strong>Restart Illustrator.</strong> This is a one-time step.</li>
-                    <li>Now you can run the script anytime from <strong><code>File > Scripts > Arrange Master Demo</code></strong>.</li>
-                </ol>
-                <div class="screenshot-wrapper">
-                    <a href="assets/screenshots/demo-how-to-run.png" class="screenshot-preview">
-                        <img src="assets/screenshots/demo-how-to-run.png" alt="How to run a JSX script from the Adobe Illustrator menu">
-                    </a>
+                <div class="offer-banner">
+                    <h4>Finalizing the Session</h4>
+                    <p>
+                        To complete the process, you must click the <strong>Ok</strong> button. This action deletes the hidden original files and commits the arranged results to the canvas. If you click <strong>Cancel</strong>, the plugin deletes the temporary layout and unhides your original selection exactly as it was.
+                    </p>
                 </div>
+                <p>
+                    <em>Security Note: The demo actively monitors the session state. Any attempt to bypass the workflow (e.g., copying temporary items to the clipboard or closing the document before clicking "Ok") will trigger an automatic abort, clearing the temporary results.</em>
+                </p>
+
+                <h3 id="disabled-features">Disabled Features (Available in Full Version)</h3>
+                <p>The following features are visually disabled in the demo panel to indicate what is unlocked in the full commercial release:</p>
+                <ul>
+                    <li><strong>Advanced Vector Gravity:</strong> Y-Gravitation (horizontal packing) and Dual Gravity (45-degree packing) are disabled. The demo strictly uses X-Gravitation.</li>
+                    <li><strong>Free Rotation:</strong> The ability to rotate objects 360° in 15° increments during True-Shape Nesting is locked.</li>
+                    <li><strong>Evolution Scaling:</strong> The full version allows up to 50 generations for the Genetic Algorithm.</li>
+                    <li><strong>Automation Tools:</strong> Single Item Fill (Grid), Fit to Container scaling (Knolling), Align Final Edge (Greedy), and Chaotic Mode (Shape Respect) are disabled.</li>
+                    <li><strong>Vector Output for Dense Packing:</strong> The full version retains exact, editable vector paths after True-Shape Nesting.</li>
+                </ul>
+
+                <h3 id="installation">Installation & Removal</h3>
+                
+                <h4>Plugin Isolation</h4>
+                <p>
+                    The Arrange Master Demo is compiled as an independent CEP extension with a unique Bundle ID (<code>com.andrewrybalko.arrangemasterdemo</code>). It uses a separate memory space and a dedicated cache directory. <strong>Installing the demo will not conflict with the full version of the plugin if both are installed simultaneously.</strong>
+                </p>
+
+                <h4>How to Install</h4>
+                <ol>
+                    <li><strong>Windows:</strong> Extract the downloaded ZIP archive and run the <code>ArrangeMasterDemo-Setup.exe</code> file.</li>
+                    <li><strong>macOS (ZXP):</strong> Use a third-party manager like <a href="https://install.anastasiy.com/" target="_blank" rel="nofollow noopener noreferrer">Anastasiy’s Extension Manager</a>, <a href="https://zxpinstaller.com/" target="_blank" rel="nofollow noopener noreferrer">ZXPinstaller</a> or <a href="https://aescripts.com/learn/aescripts-aeplugins-manager-app/" target="_blank" rel="nofollow noopener noreferrer">Aescripts</a> to install the provided <code>.zxp</code> file.</li>
+                    <li>Restart Adobe Illustrator. The panel is located under <strong>Window > Extensions > Arrange Master Demo</strong>.</li>
+                </ol>
+
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/demo-how-to-run.png" class="screenshot-preview">
+						<img src="assets/screenshots/demo-how-to-run.png" alt="How to find the Arrange Master Demo panel in Adobe Illustrator">
+					</a>
+				</div>
+
+                <h4>How to Uninstall</h4>
+                <ul>
+                    <li><strong>Windows:</strong> Go to Settings > Apps > Installed apps, locate "Arrange Master Demo", and click Uninstall.</li>
+                    <li><strong>macOS:</strong> Open your ZXP Extension Manager, select the demo plugin from the list, and click Remove. Alternatively, manually delete the <code>com.andrewrybalko.arrangemasterdemo</code> folder from <code>~/Library/Application Support/Adobe/CEP/extensions/</code>.</li>
+                </ul>
+
             </div>
         </section>
     </main>
