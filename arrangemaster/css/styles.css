@@ -1533,39 +1533,6 @@ section {
     box-shadow: 0 8px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* 1. Lava.Top (#E69358 - Orange) */
-.payment-option-btn.--lava {
-    background: #E69358;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(230, 147, 88, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-option-btn.--lava:hover {
-    filter: brightness(1.15);
-    box-shadow: 0 8px 30px rgba(230, 147, 88, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* 2. Hipolink (#2680EB - Bright Blue) */
-.payment-option-btn.--hipolink {
-    background: #2680EB;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(38, 128, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-option-btn.--hipolink:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 8px 30px rgba(38, 128, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* 3. Creative Market (#6254A9 - Purple) */
-.payment-option-btn.--cm {
-    background: #6254A9;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(98, 84, 169, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-option-btn.--cm:hover {
-    filter: brightness(1.15);
-    box-shadow: 0 8px 30px rgba(98, 84, 169, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
 /* =======================
    SEO HIDDEN BLOCK
    ======================== */
