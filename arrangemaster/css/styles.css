@@ -1105,47 +1105,6 @@ section {
     margin-bottom: 10px;
 }
 
-/* Modal Buttons Options */
-.payment-options {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-top: 20px;
-}
-
-/* 1. Personal (#2680EB - Bright Blue) */
-.payment-option-btn.--personal-btn {
-    background: #2680EB;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(38, 128, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-option-btn.--personal-btn:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 8px 30px rgba(38, 128, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* 2. Team (#6254A9 - Purple) */
-.payment-option-btn.--team-btn {
-    background: #6254A9;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(98, 84, 169, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-option-btn.--team-btn:hover {
-    filter: brightness(1.15);
-    box-shadow: 0 8px 30px rgba(98, 84, 169, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* 3. Extended (#E69358 - Orange) */
-.payment-option-btn.--extended-btn {
-    background: #E69358;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(230, 147, 88, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-option-btn.--extended-btn:hover {
-    filter: brightness(1.15);
-    box-shadow: 0 8px 30px rgba(230, 147, 88, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
 /* =======================
    FOOTER
    ======================== */
@@ -1488,15 +1447,15 @@ section {
 .modal-close:hover { color: #fff; }
 
 .modal-description {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     color: var(--text-secondary);
 }
 
 .payment-options {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 24px;
+    margin-top: 5px;
 }
 
 .author-cut-info {
@@ -1531,6 +1490,39 @@ section {
 }
 .payment-option-btn.primary:hover {
     box-shadow: 0 8px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* 1. Personal (#2680EB - Bright Blue) */
+.payment-option-btn.--personal-btn {
+    background: #2680EB;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(38, 128, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--personal-btn:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 8px 30px rgba(38, 128, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 2. Team (#6254A9 - Purple) */
+.payment-option-btn.--team-btn {
+    background: #6254A9;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(98, 84, 169, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--team-btn:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(98, 84, 169, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 3. Extended (#E69358 - Orange) */
+.payment-option-btn.--extended-btn {
+    background: #E69358;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(230, 147, 88, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--extended-btn:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(230, 147, 88, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* =======================
