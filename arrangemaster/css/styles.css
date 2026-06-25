@@ -1112,7 +1112,7 @@ section {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* 1. COMMERCIAL (TEAM) Card Buttons (#6254A9 - Purple) */ 
+/* 1. COMMERCIAL (TEAM) Card Buttons (#6254A9 - Purple) */
 .payment-btn.--team-btn {
     background: #6254A9;
     box-shadow: 0 4px 15px rgba(98, 84, 169, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
