@@ -1020,21 +1020,22 @@ section {
 }
 
 .pricing-card.highlighted {
-    border-color: rgba(38, 128, 235, 0.5); 
+    border-color: rgba(38, 128, 235, 0.5); /* Blue matching Personal */
     box-shadow: 0 0 40px rgba(38, 128, 235, 0.15);
-    transform: scale(1.05); 
+    transform: scale(1.05); /* Permanent slight zoom for the center card */
     background: rgba(25, 25, 40, 0.8);
     z-index: 2;
 }
 
+/* --- MODIFICATION: Border-Color Hover Effects matching the brand palette --- */
 .pricing-card.card-team:hover {
-    border-color: #6254A9; 
+    border-color: #6254A9; /* Purple */
 }
 .pricing-card.card-personal.highlighted:hover {
-    border-color: #2680EB; 
+    border-color: #2680EB; /* Bright Blue */
 }
 .pricing-card.card-extended:hover {
-    border-color: #E69358; 
+    border-color: #E69358; /* Orange */
 }
 
 .pricing-card h3 {
@@ -1092,91 +1093,16 @@ section {
     filter: drop-shadow(0 0 5px var(--primary-glow));
 }
 
-.card-payment-options {
-    margin-top: auto; 
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.pricing-card .cta-button {
+    margin-top: auto;
 }
 
-.payment-btn {
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 50px;
+.pricing-card.modal-override {
     text-align: center;
-    text-decoration: none;
-    color: #fff;
-    border: 1px solid transparent;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-
-/* 1. COMMERCIAL (TEAM) Card Buttons (#6254A9 - Purple) */
-.payment-btn.--team-btn {
-    background: #6254A9;
-    box-shadow: 0 4px 15px rgba(98, 84, 169, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-btn.--team-btn:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 6px 20px rgba(98, 84, 169, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* 2. PERSONAL Card Buttons (#2680EB - Bright Blue) */
-.payment-btn.--personal-btn {
-    background: #2680EB;
-    box-shadow: 0 4px 15px rgba(38, 128, 235, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-btn.--personal-btn:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 6px 20px rgba(38, 128, 235, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* 3. EXTENDED Card Buttons (#E69358 - Orange) */
-.payment-btn.--extended-btn {
-    background: #E69358;
-    box-shadow: 0 4px 15px rgba(230, 147, 88, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-.payment-btn.--extended-btn:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 6px 20px rgba(230, 147, 88, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* CM Disclaimer Text */
-.cm-disclaimer {
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
+.pricing-card.modal-override h2 {
     text-align: center;
-    margin-top: -4px;
-    margin-bottom: 0;
-    line-height: 1.4;
-}
-
-/* Bottom Contact Note */
-.pricing-footer-note {
-    margin-top: 50px;
-    text-align: center;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-    background: var(--surface-color);
-    border: 1px solid var(--surface-border);
-    border-radius: var(--radius-md);
-}
-.pricing-footer-note p {
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    margin: 0;
-}
-.pricing-footer-note a {
-    color: var(--primary-accent);
-    font-weight: 500;
-    text-decoration: underline;
-    transition: color 0.2s ease;
-}
-.pricing-footer-note a:hover {
-    color: #fff;
+    margin-bottom: 10px;
 }
 
 /* =======================
@@ -1564,6 +1490,39 @@ section {
 }
 .payment-option-btn.primary:hover {
     box-shadow: 0 8px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* 1. Personal (#2680EB - Bright Blue) */
+.payment-option-btn.--personal-btn {
+    background: #2680EB;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(38, 128, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--personal-btn:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 8px 30px rgba(38, 128, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 2. Team (#6254A9 - Purple) */
+.payment-option-btn.--team-btn {
+    background: #6254A9;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(98, 84, 169, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--team-btn:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(98, 84, 169, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 3. Extended (#E69358 - Orange) */
+.payment-option-btn.--extended-btn {
+    background: #E69358;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(230, 147, 88, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.payment-option-btn.--extended-btn:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 8px 30px rgba(230, 147, 88, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* =======================
