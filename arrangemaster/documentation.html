@@ -117,7 +117,7 @@
             </div>
             <div class="container">
                 <h1>Arrange Master Documentation</h1>
-                <p class="doc-version-note">Current Version: 1.4.1</p>
+                <p class="doc-version-note">Current Version: 1.4.2</p>
                 <ol>
                     <li><a href="#installation">Installation</a></li>
                     <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
@@ -488,13 +488,13 @@
 				</div>
 
                 <p><strong>Understanding the Genetic Algorithm (Evolution Stepper)</strong></p>
-                <p>Arrange Master handles True-Shape Nesting via a Genetic Algorithm executed directly within the Chromium Math Engine. Rather than stopping at the first valid placement, the nesting algorithm generates multiple placement sequences (generations), mutates them, and calculates the density of each using exact Vector Path Analysis. The sequence resulting in the highest material optimization is selected for the final output.</p>
+                <p>Arrange Master performs True-Shape Nesting using a genetic algorithm directly within the Chromium math engine. Instead of stopping at the first valid location, the nesting algorithm generates multiple placement sequences (generations), mutates them, and calculates the density of each generation using exact vector path analysis. The sequence resulting in the maximum material optimization is selected for the final output.</p>
 
                 <p>Finding the optimal layout for CNC/Laser Cutting preparation requires an iterative approach. Use the <code>Evolution Stepper</code> in the panel as follows:</p>
                 <ol>
                     <li>Begin with a low value, such as <strong>3</strong> or <strong>5</strong> generations.</li>
                     <li>If objects are pushed to the Overflow area, or if the layout contains noticeable gaps, increase the parameter to <strong>7–10</strong>.</li>
-                    <li>Observe the output. If the visual result stops changing around <strong>10–15</strong> generations, the algorithm has reached the optimal placement limit for the current constraints.</li>
+                    <li>Observe the output. If the visual result stops changing around <strong>10–15</strong> generations, the algorithm has reached the optimal placement limit for the current settings.</li>
                 </ol>
                 <p>To improve the layout beyond this mathematical limit, you must alter the physical boundaries. Change the Vector Gravity controls (switching between X-Gravitation, Y-Gravitation, or enabling both simultaneously) or manually resize the container shape. This resets the coordinate limits and forces the engine to build completely new structural patterns.</p>
                 <p>It is not recommended to use high Evolution Stepper values for complex layouts containing <strong>300-600</strong> or more objects, as this significantly increases processing time. For large datasets of this scale, setting the Evolution Stepper on <strong>2 or 3</strong> is entirely sufficient to achieve an optimized layout without unnecessary delays.</p>
@@ -507,7 +507,7 @@
 
                 <p><strong>Hidden Engine Capabilities:</strong></p>
                 <ul>
-                    <li><strong>Adaptive Memory Lock:</strong> The Chromium Math Engine dynamically analyzes container dimensions. For exceptionally large artboards (e.g., 5000pt+ vehicle wrap files), it automatically downscales the internal matrix resolution. This guarantees processing stability and prevents RAM overflow while strictly enforcing the requested <code>Min. Spacing</code> parameter.</li>
+                    <li><strong>Adaptive Memory Lock:</strong> The Chromium Math Engine dynamically analyzes container dimensions. For exceptionally large artboards (e.g., 5000pt+ car wrap files), it automatically downscales the internal matrix resolution. This guarantees processing stability and prevents RAM overflow while strictly enforcing the requested <code>Min. Spacing</code> parameter.</li>
                     <li><strong>Smart Caching:</strong> Once the initial <code>Arrange</code> execution compiles, the detailed pixel matrix (RLE) representation of your vectors is preserved in a local memory cache. Subsequent clicks on <code>Arrange</code> or <code>Randomize</code> bypass the heavy vector path extraction process, allowing you to iterate instantly with different packing sequences or genetic generations without any computational delays.</li>
                 </ul>
 
@@ -586,6 +586,12 @@
                 </div>
 
                 <h3 id="changelog">13. Changelog</h3>
+
+                <h4>Version 1.4.2 (June 30, 2026)</h4>
+                <p>Maintenance update.</p>
+                <ul>
+                    <li><strong>Unit Conversion Fix:</strong> Resolved an issue where the "Min. Spacing" parameter was incorrectly processed as points (pt) regardless of the document's active ruler units.</li>
+                </ul>
 
                 <h4>Version 1.4.1 (June 20, 2026)</h4>
                 <p>Maintenance update.</p>
