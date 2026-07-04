@@ -385,6 +385,17 @@ video {
 }
 
 
+/* --- 3.5a Local Screen-Sharing Indicator --- */
+.video-container.screen-sharing {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 2px var(--primary-accent);
+}
+
+.video-container.screen-sharing h4::after {
+    content: ' • Sharing';
+    color: #4dffb4;
+}
+
 /* --- 3.5 Supporting Video Styles --- */
 .video-container.speaking {
     box-shadow: 0 0 0 3px var(--primary-accent);
