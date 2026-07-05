@@ -393,7 +393,7 @@ video {
 
 .video-container.screen-sharing h4::after {
     content: ' • Sharing';
-    color: #4dffb4;
+    color: #ff4085;
 }
 
 /* --- 3.5 Supporting Video Styles --- */
