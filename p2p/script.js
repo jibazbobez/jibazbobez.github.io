@@ -2,4 +2,1120 @@
 //                    Secure Video Call - script.js
 // =================================================================
 
-const socket=io('https://webrtc-p2p-app.onrender.com'),ICON_PATHS={'micOn':'assets/icon_micro.svg','micOff':'assets/icon_micro_off.svg','videoOn':'assets/icon_camera.svg','videoOff':'assets/icon_camera_off.svg','screenShare':'assets/icon_screen_share.svg','switchCamera':'assets/icon_switch_camera.svg'},SPEAKING_THRESHOLD=-0x2306+-0x114a+0x3455,SPEAKING_TIMEOUT=-0xb*-0x15b+-0x2121+0x80*0x26,joinSection=document['getElementById']('join-section'),videosSection=document['getElementById']('videos-section'),localVideo=document['getElementById']('local-video'),videosContainer=document['getElementById']('videos'),roomInput=document['getElementById']('room-input'),joinBtn=document['getElementById']('join-btn'),regenerateBtn=document['getElementById']('regenerate-btn'),roomNameContainer=document['getElementById']('room-name-container'),roomNameText=document['getElementById']('room-name-text'),copyLinkBtn=document['getElementById']('copy-link-btn'),resolutionModal=document['getElementById']('resolution-modal'),modalCloseBtn=document['getElementById']('modal-close-btn'),mainControlsContainer=document['getElementById']('main-controls-container'),micTestBtn=document['getElementById']('mic-test-btn'),featureBtn=document['getElementById']('feature-btn'),leaveBtn=document['getElementById']('leave-btn'),muteBtn=document['getElementById']('mute-btn'),videoBtn=document['getElementById']('video-btn');let localStream,peerConnections={},roomName,audioContext,analyser,microphone,javascriptNode,isSpeaking=![],speakingTimer,syncInterval,screenStream,currentSharerId=null,currentCamera='user';const desktopMediaConstraints={'audio':!![],'video':{'width':{'ideal':0x500},'height':{'ideal':0x2d0},'frameRate':{'ideal':0x1e}}},mobileMediaConstraints={'audio':!![],'video':{'width':{'ideal':0x1e0},'height':{'ideal':0x168},'frameRate':{'ideal':0xf,'max':0x14}}},MOBILE_MAX_BITRATE=-0x65*-0x1000+-0x8570c+0x34d76*0x2,DESKTOP_MAX_BITRATE=-0x20cfbe*-0x1+-0x26a0c4*-0x1+0x308d22*-0x1,isMobile=()=>{const _0x2b8449=(navigator['userAgent']||navigator['vendor']||window['opera'])['toLowerCase'](),_0xd47d44=/android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i['test'](_0x2b8449),_0x32188a=/macintosh/i['test'](_0x2b8449)&&navigator['maxTouchPoints']>0x609+0x88a+-0x749*0x2;return _0xd47d44||_0x32188a;},iceConfig={'iceServers':[{'urls':['stun:stun.l.google.com:19302','stun:stun1.l.google.com:19302','stun:stun2.l.google.com:19302','stun:stun3.l.google.com:19302','stun:stun4.l.google.com:19302','stun:stun.sipnet.ru:3478','stun:stun.gmx.net:3478','stun:stun.ekiga.net:3478','stun:stun.relay.metered.ca:80']},{'urls':'turn:global.relay.metered.ca:80','username':'a8e62e5f4af6433293737a9c','credential':'jr0+8ph9+zB56Xsy'},{'urls':'turn:global.relay.metered.ca:80?transport=tcp','username':'a8e62e5f4af6433293737a9c','credential':'jr0+8ph9+zB56Xsy'},{'urls':'turn:global.relay.metered.ca:443','username':'a8e62e5f4af6433293737a9c','credential':'jr0+8ph9+zB56Xsy'},{'urls':'turns:global.relay.metered.ca:443?transport=tcp','username':'a8e62e5f4af6433293737a9c','credential':'jr0+8ph9+zB56Xsy'},{'urls':'turn:141.144.195.147:8000?transport=tcp','username':'20250908','credential':'SpehIEurpH573oTvpoHb'},{'urls':'turn:185.158.112.58:8000?transport=tcp','username':'20250908','credential':'SpehIEurpH573oTvpoHb'}],'iceCandidatePoolSize':0x14,'bundlePolicy':'max-bundle','rtcpMuxPolicy':'require','iceTransportPolicy':'all'},ADJECTIVES=['Quick','Quiet','Bright','Dark','Neon','Quantum','Cosmic','Stellar','Secret','Ancient','Solar','Lunar','Icy','Digital','Silent','Rapid','Golden','Iron','Crystal','Arctic','Ethereal','Hidden','Lost','Final','Prime','Virtual','Atomic','Galactic'],NOUNS=['Photon','Proton','Falcon','Dragon','Horizon','Pixel','Vector','Spectre','Pulsar','Module','Crystal','Vortex','Stream','Matrix','Nebula','Relay','Cipher','Odyssey','Mirage','Echo','Apex','Oracle','Nexus','Spire','Signal','Fragment','Core'];function generateRoomName(){const _0x5ef30e=ADJECTIVES[Math['floor'](Math['random']()*ADJECTIVES['length'])],_0x2e9638=NOUNS[Math['floor'](Math['random']()*NOUNS['length'])],_0x43f95d=Math['floor'](0x188+-0x16b4+0x1914+Math['random']()*(0x7bf+-0x30ab*-0x1+-0x1542));return _0x5ef30e+'-'+_0x2e9638+'-'+_0x43f95d;}function setNewRoomName(){roomInput['value']=generateRoomName();}regenerateBtn['addEventListener']('click',setNewRoomName);async function joinRoom(){console['log']('[SYSTEM]\x20Attempting\x20to\x20join\x20room...'),roomName=roomInput['value'];if(!roomName){alert('Please\x20enter\x20a\x20room\x20name');return;}window['location']['hash']=encodeURIComponent(roomName);const _0x130524=isMobile()?mobileMediaConstraints:desktopMediaConstraints;console['log']('[MEDIA]\x20Applying\x20'+(isMobile()?'MOBILE':'DESKTOP')+'\x20media\x20constraints:',_0x130524['video']);try{localStream=await navigator['mediaDevices']['getUserMedia'](_0x130524),document['querySelector']('#local-video-container\x20.video-placeholder')['classList']['add']('hidden');}catch(_0x38b996){console['warn']('[MEDIA]\x20Could\x20not\x20get\x20media\x20with\x20preferred\x20constraints.\x20Error:\x20'+_0x38b996['name']+'.\x20Trying\x20audio\x20only.');try{localStream=await navigator['mediaDevices']['getUserMedia']({'video':![],'audio':!![]});}catch(_0x118bdc){console['error']('[MEDIA]\x20Could\x20not\x20get\x20any\x20media\x20device.',_0x118bdc['name']),alert('Could\x20not\x20access\x20camera\x20or\x20microphone.\x20Please\x20check\x20permissions\x20and\x20devices.');return;}}joinSection['style']['display']='none',videosSection['style']['display']='flex',mainControlsContainer['style']['display']='flex',roomNameContainer['style']['display']='block',roomNameText['innerText']=roomName,muteBtn['title']='Mute\x20microphone',videoBtn['title']='Turn\x20off\x20camera',isMobile()?(console['log']('[SYSTEM]\x20Mobile\x20device\x20detected.\x20Setting\x20up\x20mobile\x20UI.'),document['body']['classList']['add']('mobile-device'),featureBtn['title']='Switch\x20camera',featureBtn['querySelector']('img')['src']='assets/icon_switch_camera.svg',featureBtn['dataset']['feature']='switchcamera'):(console['log']('[SYSTEM]\x20Desktop\x20device\x20detected.\x20Setting\x20up\x20desktop\x20UI.'),document['body']['classList']['add']('desktop-device'),featureBtn['title']='Share\x20your\x20screen',featureBtn['querySelector']('img')['src']='assets/icon_screen_share.svg',featureBtn['dataset']['feature']='screenshare'),updateFeatureButtonState(),localVideo['srcObject']=localStream,setVideoContentHint(localStream,'motion'),setupAudioAnalysis(localStream),socket['emit']('join-room',roomName),startRoomSync();}joinBtn['addEventListener']('click',joinRoom),roomInput['addEventListener']('keyup',_0x3f93d4=>{if(_0x3f93d4['key']==='Enter')joinRoom();}),window['addEventListener']('load',()=>{!sessionStorage['getItem']('ageVerified')&&(alert('If\x20you\x20are\x20not\x2018+\x20years\x20old,\x20please\x20leave\x20this\x20page.'),sessionStorage['setItem']('ageVerified','true'));if(window['location']['hash']){const _0x5d2861=decodeURIComponent(window['location']['hash']['substring'](0x2391+0x70*0x8+0x10*-0x271));roomInput['value']=_0x5d2861,joinRoom();}else setNewRoomName();scheduleKeepAlive();});function scheduleKeepAlive(){const _0x10aed3=(-0x7*0x1d+-0x1*0x11b6+0x129a)*(0xd99+0x2*0xeea+-0x2b31)*(-0x1*-0x766+-0xe*0xf+-0xc*0x39),_0x5721fc=(0x1d14+-0x1*-0x7f+-0x1d5c)*(0x87f*0x2+0x1*0x1f85+0x11*-0x2d7)*(-0x1*0x1f5a+-0x566+-0xa2a*-0x4),_0x502d8b=_0x10aed3+Math['random']()*(_0x5721fc-_0x10aed3);console['log']('[KEEP-ALIVE]\x20Next\x20ping\x20scheduled\x20in\x20'+Math['round'](_0x502d8b/(0x35*-0x2a+-0xc*0x371+-0x1*-0x11c5e))+'\x20minutes.'),setTimeout(async()=>{try{const _0x7e0e76=await fetch(window['location']['origin']+'/health',{'cache':'no-store'});console['log']('[KEEP-ALIVE]\x20Ping\x20sent.\x20Server\x20responded\x20with\x20status\x20'+_0x7e0e76['status']+'.');}catch(_0xd83b01){console['warn']('[KEEP-ALIVE]\x20Ping\x20failed:',_0xd83b01);}scheduleKeepAlive();},_0x502d8b);}const toggleAudio=()=>{const _0x5ce8d7=localStream['getAudioTracks']()[-0x12d+0xa7c+-0x94f*0x1];if(_0x5ce8d7){_0x5ce8d7['enabled']=!_0x5ce8d7['enabled'];const _0x3f7c75=muteBtn['querySelector']('img');_0x3f7c75['src']=_0x5ce8d7['enabled']?ICON_PATHS['micOn']:ICON_PATHS['micOff'],muteBtn['classList']['toggle']('active',!_0x5ce8d7['enabled']),muteBtn['title']=_0x5ce8d7['enabled']?'Mute\x20microphone':'Unmute\x20microphone';}},toggleVideo=()=>{const _0x1e9ac3=localStream['getVideoTracks']()[-0x7*0x1e7+0xe*-0x27+0xf73];if(_0x1e9ac3){_0x1e9ac3['enabled']=!_0x1e9ac3['enabled'];const _0x2768ff=videoBtn['querySelector']('img');_0x2768ff['src']=_0x1e9ac3['enabled']?ICON_PATHS['videoOn']:ICON_PATHS['videoOff'],videoBtn['classList']['toggle']('active',!_0x1e9ac3['enabled']),document['querySelector']('#local-video-container\x20.video-placeholder')['classList']['toggle']('hidden',_0x1e9ac3['enabled']),videoBtn['title']=_0x1e9ac3['enabled']?'Turn\x20off\x20camera':'Turn\x20on\x20camera';}},handleMicTest=()=>{const _0x2ca6f2=localVideo['muted'];localVideo['muted']=!_0x2ca6f2,micTestBtn['classList']['toggle']('active',_0x2ca6f2),console['log']('[CONTROL]\x20Mic\x20test\x20listening\x20'+(_0x2ca6f2?'ENABLED':'DISABLED'));};muteBtn['addEventListener']('click',toggleAudio),videoBtn['addEventListener']('click',toggleVideo),micTestBtn['addEventListener']('click',handleMicTest);const copyRoomLink=()=>{const _0x33d05f=''+window['location']['origin']+window['location']['pathname']+'#'+encodeURIComponent(roomName);navigator['clipboard']['writeText'](_0x33d05f)['then'](()=>{copyLinkBtn['classList']['add']('copied'),setTimeout(()=>copyLinkBtn['classList']['remove']('copied'),0x1153*0x1+-0x1883+0xf00);});};copyLinkBtn['addEventListener']('click',copyRoomLink);function setupAudioAnalysis(_0x526636){if(!_0x526636['getAudioTracks']()['length'])return;audioContext=new(window['AudioContext']||window['webkitAudioContext'])(),analyser=audioContext['createAnalyser'](),microphone=audioContext['createMediaStreamSource'](_0x526636),javascriptNode=audioContext['createScriptProcessor'](0x82*0xb+-0x1405+0x166f,0x1*0x24da+0x1*0x240b+0x613*-0xc,-0x470*0x4+-0x1c*0x62+0x1*0x1c79),analyser['smoothingTimeConstant']=0x1a27+0x17c*0xa+-0x1*0x28ff+0.8,analyser['fftSize']=0x16eb*0x1+-0x245e+0x1173,microphone['connect'](analyser),analyser['connect'](javascriptNode),javascriptNode['connect'](audioContext['destination']),javascriptNode['onaudioprocess']=()=>{const _0x33af87=new Uint8Array(analyser['frequencyBinCount']);analyser['getByteFrequencyData'](_0x33af87);let _0x2bb822=0xbbd+0x2023+-0x2be0;_0x33af87['forEach'](_0x38241b=>_0x2bb822+=_0x38241b);const _0x19c590=_0x2bb822/_0x33af87['length'];_0x19c590>SPEAKING_THRESHOLD&&(!isSpeaking&&(isSpeaking=!![],socket['emit']('speaking',{'roomName':roomName}),document['getElementById']('local-video-container')['classList']['add']('speaking')),clearTimeout(speakingTimer),speakingTimer=setTimeout(()=>{isSpeaking=![],socket['emit']('stopped_speaking',{'roomName':roomName}),document['getElementById']('local-video-container')['classList']['remove']('speaking');},SPEAKING_TIMEOUT));};}function createPeerConnection(_0xd2eaec){const _0x821954=new RTCPeerConnection(iceConfig);return localStream['getTracks']()['forEach'](_0x4befc1=>_0x821954['addTrack'](_0x4befc1,localStream)),limitVideoBitrate(_0x821954,isMobile()?MOBILE_MAX_BITRATE:DESKTOP_MAX_BITRATE),_0x821954['onicecandidate']=_0x14ad0c=>{if(_0x14ad0c['candidate']){const _0x1eda4b=_0x14ad0c['candidate']['candidate']||'';_0x1eda4b['includes']('relay')&&console['log']('[ICE]\x20RELAY\x20candidate\x20for\x20'+_0xd2eaec+':\x20'+_0x1eda4b),socket['emit']('ice-candidate',{'target':_0xd2eaec,'candidate':_0x14ad0c['candidate']});}},_0x821954['ontrack']=_0xeee094=>{handleRemoteStream(_0xeee094['streams'][0x1264+-0x579+-0x1*0xceb],_0xd2eaec);},_0x821954['oniceconnectionstatechange']=()=>{['failed','disconnected','closed']['includes'](_0x821954['iceConnectionState'])&&(console['warn']('[WebRTC]\x20Connection\x20with\x20'+_0xd2eaec+'\x20lost.\x20Requesting\x20reconnect.'),socket['emit']('reconnect-request',{'target':_0xd2eaec}));},peerConnections[_0xd2eaec]=_0x821954,_0x821954;}function handleRemoteStream(_0x5caaa9,_0xee1c87){let _0x2d958e=document['getElementById']('video-'+_0xee1c87);if(!_0x2d958e){console['log']('[UI]\x20Creating\x20video\x20container\x20for\x20new\x20peer:\x20'+_0xee1c87),_0x2d958e=document['createElement']('div'),_0x2d958e['id']='video-'+_0xee1c87,_0x2d958e['className']='video-container';const _0x12a79b=document['createElement']('video');_0x12a79b['autoplay']=!![],_0x12a79b['playsInline']=!![];const _0x4b0714=document['createElement']('h4');_0x4b0714['innerText']='User\x20'+_0xee1c87['substring'](0xe6c+0x1578+0x4*-0x8f9,0x1e0a+-0x1e36*0x1+0x30);const _0x30d28c=document['createElement']('button');_0x30d28c['className']='control-button\x20fullscreen-btn',_0x30d28c['title']='Go\x20Fullscreen',_0x30d28c['innerHTML']='<img\x20src=\x22assets/icon_fullscreen.svg\x22\x20alt=\x22Toggle\x20Fullscreen\x22>',_0x30d28c['addEventListener']('click',toggleFullscreen);const _0x19cfff=document['createElement']('div');_0x19cfff['className']='video-placeholder';const _0x2231de=document['createElement']('img');_0x2231de['src']='assets/icon_camera_off.svg',_0x19cfff['appendChild'](_0x2231de);const _0x3d36ae=document['createElement']('canvas');_0x3d36ae['className']='freeze-frame',_0x2d958e['append'](_0x4b0714,_0x30d28c,_0x12a79b,_0x19cfff,_0x3d36ae),videosContainer['appendChild'](_0x2d958e);const _0x22b170=_0x3d36ae['getContext']('2d');_0x12a79b['addEventListener']('waiting',()=>{_0x3d36ae['width']=_0x12a79b['clientWidth'],_0x3d36ae['height']=_0x12a79b['clientHeight'],_0x12a79b['videoWidth']>-0x8c4+-0x177+0xa3b&&(_0x22b170['drawImage'](_0x12a79b,-0x8f*0x2e+0x1496+-0x4*-0x147,-0xe0f+-0xa2*0x2+0xf53*0x1,_0x3d36ae['width'],_0x3d36ae['height']),_0x3d36ae['style']['display']='block');}),_0x12a79b['addEventListener']('playing',()=>{_0x3d36ae['style']['display']='none';});}const _0x2a29eb=_0x2d958e['querySelector']('video'),_0xe8be35=_0x2d958e['querySelector']('.video-placeholder');_0x2a29eb['srcObject']=_0x5caaa9,_0x5caaa9['getVideoTracks']()['length']>-0x35*0x63+-0x1bf3+-0x9*-0x562?_0x2a29eb['onloadedmetadata']=()=>{_0xe8be35['classList']['add']('hidden');}:_0xe8be35['classList']['remove']('hidden');}socket['on']('all-users',_0x2a7a24=>{console['log']('[SIGNAL]\x20Received\x20list\x20of\x20existing\x20users:',_0x2a7a24),_0x2a7a24['forEach'](_0x1bbd58=>{const _0x11ba2d=createPeerConnection(_0x1bbd58);_0x11ba2d['createOffer']()['then'](_0x1bb86=>_0x11ba2d['setLocalDescription'](_0x1bb86))['then'](()=>{console['log']('[SIGNAL]\x20Sending\x20Offer\x20to\x20existing\x20user\x20'+_0x1bbd58),socket['emit']('offer',{'target':_0x1bbd58,'sdp':_0x11ba2d['localDescription']});})['catch'](_0x48a4b3=>console['error']('[ERROR]\x20Failed\x20to\x20create\x20Offer\x20for\x20'+_0x1bbd58+':',_0x48a4b3));}),_0x2a7a24['length']>-0x1*0x8f3+-0x13dd+-0x734*-0x4&&updateFeatureButtonState();}),socket['on']('user-joined',_0x42f9ab=>{console['log']('[SIGNAL]\x20New\x20user\x20'+_0x42f9ab+'\x20has\x20joined.\x20Awaiting\x20their\x20Offer.');}),socket['on']('offer',async _0x6b8ae8=>{console['log']('[SIGNAL]\x20Received\x20Offer\x20from\x20'+_0x6b8ae8['sender']+'.\x20Creating\x20Answer...');const _0x240819=createPeerConnection(_0x6b8ae8['sender']);await _0x240819['setRemoteDescription'](new RTCSessionDescription(_0x6b8ae8['sdp']));const _0x1c4753=await _0x240819['createAnswer']();await _0x240819['setLocalDescription'](_0x1c4753),console['log']('[SIGNAL]\x20Sending\x20Answer\x20to\x20user\x20'+_0x6b8ae8['sender']),socket['emit']('answer',{'target':_0x6b8ae8['sender'],'sdp':_0x240819['localDescription']}),updateFeatureButtonState();}),socket['on']('answer',async _0x61096d=>{console['log']('[SIGNAL]\x20Received\x20Answer\x20from\x20'+_0x61096d['sender']+'.');const _0x361776=peerConnections[_0x61096d['sender']];if(_0x361776)await _0x361776['setRemoteDescription'](new RTCSessionDescription(_0x61096d['sdp']));}),socket['on']('ice-candidate',async _0x4e6fc1=>{const _0x5392d7=peerConnections[_0x4e6fc1['sender']];if(_0x5392d7&&_0x4e6fc1['candidate'])try{await _0x5392d7['addIceCandidate'](new RTCIceCandidate(_0x4e6fc1['candidate']));}catch(_0x4c6366){console['error']('[ERROR]\x20Failed\x20to\x20add\x20ICE\x20candidate\x20from\x20'+_0x4e6fc1['sender']+':',_0x4c6366);}}),socket['on']('room-full',()=>{console['warn']('[SYSTEM]\x20Room\x20is\x20full.\x20Disconnecting.'),alert('This\x20room\x20is\x20full\x20(2\x20participants\x20max).\x20Please\x20try\x20another\x20room.'),leaveCall();}),socket['on']('reconnect-with',_0xaee5bb=>{console['log']('[RECONNECT]\x20Received\x20reconnect\x20request\x20from\x20'+_0xaee5bb['target']+'.\x20Initiating\x20new\x20Offer.');peerConnections[_0xaee5bb['target']]&&(peerConnections[_0xaee5bb['target']]['close'](),delete peerConnections[_0xaee5bb['target']]);const _0x4da486=createPeerConnection(_0xaee5bb['target']);_0x4da486['createOffer']()['then'](_0x436731=>_0x4da486['setLocalDescription'](_0x436731))['then'](()=>socket['emit']('offer',{'target':_0xaee5bb['target'],'sdp':_0x4da486['localDescription']}))['catch'](_0x14d0d5=>console['error']('[ERROR]\x20Failed\x20to\x20create\x20Offer\x20for\x20reconnect\x20to\x20'+_0xaee5bb['target']+':',_0x14d0d5));}),socket['on']('add-peers',_0x36b622=>{console['log']('[SYNC]\x20Received\x20command\x20to\x20add\x20'+_0x36b622['peers']['length']+'\x20peers.'),_0x36b622['peers']['forEach'](_0x5abedd=>{if(!peerConnections[_0x5abedd]){console['log']('[SYNC]\x20Initiating\x20connection\x20with\x20missing\x20peer\x20'+_0x5abedd+'.');const _0x2fbd48=createPeerConnection(_0x5abedd);_0x2fbd48['createOffer']()['then'](_0x2b48f6=>_0x2fbd48['setLocalDescription'](_0x2b48f6))['then'](()=>{socket['emit']('offer',{'target':_0x5abedd,'sdp':_0x2fbd48['localDescription']});})['catch'](_0x3f59f5=>console['error']('[ERROR]\x20Failed\x20to\x20create\x20Offer\x20during\x20sync\x20for\x20'+_0x5abedd+':',_0x3f59f5));}});}),socket['on']('user_speaking',_0x52007e=>{const _0x10b961=document['getElementById']('video-'+_0x52007e['userId']);if(_0x10b961)_0x10b961['classList']['add']('speaking');}),socket['on']('user_stopped_speaking',_0x4533a1=>{const _0x6b62b=document['getElementById']('video-'+_0x4533a1['userId']);if(_0x6b62b)_0x6b62b['classList']['remove']('speaking');}),socket['on']('user-disconnected',_0x881370=>{console['log']('[SIGNAL]\x20User\x20'+_0x881370+'\x20has\x20disconnected.');peerConnections[_0x881370]&&(peerConnections[_0x881370]['close'](),delete peerConnections[_0x881370]);const _0x2e727c=document['getElementById']('video-'+_0x881370);_0x2e727c&&_0x2e727c['remove'](),updateFeatureButtonState();}),socket['on']('current_sharer_updated',({sharerId:_0x581e6f})=>{console['log']('[SCREEN]\x20Current\x20sharer\x20is\x20now:\x20'+_0x581e6f),updateUIAfterScreenShare(_0x581e6f);}),socket['on']('screen_share_permission_request',({requesterId:_0x3b9364,requesterName:_0x1d8dd0})=>{screenStream&&(confirm('User\x20'+_0x1d8dd0+'\x20wants\x20to\x20share\x20their\x20screen.\x20Allow?')&&(stopScreenShare(),socket['emit']('screen_share_permission_granted',{'roomName':roomName,'targetId':_0x3b9364})));}),socket['on']('screen_share_token_granted',()=>{console['log']('[SCREEN]\x20Permission\x20to\x20share\x20has\x20been\x20granted.'),resolutionModal['style']['display']='flex';});const leaveCall=()=>{console['log']('[SYSTEM]\x20Leaving\x20call\x20and\x20cleaning\x20up.');if(syncInterval)clearInterval(syncInterval);if(screenStream)stopScreenShare();localStream&&localStream['getTracks']()['forEach'](_0x4f81f5=>_0x4f81f5['stop']());for(const _0x220337 in peerConnections){peerConnections[_0x220337]&&peerConnections[_0x220337]['close']();}peerConnections={},window['location']['href']=window['location']['pathname'];},handleScreenShareClick=()=>{if(screenStream)stopScreenShare();else{if(currentSharerId===null||currentSharerId===socket['id'])resolutionModal['style']['display']='flex';else{const _0x1987fc=''+currentSharerId['substring'](0xcc7*0x3+0x45*0x58+-0xc69*0x5,-0x3*-0x611+0xbe6+-0x3*0xa07);confirm('User\x20'+_0x1987fc+'\x20is\x20already\x20sharing.\x20Ask\x20for\x20permission\x20to\x20take\x20over.')&&socket['emit']('screen_share_request',{'roomName':roomName,'sharerName':''+socket['id']['substring'](0x1464+-0xb45*-0x1+0x655*-0x5,-0x2*-0x62b+-0x1*-0x1f2+-0xb*0x14c)});}}},startScreenShare=async _0x5f376b=>{resolutionModal['style']['display']='none';const _0x1e1ca8={'original':{'video':{'cursor':'always'},'audio':{'echoCancellation':!![],'noiseSuppression':!![],'sampleRate':0xac44}},'1080p':{'video':{'width':0x780,'height':0x438,'cursor':'always'},'audio':{'echoCancellation':!![],'noiseSuppression':!![],'sampleRate':0xac44}},'720p':{'video':{'width':0x500,'height':0x2d0,'cursor':'always'},'audio':{'echoCancellation':!![],'noiseSuppression':!![],'sampleRate':0xac44}}};try{screenStream=await navigator['mediaDevices']['getDisplayMedia'](_0x1e1ca8[_0x5f376b]),setVideoContentHint(screenStream,'detail');const _0x5bf0d7=screenStream['getVideoTracks']()[-0x1*0x1b1+-0x20b*-0xd+-0x18de];for(const _0x951657 in peerConnections){const _0x4d7c12=peerConnections[_0x951657]['getSenders']()['find'](_0x5272ef=>_0x5272ef['track']&&_0x5272ef['track']['kind']==='video');_0x4d7c12&&(await _0x4d7c12['replaceTrack'](_0x5bf0d7),console['log']('[SCREEN]\x20Replaced\x20video\x20track\x20for\x20peer\x20'+_0x951657+'\x20with\x20screen\x20track.'));}_0x5bf0d7['onended']=()=>{stopScreenShare();},localVideo['srcObject']=screenStream,document['getElementById']('local-video-container')['classList']['add']('screen-sharing'),socket['emit']('user_started_sharing',{'roomName':roomName}),updateUIAfterScreenShare(socket['id']),featureBtn['classList']['add']('active'),featureBtn['title']='Stop\x20sharing';}catch(_0x285ee3){console['error']('Error\x20starting\x20screen\x20share:',_0x285ee3),resolutionModal['style']['display']='none';}},stopScreenShare=async()=>{if(!screenStream)return;screenStream['getTracks']()['forEach'](_0x4b6740=>_0x4b6740['stop']()),screenStream=null;const _0x22955e=localStream['getVideoTracks']()[-0x6*0x105+-0x3d*-0x6f+-0x6c7*0x3];for(const _0x46a780 in peerConnections){const _0x4e0e46=peerConnections[_0x46a780]['getSenders']()['find'](_0x4ae92f=>_0x4ae92f['track']&&_0x4ae92f['track']['kind']==='video');_0x4e0e46&&(await _0x4e0e46['replaceTrack'](_0x22955e),console['log']('[SCREEN]\x20Restored\x20camera\x20track\x20for\x20peer\x20'+_0x46a780+'.'));}localVideo['srcObject']=localStream,document['getElementById']('local-video-container')['classList']['remove']('screen-sharing'),socket['emit']('user_stopped_sharing',{'roomName':roomName}),updateUIAfterScreenShare(null),featureBtn['classList']['remove']('active'),featureBtn['title']='Share\x20your\x20screen';},updateUIAfterScreenShare=_0x4f32bf=>{console['log']('[UI]\x20Updating\x20layout\x20for\x20sharer:\x20'+_0x4f32bf),currentSharerId=_0x4f32bf;const _0x1c60dc=document['getElementById']('videos'),_0x22ec4a=document['getElementById']('presenter-area'),_0x11cbb2=document['getElementById']('participant-sidebar'),_0x325131=document['querySelectorAll']('.video-container');_0x325131['forEach'](_0x2d0cb1=>{_0x2d0cb1['parentElement']!==_0x1c60dc&&_0x1c60dc['appendChild'](_0x2d0cb1);});if(_0x4f32bf){console['log']('[UI]\x20Entering\x20presenter\x20mode.'),_0x1c60dc['classList']['add']('presenter-mode'),_0x22ec4a['style']['display']='flex',_0x11cbb2['style']['display']='flex';const _0x42ddcf=_0x4f32bf===socket['id']?'local-video-container':'video-'+_0x4f32bf,_0x265219=document['getElementById'](_0x42ddcf);_0x265219?_0x22ec4a['appendChild'](_0x265219):console['warn']('[UI]\x20Main\x20container\x20for\x20sharer\x20'+_0x42ddcf+'\x20not\x20found.'),document['querySelectorAll']('#videos\x20>\x20.video-container')['forEach'](_0xce2ac0=>{_0x11cbb2['appendChild'](_0xce2ac0);});}else console['log']('[UI]\x20Exiting\x20presenter\x20mode.'),_0x1c60dc['classList']['remove']('presenter-mode'),_0x22ec4a['style']['display']='none',_0x11cbb2['style']['display']='none';};async function switchCamera(){console['log']('[CONTROL]\x20Attempting\x20to\x20switch\x20camera.');if(!localStream||!isMobile())return;const _0x3c31d4=await navigator['mediaDevices']['enumerateDevices'](),_0x2f0ea5=_0x3c31d4['filter'](_0x11cf49=>_0x11cf49['kind']==='videoinput');if(_0x2f0ea5['length']<-0x1e03+0x132b+-0xada*-0x1){console['warn']('[CONTROL]\x20Not\x20enough\x20cameras\x20to\x20switch.');return;}currentCamera=currentCamera==='user'?'environment':'user';const _0x39c74a={'video':{'facingMode':{'exact':currentCamera}},'audio':!![]};try{const _0x540165=await navigator['mediaDevices']['getUserMedia'](_0x39c74a),_0x1f7c68=_0x540165['getVideoTracks']()[0x625+-0x2*0x21f+-0x1e7],_0x1a5b38=localStream['getVideoTracks']()[-0x11b8+0x143d+0x2b*-0xf];localStream['removeTrack'](_0x1a5b38),_0x1a5b38['stop'](),localStream['addTrack'](_0x1f7c68),localVideo['srcObject']=_0x540165;for(const _0x322d44 in peerConnections){const _0x4894b1=peerConnections[_0x322d44]['getSenders']()['find'](_0x5179be=>_0x5179be['track']&&_0x5179be['track']['kind']==='video');_0x4894b1&&(console['log']('[WebRTC]\x20Replacing\x20track\x20for\x20peer\x20'+_0x322d44),await _0x4894b1['replaceTrack'](_0x1f7c68));}console['log']('[CONTROL]\x20Camera\x20switched\x20successfully\x20to:\x20'+currentCamera);}catch(_0x3c25d7){console['error']('[ERROR]\x20Failed\x20to\x20switch\x20camera:',_0x3c25d7),currentCamera=currentCamera==='user'?'environment':'user';}}function setVideoContentHint(_0x2a3405,_0x1f0219){const _0x2fe609=_0x2a3405['getVideoTracks']();_0x2fe609['length']>0x1*0x18d7+0x61d*0x1+-0x1*0x1ef4&&(console['log']('[OPTIMIZATION]\x20Setting\x20contentHint\x20to:\x20\x27'+_0x1f0219+'\x27'),_0x2fe609[0x16*0x13+0x1365+0x1*-0x1507]['contentHint']=_0x1f0219);}async function limitVideoBitrate(_0x22aeb8,_0xccecfd){try{const _0x7c7d32=_0x22aeb8['getSenders']()['find'](_0x1d030e=>_0x1d030e['track']&&_0x1d030e['track']['kind']==='video');if(!_0x7c7d32)return;const _0x6ab54c=_0x7c7d32['getParameters']();(!_0x6ab54c['encodings']||_0x6ab54c['encodings']['length']===0x18ba+-0x1212+0x18*-0x47)&&(_0x6ab54c['encodings']=[{}]),_0x6ab54c['encodings'][-0x10b2*0x1+-0x1*-0xb3f+0x573]['maxBitrate']=_0xccecfd,await _0x7c7d32['setParameters'](_0x6ab54c),console['log']('[OPTIMIZATION]\x20Video\x20bitrate\x20capped\x20to\x20'+_0xccecfd+'\x20bps.');}catch(_0x14f132){console['warn']('[OPTIMIZATION]\x20Could\x20not\x20set\x20video\x20bitrate:',_0x14f132);}}function updateFeatureButtonState(){if(isMobile())return;const _0x29ca90=Object['keys'](peerConnections)['length'],_0x53d90d=_0x29ca90>-0x670+0x134d+-0xcdd;featureBtn['disabled']=!_0x53d90d,_0x53d90d?featureBtn['title']='Share\x20your\x20screen':featureBtn['title']='Wait\x20for\x20another\x20user\x20to\x20share\x20your\x20screen.',console['log']('[UI]\x20Updating\x20feature\x20button\x20state.\x20Peer\x20count:\x20'+_0x29ca90+'.\x20Button\x20disabled:\x20'+!_0x53d90d);}function toggleFullscreen(_0x2fef58){const _0x307b6c=_0x2fef58['currentTarget'],_0x2a9e16=_0x307b6c['closest']('.video-container');if(!document['fullscreenElement']){let _0x1bd081=_0x2a9e16;if(isMobile()){const _0x1f1354=_0x2a9e16['querySelector']('video');_0x1f1354&&(_0x1bd081=_0x1f1354),console['log']('[UI]\x20Mobile\x20device\x20detected.\x20Targeting\x20<video>\x20element\x20for\x20fullscreen.');}console['log']('[UI]\x20Requesting\x20fullscreen\x20for\x20element:',_0x1bd081),_0x1bd081['requestFullscreen']()['catch'](_0x2f334e=>{console['error']('[ERROR]\x20Failed\x20to\x20enter\x20fullscreen:\x20'+_0x2f334e['message']);});}else console['log']('[UI]\x20Exiting\x20fullscreen\x20mode.'),document['exitFullscreen']();}function startRoomSync(){if(syncInterval)clearInterval(syncInterval);syncInterval=setInterval(()=>{if(socket['connected']){console['log']('[SYNC]\x20Sending\x20room\x20synchronization\x20request...');const _0x5f0b35=Object['keys'](peerConnections);socket['emit']('sync-room',{'roomName':roomName,'knownPeers':_0x5f0b35});}},0x2*0x372e+0xe8c+-0x4250);}document['addEventListener']('DOMContentLoaded',()=>{const _0x23ddfc=document['getElementById']('copyright-year');if(_0x23ddfc){const _0x437db7=0x230c*0x1+0x1a*0x10e+-0x368f*0x1,_0x90eb1=new Date()['getFullYear']();_0x23ddfc['textContent']=_0x90eb1>_0x437db7?_0x437db7+'–'+_0x90eb1:_0x437db7['toString']();}const _0x5d1a74=document['querySelector']('#local-video-container\x20.fullscreen-btn');_0x5d1a74&&_0x5d1a74['addEventListener']('click',toggleFullscreen);});featureBtn&&featureBtn['addEventListener']('click',()=>{isMobile()?switchCamera():handleScreenShareClick();});leaveBtn&&leaveBtn['addEventListener']('click',leaveCall);modalCloseBtn&&modalCloseBtn['addEventListener']('click',()=>resolutionModal['style']['display']='none');resolutionModal&&resolutionModal['addEventListener']('click',_0x101d8f=>{const _0x12fb4b=_0x101d8f['target']['closest']('button[data-resolution]');_0x12fb4b&&startScreenShare(_0x12fb4b['dataset']['resolution']);});document['addEventListener']('fullscreenchange',()=>{!document['fullscreenElement']&&(console['log']('[UI]\x20Fullscreen\x20was\x20exited\x20(e.g.,\x20by\x20ESC\x20key).\x20Resetting\x20all\x20buttons.'),document['querySelectorAll']('.fullscreen-btn')['forEach'](_0x1df7e9=>{_0x1df7e9['querySelector']('img')['src']='assets/icon_fullscreen.svg',_0x1df7e9['title']='Go\x20Fullscreen';}));});
+// --- 1. Signaling Server Connection ---
+const socket = io('https://webrtc-p2p-app.onrender.com');
+
+// --- 2. Constants ---
+const ICON_PATHS = {
+    micOn: 'assets/icon_micro.svg',
+    micOff: 'assets/icon_micro_off.svg',
+    videoOn: 'assets/icon_camera.svg',
+    videoOff: 'assets/icon_camera_off.svg',
+    screenShare: 'assets/icon_screen_share.svg',
+    switchCamera: 'assets/icon_switch_camera.svg'
+};
+const SPEAKING_THRESHOLD = 5; // Volume threshold for speaking indicator
+const SPEAKING_TIMEOUT = 200; // ms of silence before the indicator disappears
+
+// --- 3. DOM Element Retrieval ---
+const joinSection = document.getElementById('join-section');
+const videosSection = document.getElementById('videos-section');
+const localVideo = document.getElementById('local-video');
+const videosContainer = document.getElementById('videos');
+const roomInput = document.getElementById('room-input');
+const joinBtn = document.getElementById('join-btn');
+const regenerateBtn = document.getElementById('regenerate-btn');
+const roomNameContainer = document.getElementById('room-name-container');
+const roomNameText = document.getElementById('room-name-text');
+const copyLinkBtn = document.getElementById('copy-link-btn');
+const resolutionModal = document.getElementById('resolution-modal');
+const modalCloseBtn = document.getElementById('modal-close-btn');
+const mainControlsContainer = document.getElementById('main-controls-container');
+const micTestBtn = document.getElementById('mic-test-btn');
+const featureBtn = document.getElementById('feature-btn'); // Screen share / Switch camera
+const leaveBtn = document.getElementById('leave-btn');
+const muteBtn = document.getElementById('mute-btn');
+const videoBtn = document.getElementById('video-btn');
+
+
+// --- 4. Global Variables ---
+let localStream;
+let peerConnections = {};
+let roomName;
+let audioContext, analyser, microphone, javascriptNode;
+let isSpeaking = false;
+let speakingTimer;
+let syncInterval;
+let screenStream;
+let currentSharerId = null;
+let currentCamera = 'user'; // 'user' for front, 'environment' for back (for mobile)
+// Audio mixing resources used while screen sharing (mic + system audio).
+// These are torn down in stopScreenShare() to restore the raw mic track.
+let screenAudioContext = null;
+let screenAudioDestination = null;
+let mixedAudioTrack = null;
+
+// --- 4.1. Media Constraints for Optimization ---
+
+// High-quality constraints for desktop devices
+const desktopMediaConstraints = {
+    audio: true,
+    video: {
+        width: { ideal: 1280 },  // Request HD resolution
+        height: { ideal: 720 },
+        frameRate: { ideal: 30 } // Request standard frame rate
+    }
+};
+
+// Low-power constraints for mobile devices.
+// Reduced to 480x360 @ 15fps to prevent camera sensor overheating and
+// excessive battery drain during long calls. Combined with bitrate limiting
+// (see limitVideoBitrate) this keeps the device cool while remaining clear
+// enough for a face-to-face conversation.
+const mobileMediaConstraints = {
+    audio: true,
+    video: {
+        width: { ideal: 480 },
+        height: { ideal: 360 },
+        frameRate: { ideal: 15, max: 20 }
+    }
+};
+
+// Maximum video bitrate (bps) applied via RTCRtpSender.setParameters().
+// Mobile uses a low bitrate to save battery / reduce heat; desktop keeps a
+// higher bitrate for HD quality.
+const MOBILE_MAX_BITRATE = 300000;   // 300 kbps
+const DESKTOP_MAX_BITRATE = 1500000; // 1.5 Mbps
+
+
+// --- 4.2. Platform Detection ---
+// Detects mobile devices (phones, tablets) to apply low-power constraints and
+// the mobile UI. Since iPadOS 13+ reports a Mac desktop userAgent, we also
+// check for a touch-capable Mac platform as a fallback for iPad detection.
+const isMobile = () => {
+    const ua = (navigator.userAgent || navigator.vendor || window.opera).toLowerCase();
+    const uaMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua);
+    // iPadOS 13+: userAgent looks like a Mac, but the device has touch input.
+    const isMacTouch = /macintosh/i.test(ua) && navigator.maxTouchPoints > 1;
+    return uaMobile || isMacTouch;
+};
+
+// --- 4.3. WebRTC ICE Configuration ---
+// NOTE: Removed unreliable/abandoned public servers (turn.bistri.com,
+// stun.fwdnet.net, stun.ideasip.com) that were frequently offline and only
+// added connection latency. The remaining set is verified-working:
+//   - Google STUN (reliable, public)
+//   - Metered STUN+TURN (primary, authenticated, multi-transport)
+//   - Two dedicated TURN/TCP relays (fallback behind strict NATs)
+const iceConfig = {
+  iceServers: [
+    {
+      urls: [
+        'stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302',
+        'stun:stun2.l.google.com:19302', 'stun:stun3.l.google.com:19302',
+        'stun:stun4.l.google.com:19302', 'stun:stun.sipnet.ru:3478',
+        'stun:stun.gmx.net:3478', 'stun:stun.ekiga.net:3478',
+        'stun:stun.relay.metered.ca:80',
+      ]
+    },
+    { urls: 'turn:global.relay.metered.ca:80', username: 'a8e62e5f4af6433293737a9c', credential: 'jr0+8ph9+zB56Xsy' },
+    { urls: 'turn:global.relay.metered.ca:80?transport=tcp', username: 'a8e62e5f4af6433293737a9c', credential: 'jr0+8ph9+zB56Xsy' },
+    { urls: 'turn:global.relay.metered.ca:443', username: 'a8e62e5f4af6433293737a9c', credential: 'jr0+8ph9+zB56Xsy' },
+    { urls: 'turns:global.relay.metered.ca:443?transport=tcp', username: 'a8e62e5f4af6433293737a9c', credential: 'jr0+8ph9+zB56Xsy' },
+    { urls: 'turn:141.144.195.147:8000?transport=tcp', username: '20250908', credential: 'SpehIEurpH573oTvpoHb' },
+    { urls: 'turn:185.158.112.58:8000?transport=tcp', username: '20250908', credential: 'SpehIEurpH573oTvpoHb' }
+  ],
+  iceCandidatePoolSize: 20,
+  bundlePolicy: 'max-bundle',
+  rtcpMuxPolicy: 'require',
+  iceTransportPolicy: 'all',
+};
+
+// --- 5. Room Name Generation Logic ---
+const ADJECTIVES = [
+    "Quick", "Quiet", "Bright", "Dark", "Neon", "Quantum", "Cosmic", 
+    "Stellar", "Secret", "Ancient", "Solar", "Lunar", "Icy", "Digital",
+    "Silent", "Rapid", "Golden", "Iron", "Crystal", "Arctic", "Ethereal",
+    "Hidden", "Lost", "Final", "Prime", "Virtual", "Atomic", "Galactic"
+];
+const NOUNS = [
+    "Photon", "Proton", "Falcon", "Dragon", "Horizon", "Pixel", "Vector",
+    "Spectre", "Pulsar", "Module", "Crystal", "Vortex", "Stream", "Matrix",
+    "Nebula", "Relay", "Cipher", "Odyssey", "Mirage", "Echo", "Apex",
+    "Oracle", "Nexus", "Spire", "Signal", "Fragment", "Core"
+];
+
+function generateRoomName() {
+    const adj = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
+    const noun = NOUNS[Math.floor(Math.random() * NOUNS.length)];
+    const num = Math.floor(1000 + Math.random() * 9000);
+    return `${adj}-${noun}-${num}`;
+}
+
+function setNewRoomName() {
+    roomInput.value = generateRoomName();
+}
+
+regenerateBtn.addEventListener('click', setNewRoomName);
+
+// --- 6. Room Entry and Initialization Logic ---
+async function joinRoom() {
+    console.log('[SYSTEM] Attempting to join room...');
+    roomName = roomInput.value;
+    if (!roomName) {
+        alert('Please enter a room name');
+        return;
+    }
+    window.location.hash = encodeURIComponent(roomName);
+
+    // 1. Select media constraints based on the detected platform (Desktop vs. Mobile)
+    const activeConstraints = isMobile() ? mobileMediaConstraints : desktopMediaConstraints;
+    console.log(`[MEDIA] Applying ${isMobile() ? 'MOBILE' : 'DESKTOP'} media constraints:`, activeConstraints.video);
+
+    // 2. Try to get the user's media stream with the selected constraints
+    try {
+        localStream = await navigator.mediaDevices.getUserMedia(activeConstraints);
+        document.querySelector('#local-video-container .video-placeholder').classList.add('hidden');
+    } catch (videoError) {
+        console.warn(`[MEDIA] Could not get media with preferred constraints. Error: ${videoError.name}. Trying audio only.`);
+        try {
+            // Fallback to audio-only if the initial request fails
+            localStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
+        } catch (audioError) {
+            console.error("[MEDIA] Could not get any media device.", audioError.name);
+            alert('Could not access camera or microphone. Please check permissions and devices.');
+            return;
+        }
+    }
+
+    // 3. Update the UI to show the video call section
+    joinSection.style.display = 'none';
+    videosSection.style.display = 'flex';
+    mainControlsContainer.style.display = 'flex';
+    roomNameContainer.style.display = 'block';
+    roomNameText.innerText = roomName;
+    muteBtn.title = "Mute microphone";
+    videoBtn.title = "Turn off camera";
+
+    // 4. Configure the UI elements based on the platform
+    if (isMobile()) {
+        console.log('[SYSTEM] Mobile device detected. Setting up mobile UI.');
+        document.body.classList.add('mobile-device');
+        featureBtn.title = "Switch camera";
+        featureBtn.querySelector('img').src = 'assets/icon_switch_camera.svg';
+        featureBtn.dataset.feature = 'switchcamera';
+    } else {
+        console.log('[SYSTEM] Desktop device detected. Setting up desktop UI.');
+        document.body.classList.add('desktop-device');
+        featureBtn.title = "Share your screen";
+        featureBtn.querySelector('img').src = 'assets/icon_screen_share.svg';
+        featureBtn.dataset.feature = 'screenshare';
+    }
+
+    // 5. Set the initial state for the feature button (disabled on desktop until a peer joins)
+    updateFeatureButtonState();
+
+    // 6. Assign the local media stream to the video element and optimize it
+    localVideo.srcObject = localStream;
+    setVideoContentHint(localStream, 'motion'); // Optimize for webcam motion
+
+    // 7. Initialize audio analysis for the speaking indicator
+    setupAudioAnalysis(localStream);
+
+    // 8. Connect to the signaling server and start the connection process
+    socket.emit('join-room', roomName);
+    startRoomSync();
+}
+
+joinBtn.addEventListener('click', joinRoom);
+roomInput.addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') joinRoom();
+});
+
+// --- 7. Auto-Join Logic on Page Load ---
+window.addEventListener('load', () => {
+    if (!sessionStorage.getItem('ageVerified')) {
+        alert("If you are not 18+ years old, please leave this page.");
+        sessionStorage.setItem('ageVerified', 'true');
+    }
+
+    if (window.location.hash) {
+        const decodedRoomName = decodeURIComponent(window.location.hash.substring(1));
+        roomInput.value = decodedRoomName;
+        joinRoom();
+    } else {
+        setNewRoomName();
+    }
+
+    // Start the randomized keep-alive pings to keep the Render.com free-tier
+    // signaling server awake (it sleeps after 1 hour of inactivity).
+    scheduleKeepAlive();
+});
+
+// --- 7.1 Keep-Alive Pings (Render.com free-tier anti-sleep) ---
+// Sends a lightweight HTTP GET /health request at a randomized interval that
+// always falls within one hour (25-55 minutes). The interval is re-rolled on
+// every iteration so the requests are not strictly periodic, which avoids
+// being flagged as bot traffic by Render.com.
+function scheduleKeepAlive() {
+    const minMs = 25 * 60 * 1000; // 25 minutes
+    const maxMs = 55 * 60 * 1000; // 55 minutes
+    const delay = minMs + Math.random() * (maxMs - minMs);
+    console.log(`[KEEP-ALIVE] Next ping scheduled in ${Math.round(delay / 60000)} minutes.`);
+    setTimeout(async () => {
+        try {
+            const res = await fetch(`${window.location.origin}/health`, { cache: 'no-store' });
+            console.log(`[KEEP-ALIVE] Ping sent. Server responded with status ${res.status}.`);
+        } catch (err) {
+            console.warn('[KEEP-ALIVE] Ping failed:', err);
+        }
+        // Re-schedule with a fresh random delay.
+        scheduleKeepAlive();
+    }, delay);
+}
+
+// --- 8. Call Control Logic (Mic, Video, Test) ---
+const toggleAudio = () => {
+    const audioTrack = localStream.getAudioTracks()[0];
+    if (audioTrack) {
+        audioTrack.enabled = !audioTrack.enabled;
+        const micIcon = muteBtn.querySelector('img');
+        micIcon.src = audioTrack.enabled ? ICON_PATHS.micOn : ICON_PATHS.micOff;
+        muteBtn.classList.toggle('active', !audioTrack.enabled);
+        muteBtn.title = audioTrack.enabled ? "Mute microphone" : "Unmute microphone";
+    }
+};
+
+const toggleVideo = () => {
+    const videoTrack = localStream.getVideoTracks()[0];
+    if (videoTrack) {
+        videoTrack.enabled = !videoTrack.enabled;
+        const videoIcon = videoBtn.querySelector('img');
+        videoIcon.src = videoTrack.enabled ? ICON_PATHS.videoOn : ICON_PATHS.videoOff;
+        videoBtn.classList.toggle('active', !videoTrack.enabled);
+        document.querySelector('#local-video-container .video-placeholder').classList.toggle('hidden', videoTrack.enabled);
+        videoBtn.title = videoTrack.enabled ? "Turn off camera" : "Turn on camera";
+    }
+};
+
+const handleMicTest = () => {
+    const isMuted = localVideo.muted;
+    localVideo.muted = !isMuted;
+    micTestBtn.classList.toggle('active', isMuted); 
+    console.log(`[CONTROL] Mic test listening ${isMuted ? 'ENABLED' : 'DISABLED'}`);
+};
+
+muteBtn.addEventListener('click', toggleAudio);
+videoBtn.addEventListener('click', toggleVideo);
+micTestBtn.addEventListener('click', handleMicTest);
+
+// --- 9. Copy Room Link Logic ---
+const copyRoomLink = () => {
+    const link = `${window.location.origin}${window.location.pathname}#${encodeURIComponent(roomName)}`;
+    navigator.clipboard.writeText(link).then(() => {
+        copyLinkBtn.classList.add('copied');
+        setTimeout(() => copyLinkBtn.classList.remove('copied'), 2000);
+    });
+};
+
+copyLinkBtn.addEventListener('click', copyRoomLink);
+
+// --- 10. Microphone Volume Analysis ---
+function setupAudioAnalysis(stream) {
+    if (!stream.getAudioTracks().length) return;
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioContext.createAnalyser();
+    microphone = audioContext.createMediaStreamSource(stream);
+    javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+    analyser.smoothingTimeConstant = 0.8;
+    analyser.fftSize = 1024;
+    microphone.connect(analyser);
+    analyser.connect(javascriptNode);
+    javascriptNode.connect(audioContext.destination);
+
+    javascriptNode.onaudioprocess = () => {
+        const array = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(array);
+        let values = 0;
+        array.forEach(value => values += value);
+        const average = values / array.length;
+
+        if (average > SPEAKING_THRESHOLD) {
+            if (!isSpeaking) {
+                isSpeaking = true;
+                socket.emit('speaking', { roomName });
+                document.getElementById('local-video-container').classList.add('speaking');
+            }
+            clearTimeout(speakingTimer);
+            speakingTimer = setTimeout(() => {
+                isSpeaking = false;
+                socket.emit('stopped_speaking', { roomName });
+                document.getElementById('local-video-container').classList.remove('speaking');
+            }, SPEAKING_TIMEOUT);
+        }
+    };
+}
+
+// --- 11. Core WebRTC Logic ---
+function createPeerConnection(targetSocketId) {
+    const pc = new RTCPeerConnection(iceConfig);
+    localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+
+    // Apply a per-platform bitrate cap on the outgoing video track to reduce
+    // mobile heat / battery usage and keep desktop quality high.
+    limitVideoBitrate(pc, isMobile() ? MOBILE_MAX_BITRATE : DESKTOP_MAX_BITRATE);
+
+    pc.onicecandidate = event => {
+        if (event.candidate) {
+            // Log relay (TURN) candidates so we can verify which TURN servers
+            // are actually reachable from this client. Useful for monitoring
+            // the health of the free TURN relays configured in iceConfig.
+            const c = event.candidate.candidate || '';
+            if (c.includes('relay')) {
+                console.log(`[ICE] RELAY candidate for ${targetSocketId}: ${c}`);
+            }
+            socket.emit('ice-candidate', { target: targetSocketId, candidate: event.candidate });
+        }
+    };
+
+    pc.ontrack = event => {
+        handleRemoteStream(event.streams[0], targetSocketId);
+    };
+
+    pc.oniceconnectionstatechange = () => {
+        if (['failed', 'disconnected', 'closed'].includes(pc.iceConnectionState)) {
+            console.warn(`[WebRTC] Connection with ${targetSocketId} lost. Requesting reconnect.`);
+            socket.emit('reconnect-request', { target: targetSocketId });
+        }
+    };
+    
+    peerConnections[targetSocketId] = pc;
+    return pc;
+}
+
+function handleRemoteStream(stream, targetSocketId) {
+    // First, check if a container for this user already exists.
+    let videoContainer = document.getElementById(`video-${targetSocketId}`);
+
+    // If the video container doesn't exist, create it from scratch.
+    if (!videoContainer) {
+        console.log(`[UI] Creating video container for new peer: ${targetSocketId}`);
+        
+        // 1. Create the main container div
+        videoContainer = document.createElement('div');
+        videoContainer.id = `video-${targetSocketId}`;
+        videoContainer.className = 'video-container';
+        
+        // 2. Create the video element
+        const newVideo = document.createElement('video');
+        newVideo.autoplay = true;
+        newVideo.playsInline = true; // Essential for mobile browsers
+
+        // 3. Create the name tag
+        const nameTag = document.createElement('h4');
+        nameTag.innerText = `User ${targetSocketId.substring(0, 4)}`;
+        
+        // 4. Create the fullscreen button
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'control-button fullscreen-btn';
+        fullscreenBtn.title = 'Go Fullscreen';
+        fullscreenBtn.innerHTML = `<img src="assets/icon_fullscreen.svg" alt="Toggle Fullscreen">`;
+        fullscreenBtn.addEventListener('click', toggleFullscreen); // Attach the universal handler
+        
+        // 5. Create the placeholder for when the camera is off
+        const placeholder = document.createElement('div');
+        placeholder.className = 'video-placeholder';
+        const placeholderIcon = document.createElement('img');
+        placeholderIcon.src = 'assets/icon_camera_off.svg';
+        placeholder.appendChild(placeholderIcon);
+
+        // 6. Create the canvas for the freeze-frame effect (for connection lags)
+        const freezeFrameCanvas = document.createElement('canvas');
+        freezeFrameCanvas.className = 'freeze-frame';
+
+        // 7. Append all created elements into the container in the correct order
+        videoContainer.append(nameTag, fullscreenBtn, newVideo, placeholder, freezeFrameCanvas);
+        
+        // 8. Add the fully constructed container to the main videos grid
+        videosContainer.appendChild(videoContainer);
+
+        // --- Logic for the freeze-frame effect ---
+        const canvasContext = freezeFrameCanvas.getContext('2d');
+        
+        // When the video is buffering or lagging, show the last good frame
+        newVideo.addEventListener('waiting', () => {
+            // Set canvas dimensions to match the video element's display size
+            freezeFrameCanvas.width = newVideo.clientWidth;
+            freezeFrameCanvas.height = newVideo.clientHeight;
+            // Only draw if there's an actual video frame to draw from
+            if (newVideo.videoWidth > 0) {
+                canvasContext.drawImage(newVideo, 0, 0, freezeFrameCanvas.width, freezeFrameCanvas.height);
+                freezeFrameCanvas.style.display = 'block';
+            }
+        });
+
+        // When the video resumes playing, hide the freeze-frame
+        newVideo.addEventListener('playing', () => {
+            freezeFrameCanvas.style.display = 'none';
+        });
+    }
+
+    // --- Stream handling (runs for both new and existing containers) ---
+
+    // Get the video and placeholder elements from the container
+    const videoElement = videoContainer.querySelector('video');
+    const placeholderElement = videoContainer.querySelector('.video-placeholder');
+    
+    // Assign the incoming stream to the video element
+    videoElement.srcObject = stream;
+    
+    // Check if the stream has a video track to decide if we show the video or the placeholder
+    if (stream.getVideoTracks().length > 0) {
+        // If there is a video track, wait for its metadata to load, then hide the placeholder
+        videoElement.onloadedmetadata = () => {
+            placeholderElement.classList.add('hidden');
+        };
+    } else {
+        // If there's no video track, make sure the placeholder is visible
+        placeholderElement.classList.remove('hidden');
+    }
+}
+
+// --- 12. Signaling Server Event Handlers ---
+socket.on('all-users', (otherUsers) => {
+    console.log('[SIGNAL] Received list of existing users:', otherUsers);
+    otherUsers.forEach(userId => {
+        const pc = createPeerConnection(userId);
+        pc.createOffer()
+            .then(offer => pc.setLocalDescription(offer))
+            .then(() => {
+                console.log(`[SIGNAL] Sending Offer to existing user ${userId}`);
+                socket.emit('offer', { target: userId, sdp: pc.localDescription });
+            })
+            .catch(error => console.error(`[ERROR] Failed to create Offer for ${userId}:`, error));
+    });
+
+    // If we joined a room that already has users, enable the feature button
+    if (otherUsers.length > 0) {
+        updateFeatureButtonState();
+    }
+});
+
+socket.on('user-joined', (newUserId) => {
+    console.log(`[SIGNAL] New user ${newUserId} has joined. Awaiting their Offer.`);
+});
+
+socket.on('offer', async (payload) => {
+    console.log(`[SIGNAL] Received Offer from ${payload.sender}. Creating Answer...`);
+    const pc = createPeerConnection(payload.sender);
+    await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp));
+    const answer = await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+    console.log(`[SIGNAL] Sending Answer to user ${payload.sender}`);
+    socket.emit('answer', { target: payload.sender, sdp: pc.localDescription });
+
+    // A peer is connecting, so enable the feature button
+    updateFeatureButtonState();
+});
+
+socket.on('answer', async (payload) => {
+    console.log(`[SIGNAL] Received Answer from ${payload.sender}.`);
+    const pc = peerConnections[payload.sender];
+    if (pc) await pc.setRemoteDescription(new RTCSessionDescription(payload.sdp));
+});
+
+socket.on('ice-candidate', async (payload) => {
+    const pc = peerConnections[payload.sender];
+    if (pc && payload.candidate) {
+        try {
+            await pc.addIceCandidate(new RTCIceCandidate(payload.candidate));
+        } catch (error) {
+            console.error(`[ERROR] Failed to add ICE candidate from ${payload.sender}:`, error);
+        }
+    }
+});
+
+socket.on('room-full', () => {
+    console.warn('[SYSTEM] Room is full. Disconnecting.');
+    alert('This room is full (2 participants max). Please try another room.');
+    leaveCall();
+});
+
+socket.on('reconnect-with', (payload) => {
+    console.log(`[RECONNECT] Received reconnect request from ${payload.target}. Initiating new Offer.`);
+    if (peerConnections[payload.target]) {
+        peerConnections[payload.target].close();
+        delete peerConnections[payload.target];
+    }
+    const pc = createPeerConnection(payload.target);
+    pc.createOffer()
+        .then(offer => pc.setLocalDescription(offer))
+        .then(() => socket.emit('offer', { target: payload.target, sdp: pc.localDescription }))
+        .catch(error => console.error(`[ERROR] Failed to create Offer for reconnect to ${payload.target}:`, error));
+});
+
+socket.on('add-peers', (payload) => {
+    console.log(`[SYNC] Received command to add ${payload.peers.length} peers.`);
+    payload.peers.forEach(userId => {
+        if (!peerConnections[userId]) {
+            console.log(`[SYNC] Initiating connection with missing peer ${userId}.`);
+            const pc = createPeerConnection(userId);
+            pc.createOffer()
+                .then(offer => pc.setLocalDescription(offer))
+                .then(() => {
+                    socket.emit('offer', { target: userId, sdp: pc.localDescription });
+                })
+                .catch(error => console.error(`[ERROR] Failed to create Offer during sync for ${userId}:`, error));
+        }
+    });
+});
+
+socket.on('user_speaking', (payload) => {
+    const userContainer = document.getElementById(`video-${payload.userId}`);
+    if (userContainer) userContainer.classList.add('speaking');
+});
+
+socket.on('user_stopped_speaking', (payload) => {
+    const userContainer = document.getElementById(`video-${payload.userId}`);
+    if (userContainer) userContainer.classList.remove('speaking');
+});
+
+socket.on('user-disconnected', (userId) => {
+    console.log(`[SIGNAL] User ${userId} has disconnected.`);
+    if (peerConnections[userId]) {
+        peerConnections[userId].close();
+        delete peerConnections[userId];
+    }
+    const videoElement = document.getElementById(`video-${userId}`);
+    if (videoElement) {
+        videoElement.remove();
+    }
+    
+    // Check if we are alone now and update the feature button state
+    updateFeatureButtonState();
+});
+
+socket.on('current_sharer_updated', ({ sharerId }) => {
+    console.log(`[SCREEN] Current sharer is now: ${sharerId}`);
+    updateUIAfterScreenShare(sharerId);
+});
+
+socket.on('screen_share_permission_request', ({ requesterId, requesterName }) => {
+    if (screenStream) { // Only the current sharer should see this
+        if (confirm(`User ${requesterName} wants to share their screen. Allow?`)) {
+            stopScreenShare();
+            socket.emit('screen_share_permission_granted', { roomName, targetId: requesterId });
+        }
+    }
+});
+
+socket.on('screen_share_token_granted', () => {
+    console.log('[SCREEN] Permission to share has been granted.');
+    resolutionModal.style.display = 'flex';
+});
+
+// --- 13. UI and Layout Management ---
+const leaveCall = () => {
+    console.log('[SYSTEM] Leaving call and cleaning up.');
+    if (syncInterval) clearInterval(syncInterval);
+    if (screenStream) stopScreenShare();
+    
+    if (localStream) {
+        localStream.getTracks().forEach(track => track.stop());
+    }
+
+    for (const userId in peerConnections) {
+        if (peerConnections[userId]) {
+            peerConnections[userId].close();
+        }
+    }
+    peerConnections = {};
+
+    // Reload the page to go back to the home screen
+    window.location.href = window.location.pathname;
+};
+
+// --- 14. Screen Sharing Logic ---
+const handleScreenShareClick = () => {
+    if (screenStream) {
+        stopScreenShare();
+    } else {
+        if (currentSharerId === null || currentSharerId === socket.id) {
+            resolutionModal.style.display = 'flex';
+        } else {
+            const sharerName = `${currentSharerId.substring(0, 4)}`;
+            if (confirm(`User ${sharerName} is already sharing. Ask for permission to take over.`)) {
+                socket.emit('screen_share_request', { 
+                    roomName, 
+                    sharerName: `${socket.id.substring(0, 4)}` 
+                });
+            }
+        }
+    }
+};
+
+const startScreenShare = async (resolution) => {
+    resolutionModal.style.display = 'none';
+
+    const constraints = {
+        'original': { video: { cursor: "always" }, audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 44100 } },
+        '1080p': { video: { width: 1920, height: 1080, cursor: "always" }, audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 44100 } },
+        '720p': { video: { width: 1280, height: 720, cursor: "always" }, audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 44100 } }
+    };
+
+    try {
+        screenStream = await navigator.mediaDevices.getDisplayMedia(constraints[resolution]);
+        setVideoContentHint(screenStream, 'detail'); // Optimize for screen sharing
+        const screenTrack = screenStream.getVideoTracks()[0];
+
+        // --- System audio + microphone mixing ---
+        // getDisplayMedia() returns a system-audio track ONLY when the user
+        // checks "Share audio" (Chrome/Edge) or shares a tab (Chrome). When
+        // present, we mix it with the live microphone track so the peer hears
+        // both the presenter's voice and the desktop sound. When the screen
+        // share has no audio track (e.g. window/desktop without "share audio"),
+        // we keep sending the raw microphone track and do not set up a mix.
+        const systemAudioTrack = screenStream.getAudioTracks()[0];
+        const micTrack = localStream.getAudioTracks()[0];
+
+        if (systemAudioTrack && micTrack) {
+            try {
+                screenAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+                screenAudioDestination = screenAudioContext.createMediaStreamDestination();
+
+                const micSource = screenAudioContext.createMediaStreamSource(new MediaStream([micTrack]));
+                const systemSource = screenAudioContext.createMediaStreamSource(new MediaStream([systemAudioTrack]));
+
+                // Gain nodes allow independent level control; both at 1.0 by default.
+                const micGain = screenAudioContext.createGain();
+                const systemGain = screenAudioContext.createGain();
+                micGain.gain.value = 1.0;
+                systemGain.gain.value = 1.0;
+
+                micSource.connect(micGain).connect(screenAudioDestination);
+                systemSource.connect(systemGain).connect(screenAudioDestination);
+
+                mixedAudioTrack = screenAudioDestination.stream.getAudioTracks()[0];
+                console.log('[SCREEN] Mixed audio track created (mic + system audio).');
+            } catch (mixErr) {
+                console.warn('[SCREEN] Could not mix system audio with microphone. Falling back to mic only.', mixErr);
+                cleanupScreenAudioMix();
+            }
+        } else if (systemAudioTrack && !micTrack) {
+            // No microphone available — send the raw system audio track.
+            mixedAudioTrack = systemAudioTrack;
+            console.log('[SCREEN] No microphone track; sending raw system audio.');
+        } else {
+            console.log('[SCREEN] No system audio track in screen share. Microphone track unchanged.');
+        }
+
+        // Replace the video track sent to all peers with the screen track.
+        // IMPORTANT: await each replaceTrack to guarantee the peer receives the
+        // screen frame instead of the camera frame (fixes the bug where the
+        // camera image was transmitted instead of the screen).
+        for (const peerId in peerConnections) {
+            const videoSender = peerConnections[peerId].getSenders().find(s => s.track && s.track.kind === 'video');
+            if (videoSender) {
+                await videoSender.replaceTrack(screenTrack);
+                console.log(`[SCREEN] Replaced video track for peer ${peerId} with screen track.`);
+            }
+            // Replace the audio track with the mixed track (mic + system) when
+            // available, so the peer receives desktop sound together with the
+            // presenter's voice.
+            if (mixedAudioTrack) {
+                const audioSender = peerConnections[peerId].getSenders().find(s => s.track && s.track.kind === 'audio');
+                if (audioSender) {
+                    await audioSender.replaceTrack(mixedAudioTrack);
+                    console.log(`[SCREEN] Replaced audio track for peer ${peerId} with mixed audio.`);
+                }
+            }
+        }
+
+        screenTrack.onended = () => {
+            stopScreenShare();
+        };
+
+        // Instead of creating a separate "local-screen-share" window (which
+        // conflicted with the 2-window room layout and broke the presenter
+        // mode), we reuse the existing local video container: swap its source
+        // to the screen stream so the local user sees what they are sharing,
+        // and mark the container so the UI can show a "sharing" indicator.
+        localVideo.srcObject = screenStream;
+        document.getElementById('local-video-container').classList.add('screen-sharing');
+
+        socket.emit('user_started_sharing', { roomName });
+        updateUIAfterScreenShare(socket.id); // Pass our own ID as the sharer
+        featureBtn.classList.add('active');
+        featureBtn.title = 'Stop sharing';
+
+    } catch (err) {
+        console.error("Error starting screen share:", err);
+        // If the user cancels the screen picker, make sure the modal is closed
+        // and no half-applied state remains.
+        resolutionModal.style.display = 'none';
+    }
+};
+
+// Tears down the Web Audio mixing graph created during screen sharing and
+// releases the mixed audio track. Safe to call even if no mix was set up.
+function cleanupScreenAudioMix() {
+    if (screenAudioContext) {
+        try { screenAudioContext.close(); } catch (e) { /* ignore */ }
+        screenAudioContext = null;
+    }
+    screenAudioDestination = null;
+    mixedAudioTrack = null;
+}
+
+const stopScreenShare = async () => {
+    if (!screenStream) return;
+
+    screenStream.getTracks().forEach(track => track.stop());
+    screenStream = null;
+
+    // Restore the camera track for all peers.
+    const cameraTrack = localStream.getVideoTracks()[0];
+    // Restore the original microphone track (the mixed/system audio track is
+    // discarded together with the screen stream).
+    const micTrack = localStream.getAudioTracks()[0];
+    for (const peerId in peerConnections) {
+        const videoSender = peerConnections[peerId].getSenders().find(s => s.track && s.track.kind === 'video');
+        if (videoSender) {
+            await videoSender.replaceTrack(cameraTrack);
+            console.log(`[SCREEN] Restored camera track for peer ${peerId}.`);
+        }
+        if (mixedAudioTrack && micTrack) {
+            const audioSender = peerConnections[peerId].getSenders().find(s => s.track && s.track.kind === 'audio');
+            if (audioSender) {
+                await audioSender.replaceTrack(micTrack);
+                console.log(`[SCREEN] Restored microphone track for peer ${peerId}.`);
+            }
+        }
+    }
+
+    // Tear down the Web Audio mixing graph and release the mixed track.
+    cleanupScreenAudioMix();
+
+    // Restore the local video preview to the camera stream.
+    localVideo.srcObject = localStream;
+    document.getElementById('local-video-container').classList.remove('screen-sharing');
+
+    socket.emit('user_stopped_sharing', { roomName });
+    updateUIAfterScreenShare(null);
+    featureBtn.classList.remove('active');
+    featureBtn.title = 'Share your screen';
+};
+
+const updateUIAfterScreenShare = (sharerId) => {
+    console.log(`[UI] Updating layout for sharer: ${sharerId}`);
+    currentSharerId = sharerId;
+    const videosEl = document.getElementById('videos');
+    const presenterArea = document.getElementById('presenter-area');
+    const sidebar = document.getElementById('participant-sidebar');
+
+    // Reset: move every video container back under #videos so we can re-layout.
+    const allContainers = document.querySelectorAll('.video-container');
+    allContainers.forEach(container => {
+        if (container.parentElement !== videosEl) {
+            videosEl.appendChild(container);
+        }
+    });
+
+    if (sharerId) {
+        console.log('[UI] Entering presenter mode.');
+        videosEl.classList.add('presenter-mode');
+        presenterArea.style.display = 'flex';
+        sidebar.style.display = 'flex';
+
+        // The sharer's main screen is the local video container when sharing
+        // locally (we reuse it instead of a separate "local-screen-share"
+        // window), or the remote peer's container when someone else shares.
+        const mainScreenContainerId = sharerId === socket.id
+            ? 'local-video-container'
+            : `video-${sharerId}`;
+        const mainScreenContainer = document.getElementById(mainScreenContainerId);
+        
+        if (mainScreenContainer) {
+            presenterArea.appendChild(mainScreenContainer);
+        } else {
+             console.warn(`[UI] Main container for sharer ${mainScreenContainerId} not found.`);
+        }
+
+        // All remaining containers go to the sidebar as participants.
+        document.querySelectorAll('#videos > .video-container').forEach(container => {
+            sidebar.appendChild(container);
+        });
+
+    } else {
+        console.log('[UI] Exiting presenter mode.');
+        videosEl.classList.remove('presenter-mode');
+        presenterArea.style.display = 'none';
+        sidebar.style.display = 'none';
+    }
+};
+
+// --- 14.5. Mobile Camera Switch Logic ---
+// Switches between the front and back cameras on mobile devices.
+//
+// Implementation notes (Android reliability):
+//  - `facingMode: { exact: ... }` is unreliable on many Android devices: some
+//    phones expose both cameras but ignore the constraint, return a black
+//    frame, or throw an OverconstrainedError. We therefore prefer selecting
+//    the next camera by its explicit `deviceId` (enumerated up front) and only
+//    fall back to `facingMode` constraints if deviceId selection fails.
+//  - We also keep the audio track from the existing localStream instead of
+//    requesting audio again, which avoids mic glitches during the switch.
+async function switchCamera() {
+    console.log('[CONTROL] Attempting to switch camera.');
+    if (!localStream || !isMobile()) return;
+
+    const oldVideoTrack = localStream.getVideoTracks()[0];
+    if (!oldVideoTrack) {
+        console.warn('[CONTROL] No active video track to switch from.');
+        return;
+    }
+
+    // Enumerate cameras and pick the next one that is NOT the current track's
+    // device. This is the most reliable cross-device strategy.
+    let cameras = [];
+    try {
+        const videoDevices = await navigator.mediaDevices.enumerateDevices();
+        cameras = videoDevices.filter(device => device.kind === 'videoinput');
+    } catch (enumErr) {
+        console.error('[CONTROL] enumerateDevices failed:', enumErr);
+    }
+
+    if (cameras.length < 2) {
+        console.warn('[CONTROL] Not enough cameras to switch.');
+        return;
+    }
+
+    const currentDeviceId = oldVideoTrack.getSettings().deviceId;
+    // Prefer a camera with a different deviceId; if labels are unavailable
+    // (permissions not granted yet) deviceIds may still differ, so this is a
+    // safe heuristic.
+    const nextCamera =
+        cameras.find(c => c.deviceId && c.deviceId !== currentDeviceId) ||
+        cameras.find(c => c !== cameras.find(x => x.deviceId === currentDeviceId));
+
+    const targetDeviceId = nextCamera && nextCamera.deviceId ? nextCamera.deviceId : null;
+    const targetFacing = (currentCamera === 'user') ? 'environment' : 'user';
+
+    // Build a list of constraint candidates, from most to least specific.
+    // We try them in order until one succeeds.
+    const constraintCandidates = [];
+    if (targetDeviceId) {
+        constraintCandidates.push({ video: { deviceId: { exact: targetDeviceId } } });
+    }
+    constraintCandidates.push({ video: { facingMode: { exact: targetFacing } } });
+    constraintCandidates.push({ video: { facingMode: targetFacing } });
+    // Last-resort: just any other camera.
+    constraintCandidates.push({ video: true });
+
+    let newStream = null;
+    let lastError = null;
+    for (const constraints of constraintCandidates) {
+        try {
+            console.log('[CONTROL] Trying camera constraints:', constraints);
+            newStream = await navigator.mediaDevices.getUserMedia(constraints);
+            break;
+        } catch (err) {
+            console.warn(`[CONTROL] Constraints failed (${err.name}):`, constraints);
+            lastError = err;
+            if (newStream) { newStream.getTracks().forEach(t => t.stop()); newStream = null; }
+        }
+    }
+
+    if (!newStream) {
+        console.error('[ERROR] Failed to switch camera with all constraint candidates:', lastError);
+        // Do not flip currentCamera state since the switch failed.
+        return;
+    }
+
+    const newVideoTrack = newStream.getVideoTracks()[0];
+
+    // Sanity check: if the new track is the same deviceId as the old one and
+    // we had more than one camera, the device ignored our constraints. In that
+    // case we still proceed (better to show something than nothing), but log it.
+    const newDeviceId = newVideoTrack.getSettings().deviceId;
+    if (currentDeviceId && newDeviceId && currentDeviceId === newDeviceId) {
+        console.warn('[CONTROL] New track has the same deviceId as the old track. Device may have ignored constraints.');
+    }
+
+    // Swap the video track inside localStream (keep the existing audio track).
+    localStream.removeTrack(oldVideoTrack);
+    oldVideoTrack.stop();
+    localStream.addTrack(newVideoTrack);
+
+    // Update the local preview. Re-assign the whole localStream so the audio
+    // track stays wired to the same element.
+    localVideo.srcObject = localStream;
+
+    // Replace the track sent to every peer.
+    for (const peerId in peerConnections) {
+        const sender = peerConnections[peerId].getSenders().find(s => s.track && s.track.kind === 'video');
+        if (sender) {
+            console.log(`[WebRTC] Replacing track for peer ${peerId}`);
+            await sender.replaceTrack(newVideoTrack);
+        }
+    }
+
+    // Flip the recorded facing state to match the new track's reported facing
+    // mode when available; otherwise assume the switch succeeded.
+    const newFacing = newVideoTrack.getSettings().facingMode;
+    if (newFacing) {
+        currentCamera = newFacing;
+    } else {
+        currentCamera = targetFacing;
+    }
+    console.log(`[CONTROL] Camera switched successfully to: ${currentCamera} (deviceId: ${newDeviceId || 'unknown'})`);
+}
+
+// --- 14.6 Video Content Hint Optimization ---
+function setVideoContentHint(stream, hint) {
+    const videoTracks = stream.getVideoTracks();
+    if (videoTracks.length > 0) {
+        console.log(`[OPTIMIZATION] Setting contentHint to: '${hint}'`);
+        videoTracks[0].contentHint = hint;
+    }
+}
+
+// --- 14.6b Video Bitrate Limiting ---
+// Caps the outgoing video bitrate via RTCRtpSender.setParameters(). This is the
+// most effective way to reduce mobile camera heat and battery drain: even if
+// the camera captures at a given resolution/framerate, the encoder will not
+// produce more bits than maxBitrate, lowering CPU/GPU and sensor load.
+async function limitVideoBitrate(pc, maxBitrate) {
+    try {
+        const sender = pc.getSenders().find(s => s.track && s.track.kind === 'video');
+        if (!sender) return;
+        const params = sender.getParameters();
+        if (!params.encodings || params.encodings.length === 0) {
+            params.encodings = [{}];
+        }
+        params.encodings[0].maxBitrate = maxBitrate;
+        await sender.setParameters(params);
+        console.log(`[OPTIMIZATION] Video bitrate capped to ${maxBitrate} bps.`);
+    } catch (err) {
+        console.warn('[OPTIMIZATION] Could not set video bitrate:', err);
+    }
+}
+
+// --- 14.7 UI State Management ---
+function updateFeatureButtonState() {
+    if (isMobile()) {
+        return; // On mobile, this button is for switching camera and should always be active
+    }
+    const peerCount = Object.keys(peerConnections).length;
+    const isEnabled = peerCount > 0;
+    featureBtn.disabled = !isEnabled;
+    if (isEnabled) {
+        featureBtn.title = 'Share your screen';
+    } else {
+        featureBtn.title = 'Wait for another user to share your screen.';
+    }
+    console.log(`[UI] Updating feature button state. Peer count: ${peerCount}. Button disabled: ${!isEnabled}`);
+}
+
+// --- 14.8 UI Interaction ---
+function toggleFullscreen(event) {
+    const button = event.currentTarget;
+    const container = button.closest('.video-container');
+
+    // --- Platform-aware fullscreen logic ---
+    if (!document.fullscreenElement) {
+        // --- Enter fullscreen mode ---
+        let elementToFullscreen = container;
+        
+        if (isMobile()) {
+            // On mobile, target the video element directly
+            const videoEl = container.querySelector('video');
+            if (videoEl) {
+                elementToFullscreen = videoEl;
+            }
+            console.log('[UI] Mobile device detected. Targeting <video> element for fullscreen.');
+        }
+
+        console.log('[UI] Requesting fullscreen for element:', elementToFullscreen);
+        elementToFullscreen.requestFullscreen().catch(err => {
+            console.error(`[ERROR] Failed to enter fullscreen: ${err.message}`);
+        });
+        
+    } else {
+        // --- Exit fullscreen mode (this part is universal) ---
+        console.log('[UI] Exiting fullscreen mode.');
+        document.exitFullscreen();
+    }
+}
+
+// --- 15. Periodic Synchronization ---
+function startRoomSync() {
+    if (syncInterval) clearInterval(syncInterval);
+    syncInterval = setInterval(() => {
+        if (socket.connected) {
+            console.log("[SYNC] Sending room synchronization request...");
+            const knownPeers = Object.keys(peerConnections);
+            socket.emit('sync-room', {
+                roomName: roomName,
+                knownPeers: knownPeers
+            });
+        }
+    }, 15000);
+}
+
+// --- 16. Automatic Copyright Year Update ---
+document.addEventListener('DOMContentLoaded', () => {
+    const copyrightYearSpan = document.getElementById('copyright-year');
+    if (copyrightYearSpan) {
+        const startYear = 2025;
+        const currentYear = new Date().getFullYear();
+        copyrightYearSpan.textContent = (currentYear > startYear) ? `${startYear}–${currentYear}` : startYear.toString();
+    }
+
+    const localFullscreenBtn = document.querySelector('#local-video-container .fullscreen-btn');
+    if (localFullscreenBtn) {
+        localFullscreenBtn.addEventListener('click', toggleFullscreen);
+    }
+});
+
+// --- 17. Top-Level Event Listeners ---
+if (featureBtn) {
+    featureBtn.addEventListener('click', () => {
+        if (isMobile()) {
+            switchCamera();
+        } else {
+            handleScreenShareClick();
+        }
+    });
+}
+
+// Attach listener to the new Leave button
+if (leaveBtn) {
+    leaveBtn.addEventListener('click', leaveCall);
+}
+
+// Attach event listener for the modal close button
+if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', () => resolutionModal.style.display = 'none');
+}
+
+// Attach event listener for the resolution selection buttons inside the modal
+if (resolutionModal) {
+    resolutionModal.addEventListener('click', (e) => {
+        const button = e.target.closest('button[data-resolution]');
+        if (button) {
+            startScreenShare(button.dataset.resolution);
+        }
+    });
+}
+
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+        console.log('[UI] Fullscreen was exited (e.g., by ESC key). Resetting all buttons.');
+        // If we exited fullscreen, reset all fullscreen buttons to their initial state
+        document.querySelectorAll('.fullscreen-btn').forEach(button => {
+            button.querySelector('img').src = 'assets/icon_fullscreen.svg';
+            button.title = 'Go Fullscreen';
+        });
+    }
+});
