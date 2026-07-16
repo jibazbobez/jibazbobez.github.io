@@ -117,7 +117,7 @@
             </div>
             <div class="container">
                 <h1>Arrange Master Documentation</h1>
-                <p class="doc-version-note">Current Version: 1.4.3</p>
+                <p class="doc-version-note">Current Version: 1.4.4</p>
                 <ol>
                     <li><a href="#installation">Installation</a></li>
                     <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
@@ -414,9 +414,11 @@
                 <ul>
                     <li><strong>Fill Direction:</strong> Sets the vertical packing priority (<code>Top-Down</code> or <code>Bottom-Up</code>).</li>
                     <li><strong>Min. Spacing:</strong> Distance between items.</li>
-                    <li><strong>Allow 90° turn:</strong> Orthogonal rotation support.</li>
-                    <li><strong>Outer Padding OFF:</strong> Disables container edge padding.</li>
-                    <li><strong>Align Final Edge:</strong> Executes a recursive accordion stretch to align the ragged perimeter of the final layout. <em>Not recommended for tight nesting parameters or datasets smaller than 50 items.</em></li>
+                    <li><strong>X-Gravity / Y-Gravity / X/Y-Gravity:</strong> Controls the primary pull direction. X/Y-Gravity pulls items diagonally.</li>
+                    <li><strong>Rotation (90° / 180° / 360°):</strong> Enables orthogonal, flipped, or free rotation. <em>Note: 180° Turn and 360° Turn require Dense Packing to be active in this mode, as they provide no mathematical benefit to static bounding boxes.</em></li>
+                    <li><strong>Outer Pad Off:</strong> Disables container edge padding.</li>
+                    <li><strong>Single Item:</strong> Calculates bounds and fills the container with copies of a single selected item. Unplaced copies are automatically deleted to keep the artboard clean.</li>
+                    <li><strong>Align Edge:</strong> Executes a recursive accordion stretch to align the ragged perimeter of the final layout.</li>
                 </ul>
 
                 <h4 id="shape-respect-layout">Shape Respect Layout</h4>
@@ -432,10 +434,11 @@
                 <ul>
                     <li><strong>Fill Direction:</strong> <code>Top-Down</code> or <code>Bottom-Up</code> placement priority.</li>
                     <li><strong>Min. Spacing:</strong> Gap distance.</li>
-                    <li><strong>Allow 90° turn:</strong> Tests horizontal and vertical orientation.</li>
-                    <li><strong>Free Rotation:</strong> Applies a random 360° rotation to items prior to packing.</li>
-                    <li><strong>Outer Padding OFF:</strong> Disables edge margins.</li>
-                    <li><strong>Chaotic Mode:</strong> Uses a random placement coordinate algorithm instead of an ordered grid, generating natural, organic dispersion patterns.</li>
+                    <li><strong>X-Gravity / Y-Gravity / X/Y-Gravity:</strong> Controls the pull direction during collision calculations.</li>
+                    <li><strong>Rotation (90° / 180° / 360°):</strong> Evaluates orientations during placement. <em>Note: 180° Turn requires Dense Packing. 360° Turn is supported natively in both Bounding Box and Dense Packing modes.</em></li>
+                    <li><strong>Outer Pad Off:</strong> Disables edge margins.</li>
+                    <li><strong>Single Item:</strong> Fills the custom container geometry with copies of one selected item. Unplaced copies are deleted.</li>
+                    <li><strong>Chaotic:</strong> Uses a random placement coordinate algorithm instead of an ordered grid, generating natural, organic dispersion patterns.</li>
                 </ul>
 
 				<div class="screenshot-wrapper">
@@ -469,16 +472,17 @@
 
                 <p><strong>Dense Packing Specific Parameters:</strong></p>
                 <ul>
-                    <li><strong>Evolution Stepper (1-50):</strong> Replaces the old Analysis Precision tool. It is located to the right of the Dense Packaging checkbox. This controls the <strong>Genetic Algorithm (GA)</strong>. Higher values instruct the engine to evolve the packing sequence over more generations, mathematically searching for the highest density score. Values above 20 take longer but yield tighter interlocking geometry.</li>
+                    <li><strong>Evolution Stepper (1-50):</strong> Controls the <strong>Genetic Algorithm (GA)</strong>. Higher values instruct the engine to evolve the packing sequence over more generations, mathematically searching for the highest density score. Values above 20 take longer but yield tighter interlocking geometry.</li>
                     <li><strong>Vector Gravity Control:</strong> Dense Packing allows you to control how gravity pulls items into position during placement.
                         <ul>
-                            <li><strong>X-Gravitation</strong> pulls items vertically (perpendicular to the X-axis).</li>
-                            <li><strong>Y-Gravitation</strong> pulls items horizontally (perpendicular to the Y-axis), which is recommended for long, rolled media workflows.</li>
-                            <li><strong>Selecting both</strong> pulls items diagonally at a 45-degree angle toward the origin corner. This produces very tight and dense clusters. Resize the container to compensate for the diagonal edge created by dual gravity.</li>
+                            <li><strong>X-Gravity</strong> pulls items vertically (perpendicular to the X-axis).</li>
+                            <li><strong>Y-Gravity</strong> pulls items horizontally (perpendicular to the Y-axis), which is recommended for long, rolled media workflows.</li>
+                            <li><strong>X/Y-Gravity (Dual)</strong> pulls items diagonally at a 45-degree angle toward the origin corner. This produces very tight and dense clusters. Resize the container to compensate for the diagonal edge created by dual gravity.</li>
                         </ul>
                     </li>
-                    <li><strong>Allow 90° turn:</strong> Orthogonal placement (0°, 90°, 180°, 270°). Recommended for rectangular or regular shaped objects.</li>
-                    <li><strong>Free Rotation:</strong> Allows 360° rotation with 15° steps during the collision calculation phase. Essential for complex, organic shapes.</li>
+                    <li><strong>90° Turn:</strong> Orthogonal placement (0°, 90°, 180°, 270°). Recommended for rectangular or regular shaped objects.</li>
+                    <li><strong>180° Turn:</strong> Allows a 180° flip. Perfect for textile nesting to maintain fabric elasticity and the grain line, or for symmetrical layouts.</li>
+                    <li><strong>360° Turn:</strong> Allows 360° rotation with 15° steps during the collision calculation phase. Essential for complex, organic shapes.</li>
                 </ul>
 
 				<div class="screenshot-wrapper">
@@ -586,6 +590,14 @@
                 </div>
 
                 <h3 id="changelog">13. Changelog</h3>
+
+                <h4>Version 1.4.4 (July 16, 2026)</h4>
+                <p>Feature expansion update.</p>
+                <ul>
+                    <li><strong>Dual Gravity Checkbox:</strong> Added the "X/Y-Gravity" checkbox for direct access to dual gravity vectors.</li>
+                    <li><strong>180° Rotation:</strong> Added additional rotation option - "180° Turn" for upside-down placement.</li>
+                    <li><strong>Single Item Fill Expansion:</strong> Added the "Single Item" fill mode to Greedy and Shape Respect layouts.</li>
+                </ul>
 
                 <h4>Version 1.4.3 (July 8, 2026)</h4>
                 <p>Maintenance update.</p>
