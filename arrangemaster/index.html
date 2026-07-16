@@ -32,20 +32,21 @@
     "name": "Arrange Master",
     "alternateName": "Arrange Master: True-Shape Nesting Plugin",
     "url": "https://andrewr.online/arrangemaster/",
-    "description": "A true-shape nesting and layout automation plugin for Adobe Illustrator. It optimizes material usage for print shops and laser cutting workflows, and arranges vector and raster objects inside custom boundaries.",
+    "description": "A professional Adobe Illustrator plugin for layout automation and material optimization. It applies a true-shape nesting algorithm to prepare files for print production, CNC machining, and laser cutting.",
     "applicationCategory": "DesignApplication",
     "applicationSubCategory": "Adobe Illustrator Extension",
     "operatingSystem": ["Windows", "macOS"],
     "softwareRequirements": "Adobe Illustrator",
-    "keywords": "True-Shape Nesting, Adobe Illustrator Plugin, Vector Packing, CNC Nesting, Sticker Sheet Layout, Print Shop Automation",
+    "keywords": "True-Shape Nesting, Adobe Illustrator Plugin, Vector Path Analysis, Material Optimization, CNC/Laser Cutting Preparation",
     "featureList": [
-        "True-shape nesting algorithm for material usage optimization",
-        "Dual layout modes supporting both standard bounding boxes and true vector shapes",
-        "Object arrangement inside rectangular artboards and custom non-rectangular boundaries",
-        "Processing of multiple object types including vectors, rasters, groups, text, and dynamic symbols",
-        "Single-item fill mode to maximize the number of duplicate copies within a specified container",
-        "Clipping Mask support that strictly calculates visible boundaries and ignores hidden content",
-        "Non-destructive session workflow that preserves original artwork"
+        "True-Shape Nesting algorithm utilizing vector path analysis for material optimization",
+        "Bounding box and true contour processing for both vector and raster graphics",
+        "Layer structure retention preserving spot colors, cut paths, and registration marks",
+        "Directional layout controls with perpendicular X and Y gravity vectors",
+        "Object arrangement within custom vector boundaries and complex shape containers",
+        "Single item fill mode for calculating maximum duplicate capacity",
+        "Universal document unit synchronization (millimeters, centimeters, inches, points, pixels)",
+        "Advanced rotation constraints including 90-degree orthogonal and 360-degree free rotation"
     ],
     "offers": {
         "@type": "Offer",
@@ -126,7 +127,7 @@
                             <img class="feature-preview" src="assets/feature-grid.png" alt="Animated preview of the Grid Layout feature.">
                             <div class="feature-overlay">
                                 <h3>Grid Layout</h3>
-                                <p>Create perfect grids for icons and assets. Use creative controls like Vary Size & Rotation, or create staggered patterns with Offset Rows.</p>
+                                <p>Organize your assets into clean grids. Control the spacing, stagger rows, or duplicate one item to fill the entire area.</p>
                             </div>
                             <div class="play-button-overlay"></div>
                         </div>
@@ -137,7 +138,7 @@
                             <img class="feature-preview" src="assets/feature-knolling.png" alt="Demonstration of the Knolling Layout feature.">
                             <div class="feature-overlay">
                                 <h3>Knolling Layout</h3>
-                                <p>The perfectionist's choice. This engine packs objects with extreme efficiency, ideal for "knolling" flat lays and print-ready sheets.</p>
+                                <p>Pack objects neatly based on their bounding boxes. The plugin scales your items automatically to fit the artboard space.</p>
                             </div>
                             <div class="play-button-overlay"></div>
                         </div>
@@ -148,7 +149,7 @@
                             <img class="feature-preview" src="assets/feature-greedy.png" alt="Organic pattern creation using the Greedy Layout.">
                             <div class="feature-overlay">
                                 <h3>Greedy Layout</h3>
-                                <p>Quickly fill any area or enable "Dense Packing" mode to use our advanced true-shape nesting engine for maximum density.</p>
+                                <p>Stack elements quickly using directional gravity. Turn on Dense Packing to nest true vector shapes and save material.</p>
                             </div>
                             <div class="play-button-overlay"></div>
                         </div>
@@ -159,7 +160,7 @@
                             <img class="feature-preview" src="assets/feature-shape-respect.png" alt="The Shape Respect feature filling a complex letter 'A'.">
                             <div class="feature-overlay">
                                 <h3>Shape Respect</h3>
-                                <p>The most advanced feature. Fill any complex vector shape or text with your objects, now with rotation controls for a more organic feel.</p>
+                                <p>Place your items inside custom vector boundaries. The tool recognizes text outlines and fills complex shapes automatically.</p>
                             </div>
                             <div class="play-button-overlay"></div>
                         </div>
@@ -175,36 +176,70 @@
             <div class="container">
                 <h2>Unlock Your Productivity</h2>
                 <div class="what-is-grid">
+                    
+                    <!-- Card 1 -->
                     <div class="what-is-item">
-                        <img src="assets/icon-clock.svg" alt="Clock Icon" class="what-is-icon">
-                        <h3>Save Hours of Manual Work</h3>
-                        <p>Stop dragging and aligning objects by hand. The plugin calculates exact coordinates and arranges hundreds of items in seconds, speeding up your standard design workflow.</p>
-                    </div>
-                    <div class="what-is-item">
-                        <img src="assets/icon-shape.svg" alt="Complex Shape Icon" class="what-is-icon">
+                        <img src="assets/icon-true-shape.svg" alt="Placeholder: Overlapping puzzle pieces or vector nodes" class="what-is-icon">
                         <h3>True-Shape Nesting</h3>
-                        <p>The Dense Packing algorithm uses vector path analysis to tightly interlock irregular objects. This ensures strict material optimization for print and CNC/laser cutting.</p>
+                        <p>Optimize material usage for print shops, CNC/laser cutting. The nesting algorithm uses vector path analysis to pack objects based on their actual contours and internal cavities.</p>
                     </div>
+
+                    <!-- Card 2 -->
                     <div class="what-is-item">
-                        <img src="assets/icon-tools.svg" alt="Swiss Army Knife Icon" class="what-is-icon">
-                        <h3>A Versatile Toolkit</h3>
-                        <p>Whether you need a perfectly structured grid or an organic, chaotic pattern, you get four dedicated layout engines to handle any technical or creative task.</p>
+                        <img src="assets/icon-raster-vector.svg" alt="Placeholder: Image icon" class="what-is-icon">
+                        <h3>Vector & Raster Support</h3>
+                        <p>Arrange basic shapes, typography, and embedded images. The plugin evaluates standard bounding boxes and packs raster elements masked within vector clipping paths.</p>
                     </div>
+
+                    <!-- Card 3 -->
                     <div class="what-is-item">
-                        <img src="assets/icon-safe.svg" alt="Shield Icon" class="what-is-icon">
-                        <h3>Non-Destructive Workflow</h3>
-                        <p>Calculations run on a temporary layer. Your original objects and images are isolated and protected, so you can test different spacing parameters and revert the changes at any time.</p>
+                        <img src="assets/icon-layers.svg" alt="Placeholder: Stacked layers icon" class="what-is-icon">
+                        <h3>Layer Structure Retention</h3>
+                        <p>Your file organization remains intact. Cut lines, spot colors, QR codes, and guides stay on their original layers after the layout process is complete, ensuring production-ready files.</p>
                     </div>
+
+                    <!-- Card 4 -->
                     <div class="what-is-item">
-                         <img src="assets/icon-production.svg" alt="Production Icon" class="what-is-icon">
-                        <h3>Prepress & Production Setup</h3>
-                        <p>Built for wide-format printing and stock asset creation. Easily organize sticker sheets, die-cut paths, and icon sets into dense, production-ready boards.</p>
+                        <img src="assets/icon-gravity.svg" alt="Placeholder: Arrows pointing down and right" class="what-is-icon">
+                        <h3>Direction & Gravity Controls</h3>
+                        <p>Define how objects settle into the layout. Choose between top-down or bottom-up filling, and apply X, Y, or dual X/Y gravity vectors to strictly control the nesting direction.</p>
                     </div>
+
+                    <!-- Card 5 -->
                     <div class="what-is-item">
-                        <img src="assets/icon-creativity.svg" alt="Magic Wand Icon" class="what-is-icon">
-                        <h3>Custom Boundary Filling</h3>
-                        <p>Use any vector contour or outlined text as your container. The engine detects internal cavities and limits to fit your elements perfectly within the shape.</p>
+                        <img src="assets/icon-custom-shape.svg" alt="Placeholder: Star or organic shape with items inside" class="what-is-icon">
+                        <h3>Custom Shape Containers</h3>
+                        <p>Select any arbitrary shape to act as your container. A secure session workflow protects your original artwork while objects automatically fill the container's geometry.</p>
                     </div>
+
+                    <!-- Card 6 -->
+                    <div class="what-is-item">
+                        <img src="assets/icon-single-fill.svg" alt="Placeholder: One item multiplying into a box" class="what-is-icon">
+                        <h3>Single Item Fill Mode</h3>
+                        <p>Select one object and automatically fill the entire container with its copies. Adjust gravity vectors and fill directions to maximize the number of items placed in a single run.</p>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="what-is-item">
+                        <img src="assets/icon-ruler.svg" alt="Placeholder: A ruler or measurement tool" class="what-is-icon">
+                        <h3>Universal Measurement Units</h3>
+                        <p>Work in the metrics you prefer. Arrange Master seamlessly synchronizes with your active Illustrator document, supporting millimeters, centimeters, inches, points, and pixels.</p>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="what-is-item">
+                        <img src="assets/icon-rotation.svg" alt="Placeholder: 360 degree rotation arrows" class="what-is-icon">
+                        <h3>Advanced Rotation Options</h3>
+                        <p>Adapt to your material constraints. Use 90° orthogonal turns for geometric shapes, 180° flips for textile grain alignment, or 360° free rotation for complex organic objects.</p>
+                    </div>
+
+                    <!-- Card 9 -->
+                    <div class="what-is-item">
+                        <img src="assets/icon-license.svg" alt="Placeholder: A key or infinity symbol" class="what-is-icon">
+                        <h3>Lifetime License & Compatibility</h3>
+                        <p>A professional Adobe Illustrator plugin for macOS and Windows (CC 2018+). Available globally as a one-time purchase with no recurring subscriptions.</p>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -547,16 +582,15 @@
         <section class="seo-hidden" aria-hidden="true">
             <div class="container">
                 <h2>Arrange Master | Illustrator Plugin</h2>
-                <p>Save hours in Illustrator. Arrange Master is a pro plugin to auto-arrange objects in knolling style, fill shapes & nest layouts. Free demo available!</p>
-                <h3>Key Features & Use Cases:</h3>
+                <p>Arrange Master is a professional Adobe Illustrator plugin engineered for layout automation and material optimization. It utilizes a true-shape nesting algorithm to process complex geometries, preparing files for print production, CNC machining, and laser cutting.</p>
+                <h3>Key Capabilities & Algorithms:</h3>
                 <ul>
-                    <li><strong>Adobe Illustrator Plugin:</strong> A professional extension for creative and technical designers.</li>
-                    <li><strong>Object Arrangement:</strong> Automatically arrange hundreds of objects into perfect compositions.</li>
-                    <li><strong>Knolling Layout:</strong> Create meticulously organized flat lays with our advanced knolling algorithm.</li>
-                    <li><strong>Fill Any Shape:</strong> Use the Shape Respect feature to fill any vector path, including text and compound shapes.</li>
-                    <li><strong>Nesting & Packing:</strong> Optimize your layouts for laser cutting or material saving with the Dense Packing engine.</li>
-                    <li><strong>Grid Organization:</strong> Quickly create dynamic and responsive grids for icon sets and asset management.</li>
-                    <li><strong>Free Demo Available:</strong> Try the core features with a simple JSX script before you buy.</li>
+                    <li><strong>True-Shape Nesting:</strong> Applies vector path analysis to interlock irregular shapes, minimizing material waste during the layout process.</li>
+                    <li><strong>Raster & Vector Processing:</strong> Evaluates bounding boxes for embedded raster images and traces exact contours for vector graphics.</li>
+                    <li><strong>Layer Retention:</strong> Maintains document hierarchy, keeping cut paths, spot colors, and registration marks on their respective layers.</li>
+                    <li><strong>Gravity & Direction:</strong> Employs perpendicular X and Y gravity vectors to control object distribution and nesting density.</li>
+                    <li><strong>Custom Containers:</strong> Constrains arrangement patterns within specific vector boundaries, handling internal holes and text outlines.</li>
+                    <li><strong>Production Preparation:</strong> Automates the generation of sticker sheets, flat lays, and CNC/laser cutting templates across all standard measurement units.</li>
                 </ul>
             </div>
         </section>

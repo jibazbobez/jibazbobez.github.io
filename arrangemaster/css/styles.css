@@ -706,7 +706,7 @@ section {
 
 .what-is-icon {
     height: 40px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.3));
     transition: filter 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
