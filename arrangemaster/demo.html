@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Demo — Arrange Master Illustrator Plugin</title>
-    <meta name="description" content="Download the free demo of the Arrange Master nesting plugin for Adobe Illustrator. Test grid and knolling vector layout algorithms using a lightweight JSX script.">
+    <meta name="description" content="Download the free demo of the Arrange Master Adobe Illustrator nesting plugin. Test True-Shape Nesting and Vector Path Analysis for CNC/Laser preparation.">
 
     <link rel="canonical" href="https://andrewr.online/arrangemaster/demo.html" />
 
@@ -31,63 +31,37 @@
       "@graph": [
         {
           "@type": "SoftwareApplication",
-          "name": "Arrange Master (Demo Version)",
+          "name": "Arrange Master Demo",
           "url": "https://andrewr.online/arrangemaster/demo",
           "applicationCategory": "DesignApplication",
-          "operatingSystem": ["Windows", "macOS"],
+          "operatingSystem": "Windows, macOS",
+          "softwareVersion": "1.4.4",
+          "description": "A free evaluation version of the Arrange Master Professional Adobe Illustrator Plugin. Test the True-Shape Nesting algorithm, Vector Path Analysis, and Material Optimization capabilities for CNC/Laser Cutting Preparation.",
           "offers": {
             "@type": "Offer",
-            "price": "0"
-          },
-          "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://andrewr.online/arrangemaster/demo"
+            "price": "0",
+            "priceCurrency": "USD"
           }
         },
         {
           "@type": "HowTo",
-          "name": "How to Install and Run the Arrange Master Demo Script",
-          "description": "Two methods for running the free Arrange Master JSX script in Adobe Illustrator: a quick run without installation, and a recommended setup for regular use.",
+          "name": "How to Install the Arrange Master Demo in Adobe Illustrator",
+          "description": "Step-by-step instructions for installing the Arrange Master Demo CEP Extension on Windows and macOS.",
           "step": [
             {
-              "@type": "HowToSection",
-              "name": "Quick Run (No Installation)",
-              "itemListElement": [
-                {
-                  "@type": "HowToStep",
-                  "text": "Download the script using the button on the page to get the 'Arrange Master Demo.jsx' file."
-                },
-                {
-                  "@type": "HowToStep",
-                  "text": "In Adobe Illustrator, select your objects (a container and some items)."
-                },
-                {
-                  "@type": "HowToStep",
-                  "text": "Go to the menu: File > Scripts > Other Script... (or press Cmd+F12 / Ctrl+F12)."
-                },
-                {
-                  "@type": "HowToStep",
-                  "text": "Navigate to and select the downloaded 'Arrange Master Demo.jsx' file to run it."
-                }
-              ]
+              "@type": "HowToStep",
+              "name": "Windows Installation",
+              "text": "Extract the downloaded ZIP archive and double-click the ArrangeMasterDemo-Setup.exe file to run the automated installer."
             },
             {
-              "@type": "HowToSection",
-              "name": "Recommended for Regular Use (Installation)",
-              "itemListElement": [
-                {
-                  "@type": "HowToStep",
-                  "text": "Place the downloaded script into your Adobe Illustrator Scripts folder. Common locations are Windows: C:/Program Files/Adobe/Adobe Illustrator [Version]/Presets/en_US/Scripts/ or macOS: /Applications/Adobe Illustrator [Version]/Presets.localized/en_US/Scripts/"
-                },
-                {
-                  "@type": "HowToStep",
-                  "text": "Restart Illustrator. This is a one-time step."
-                },
-                {
-                  "@type": "HowToStep",
-                  "text": "Now you can run the script anytime from File > Scripts > Arrange Master Demo."
-                }
-              ]
+              "@type": "HowToStep",
+              "name": "macOS Installation",
+              "text": "Open a third-party ZXP manager (such as Anastasiy's Extension Manager or ZXPinstaller) and drag-and-drop the provided .zxp file into the application."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Launch the Plugin",
+              "text": "Restart Adobe Illustrator. Navigate to the top menu and click Window > Extensions > Arrange Master Demo to open the panel."
             }
           ]
         }
@@ -161,7 +135,8 @@
                 <ul>
                     <li><strong>Grid Layout:</strong> Distributes objects into a structured grid. Controls for Rows, Columns, Size Limit OFF, and Square Cells (proportional centering) are active.</li>
                     <li><strong>Knolling Layout:</strong> Evaluates bounding boxes using the Maximal Empty Rectangles heuristic. Fill Direction, Min. Spacing, Allow 90° turn, and Outer Padding OFF are active.</li>
-                    <li><strong>Greedy Layout & Shape Respect:</strong> Sequential placement algorithms. In the demo, you can control Fill Direction, Min. Spacing, Allow 90° turn, and toggle the Dense Packing mode.</li>
+                    <li><strong>Greedy Layout:</strong> Sequential placement algorithm. Active parameters: Fill Direction, Min. Spacing, Dense Packing/Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, and Outer Pad Off.</li>
+                    <li><strong>Shape Respect Layout:</strong> Places items within non-rectangular vector containers. Active parameters: Fill Direction, Min. Spacing, Dense Packing, Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, and Outer Pad Off.</li>
                 </ul>
 
                 <div class="offer-banner">
@@ -189,6 +164,7 @@
                     <li>A value of <code>1</code> executes a single, fast pass.</li>
                     <li>Increasing the value forces the algorithm to compute more generations, finding tighter interlocking coordinates for material optimization.</li>
                     <li><strong>In the demo version, the Evolution Stepper is capped at <code>15</code> generations.</strong></li>
+                    <li><strong>Object Limit:</strong> True-Shape Nesting in the demo restricts the selection to a maximum of 70 objects per run.</li>
                 </ul>
                 <p>
                     <em>Note: To protect the proprietary nesting algorithm, Dense Packing results in the demo version are finalized as a 150 PPI raster image with a watermark. Standard layout methods (Grid, Knolling) remain as editable vectors.</em>
@@ -238,11 +214,11 @@
                 <h3 id="disabled-features">Disabled Features (Available in Full Version)</h3>
                 <p>The following features are visually disabled in the demo panel to indicate what is unlocked in the full commercial release:</p>
                 <ul>
-                    <li><strong>Advanced Vector Gravity:</strong> Y-Gravitation (horizontal packing) and Dual Gravity (45-degree packing) are disabled. The demo strictly uses X-Gravitation.</li>
-                    <li><strong>Free Rotation:</strong> The ability to rotate objects 360° in 15° increments during True-Shape Nesting is locked.</li>
-                    <li><strong>Evolution Scaling:</strong> The full version allows up to 50 generations for the Genetic Algorithm.</li>
-                    <li><strong>Automation Tools:</strong> Single Item Fill (Grid), Fit to Container scaling (Knolling), Align Final Edge (Greedy), and Chaotic Mode (Shape Respect) are disabled.</li>
                     <li><strong>Vector Output for Dense Packing:</strong> The full version retains exact, editable vector paths after True-Shape Nesting.</li>
+                    <li><strong>Advanced Vector Gravity:</strong> Combined X/Y-Gravity (diagonal packing for maximum density) is disabled.</li>
+                    <li><strong>360° Turn:</strong> Stepless free rotation during nesting is disabled.</li>
+                    <li><strong>Automation Modes:</strong> Single Item Fill (Grid, Greedy, Shape Respect), Chaotic Mode (Shape Respect), Align Edge (Greedy), and Fit to Container scaling (Knolling) are disabled.</li>
+                    <li><strong>Limits Removed:</strong> The full version removes the 70-object limit and expands the Evolution Stepper to 50 generations.</li>
                 </ul>
 
                 <h3 id="installation">Installation & Removal</h3>
