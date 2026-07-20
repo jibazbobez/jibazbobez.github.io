@@ -136,7 +136,7 @@
                     <li><strong>Grid Layout:</strong> Distributes objects into a structured grid. Controls for Rows, Columns, Size Limit OFF, and Square Cells (proportional centering) are active.</li>
                     <li><strong>Knolling Layout:</strong> Evaluates bounding boxes using the Maximal Empty Rectangles heuristic. Fill Direction, Min. Spacing, Allow 90° turn, and Outer Padding OFF are active.</li>
                     <li><strong>Greedy Layout:</strong> Sequential placement algorithm. Active parameters: Fill Direction, Min. Spacing, Dense Packing/Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, and Outer Pad Off.</li>
-                    <li><strong>Shape Respect Layout:</strong> Places items within non-rectangular vector containers. Active parameters: Fill Direction, Min. Spacing, Dense Packing, Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, and Outer Pad Off.</li>
+                    <li><strong>Shape Respect Layout:</strong> Places items within non-rectangular vector containers. Active parameters: Fill Direction, Min. Spacing, Dense Packing/Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, and Outer Pad Off.</li>
                 </ul>
 
                 <div class="offer-banner">
@@ -192,7 +192,7 @@
                 <h3 id="hidden-capabilities">Hidden Capabilities</h3>
                 <p>While the interface parameters are restricted, the core engine processes files with the exact same logic as the full version. The demo actively supports:</p>
                 <ul>
-                    <li><strong>Multi-Layer Retention:</strong> The engine temporarily groups objects that overlap across different layers (e.g., CUT, PRINT, and MARKS layers). It moves them as a single unit during the nesting process and restores them to their specific original layers upon finalization. This is critical for CNC/Laser Cutting preparation.</li>
+                    <li><strong>Multi-Layer Retention:</strong> The engine temporarily groups objects that overlap across different layers (e.g., CUT, PRINT, and MARKS layers). It moves them as a single unit during the nesting process and restores them to their specific original layers upon finalization. You can test the <strong>Multi-Layer Retention</strong> feature in Knolling Layout.</li>
                     <li><strong>Clipping Mask Detection:</strong> The algorithm correctly reads the true visible boundaries of clipping masks, ignoring hidden bleeding paths.</li>
                 </ul>
 
