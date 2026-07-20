@@ -1027,7 +1027,7 @@ section {
     z-index: 2;
 }
 
-/* --- MODIFICATION: Border-Color Hover Effects matching the brand palette --- */
+/* --- Border-Color Hover Effects matching the brand palette --- */
 .pricing-card.card-team:hover {
     border-color: #6254A9; /* Purple */
 }
