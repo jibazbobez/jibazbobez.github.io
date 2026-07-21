@@ -113,11 +113,10 @@
     <main>
         <section class="doc-page">
             <div class="doc-page-background">
-                <img src="assets/doc-background.webp" alt="Technical illustration background">
             </div>
             <div class="container">
                 <h1>Arrange Master Documentation</h1>
-                <p class="doc-version-note">Current Version: 1.4.4</p>
+                <p class="doc-version-note">Current Version: 1.4.5</p>
                 <ol>
                     <li><a href="#installation">Installation</a></li>
                     <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
@@ -590,6 +589,13 @@
                 </div>
 
                 <h3 id="changelog">13. Changelog</h3>
+
+                <h4>Version 1.4.5 (July 21, 2026)</h4>
+                <p>Maintenance update.</p>
+                <ul>
+                    <li><strong>Disjointed Compound Paths Fix:</strong> Rebuilt polygon parsing logic to handle compound paths with physically separated subpaths, resolving overlapping and geometry distortion issues.</li>
+                    <li><strong>Multi-Layer Single Item Support:</strong> Adjusted the validation order to allow Single Item Fill on artwork split across multiple layers (e.g., PRINT and CUT layers).</li>
+                </ul>
 
                 <h4>Version 1.4.4 (July 16, 2026)</h4>
                 <p>Feature expansion update.</p>
