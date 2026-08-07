@@ -1359,6 +1359,185 @@ section {
 }
 
 /* =======================
+   FAQ ACCORDION SECTION
+   ======================== */
+.faq-section {
+    padding-bottom: 80px;
+}
+
+.faq-accordion {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.faq-item {
+    background: var(--surface-color);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: var(--primary-accent);
+    background-color: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.15);
+}
+
+.faq-item.active {
+    border-color: var(--primary-accent);
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 122, 255, 0.2);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 22px 28px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 500;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    gap: 16px;
+    outline: none;
+}
+
+.faq-question span:first-child {
+    line-height: 1.35;
+}
+
+.faq-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+    content: '';
+    position: absolute;
+    background-color: var(--text-secondary);
+    border-radius: 2px;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.35s ease, opacity 0.25s ease;
+}
+
+.faq-icon::before {
+    top: 9px;
+    left: 2px;
+    right: 2px;
+    height: 2px;
+}
+
+.faq-icon::after {
+    left: 9px;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+}
+
+.faq-item:hover .faq-icon::before,
+.faq-item:hover .faq-icon::after {
+    background-color: #ffffff;
+}
+
+.faq-item.active .faq-icon::before {
+    background-color: var(--primary-accent);
+}
+
+.faq-item.active .faq-icon::after {
+    transform: rotate(90deg);
+    opacity: 0;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
+    opacity: 0;
+}
+
+.faq-item.active .faq-answer {
+    opacity: 1;
+}
+
+.faq-answer-content {
+    padding: 0 28px 24px 28px;
+}
+
+.faq-answer-content p {
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.65;
+}
+
+.faq-answer-content p:last-child {
+    margin-bottom: 0;
+}
+
+.faq-answer-content strong {
+    color: var(--text-primary);
+}
+
+.faq-answer-content ol,
+.faq-answer-content ul {
+    padding-left: 22px;
+    margin: 10px 0 16px 0;
+}
+
+.faq-answer-content li {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 6px;
+}
+
+.faq-answer-content code {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--surface-border);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #93c5fd;
+}
+
+.faq-code-block {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.85rem;
+    color: #93c5fd;
+    word-break: break-all;
+    margin: 12px 0;
+    user-select: all;
+    line-height: 1.5;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .faq-question {
+        padding: 18px 20px;
+        font-size: 1.05rem;
+    }
+    .faq-answer-content {
+        padding: 0 20px 20px 20px;
+    }
+}
+
+/* =======================
    MODALS & LIGHTBOX
    ======================== */
 .lightbox {
@@ -1644,6 +1823,14 @@ section {
     }
     .placeholder-label, .placeholder-desc {
         color: #000;
+    }
+    .faq-code-block,
+    .code-block,
+    code {
+        background-color: #ffffff !important;
+        border: 1px solid #000000 !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
     }
 }
 

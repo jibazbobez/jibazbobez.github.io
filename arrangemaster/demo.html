@@ -117,6 +117,17 @@
         ======================== -->
         <section class="doc-page" style="padding-top: 60px;">
             <div class="container">
+                
+                <ol style="margin-bottom: 40px;">
+                    <li><a href="#demo-purpose">The Purpose of the Demo</a></li>
+                    <li><a href="#features">Available Functionality</a></li>
+                    <li><a href="#genetic-algorithm">Dense Packing &amp; The Evolution Stepper</a></li>
+                    <li><a href="#hidden-capabilities">Hidden Capabilities</a></li>
+                    <li><a href="#session-workflow">The Session Workflow: Why You Must Click "OK"</a></li>
+                    <li><a href="#disabled-features">Disabled Features (Available in Full Version)</a></li>
+                    <li><a href="#installation">Installation &amp; Removal</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting: Blank Panel Issue</a></li>
+                </ol>
 
                 <h3 id="demo-purpose">The Purpose of the Demo</h3>
                 <p>
@@ -246,6 +257,73 @@
                     <li><strong>Windows:</strong> Go to Settings > Apps > Installed apps, locate "Arrange Master Demo", and click Uninstall.</li>
                     <li><strong>macOS:</strong> Open your ZXP Extension Manager, select the demo plugin from the list, and click Remove. Alternatively, manually delete the <code>com.andrewrybalko.arrangemasterdemo</code> folder from <code>~/Library/Application Support/Adobe/CEP/extensions/</code>.</li>
                 </ul>
+
+                <h3 id="troubleshooting">Troubleshooting: Blank Panel Issue</h3>
+                <p>A blank panel in Adobe CEP extensions is typically caused by a Creative Cloud sync issue or an Adobe security restriction that prevents the extension interface from loading (often called the "PlayerDebugMode" issue).</p>
+
+                <p><strong>Fix for macOS (Terminal)</strong></p>
+                <p>If you are on a Mac and installed the demo via a <code>.zxp</code> file, enable the debug mode manually using the Terminal:</p>
+                <ol>
+                    <li>Quit Adobe Illustrator.</li>
+                    <li>Open the <strong>Terminal</strong> app (Command+Space, type "Terminal").</li>
+                    <li>Copy and paste the following code block into the Terminal and press <strong>Enter</strong>:</li>
+                </ol>
+                <div class="faq-code-block">
+                defaults write com.adobe.CSXS.10 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.11 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.12 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.13 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.14 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.15 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.16 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.17 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.18 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.19 PlayerDebugMode 1<br>
+                defaults write com.adobe.CSXS.20 PlayerDebugMode 1<br>
+                killall -u `whoami` cfprefsd
+                </div>
+                <ol start="4">
+                    <li>Restart Adobe Illustrator.</li>
+                </ol>
+
+                <p><strong>Fix for Windows (Registry)</strong></p>
+                <p>The automated Windows installer (<code>ArrangeMasterDemo-Setup.exe</code>) configures this registry key automatically during setup. However, if you installed the demo manually using a <code>.zxp</code> file and ZXP installer, you must to create a registry key to unlock the panel. Follow these steps to create the fix file yourself:</p>
+                <ol>
+                    <li>Open <strong>Notepad</strong>.</li>
+                    <li>Copy the code below and paste it into the empty text file:</li>
+                </ol>
+                <div class="faq-code-block">
+                Windows Registry Editor Version 5.00<br>
+                <br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.10]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.11]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.12]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.13]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.14]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.15]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.16]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.17]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.18]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.19]<br>
+                "PlayerDebugMode"="1"<br>
+                [HKEY_CURRENT_USER\Software\Adobe\CSXS.20]<br>
+                "PlayerDebugMode"="1"
+                </div>
+                <ol start="3">
+                    <li>Click <strong>File &gt; Save As</strong>.</li>
+                    <li>Name the file <strong>fix.reg</strong> (make sure to select "All Files" in the "Save as type" dropdown so it doesn't save as .txt).</li>
+                    <li>Double-click the created <code>fix.reg</code> file and click <strong>Yes</strong> to confirm adding the data to your Registry.</li>
+                    <li>Restart Adobe Illustrator.</li>
+                </ol>
 
             </div>
         </section>

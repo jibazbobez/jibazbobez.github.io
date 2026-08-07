@@ -577,6 +577,188 @@
         </section>
 
         <!-- =======================
+        FAQ SECTION
+        ======================== -->
+        <section id="faq" class="faq-section">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-accordion">
+
+                    <!-- Question 1 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Where do I find the panel after installation?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Once installed, restart Adobe Illustrator. You can find the panel in the top menu under:</p>
+                                <p><strong>Window &gt; Extensions &gt; Arrange Master</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>The panel is blank or shows an error. What should I do?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>This is usually caused by a sync issue with the Creative Cloud app or a security restriction that prevents the extension interface from loading (often called the "PlayerDebugMode" issue). Please try these solutions:</p>
+
+                                <p><strong>Fix for macOS (Terminal)</strong></p>
+                                <p>If you are on a Mac, you need to enable the debug mode manually using the Terminal. This ensures compatibility with current and future versions of Illustrator.</p>
+                                <ol>
+                                    <li>Quit Adobe Illustrator.</li>
+                                    <li>Open the <strong>Terminal</strong> app (Command+Space, type "Terminal").</li>
+                                    <li>Copy and paste the following code block into the Terminal and press <strong>Enter</strong>:</li>
+                                </ol>
+                                <div class="faq-code-block">
+                                defaults write com.adobe.CSXS.10 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.11 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.12 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.13 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.14 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.15 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.16 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.17 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.18 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.19 PlayerDebugMode 1<br>
+                                defaults write com.adobe.CSXS.20 PlayerDebugMode 1<br>
+                                killall -u `whoami` cfprefsd
+                                </div>
+                                <ol start="4">
+                                    <li>Restart Adobe Illustrator.</li>
+                                </ol>
+
+                                <p><strong>Fix for Windows (Registry)</strong></p>
+                                <p>The automated Windows installer (<code>ArrangeMaster-Setup.exe</code>) configures this registry key automatically during setup. However, if you installed the plugin manually using a <code>.zxp</code> file and ZXP installer, you must to create a registry key to unlock the panel. Follow these steps to create the fix file yourself:</p>
+                                <ol>
+                                    <li>Open <strong>Notepad</strong>.</li>
+                                    <li>Copy the code below and paste it into the empty text file:</li>
+                                </ol>
+                                <div class="faq-code-block">
+                                Windows Registry Editor Version 5.00<br>
+                                <br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.10]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.11]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.12]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.13]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.14]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.15]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.16]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.17]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.18]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.19]<br>
+                                "PlayerDebugMode"="1"<br>
+                                [HKEY_CURRENT_USER\Software\Adobe\CSXS.20]<br>
+                                "PlayerDebugMode"="1"
+                                </div>
+                                <ol start="3">
+                                    <li>Click <strong>File &gt; Save As</strong>.</li>
+                                    <li>Name the file <strong>fix.reg</strong> (make sure to select "All Files" in the "Save as type" dropdown so it doesn't save as .txt).</li>
+                                    <li>Double-click the created fix.reg file and click <strong>Yes</strong> to confirm adding the data to your Registry.</li>
+                                    <li>Restart Adobe Illustrator.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Why should I pay for this when free arranger scripts exist?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Free ExtendScript scripts process items sequentially using simple bounding boxes, which often causes Illustrator to freeze on large selections. Arrange Master offloads math to a background Chromium process, performs true-shape nesting for complex vectors, provides a non-destructive session workflow, and preserves multi-layer prepress structures (Cut, Print, Marks) without flattening your artwork.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How does the plugin decide which object is the container?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Arrange Master calculates the visual area of all selected objects and automatically designates the object with the largest area as the container. All other selected items are treated as objects to be arranged inside it.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How does Arrange Master handle raster images (photos)?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Raster graphics (photos, embedded or linked images) are supported in standard layout modes (Grid, Knolling, Greedy, Shape Respect) based on their rectangular bounding boxes. Dense Packing mode requires vector path geometry for contour analysis, so it is vector-only.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Does it support true-shape nesting or just bounding boxes?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Both. Grid, Knolling, and standard Greedy or Shape Respect modes use bounding boxes for fast layout generation. Enabling <strong>Dense Packing</strong> in Greedy or Shape Respect activates vector path analysis, allowing items to interlock and fill internal shape cavities.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Does the plugin work with objects on different layers?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Yes. You can select items across multiple layers. Arrange Master automatically clusters overlapping multi-layer components during arrangement, and upon clicking <strong>Ok</strong>, restores every object to its original layer and stacking order.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 8 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Why are my items arranged in a rectangle even though my container is a circle?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Grid, Knolling, and Greedy layout algorithms calculate placement using the rectangular bounding box of the container. To pack items strictly inside curved or custom vector boundaries, use the <strong>Shape Respect Layout</strong> mode.</p>
+                                <p><em>Note: If your container is a complex grouped shape, ungroup it first and convert it to a Compound Path (<code>Cmd+8</code> / <code>Ctrl+8</code>) so the algorithm can analyze it as a single shape.</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =======================
         SEO-OPTIMIZED HIDDEN BLOCK
         ======================== -->
         <section class="seo-hidden" aria-hidden="true">

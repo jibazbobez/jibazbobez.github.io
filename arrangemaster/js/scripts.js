@@ -461,3 +461,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// ===================================================================
+//  10. FAQ ACCORDION LOGIC
+// ===================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    if (faqItems.length > 0) {
+        faqItems.forEach(item => {
+            const questionBtn = item.querySelector('.faq-question');
+            const answerContainer = item.querySelector('.faq-answer');
+
+            questionBtn.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    }
+                });
+
+                if (isActive) {
+                    item.classList.remove('active');
+                    questionBtn.setAttribute('aria-expanded', 'false');
+                    answerContainer.style.maxHeight = null;
+                } else {
+                    item.classList.add('active');
+                    questionBtn.setAttribute('aria-expanded', 'true');
+                    answerContainer.style.maxHeight = answerContainer.scrollHeight + 'px';
+                }
+            });
+        });
+    }
+});
