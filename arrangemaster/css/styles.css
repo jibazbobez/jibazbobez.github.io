@@ -94,6 +94,7 @@
     --radius-sm: 8px;
     --radius-md: 16px;
     --radius-lg: 24px;
+    --radius-xl: 100px;
     
     --glass-bg: rgba(5, 5, 7, 0.7);
     --glass-blur: blur(12px);
