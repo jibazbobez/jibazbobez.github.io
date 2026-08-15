@@ -111,6 +111,7 @@
                 </div>
                 <p class="sub-cta">One-Time Purchase, Lifetime License.</p>
                 <p class="sub-cta promo"><a href="https://youtu.be/a91jQegMMCY" target="_blank">Watch the video demonstration</a><br>of Dense Packing (True-Shape Nesting)</p>
+                <p class="sub-cta promo">Troubleshooting:<br><a href="#faq">Fix for the blank plugin panel issue</a></p>
             </div>
             <a href="#features" class="scroll-down-arrow" aria-label="Scroll to Features"></a>
         </section>
@@ -588,54 +589,66 @@
                     <!-- Question 1 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
-                            <span>Where do I find the panel after installation?</span>
-                            <span class="faq-icon" aria-hidden="true"></span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="faq-answer-content">
-                                <p>Once installed, restart Adobe Illustrator. You can find the panel in the top menu under:</p>
-                                <p><strong>Window &gt; Extensions &gt; Arrange Master</strong></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Question 2 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
                             <span>The panel is blank or shows an error. What should I do?</span>
                             <span class="faq-icon" aria-hidden="true"></span>
                         </button>
                         <div class="faq-answer">
                             <div class="faq-answer-content">
-                                <p>This is usually caused by a sync issue with the Creative Cloud app or a security restriction that prevents the extension interface from loading (often called the "PlayerDebugMode" issue). Please try these solutions:</p>
+                                <p>A blank panel in Adobe CEP extensions is typically caused by a Creative Cloud sync issue, macOS security flags (Gatekeeper quarantine), or missing PlayerDebugMode permissions. Please try the following solutions:</p>
 
                                 <p><strong>Fix for macOS (Terminal)</strong></p>
-                                <p>If you are on a Mac, you need to enable the debug mode manually using the Terminal. This ensures compatibility with current and future versions of Illustrator.</p>
-                                <ol>
-                                    <li>Quit Adobe Illustrator.</li>
-                                    <li>Open the <strong>Terminal</strong> app (Command+Space, type "Terminal").</li>
-                                    <li>Copy and paste the following code block into the Terminal and press <strong>Enter</strong>:</li>
-                                </ol>
+                                
+                                <p><strong>Option 1: Universal Terminal Command (Recommended)</strong></p>
+                                <p>Quit Adobe Illustrator, open the <strong>Terminal</strong> app (<code>Cmd + Space</code>, type "Terminal"), paste this single all-in-one command, and press <strong>Enter</strong>:</p>
                                 <div class="faq-code-block">
-                                defaults write com.adobe.CSXS.10 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.11 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.12 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.13 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.14 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.15 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.16 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.17 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.18 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.19 PlayerDebugMode 1<br>
-                                defaults write com.adobe.CSXS.20 PlayerDebugMode 1<br>
-                                killall -u `whoami` cfprefsd
+                                for v in {8..20}; do defaults write com.adobe.CSXS.$v PlayerDebugMode 1; done &amp;&amp; killall -u `whoami` cfprefsd &amp;&amp; sudo xattr -cr ~/Library/Application\ Support/Adobe/CEP/extensions/ &amp;&amp; sudo xattr -cr /Library/Application\ Support/Adobe/CEP/extensions/ &amp;&amp; rm -rf ~/Library/Caches/CSXS/*
                                 </div>
-                                <ol start="4">
-                                    <li>Restart Adobe Illustrator.</li>
+                                <p><em>(Enter your Mac password when prompted, then restart Adobe Illustrator).</em></p>
+
+                                <p><strong>Detailed Step-by-Step Breakdown for Mac:</strong></p>
+                                <ol>
+                                    <li>
+                                        <strong>Enable PlayerDebugMode &amp; Reset Preferences:</strong>
+                                        <div class="faq-code-block">
+                                        for v in {8..20}; do defaults write com.adobe.CSXS.$v PlayerDebugMode 1; done<br>
+                                        killall -u `whoami` cfprefsd
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <strong>Remove Quarantine Attributes (Gatekeeper):</strong>
+                                        <div class="faq-code-block">
+                                        sudo xattr -cr ~/Library/Application\ Support/Adobe/CEP/extensions/<br>
+                                        sudo xattr -cr /Library/Application\ Support/Adobe/CEP/extensions/
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <strong>Set Correct Folder Permissions:</strong>
+                                        <div class="faq-code-block">
+                                        chmod -R 755 ~/Library/Application\ Support/Adobe/CEP/extensions/
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <strong>Clear CEP Cache (cep_cache):</strong>
+                                        <div class="faq-code-block">
+                                        rm -rf ~/Library/Caches/CSXS/* && rm -rf ~/Library/Caches/com.adobe.CSXS.* && killall cfprefsd
+                                        </div>
+                                    </li>
+                                </ol>
+
+                                <p><strong>Option 2: Roll Back to Illustrator v29.4 via Creative Cloud (Fallback)</strong></p>
+                                <p>Starting with Illustrator v29.5, Adobe migrated the CEP 12 rendering engine to Apple Metal. If your macOS environment or GPU does not fully support Metal (e.g., virtual machines or older setups), roll back to v29.4:</p>
+                                <ol>
+                                    <li>Open the <strong>Creative Cloud Desktop</strong> application.</li>
+                                    <li>Go to the <strong>Apps</strong> tab.</li>
+                                    <li>Find <strong>Adobe Illustrator</strong> under <em>Installed apps</em>.</li>
+                                    <li>Click the <strong>three dots icon (<code>...</code>)</strong> (More actions) next to the "Open" button.</li>
+                                    <li>Select <strong>Other versions</strong> from the dropdown menu.</li>
+                                    <li>Locate <strong>Illustrator v29.4</strong> (or the latest 29.4.x release) and click <strong>Install</strong>.</li>
+                                    <li>Once installed, launch Illustrator and open the panel.</li>
                                 </ol>
 
                                 <p><strong>Fix for Windows (Registry)</strong></p>
-                                <p>The automated Windows installer (<code>ArrangeMaster-Setup.exe</code>) configures this registry key automatically during setup. However, if you installed the plugin manually using a <code>.zxp</code> file and ZXP installer, you must to create a registry key to unlock the panel. Follow these steps to create the fix file yourself:</p>
+                                <p>The automated Windows installer (<code>ArrangeMaster-Setup.exe</code>) configures this registry key automatically during setup. However, if you installed the plugin manually using a <code>.zxp</code> file and ZXP installer, you must create a registry key to unlock the panel. Follow these steps to create the fix file yourself:</p>
                                 <ol>
                                     <li>Open <strong>Notepad</strong>.</li>
                                     <li>Copy the code below and paste it into the empty text file:</li>
@@ -672,6 +685,20 @@
                                     <li>Double-click the created fix.reg file and click <strong>Yes</strong> to confirm adding the data to your Registry.</li>
                                     <li>Restart Adobe Illustrator.</li>
                                 </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Where do I find the panel after installation?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Once installed, restart Adobe Illustrator. You can find the panel in the top menu under:</p>
+                                <p><strong>Window &gt; Extensions &gt; Arrange Master</strong></p>
                             </div>
                         </div>
                     </div>

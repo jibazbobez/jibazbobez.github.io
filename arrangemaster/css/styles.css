@@ -1800,6 +1800,7 @@ section {
         border: 1px solid #000 !important;
         border-left: 4px solid #000 !important;
         border-radius: var(--radius-md) !important;
+        box-shadow: none !important;
         page-break-inside: avoid;
         padding: 5px 30px !important;
     }
