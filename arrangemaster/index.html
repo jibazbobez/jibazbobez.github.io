@@ -692,6 +692,44 @@
                     <!-- Question 2 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
+                            <span>Activation or demo verification fails with a connection error. What should I do?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Connection errors during license activation or demo initialization are typically caused by regional firewall restrictions, ISP routing conflicts, or proxy settings. Follow these steps to resolve the issue:</p>
+
+                                <p><strong>1. Check Service Status</strong></p>
+                                <p>Arrange Master distributes endpoint lists and secure engine modules via Cloudflare and GitHub. Check <a href="https://www.cloudflarestatus.com/" target="_blank" rel="nofollow noopener noreferrer">Cloudflare Status</a> and <a href="https://www.githubstatus.com/" target="_blank" rel="nofollow noopener noreferrer">GitHub Status</a>. If an outage is active, wait until services recover and try again. Otherwise, proceed to steps 2 and 3.</p>
+
+                                <p><strong>2. Configure VPN / Proxy (Mainland China &amp; Restricted Regions)</strong></p>
+                                <p>Standard system proxies often do not route internal network traffic from Adobe Illustrator. If you are using a proxy client (such as Clash or V2Ray):</p>
+                                <ul>
+                                    <li>Temporarily switch your proxy client to <strong>Global Mode</strong> or enable <strong>TUN Mode (Virtual Network Adapter)</strong>. This forces Illustrator to route all traffic through the proxy.</li>
+                                    <li>Click <strong>Activate Device</strong> (or open the demo panel).</li>
+                                    <li>If the full version of Arrange Master is once verified, the engine is cached locally, and you can switch your proxy client back to its standard mode.</li>
+                                </ul>
+
+                                <p><strong>3. Resolve IPv6 Routing Conflicts (EACCES Error)</strong></p>
+                                <p>An error like <code>EACCES [2606:4700:...]</code> indicates that your local ISP has an IPv6 routing issue with Cloudflare edge nodes (common in Southeast Asia). Since license activation is a one-time process and Arrange Master works 100% offline afterward, use one of these quick fixes:</p>
+                                <ul>
+                                    <li><strong>Option A (Fastest):</strong> Connect your computer temporarily to a mobile hotspot (4G/5G) or a VPN, open Illustrator, and click <strong>Activate Device</strong>. Once activated, return to your regular Wi-Fi.</li>
+                                    <li><strong>Option B (Disable IPv6 on Windows):</strong>
+                                        <ol>
+                                            <li>Press <code>Win + R</code>, type <code>ncpa.cpl</code>, and press <strong>Enter</strong>.</li>
+                                            <li>Right-click your active network adapter (Wi-Fi or Ethernet) and select <strong>Properties</strong>.</li>
+                                            <li>Uncheck <strong>Internet Protocol Version 6 (TCP/IPv6)</strong> and click <strong>OK</strong>.</li>
+                                            <li>Restart Illustrator and click <strong>Activate Device</strong>. (You can re-enable IPv6 afterward).</li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
                             <span>Where do I find the panel after installation?</span>
                             <span class="faq-icon" aria-hidden="true"></span>
                         </button>
@@ -703,7 +741,7 @@
                         </div>
                     </div>
 
-                    <!-- Question 3 -->
+                    <!-- Question 4 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Why should I pay for this when free arranger scripts exist?</span>
@@ -716,7 +754,7 @@
                         </div>
                     </div>
 
-                    <!-- Question 4 -->
+                    <!-- Question 5 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>How does the plugin decide which object is the container?</span>
@@ -729,7 +767,7 @@
                         </div>
                     </div>
 
-                    <!-- Question 5 -->
+                    <!-- Question 6 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>How does Arrange Master handle raster images (photos)?</span>
@@ -742,7 +780,7 @@
                         </div>
                     </div>
 
-                    <!-- Question 6 -->
+                    <!-- Question 7 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Does it support true-shape nesting or just bounding boxes?</span>
@@ -755,7 +793,7 @@
                         </div>
                     </div>
 
-                    <!-- Question 7 -->
+                    <!-- Question 8 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Does the plugin work with objects on different layers?</span>
@@ -768,7 +806,7 @@
                         </div>
                     </div>
 
-                    <!-- Question 8 -->
+                    <!-- Question 9 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Why are my items arranged in a rectangle even though my container is a circle?</span>
