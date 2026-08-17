@@ -710,7 +710,15 @@
                                     <li>If the full version of Arrange Master is once verified, the engine is cached locally, and you can switch your proxy client back to its standard mode.</li>
                                 </ul>
 
-                                <p><strong>3. Resolve IPv6 Routing Conflicts (EACCES Error)</strong></p>
+                                <p><strong>3. Temporarily Pause Antivirus / Firewall</strong></p>
+                                <p>Third-party security software (such as Kaspersky, Avast, Bitdefender, McAfee, or 360 Security) or strict local firewall rules can block Illustrator's background network process (<code>CEPHtmlEngine.exe</code>), returning an <code>EACCES</code> connection error:</p>
+                                <ul>
+                                    <li>Temporarily pause your antivirus web/real-time protection for 5 minutes.</li>
+                                    <li>Alternatively, check your firewall settings and allow outbound connections for <code>CEPHtmlEngine.exe</code> and <code>Illustrator.exe</code>.</li>
+                                    <li>Click <strong>Activate Device</strong> (or reopen the demo panel). Once activated, the license is cached permanently and you can turn your antivirus back on.</li>
+                                </ul>
+
+                                <p><strong>4. Resolve IPv6 Routing Conflicts (EACCES Error)</strong></p>
                                 <p>An error like <code>EACCES [2606:4700:...]</code> indicates that your local ISP has an IPv6 routing issue with Cloudflare edge nodes (common in Southeast Asia). Since license activation is a one-time process and Arrange Master works 100% offline afterward, use one of these quick fixes:</p>
                                 <ul>
                                     <li><strong>Option A (Fastest):</strong> Connect your computer temporarily to a mobile hotspot (4G/5G) or a VPN, open Illustrator, and click <strong>Activate Device</strong>. Once activated, return to your regular Wi-Fi.</li>
