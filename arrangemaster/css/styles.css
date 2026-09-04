@@ -1591,6 +1591,49 @@ section {
 .lightbox-nav.prev { left: 40px; transform: translateY(-50%) rotate(45deg); }
 .lightbox-nav.next { right: 40px; transform: translateY(-50%) rotate(-135deg); }
 
+.modal-disclaimer {
+    text-align: left;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    margin: 18px 0 16px;
+    line-height: 1.55;
+    font-size: 0.88rem;
+}
+
+.modal-disclaimer .disclaimer-intro {
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+}
+
+.modal-disclaimer .disclaimer-intro strong {
+    color: var(--text-primary);
+}
+
+/* Documentation-style link */
+.modal-disclaimer .disclaimer-link {
+    color: #93c5fd;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.modal-disclaimer .disclaimer-link:hover {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
+.modal-disclaimer .disclaimer-refund {
+    margin-bottom: 0;
+    color: #93c5fd;
+    font-size: 0.85rem;
+}
+
+.modal-disclaimer .disclaimer-refund strong {
+    color: #93c5fd;
+    font-weight: 600;
+}
+
 .payment-modal {
     display: none;
     position: fixed;
