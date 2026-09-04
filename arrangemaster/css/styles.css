@@ -1603,7 +1603,7 @@ section {
 }
 
 .modal-disclaimer .disclaimer-intro {
-    margin-bottom: 10px;
+    margin-bottom: 0;
     color: var(--text-secondary);
 }
 
@@ -1611,7 +1611,6 @@ section {
     color: var(--text-primary);
 }
 
-/* Documentation-style link */
 .modal-disclaimer .disclaimer-link {
     color: #93c5fd;
     text-decoration: none;
@@ -1623,15 +1622,13 @@ section {
     text-decoration: underline;
 }
 
-.modal-disclaimer .disclaimer-refund {
+.modal-refund-note {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: 18px;
     margin-bottom: 0;
-    color: #93c5fd;
-    font-size: 0.85rem;
-}
-
-.modal-disclaimer .disclaimer-refund strong {
-    color: #93c5fd;
-    font-weight: 600;
+    line-height: 1.45;
 }
 
 .payment-modal {
