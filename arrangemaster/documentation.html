@@ -140,6 +140,7 @@
                     <li><a href="#overflow-placement">Overflow Placement</a></li>
                     <li><a href="#common-features">Common Features & Best Practices</a></li>
                     <li><a href="#prepress-splitter">Prepress Splitter Script</a></li>
+                    <li><a href="#troubleshooting-preflight">Troubleshooting &amp; Production Preflight</a></li>
                     <li><a href="#changelog">Changelog</a></li>
                 </ol>
 				
@@ -295,9 +296,12 @@
                 </ul>
 
                 <h4>Preparation for Dense Packing (True-Shape Nesting)</h4>
-                <p>Dense Packing bypasses bounding boxes and analyzes the <strong>True Vector Geometry</strong> of the object. </p>
+                <p>Dense Packing bypasses bounding boxes and analyzes the <strong>True Vector Geometry</strong> of the object. The geometry you provide is therefore the collision geometry used by the nesting engine.</p>
                 <ul>
-                    <li><strong>Vector Only:</strong> Dense Packing strictly requires mathematical path data. <strong>Raster images are NOT supported</strong> in this mode. If you attempt to use Raster items with Dense Packing enabled, the plugin will throw an error or skip them.</li>
+                    <li><strong>Vector Only:</strong> Dense Packing strictly requires mathematical path data. <strong>Raster images are NOT supported as true-shape collision geometry</strong>. Use standard bounding-box modes for raster-only items.</li>
+                    <li><strong>Use closed production contours:</strong> For stickers, laser cutting, CNC, or artwork that needs a safety envelope, nest by a clean closed cut/outer contour. Open strokes, individual letters, decorative paths, and internal details can be interpreted as separate geometry and may allow visible artwork to appear too close or overlap.</li>
+                    <li><strong>Keep the collision boundary unambiguous:</strong> Remove stray points, hidden paths, duplicate contours, and unnecessary clipping structures before a production nest.</li>
+                    <li><strong>Test a representative sample first:</strong> Before nesting hundreds of items, run 5–20 representative objects with the intended spacing and rotation constraints. This exposes geometry problems much faster.</li>
                 </ul>
 
                 <h4>Supported Object Types</h4>
@@ -379,6 +383,7 @@
 					</a>
 				</div>
                 <p>When the <strong>Single Item Fill</strong> checkbox is enabled, the panel switches to a specialized mode. Instead of arranging a selection of different objects, it calculates the maximum capacity and fills the container with copies of one selected item.</p>
+                <p><strong>Common mistake:</strong> If Arrange Master unexpectedly creates many new copies, turn <strong>Single Item Fill</strong> off. This behavior is intentional and is not the normal multi-object arrangement workflow.</p>
                 <ul>
                     <li><strong>Spacing:</strong> The distance between duplicated items (allows <code>0</code>).</li>
                     <li><strong>Allow 90° turn:</strong> Allows the item to be rotated orthogonally to maximize capacity.</li>
@@ -423,6 +428,7 @@
                 </ul>
 
                 <h4 id="shape-respect-layout">Shape Respect Layout</h4>
+                <p><strong>Container requirement:</strong> For predictable custom-boundary results, use one clean Path or Compound Path as the container. If the visible container is actually a Group, ungroup/clean it first and rebuild the final boundary as a Compound Path when appropriate.</p>
                 <p>This layout operates inside <strong>custom vector shapes</strong>, such as text outlines, angled polygons, or containers with internal holes.</p>
 				
 				<div class="screenshot-wrapper">
@@ -590,7 +596,66 @@
                     </a>
                 </div>
 
-                <h3 id="changelog">13. Changelog</h3>
+
+                <h3 id="troubleshooting-preflight">13. Troubleshooting &amp; Production Preflight</h3>
+                <p>This section consolidates the problems most often seen in real customer files and support requests. Work through the checklist before sending a production job.</p>
+
+                <h4>Dense Packing overlaps artwork or ignores the expected cut boundary</h4>
+                <ol>
+                    <li>Identify the exact vector path that should act as the physical collision/safety boundary.</li>
+                    <li>Make sure that boundary is closed and free of stray points, duplicated paths, hidden objects, and accidental internal geometry.</li>
+                    <li>If your artwork contains raster images, text, marks, or several production layers, do not assume their visible appearance automatically defines the Dense Packing contour.</li>
+                    <li>Test with Dense Packing disabled. If the bounding-box result is correct, the issue is almost certainly in the vector collision geometry rather than basic placement.</li>
+                </ol>
+
+                <h4>Shape Respect does not follow the visible custom shape</h4>
+                <p>Check the Layers panel: the container should be a single Path or Compound Path, not a Group that merely looks like one object. Ungroup it, delete hidden/stray elements, create a clean Compound Path if needed, then retry.</p>
+
+                <h4>Unexpected duplication of one item</h4>
+                <p>Disable <strong>Single Item Fill</strong>. This mode intentionally creates copies to calculate maximum capacity and is easy to enable accidentally when returning to a previous panel state.</p>
+
+                <h4>Rotation constraints are production-critical</h4>
+                <p>Use <strong>180° Turn</strong> when an item may be flipped but must not be quarter-turned (for example, directional print, fabric grain, or other orientation-sensitive production). Use 90° or 360° only when those orientations are acceptable for the job.</p>
+
+                <h4>Higher Evolution Stepper does not always look better</h4>
+                <p>This is expected for heuristic nesting. A larger value increases search effort; it does not guarantee monotonic improvement on every run. For high-value material, compare multiple results and retain the best layout. A generated nest is not guaranteed to be the mathematical global optimum.</p>
+
+                <h4>Activation: “servers unreachable”, ECONNREFUSED, EACCES, or regional access problems</h4>
+                <ul>
+                    <li>Confirm that Illustrator and its CEP background process are allowed through the firewall/antivirus.</li>
+                    <li>Try a different network or mobile hotspot to distinguish a local/ISP routing problem from an application problem.</li>
+                    <li>In regions where Adobe background traffic does not follow the normal system proxy, temporarily use a VPN/proxy mode that routes all application traffic (for example, TUN/global mode), then retry initialization.</li>
+                    <li>If a device-limit/HWID message appears after hardware, OS, or machine changes, contact support for a license-device reset instead of repeatedly reinstalling.</li>
+                </ul>
+                <p><strong>Connectivity note:</strong> An active connection is required when the license/engine is initialized as described in the Activation section. Do not plan a production workflow around permanent offline availability unless your specific license arrangement explicitly supports it.</p>
+
+                <h4>Blank panel after an Illustrator or macOS update</h4>
+                <ol>
+                    <li>Completely remove the old Arrange Master extension.</li>
+                    <li>Install the newest available Arrange Master build and restart Illustrator.</li>
+                    <li>If the panel is still blank on macOS, apply the PlayerDebugMode/Gatekeeper/cache steps from the website FAQ.</li>
+                    <li>If an older Illustrator build works but the newest one does not, report the exact Illustrator version, macOS version, Mac model/CPU, and Arrange Master version. Treat an Illustrator rollback as a diagnostic test, not the default permanent fix.</li>
+                </ol>
+
+                <h4>Panel scale or document units look wrong</h4>
+                <p>After changing Illustrator UI scaling, display scaling, or document ruler units, close and reopen the Arrange Master panel (or restart Illustrator) before a production run. Verify the displayed Min. Spacing value against a known object measurement before nesting a large job.</p>
+
+                <h4>Purchase delivery, download, key, or invoice problem</h4>
+                <p>Check Spam/Junk and the email used at checkout. If the purchase portal cannot load the download or a key did not arrive, contact support with the checkout email, purchase date, and payment/order confirmation. Include billing details when requesting an invoice.</p>
+
+                <h4>Production preflight checklist</h4>
+                <ul>
+                    <li>Correct layout method selected (Grid / Knolling / Greedy / Shape Respect).</li>
+                    <li>Single Item Fill is ON only when duplication is intentional.</li>
+                    <li>Container is the intended largest object; Shape Respect container is a clean Path/Compound Path.</li>
+                    <li>Dense Packing items use clean vector collision contours; raster-only artwork uses a standard mode.</li>
+                    <li>Min. Spacing and document units are verified.</li>
+                    <li>Rotation permissions match production constraints.</li>
+                    <li>A small representative sample has been tested before a large batch.</li>
+                    <li>Keep the Illustrator document saved before starting a heavy calculation.</li>
+                </ul>
+
+                <h3 id="changelog">14. Changelog</h3>
 
                 <h4>Version 1.4.5 (July 21, 2026)</h4>
                 <p>Maintenance update.</p>

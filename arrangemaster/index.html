@@ -634,17 +634,9 @@
                                     </li>
                                 </ol>
 
-                                <p><strong>Option 2: Roll Back to Illustrator v29.4 via Creative Cloud (Fallback)</strong></p>
-                                <p>Starting with Illustrator v29.5, Adobe migrated the CEP 12 rendering engine to Apple Metal. If your macOS environment or GPU does not fully support Metal (e.g., virtual machines or older setups), roll back to v29.4:</p>
-                                <ol>
-                                    <li>Open the <strong>Creative Cloud Desktop</strong> application.</li>
-                                    <li>Go to the <strong>Apps</strong> tab.</li>
-                                    <li>Find <strong>Adobe Illustrator</strong> under <em>Installed apps</em>.</li>
-                                    <li>Click the <strong>three dots icon (<code>...</code>)</strong> (More actions) next to the "Open" button.</li>
-                                    <li>Select <strong>Other versions</strong> from the dropdown menu.</li>
-                                    <li>Locate <strong>Illustrator v29.4</strong> (or the latest 29.4.x release) and click <strong>Install</strong>.</li>
-                                    <li>Once installed, launch Illustrator and open the panel.</li>
-                                </ol>
+                                <p><strong>Option 2: Reinstall the latest Arrange Master build first</strong></p>
+                                <p>Adobe Illustrator updates can change the CEP host and cause an older extension build to open as a blank panel. Before changing Illustrator versions, completely remove the old Arrange Master extension, install the newest build from your purchase download, restart Illustrator, and test again.</p>
+                                <p>If the panel works in an older Illustrator version but is blank in the newest one, this is a useful compatibility diagnostic. Contact support with your exact <strong>Illustrator version, macOS version, Mac model/CPU, and Arrange Master version</strong>. Do not assume that a permanent Illustrator rollback is required.</p>
 
                                 <p><strong>Fix for Windows (Registry)</strong></p>
                                 <p>The automated Windows installer (<code>ArrangeMaster-Setup.exe</code>) configures this registry key automatically during setup. However, if you installed the plugin manually using a <code>.zxp</code> file and ZXP installer, you must create a registry key to unlock the panel. Follow these steps to create the fix file yourself:</p>
@@ -706,7 +698,7 @@
                                 <ul>
                                     <li>Temporarily switch your proxy client to <strong>Global Mode</strong> or enable <strong>TUN Mode (Virtual Network Adapter)</strong>. This forces Illustrator to route all traffic through the proxy.</li>
                                     <li>Click <strong>Activate Device</strong> (or open the demo panel).</li>
-                                    <li>If the full version of Arrange Master is once verified, the engine is cached locally, and you can switch your proxy client back to its standard mode.</li>
+                                    <li>After the current Illustrator session has initialized successfully, you may return the proxy client to its normal mode. A future Illustrator session may require network access again to authenticate and load the Dense Packing engine.</li>
                                 </ul>
 
                                 <p><strong>3. Temporarily Pause Antivirus / Firewall</strong></p>
@@ -718,7 +710,7 @@
                                 </ul>
 
                                 <p><strong>4. Resolve IPv6 Routing Conflicts (EACCES Error)</strong></p>
-                                <p>An error like <code>EACCES [2606:4700:...]</code> indicates that your local ISP has an IPv6 routing issue with Cloudflare edge nodes (common in Southeast Asia). Since license activation is a one-time process and Arrange Master works 100% offline afterward, use one of these quick fixes:</p>
+                                <p>An error like <code>EACCES [2606:4700:...]</code> indicates that your local ISP has an IPv6 routing issue with Cloudflare edge nodes (common in Southeast Asia). If the connection fails because the Adobe CEP process cannot reach the authentication/engine endpoints, use one of these quick diagnostics:</p>
                                 <ul>
                                     <li><strong>Option A (Fastest):</strong> Connect your computer temporarily to a mobile hotspot (4G/5G) or a VPN, open Illustrator, and click <strong>Activate Device</strong>. Once activated, return to your regular Wi-Fi.</li>
                                     <li><strong>Option B (Disable IPv6 on Windows):</strong>
@@ -825,6 +817,70 @@
                                 <p><em>Note: If your container is a complex grouped shape, ungroup it first and convert it to a Compound Path (<code>Cmd+8</code> / <code>Ctrl+8</code>) so the algorithm can analyze it as a single shape.</em></p>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Support-derived FAQ additions -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Why does Dense Packing overlap artwork or ignore my cut line?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer"><div class="faq-answer-content">
+                            <p><strong>Dense Packing calculates collisions from vector geometry, not from the visual meaning of your artwork.</strong> Open cut lines, individual letters, decorative paths, or a raster image inside a group may therefore not create the safety envelope you expect.</p>
+                            <p>For print-and-cut work, use a clean <strong>closed vector contour</strong> as the nesting geometry. If you only need rectangular separation, turn Dense Packing off and use the standard bounding-box mode. For complex sticker files, test a small representative set in the demo before processing a full production sheet.</p>
+                        </div></div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Why does Shape Respect fail to fill my custom container?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer"><div class="faq-answer-content">
+                            <p>The container should be a single clean <strong>Path or Compound Path</strong>. A Group that only looks like one shape can be interpreted differently by Illustrator and may produce an unexpected rectangular or incomplete result.</p>
+                            <p>Ungroup the container, remove stray/hidden objects, convert the final boundary to a Compound Path when appropriate, then select the container together with the items and run Shape Respect again.</p>
+                        </div></div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Why did Arrange Master create many copies of one object?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer"><div class="faq-answer-content">
+                            <p>Check whether <strong>Single Item</strong> / <strong>Single Item Fill</strong> is enabled. This mode is intentionally designed to duplicate one selected item and calculate how many copies fit inside the container. Turn it off when you want to arrange an existing multi-object selection without creating copies.</p>
+                        </div></div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Does a higher Evolution Stepper always produce a better nest?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer"><div class="faq-answer-content">
+                            <p>No. Dense Packing uses a heuristic search, so a higher generation count gives the engine more opportunities to explore layouts but does <strong>not</strong> guarantee that every individual run will be denser than a lower value. Compare several runs when material utilization is critical, and keep the best result.</p>
+                            <p>Also remember that true-shape nesting is an optimization problem, not a mathematical guarantee of the global optimum; a manually discovered arrangement can occasionally beat one generated run.</p>
+                        </div></div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How do the 90°, 180°, and 360° rotation options differ?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer"><div class="faq-answer-content">
+                            <p>Use the rotation controls as explicit production constraints. <strong>180° Turn</strong> is the safest choice when upside-down placement is allowed but quarter-turns are not (for example, grain- or direction-sensitive artwork). <strong>90° Turn</strong> allows orthogonal orientation changes, while <strong>360° Turn</strong> permits free-angle search where supported.</p>
+                        </div></div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>I did not receive a license key, download, or invoice. What should I do?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer"><div class="faq-answer-content">
+                            <p>First check Spam/Junk and confirm the email address used at checkout. If the purchase portal shows no download or returns an error, contact support and include the <strong>checkout email, approximate purchase date, and payment/order confirmation</strong>. For accounting requests, include your billing details so an invoice/receipt can be matched to the correct purchase.</p>
+                        </div></div>
                     </div>
 
                 </div>

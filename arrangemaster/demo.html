@@ -121,6 +121,7 @@
                 
                 <ol style="margin-bottom: 40px;">
                     <li><a href="#demo-purpose">The Purpose of the Demo</a></li>
+                    <li><a href="#preflight">Before You Test: 60-Second Preflight</a></li>
                     <li><a href="#features">Available Functionality</a></li>
                     <li><a href="#genetic-algorithm">Dense Packing &amp; The Evolution Stepper</a></li>
                     <li><a href="#hidden-capabilities">Hidden Capabilities</a></li>
@@ -128,12 +129,23 @@
                     <li><a href="#disabled-features">Disabled Features (Available in Full Version)</a></li>
                     <li><a href="#installation">Installation &amp; Removal</a></li>
                     <li><a href="#troubleshooting">Troubleshooting: Blank Panel Issue</a></li>
+                    <li><a href="#connectivity">Troubleshooting: Activation &amp; Connectivity</a></li>
                 </ol>
 
                 <h3 id="demo-purpose">The Purpose of the Demo</h3>
                 <p>
                     The Arrange Master Demo provides a hands-on trial of our True-Shape Nesting Plugin for <strong>Adobe Illustrator (CC 2018+)</strong>. Previously distributed as a basic JSX script, the demo is now a fully integrated CEP panel. It allows users to test the performance of the True-Shape Nesting algorithm, verify compatibility with complex prepress vector files, and understand the core session workflow.
                 </p>
+
+                <h3 id="preflight">Before You Test: 60-Second Preflight</h3>
+                <p>The demo is most useful when you test the same type of production geometry you plan to use after purchase. Before clicking <strong>Arrange</strong>:</p>
+                <ul>
+                    <li><strong>Dense Packing is vector-based:</strong> use clean vector paths for true-shape collision analysis. Raster-only artwork should be evaluated with the standard bounding-box modes.</li>
+                    <li><strong>For stickers / CNC / laser work:</strong> use a clean, closed outer or cut contour if that contour is the safety boundary you need. Open strokes, text outlines, and decorative internal paths may not represent the envelope you expect.</li>
+                    <li><strong>For Shape Respect:</strong> use one clean Path or Compound Path as the custom container, not a Group that only looks like one shape.</li>
+                    <li><strong>Start small:</strong> test 5–20 representative objects before a large job. Confirm spacing, rotation, and container behavior first.</li>
+                    <li><strong>Demo output:</strong> Dense Packing is intentionally rasterized/watermarked in the demo; use it to evaluate geometry, speed, and compatibility rather than final production output.</li>
+                </ul>
 
                 <h3 id="features">Available Functionality</h3>
 
@@ -301,17 +313,9 @@
                     </li>
                 </ol>
 
-                <p><strong>Option 2: Roll Back to Illustrator v29.4 via Creative Cloud (Fallback)</strong></p>
-                <p>Starting with Illustrator v29.5, Adobe migrated the CEP 12 rendering engine to Apple Metal. If your macOS environment or GPU does not fully support Metal (e.g., virtual machines or older setups), roll back to v29.4:</p>
-                <ol>
-                    <li>Open the <strong>Creative Cloud Desktop</strong> application.</li>
-                    <li>Go to the <strong>Apps</strong> tab.</li>
-                    <li>Find <strong>Adobe Illustrator</strong> under <em>Installed apps</em>.</li>
-                    <li>Click the <strong>three dots icon (<code>...</code>)</strong> (More actions) next to the "Open" button.</li>
-                    <li>Select <strong>Other versions</strong> from the dropdown menu.</li>
-                    <li>Locate <strong>Illustrator v29.4</strong> (or the latest 29.4.x release) and click <strong>Install</strong>.</li>
-                    <li>Once installed, launch Illustrator and open the panel.</li>
-                </ol>
+                <p><strong>Option 2: Reinstall the latest demo build before changing Illustrator</strong></p>
+                <p>Recent Illustrator/macOS updates can change the CEP host. If an older Arrange Master Demo build opens as a blank panel, first remove the demo completely, download the newest demo package from this page, reinstall it, restart Illustrator, and test again.</p>
+                <p>If the newest demo still works in an older Illustrator build but remains blank in the newest one, report your exact <strong>Illustrator version, macOS version, Mac model/CPU, and demo version</strong>. Testing an older Illustrator build can isolate a compatibility issue, but it should be treated as a diagnostic step rather than the default permanent solution.</p>
 
                 <p><strong>Fix for Windows (Registry)</strong></p>
                 <p>The automated Windows installer (<code>ArrangeMasterDemo-Setup.exe</code>) configures this registry key automatically during setup. However, if you installed the demo manually using a <code>.zxp</code> file and ZXP installer, you must create a registry key to unlock the panel. Follow these steps to create the fix file yourself:</p>
@@ -351,6 +355,16 @@
                     <li>Double-click the created <code>fix.reg</code> file and click <strong>Yes</strong> to confirm adding the data to your Registry.</li>
                     <li>Restart Adobe Illustrator.</li>
                 </ol>
+
+                <h3 id="connectivity">Troubleshooting: Activation &amp; Connectivity</h3>
+                <p>The demo requires an active connection during initialization. If you see <code>All authentication servers are unreachable</code>, <code>ECONNREFUSED</code>, <code>EACCES</code>, or the verification never completes:</p>
+                <ol>
+                    <li>Temporarily allow <code>Illustrator</code> and <code>CEPHtmlEngine</code> through your firewall/antivirus.</li>
+                    <li>Try a different network or a mobile hotspot. If that works, the problem is likely local firewall/ISP routing rather than the demo itself.</li>
+                    <li>If you are in a region where Adobe background traffic does not follow the normal system proxy, temporarily use a VPN/proxy in a mode that routes all application traffic (for example TUN/global mode).</li>
+                    <li>Close and reopen Illustrator after changing network/proxy settings, then reopen the demo panel.</li>
+                </ol>
+                <p><strong>When contacting support:</strong> include the exact error text, operating system, Illustrator version, and whether another network/VPN changes the result. This usually identifies the cause much faster than reinstalling repeatedly.</p>
 
             </div>
         </section>
