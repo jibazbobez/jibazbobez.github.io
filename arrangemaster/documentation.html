@@ -117,32 +117,48 @@
                 <img src="assets/doc-background.webp" alt="Technical illustration background">
             </div>
             <div class="container">
+                <div class="doc-layout">
+
+                    <aside class="doc-toc" aria-label="Table of contents">
+                        <div class="doc-toc-inner">
+
+                            <div class="doc-toc-title">On this page</div>
+
+                            <ol>
+                                <li><a href="#installation">Installation</a></li>
+                                <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
+                                <li><a href="#introduction">Introduction</a></li>
+                                <li><a href="#activation">Activation & Connectivity Requirements</a></li>
+                                <li><a href="#the-main-interface">The Main Interface</a></li>
+                                <li><a href="#the-container-tool">The Container as an Active Tool</a></li>
+                                <li><a href="#preparing-for-arrangement">Preparing Items for Arrangement</a></li>
+                                <li><a href="#the-arrangement-workflow">The Arrangement Workflow: Understanding Sessions</a></li>
+
+                                <li>
+                                    <a href="#layout-methods">Layout Methods</a>
+                                    <ul>
+                                        <li><a href="#dense-packing">Dense Packing</a></li>
+                                        <li><a href="#grid-layout">Grid Layout</a></li>
+                                        <li><a href="#knolling-layout">Knolling Layout</a></li>
+                                        <li><a href="#greedy-layout">Greedy Layout</a></li>
+                                        <li><a href="#shape-respect-layout">Shape Respect Layout</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><a href="#overflow-placement">Overflow Placement</a></li>
+                                <li><a href="#common-features">Common Features & Best Practices</a></li>
+                                <li><a href="#prepress-splitter">Prepress Splitter Script</a></li>
+                                <li><a href="#troubleshooting-preflight">Troubleshooting & Production Preflight</a></li>
+                                <li><a href="#changelog">Changelog</a></li>
+                            </ol>
+
+                        </div>
+                    </aside>
+
+                <div class="doc-content">
+
                 <h1>Arrange Master Documentation</h1>
                 <p class="doc-version-note">Current Version: 1.4.6</p>
-                <ol>
-                    <li><a href="#installation">Installation</a></li>
-                    <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
-                    <li><a href="#introduction">Introduction</a></li>
-                    <li><a href="#activation">Activation & Connectivity Requirements</a></li>
-                    <li><a href="#the-main-interface">The Main Interface</a></li>
-                    <li><a href="#the-container-tool">The Container as an Active Tool</a></li>
-                    <li><a href="#preparing-for-arrangement">Preparing Items for Arrangement</a></li>
-                    <li><a href="#the-arrangement-workflow">The Arrangement Workflow: Understanding Sessions</a></li>
-                    <li><a href="#layout-methods">Layout Methods</a>
-                        <ul>
-                            <li><a href="#grid-layout">Grid Layout</a></li>
-                            <li><a href="#knolling-layout">Knolling Layout</a></li>
-                            <li><a href="#greedy-layout">Greedy Layout</a></li>
-                            <li><a href="#shape-respect-layout">Shape Respect Layout</a></li>
-                            <li><a href="#dense-packing">Dense Packing (True-Shape Nesting)</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#overflow-placement">Overflow Placement</a></li>
-                    <li><a href="#common-features">Common Features & Best Practices</a></li>
-                    <li><a href="#prepress-splitter">Prepress Splitter Script</a></li>
-                    <li><a href="#troubleshooting-preflight">Troubleshooting &amp; Production Preflight</a></li>
-                    <li><a href="#changelog">Changelog</a></li>
-                </ol>
 				
 				<h3 id="installation">1. Installation</h3>
 
@@ -358,6 +374,80 @@
 
                 <h3 id="layout-methods">9. Layout Methods</h3>
 
+                <h4 id="dense-packing">Dense Packing (True-Shape Nesting)</h4>
+                <p>Available as a checkbox in both <strong>Greedy Layout</strong> and <strong>Shape Respect Layout</strong>, this activates Arrange Master's flagship feature: the <strong>Chromium Math Engine</strong>. This transitions the plugin from a simple bounding box arranger into a professional True-Shape Nesting tool.</p>
+
+                <p>Dense Packing relies on deep <strong>Vector Path Analysis</strong>. Instead of drawing a box around an item, the engine calculates the exact mathematical contour. This allows items to interlock, filling concavities and isolated cavities, providing high-yield material optimization for print production, CNC, and laser cutting preparation.</p>
+
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_013.png" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_013.png" alt="Bounding Box vs Dense Packing comparison">
+                    </a>
+                </div>
+
+                <p><strong>How it works:</strong></p>
+                <ul>
+                    <li><strong>In Greedy Layout:</strong> Evaluates exact shapes and packs them tightly inside a standard rectangular container.</li>
+                    <li><strong>In Shape Respect Layout:</strong> Rasterizes custom vector containers (including internal holes) and performs exact shape nesting within those specific boundaries.</li>
+                </ul>
+
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_009.png" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_009.png" alt="Shape Respect Layout">
+					</a>
+				</div>
+
+                <p><strong>Dense Packing Specific Parameters:</strong></p>
+                <ul>
+                    <li><strong>Evolution Stepper (1-50):</strong> Controls the <strong>Genetic Algorithm (GA)</strong>. Higher values instruct the engine to evolve the packing sequence over more generations, mathematically searching for the highest density score. Values above 20 take longer but yield tighter interlocking geometry.</li>
+                    <li><strong>Vector Gravity Control:</strong> Dense Packing allows you to control how gravity pulls items into position during placement.
+                        <ul>
+                            <li><strong>X-Gravity</strong> pulls items vertically (perpendicular to the X-axis).</li>
+                            <li><strong>Y-Gravity</strong> pulls items horizontally (perpendicular to the Y-axis), which is recommended for long, rolled media workflows.</li>
+                            <li><strong>X/Y-Gravity (Dual)</strong> pulls items diagonally at a 45-degree angle toward the origin corner. This produces very tight and dense clusters. Resize the container to compensate for the diagonal edge created by dual gravity.</li>
+                        </ul>
+                    </li>
+                    <li><strong>90° Turn:</strong> Orthogonal placement (0°, 90°, 180°, 270°). Recommended for rectangular or regular shaped objects.</li>
+                    <li><strong>180° Turn:</strong> Allows a 180° flip. Perfect for textile nesting to maintain fabric elasticity and the grain line, or for symmetrical layouts.</li>
+                    <li><strong>360° Turn:</strong> Allows 360° rotation with 15° steps during the collision calculation phase. Essential for complex, organic shapes.</li>
+                </ul>
+
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_016.png" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_016.png" alt="Smart Euclidean Bin Packing (< 50 Objects)">
+					</a>
+				</div>
+
+                <p><strong>Understanding the Genetic Algorithm (Evolution Stepper)</strong></p>
+                <p>Arrange Master performs True-Shape Nesting using a genetic algorithm directly within the Chromium math engine. Instead of stopping at the first valid location, the nesting algorithm generates multiple placement sequences (generations), mutates them, and calculates the density of each generation using exact vector path analysis. The sequence resulting in the maximum material optimization is selected for the final output.</p>
+
+                <p>Finding the optimal layout for CNC/Laser Cutting preparation requires an iterative approach. Use the <code>Evolution Stepper</code> in the panel as follows:</p>
+                <ol>
+                    <li>Begin with a low value, such as <strong>3</strong> or <strong>5</strong> generations.</li>
+                    <li>If objects are pushed to the Overflow area, or if the layout contains noticeable gaps, increase the parameter to <strong>7–10</strong>.</li>
+                    <li>Observe the output. If the visual result stops changing around <strong>10–15</strong> generations, the algorithm has reached the optimal placement limit for the current settings.</li>
+                </ol>
+                <p>To improve the layout beyond this mathematical limit, you must alter the physical boundaries. Change the Vector Gravity controls (switching between X-Gravitation, Y-Gravitation, or enabling both simultaneously) or manually resize the container shape. This resets the coordinate limits and forces the engine to build completely new structural patterns.</p>
+                <p>It is not recommended to use high Evolution Stepper values for complex layouts containing <strong>300-600</strong> or more objects, as this significantly increases processing time. For large datasets of this scale, setting the Evolution Stepper on <strong>2 or 3</strong> is entirely sufficient to achieve an optimized layout without unnecessary delays.</p>
+
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_022.png" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_022.png" alt="Table comparing placement results at 1, 5, 10, 15, 25, and 50 generations.">
+					</a>
+				</div>
+
+                <p><strong>Hidden Engine Capabilities:</strong></p>
+                <ul>
+                    <li><strong>Adaptive Memory Lock:</strong> The Chromium Math Engine dynamically analyzes container dimensions. For exceptionally large artboards (e.g., 5000pt+ car wrap files), it automatically downscales the internal matrix resolution. This guarantees processing stability and prevents RAM overflow while strictly enforcing the requested <code>Min. Spacing</code> parameter.</li>
+                    <li><strong>Smart Caching:</strong> Once the initial <code>Arrange</code> execution compiles, the detailed pixel matrix (RLE) representation of your vectors is preserved in a local memory cache. Subsequent clicks on <code>Arrange</code> or <code>Randomize</code> bypass the heavy vector path extraction process, allowing you to iterate instantly with different packing sequences or genetic generations without any computational delays.</li>
+                </ul>
+
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_012.png" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_012.png" alt="Complex Dense Packing">
+                    </a>
+                </div>
+
                 <h4 id="grid-layout">Grid Layout</h4>
                 <p>Divides the container into a structured grid, centering items within designated cells. Ideal for object sets and icon sheets.</p>
 				<div class="screenshot-wrapper">
@@ -453,80 +543,6 @@
 						<img src="assets/screenshots/documentation_screenshot_020.png" alt="Shape Respect Layout. Accurate Mode">
 					</a>
 				</div>
-
-                <h4 id="dense-packing">Dense Packing (True-Shape Nesting)</h4>
-                <p>Available as a checkbox in both <strong>Greedy Layout</strong> and <strong>Shape Respect Layout</strong>, this activates Arrange Master's flagship feature: the <strong>Chromium Math Engine</strong>. This transitions the plugin from a simple bounding box arranger into a professional True-Shape Nesting tool.</p>
-
-                <p>Dense Packing relies on deep <strong>Vector Path Analysis</strong>. Instead of drawing a box around an item, the engine calculates the exact mathematical contour. This allows items to interlock, filling concavities and isolated cavities, providing high-yield material optimization for print production, CNC, and laser cutting preparation.</p>
-
-                <div class="screenshot-wrapper">
-                    <a href="assets/screenshots/documentation_screenshot_013.png" class="screenshot-preview">
-                        <img src="assets/screenshots/documentation_screenshot_013.png" alt="Bounding Box vs Dense Packing comparison">
-                    </a>
-                </div>
-
-                <p><strong>How it works:</strong></p>
-                <ul>
-                    <li><strong>In Greedy Layout:</strong> Evaluates exact shapes and packs them tightly inside a standard rectangular container.</li>
-                    <li><strong>In Shape Respect Layout:</strong> Rasterizes custom vector containers (including internal holes) and performs exact shape nesting within those specific boundaries.</li>
-                </ul>
-
-				<div class="screenshot-wrapper">
-					<a href="assets/screenshots/documentation_screenshot_009.png" class="screenshot-preview">
-						<img src="assets/screenshots/documentation_screenshot_009.png" alt="Shape Respect Layout">
-					</a>
-				</div>
-
-                <p><strong>Dense Packing Specific Parameters:</strong></p>
-                <ul>
-                    <li><strong>Evolution Stepper (1-50):</strong> Controls the <strong>Genetic Algorithm (GA)</strong>. Higher values instruct the engine to evolve the packing sequence over more generations, mathematically searching for the highest density score. Values above 20 take longer but yield tighter interlocking geometry.</li>
-                    <li><strong>Vector Gravity Control:</strong> Dense Packing allows you to control how gravity pulls items into position during placement.
-                        <ul>
-                            <li><strong>X-Gravity</strong> pulls items vertically (perpendicular to the X-axis).</li>
-                            <li><strong>Y-Gravity</strong> pulls items horizontally (perpendicular to the Y-axis), which is recommended for long, rolled media workflows.</li>
-                            <li><strong>X/Y-Gravity (Dual)</strong> pulls items diagonally at a 45-degree angle toward the origin corner. This produces very tight and dense clusters. Resize the container to compensate for the diagonal edge created by dual gravity.</li>
-                        </ul>
-                    </li>
-                    <li><strong>90° Turn:</strong> Orthogonal placement (0°, 90°, 180°, 270°). Recommended for rectangular or regular shaped objects.</li>
-                    <li><strong>180° Turn:</strong> Allows a 180° flip. Perfect for textile nesting to maintain fabric elasticity and the grain line, or for symmetrical layouts.</li>
-                    <li><strong>360° Turn:</strong> Allows 360° rotation with 15° steps during the collision calculation phase. Essential for complex, organic shapes.</li>
-                </ul>
-
-				<div class="screenshot-wrapper">
-					<a href="assets/screenshots/documentation_screenshot_016.png" class="screenshot-preview">
-						<img src="assets/screenshots/documentation_screenshot_016.png" alt="Smart Euclidean Bin Packing (< 50 Objects)">
-					</a>
-				</div>
-
-                <p><strong>Understanding the Genetic Algorithm (Evolution Stepper)</strong></p>
-                <p>Arrange Master performs True-Shape Nesting using a genetic algorithm directly within the Chromium math engine. Instead of stopping at the first valid location, the nesting algorithm generates multiple placement sequences (generations), mutates them, and calculates the density of each generation using exact vector path analysis. The sequence resulting in the maximum material optimization is selected for the final output.</p>
-
-                <p>Finding the optimal layout for CNC/Laser Cutting preparation requires an iterative approach. Use the <code>Evolution Stepper</code> in the panel as follows:</p>
-                <ol>
-                    <li>Begin with a low value, such as <strong>3</strong> or <strong>5</strong> generations.</li>
-                    <li>If objects are pushed to the Overflow area, or if the layout contains noticeable gaps, increase the parameter to <strong>7–10</strong>.</li>
-                    <li>Observe the output. If the visual result stops changing around <strong>10–15</strong> generations, the algorithm has reached the optimal placement limit for the current settings.</li>
-                </ol>
-                <p>To improve the layout beyond this mathematical limit, you must alter the physical boundaries. Change the Vector Gravity controls (switching between X-Gravitation, Y-Gravitation, or enabling both simultaneously) or manually resize the container shape. This resets the coordinate limits and forces the engine to build completely new structural patterns.</p>
-                <p>It is not recommended to use high Evolution Stepper values for complex layouts containing <strong>300-600</strong> or more objects, as this significantly increases processing time. For large datasets of this scale, setting the Evolution Stepper on <strong>2 or 3</strong> is entirely sufficient to achieve an optimized layout without unnecessary delays.</p>
-
-				<div class="screenshot-wrapper">
-					<a href="assets/screenshots/documentation_screenshot_022.png" class="screenshot-preview">
-						<img src="assets/screenshots/documentation_screenshot_022.png" alt="Table comparing placement results at 1, 5, 10, 15, 25, and 50 generations.">
-					</a>
-				</div>
-
-                <p><strong>Hidden Engine Capabilities:</strong></p>
-                <ul>
-                    <li><strong>Adaptive Memory Lock:</strong> The Chromium Math Engine dynamically analyzes container dimensions. For exceptionally large artboards (e.g., 5000pt+ car wrap files), it automatically downscales the internal matrix resolution. This guarantees processing stability and prevents RAM overflow while strictly enforcing the requested <code>Min. Spacing</code> parameter.</li>
-                    <li><strong>Smart Caching:</strong> Once the initial <code>Arrange</code> execution compiles, the detailed pixel matrix (RLE) representation of your vectors is preserved in a local memory cache. Subsequent clicks on <code>Arrange</code> or <code>Randomize</code> bypass the heavy vector path extraction process, allowing you to iterate instantly with different packing sequences or genetic generations without any computational delays.</li>
-                </ul>
-
-                <div class="screenshot-wrapper">
-                    <a href="assets/screenshots/documentation_screenshot_012.png" class="screenshot-preview">
-                        <img src="assets/screenshots/documentation_screenshot_012.png" alt="Complex Dense Packing">
-                    </a>
-                </div>
 
                 <h3 id="overflow-placement">10. Overflow Placement: Handling Unplaced Items</h3>
                 <p>If an item cannot fit inside the container, it is processed as an "overflow" item.</p>
@@ -809,7 +825,11 @@
                     <li>Implemented basic controls for each layout method, including spacing, rotation, and fill direction.</li>
                 </ul>
 
+                </div>
+
             </div>
+
+        </div>
         </section>
     </main>
     
@@ -875,13 +895,6 @@
         <div class="pricing-card modal-override">
             <span class="modal-close">&times;</span>
             <h2>Choose Your License</h2>
-            
-            <!-- Disclaimer Box -->
-            <div class="modal-disclaimer">
-                <p class="disclaimer-intro">
-                    <strong>Before you purchase:</strong> Please try <a href="demo.html" target="_blank" class="disclaimer-link">Free Demo Version</a> first to ensure full compatibility with your specific Adobe Illustrator version, operating system and your work files.
-                </p>
-            </div>
 
             <p class="modal-description">Select the license tier that fits your workflow. All transactions are securely processed by trusted platform.</p>
 

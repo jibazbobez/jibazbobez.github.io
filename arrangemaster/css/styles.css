@@ -2180,3 +2180,289 @@ section,
         letter-spacing: -0.01em;
     }
 }
+/* ==========================================================
+   DOCUMENTATION / DEMO — STICKY TABLE OF CONTENTS
+   ========================================================== */
+
+/*
+ * Внешний контейнер становится шире только на страницах,
+ * где присутствует .doc-layout.
+ *
+ * Сам текст при этом остается максимум 800px,
+ * как в оригинальном дизайне.
+ */
+.doc-page:has(.doc-layout) > .container {
+    max-width: 1180px;
+}
+
+/*
+ * В исходном CSS .doc-page использует overflow: hidden,
+ * что может блокировать position: sticky.
+ * Сохраняем горизонтальное обрезание, но разрешаем sticky по вертикали.
+ */
+.doc-page:has(.doc-layout) {
+    overflow-x: clip;
+    overflow-y: visible;
+}
+
+/* ----------------------------------------------------------
+   Two-column layout
+   ---------------------------------------------------------- */
+
+.doc-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 800px);
+    gap: 48px;
+    align-items: start;
+    justify-content: center;
+}
+
+/* ----------------------------------------------------------
+   Main document content
+   ---------------------------------------------------------- */
+
+.doc-content {
+    width: 100%;
+    max-width: 800px;
+    min-width: 0;
+}
+
+/* ----------------------------------------------------------
+   Sticky TOC column
+   ---------------------------------------------------------- */
+
+.doc-toc {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+.doc-toc-inner {
+    position: sticky;
+    top: 105px;
+
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+
+    padding: 20px 18px;
+
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+    scrollbar-width: thin;
+}
+
+.doc-toc-title {
+    margin-bottom: 14px;
+
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 600;
+
+    color: var(--text-tertiary);
+
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* ----------------------------------------------------------
+   Remove normal document-list formatting
+   ---------------------------------------------------------- */
+
+.doc-page .doc-toc ol,
+.doc-page .doc-toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.doc-page .doc-toc li {
+    margin: 0;
+    padding: 0;
+
+    font-size: 0.84rem;
+    line-height: 1.35;
+}
+
+.doc-page .doc-toc a {
+    position: relative;
+
+    display: block;
+
+    padding: 7px 9px 7px 12px;
+
+    color: var(--text-tertiary);
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.doc-page .doc-toc a:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.045);
+    text-decoration: none;
+}
+
+/* ----------------------------------------------------------
+   Current section
+   ---------------------------------------------------------- */
+
+.doc-page .doc-toc a.active {
+    color: #ffffff;
+    background: rgba(38, 128, 235, 0.14);
+}
+
+.doc-page .doc-toc a.active::before {
+    content: '';
+
+    position: absolute;
+
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+
+    width: 2px;
+
+    background: #2680EB;
+
+    border-radius: 2px;
+
+    box-shadow: 0 0 8px rgba(38, 128, 235, 0.6);
+}
+
+/* ----------------------------------------------------------
+   Nested links — Layout Methods
+   ---------------------------------------------------------- */
+
+.doc-page .doc-toc li ul {
+    margin: 2px 0 5px 10px;
+    padding-left: 8px;
+
+    border-left: 1px solid var(--surface-border);
+}
+
+.doc-page .doc-toc li ul a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    font-size: 0.78rem;
+}
+
+/* ----------------------------------------------------------
+   TOC scrollbar
+   ---------------------------------------------------------- */
+
+.doc-toc-inner::-webkit-scrollbar {
+    width: 4px;
+}
+
+.doc-toc-inner::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.doc-toc-inner::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+
+@media (max-width: 1050px) {
+
+    .doc-page:has(.doc-layout) > .container {
+        max-width: 900px;
+    }
+
+    .doc-layout {
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 30px;
+    }
+
+    .doc-toc-inner {
+        padding: 16px 14px;
+    }
+
+    .doc-page .doc-toc li {
+        font-size: 0.78rem;
+    }
+}
+
+@media (max-width: 780px) {
+
+    .doc-page:has(.doc-layout) > .container {
+        max-width: 800px;
+    }
+
+    .doc-layout {
+        display: block;
+    }
+
+    .doc-toc {
+        margin-bottom: 40px;
+    }
+
+    .doc-toc-inner {
+        position: relative;
+        top: auto;
+
+        max-height: none;
+        overflow: visible;
+    }
+
+    .doc-page .doc-toc li {
+        font-size: 0.88rem;
+    }
+}
+
+/* ==========================================================
+   STICKY TOC — FIXED POSITIONING BEHAVIOR
+   ========================================================== */
+
+/*
+ * The original .doc-page uses overflow: hidden. Any non-visible
+ * overflow on an ancestor can prevent position: sticky from tracking
+ * the viewport correctly, so it is disabled only on pages using the TOC.
+ */
+.doc-page:has(.doc-layout) {
+    overflow: visible !important;
+}
+
+/*
+ * Make the grid item itself sticky. Keeping sticky on .doc-toc-inner
+ * constrains it to the short height of its parent and prevents movement.
+ */
+.doc-toc {
+    position: sticky;
+    top: 105px;
+    align-self: start;
+    z-index: 5;
+}
+
+.doc-toc-inner {
+    position: relative;
+    top: auto;
+}
+
+@media (max-width: 780px) {
+    .doc-toc {
+        position: relative;
+        top: auto;
+        z-index: auto;
+    }
+}

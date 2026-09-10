@@ -11,7 +11,7 @@ internalLinks.forEach(link => {
         const targetId = this.getAttribute('href');
 
         if (targetId === '#') {
-            // Если ссылка - это просто #, плавно скроллим на самый верх
+            // If the link is just #, smoothly scroll to the top of the page
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -59,11 +59,11 @@ if (lightbox) {
         event.preventDefault();
         const clickedItem = event.currentTarget;
         
-        // === ИЗМЕНЕНИЕ: Теперь мы обрабатываем оба случая ===
+        // Handle both gallery items and standalone screenshots
         const galleryContainer = clickedItem.closest('.knolling-gallery, .carousel-track');
         
         if (galleryContainer) {
-            // СЛУЧАЙ 1: ЭТО ГАЛЕРЕЯ
+            // CASE 1: Gallery item
             const allItemsInGallery = Array.from(galleryContainer.querySelectorAll('.screenshot-preview'));
             const galleryItemsForLightbox = allItemsInGallery.filter(item => !item.hasAttribute('aria-hidden'));
             
@@ -73,7 +73,7 @@ if (lightbox) {
             
             showImage(targetGalleryIndex);
 
-            // Показываем стрелки, если в галерее больше одного фото
+            // Show navigation arrows when the gallery contains more than one image
             if (currentGallery.length > 1) {
                 lightboxPrev.style.display = 'block';
                 lightboxNext.style.display = 'block';
@@ -83,14 +83,14 @@ if (lightbox) {
             }
 
         } else {
-            // СЛУЧАЙ 2: ЭТО ОДИНОЧНЫЙ СКРИНШОТ
-            currentGallery = [clickedItem]; // Галерея состоит из одного элемента
+            // CASE 2: Standalone screenshot
+            currentGallery = [clickedItem]; // The gallery contains only the clicked item
             currentIndex = 0;
             
             const imageSrc = clickedItem.getAttribute('href');
             lightboxImage.setAttribute('src', imageSrc);
             
-            // Прячем стрелки навигации
+            // Hide navigation arrows
             lightboxPrev.style.display = 'none';
             lightboxNext.style.display = 'none';
         }
@@ -106,13 +106,13 @@ if (lightbox) {
     };
 
     const showNextImage = () => {
-        if (currentGallery.length <= 1) return; // Не делаем ничего, если фото одно
+        if (currentGallery.length <= 1) return; // Do nothing when there is only one image
         const nextIndex = (currentIndex + 1) % currentGallery.length;
         showImage(nextIndex);
     };
 
     const showPrevImage = () => {
-        if (currentGallery.length <= 1) return; // Не делаем ничего, если фото одно
+        if (currentGallery.length <= 1) return; // Do nothing when there is only one image
         const prevIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
         showImage(prevIndex);
     };
@@ -187,9 +187,9 @@ if (featureVisuals.length > 0) {
 // ===================================================================
 const copyrightYearSpan = document.getElementById('copyright-year');
     
-    // Выполняем код, только если элемент для года есть на странице
+    // Run only when the copyright year element exists on the page
     if (copyrightYearSpan) {
-        const startYear = 2025; // Год запуска
+        const startYear = 2025; // Launch year
         const currentYear = new Date().getFullYear();
         let yearText = startYear.toString();
 
@@ -231,7 +231,7 @@ if (paymentModal) {
     }
 
     paymentModal.addEventListener('click', (event) => {
-        // Закрываем по клику на фон (оверлей)
+        // Close when the overlay background is clicked
         if (event.target === paymentModal) {
             closePaymentModal();
         }
@@ -315,10 +315,10 @@ document.addEventListener('DOMContentLoaded', () => {
 //  7. COOKIE CONSENT (NATIVE IMPLEMENTATION)
 // ===================================================================
 (function() {
-    // Проверяем, давал ли пользователь согласие ранее
+    // Check whether the user has already accepted cookies
     if (localStorage.getItem('am_cookies_accepted')) return;
 
-    // Создаем стили для окна (используем переменные из вашего styles.css)
+    // Create banner styles using variables from styles.css
     const style = document.createElement('style');
     style.innerHTML = `
         .am-cookie-banner {
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    // Создаем HTML структуру
+    // Create the banner HTML structure
     const banner = document.createElement('div');
     banner.className = 'am-cookie-banner';
     banner.innerHTML = `
@@ -389,12 +389,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(banner);
 
-    // Показываем окно с небольшой задержкой
+    // Show the banner after a short delay
     setTimeout(() => {
         banner.classList.add('visible');
     }, 1000);
 
-    // Логика кнопки
+    // Accept button logic
     document.getElementById('accept-cookies').addEventListener('click', function() {
         localStorage.setItem('am_cookies_accepted', 'true');
         banner.classList.remove('visible');
@@ -496,4 +496,125 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+});
+// ===================================================================
+//  STICKY DOCUMENTATION TABLE OF CONTENTS
+// ===================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const toc = document.querySelector('.doc-toc');
+
+    if (!toc) return;
+
+    const tocInner = toc.querySelector('.doc-toc-inner');
+    const tocLinks = Array.from(toc.querySelectorAll('a[href^="#"]'));
+
+    if (!tocLinks.length) return;
+
+    // Match TOC links to the existing sections on the page.
+    const sections = tocLinks
+        .map(link => {
+            const id = link.getAttribute('href').substring(1);
+            const section = document.getElementById(id);
+
+            if (!section) return null;
+
+            return {
+                id,
+                link,
+                section
+            };
+        })
+        .filter(Boolean);
+
+    if (!sections.length) return;
+
+    let activeId = null;
+
+    const setActiveSection = (id) => {
+        // Skip state updates when the active section has not changed.
+        if (activeId === id) return;
+        activeId = id;
+
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+            link.removeAttribute('aria-current');
+        });
+
+        const current = sections.find(item => item.id === id);
+        if (!current) return;
+
+        current.link.classList.add('active');
+        current.link.setAttribute('aria-current', 'location');
+
+        // For long documentation TOCs, scroll the internal container
+        // so the active item remains visible.
+        if (tocInner && window.innerWidth > 780) {
+            const linkTop = current.link.offsetTop;
+            const linkHeight = current.link.offsetHeight;
+            const visibleTop = tocInner.scrollTop;
+            const visibleBottom = visibleTop + tocInner.clientHeight;
+
+            if (
+                linkTop < visibleTop + 40 ||
+                linkTop + linkHeight > visibleBottom - 40
+            ) {
+                tocInner.scrollTo({
+                    top: Math.max(
+                        0,
+                        linkTop - tocInner.clientHeight / 2 + linkHeight / 2
+                    ),
+                    behavior: 'smooth'
+                });
+            }
+        }
+    };
+
+    const updateActiveSection = () => {
+        // Use an offset below the fixed header so highlighting changes
+        // when the heading enters the readable viewport area.
+        const headerOffset = 150;
+
+        let currentId = sections[0].id;
+
+        sections.forEach(item => {
+            const rect = item.section.getBoundingClientRect();
+
+            if (rect.top <= headerOffset) {
+                currentId = item.id;
+            }
+        });
+
+        // If the user reaches the bottom of the page,
+        // ensure the final section becomes active.
+        const reachedBottom =
+            window.innerHeight + window.scrollY >=
+            document.documentElement.scrollHeight - 4;
+
+        if (reachedBottom) {
+            currentId = sections[sections.length - 1].id;
+        }
+
+        setActiveSection(currentId);
+    };
+
+    let ticking = false;
+
+    const requestTocUpdate = () => {
+        if (ticking) return;
+
+        ticking = true;
+
+        window.requestAnimationFrame(() => {
+            updateActiveSection();
+            ticking = false;
+        });
+    };
+
+    window.addEventListener('scroll', requestTocUpdate, { passive: true });
+    window.addEventListener('resize', requestTocUpdate, { passive: true });
+
+    // Run the first calculation immediately after page load.
+    updateActiveSection();
 });
