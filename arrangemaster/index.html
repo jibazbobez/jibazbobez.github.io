@@ -585,7 +585,6 @@
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-accordion">
 
-                    <!-- Question 1 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>The panel is blank or shows an error. What should I do?</span>
@@ -680,7 +679,16 @@
                         </div>
                     </div>
 
-                    <!-- Question 2 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>I did not receive a license key, download, or invoice. What should I do?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer"><div class="faq-answer-content">
+                            <p>First check Spam/Junk and confirm the email address used at checkout. If the purchase portal shows no download or returns an error, contact support and include the <strong>checkout email, approximate purchase date, and payment/order confirmation</strong>. For accounting requests, include your billing details so an invoice/receipt can be matched to the correct purchase.</p>
+                        </div></div>
+                    </div>
+
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Activation or demo verification fails with a connection error. What should I do?</span>
@@ -726,7 +734,6 @@
                         </div>
                     </div>
 
-                    <!-- Question 3 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Where do I find the panel after installation?</span>
@@ -740,7 +747,6 @@
                         </div>
                     </div>
 
-                    <!-- Question 4 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Why should I pay for this when free arranger scripts exist?</span>
@@ -749,11 +755,11 @@
                         <div class="faq-answer">
                             <div class="faq-answer-content">
                                 <p>Free ExtendScript scripts process items sequentially using simple bounding boxes, which often causes Illustrator to freeze on large selections. Arrange Master offloads math to a background Chromium process, performs true-shape nesting for complex vectors, provides a non-destructive session workflow, and preserves multi-layer prepress structures (Cut, Print, Marks) without flattening your artwork.</p>
+                                <p>Version 1.5.0 improves directional packing, adapts Single Item Fill to the source shape, and expands custom-container support to groups and compound clipping masks. It also supports moving related artwork across production layers together and restoring retained artwork to its layers when you finish.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Question 5 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>How does the plugin decide which object is the container?</span>
@@ -766,7 +772,6 @@
                         </div>
                     </div>
 
-                    <!-- Question 6 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>How does Arrange Master handle raster images (photos)?</span>
@@ -779,7 +784,6 @@
                         </div>
                     </div>
 
-                    <!-- Question 7 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Does it support true-shape nesting or just bounding boxes?</span>
@@ -787,12 +791,13 @@
                         </button>
                         <div class="faq-answer">
                             <div class="faq-answer-content">
-                                <p>Both. Grid, Knolling, and standard Greedy or Shape Respect modes use bounding boxes for fast layout generation. Enabling <strong>Dense Packing</strong> in Greedy or Shape Respect activates vector path analysis, allowing items to interlock and fill internal shape cavities.</p>
+                                <p>Yes. You can select related artwork across layers such as CUT, PRINT, and MARKS. Arrange Master identifies overlapping components that belong together for the arrangement, moves them as a unit, and restores retained artwork to its original layers when you finish with <strong>OK</strong>. Cancel restores the original selection.</p>
+                                <p>Before a large job, test several representative items and inspect the result after OK. Make sure nearby but unrelated artwork has not been included in the selection, and verify cut contours, marks, and stacking order before export. A session must be finished before you treat its working objects as the final file.</p>
+                                <p>In the demo, you can test layer retention with Knolling or another ordinary layout. Dense Packing deliberately produces a watermarked raster, so it does not retain separate editable production layers within that raster. Objects excluded by the demo limit remain outside it and stay unchanged.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Question 8 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Does the plugin work with objects on different layers?</span>
@@ -805,7 +810,6 @@
                         </div>
                     </div>
 
-                    <!-- Question 9 -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Why are my items arranged in a rectangle even though my container is a circle?</span>
@@ -819,7 +823,6 @@
                         </div>
                     </div>
 
-                    <!-- Support-derived FAQ additions -->
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Why does Dense Packing overlap artwork or ignore my cut line?</span>
@@ -837,8 +840,9 @@
                             <span class="faq-icon" aria-hidden="true"></span>
                         </button>
                         <div class="faq-answer"><div class="faq-answer-content">
-                            <p>The container should be a single clean <strong>Path or Compound Path</strong>. A Group that only looks like one shape can be interpreted differently by Illustrator and may produce an unexpected rectangular or incomplete result.</p>
-                            <p>Ungroup the container, remove stray/hidden objects, convert the final boundary to a Compound Path when appropriate, then select the container together with the items and run Shape Respect again.</p>
+                            <p>First check the selection: the intended container must be the largest selected object, and Shape Respect must be the active method. In 1.5.0, supported containers include closed Paths, Compound Paths, groups of closed contours, and clipping groups with supported simple or compound masks.</p>
+                            <p>Inspect the Layers panel for open paths, unrelated hidden components, stray elements, or a mask different from the visible boundary you expected. A group is not itself an error. Simplify it to a clean Compound Path only when that helps clarify the outline. Container holes remain unavailable for placement, and the valid area may be much smaller than the outer bounds suggest.</p>
+                            <p>Ordinary Accurate must fit each item’s entire bounding rectangle inside the valid area. Use Dense Packing for closer contour-based fitting. If an existing curved path is rejected in Chaotic, install the complete 1.5.0 package and restart Illustrator; that update includes the curved-container fix. Updating the engine alone does not update the older host’s container extraction.</p>
                         </div></div>
                     </div>
 
@@ -869,17 +873,9 @@
                             <span class="faq-icon" aria-hidden="true"></span>
                         </button>
                         <div class="faq-answer"><div class="faq-answer-content">
-                            <p>Use the rotation controls as explicit production constraints. <strong>180° Turn</strong> is the safest choice when upside-down placement is allowed but quarter-turns are not (for example, grain- or direction-sensitive artwork). <strong>90° Turn</strong> allows orthogonal orientation changes, while <strong>360° Turn</strong> permits free-angle search where supported.</p>
-                        </div></div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>I did not receive a license key, download, or invoice. What should I do?</span>
-                            <span class="faq-icon" aria-hidden="true"></span>
-                        </button>
-                        <div class="faq-answer"><div class="faq-answer-content">
-                            <p>First check Spam/Junk and confirm the email address used at checkout. If the purchase portal shows no download or returns an error, contact support and include the <strong>checkout email, approximate purchase date, and payment/order confirmation</strong>. For accounting requests, include your billing details so an invoice/receipt can be matched to the correct purchase.</p>
+                            <p><strong>90° Turn</strong> permits quarter-turn orientations so the engine can compare horizontal and vertical placement. <strong>180° Turn</strong> permits upside-down placement without requiring quarter-turns. <strong>360° Turn / Free Rotation</strong> enables additional-angle search where supported; it is not a promise to test every possible angle continuously.</p>
+                            <p>Use these controls as production constraints. An item that must follow a grain axis may allow 180° rotation, but directional fabric, a printed design, or a one-way finish may prohibit even that reversal. Rotation does not mirror the artwork.</p>
+                            <p>Available controls depend on the method and whether Dense Packing is enabled. In Greedy, 180° and Free Rotation require Dense Packing; Shape Respect supports free-angle placement in ordinary Accurate as well. The demo disables Free Rotation. Check a small sample before allowing additional orientations for a full job.</p>
                         </div></div>
                     </div>
 

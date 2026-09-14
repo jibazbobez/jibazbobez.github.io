@@ -125,6 +125,7 @@
                             <div class="doc-toc-title">On this page</div>
 
                             <ol>
+                                <li><a href="#system-requirements">System Requirements</a></li>
                                 <li><a href="#installation">Installation</a></li>
                                 <li><a href="#uninstallation">Upgrading & Complete Uninstallation</a></li>
                                 <li><a href="#introduction">Introduction</a></li>
@@ -138,6 +139,7 @@
                                     <a href="#layout-methods">Layout Methods</a>
                                     <ul>
                                         <li><a href="#dense-packing">Dense Packing</a></li>
+                                        <li><a href="#dense-single-item-fill">Single Item Fill in Dense Packing</a></li>
                                         <li><a href="#grid-layout">Grid Layout</a></li>
                                         <li><a href="#knolling-layout">Knolling Layout</a></li>
                                         <li><a href="#greedy-layout">Greedy Layout</a></li>
@@ -146,9 +148,8 @@
                                 </li>
 
                                 <li><a href="#overflow-placement">Overflow Placement</a></li>
-                                <li><a href="#common-features">Common Features & Best Practices</a></li>
+                                <li><a href="#best-practices-and-troubleshooting">Best Practices & Troubleshooting</a></li>
                                 <li><a href="#prepress-splitter">Prepress Splitter Script</a></li>
-                                <li><a href="#troubleshooting-preflight">Troubleshooting & Production Preflight</a></li>
                                 <li><a href="#changelog">Changelog</a></li>
                             </ol>
 
@@ -158,9 +159,56 @@
                 <div class="doc-content">
 
                 <h1 style="text-align: left;">Arrange Master Documentation</h1>
-                <p class="doc-version-note">Current Version: 1.4.6</p>
-				
-				<h3 id="installation">1. Installation</h3>
+                <p class="doc-version-note">Current Version: 1.5.0</p>
+
+                <h3 id="system-requirements">1. System Requirements</h3>
+
+                <div class="requirements-table-wrapper" role="region" aria-label="System requirements" tabindex="0">
+                    <table class="requirements-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Component</th>
+                                <th scope="col">Minimum Specification</th>
+                                <th scope="col">Recommended Specification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Operating System</th>
+                                <td>Windows 10 (64-bit)<br>macOS 11.0 (Big Sur)</td>
+                                <td>Windows 11 (64-bit)<br>macOS 13+ (Ventura, Sonoma, Sequoia)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Host Application</th>
+                                <td>Adobe Illustrator CC 2018 (v22.0)</td>
+                                <td>Adobe Illustrator 2022–2026+ (v26.0–v30.x+)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Processor (CPU)</th>
+                                <td>64-bit Intel / AMD dual-core, 2.0 GHz</td>
+                                <td>Quad-core 3.0 GHz+ or Apple Silicon (M1/M2/M3/M4)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">System Memory (RAM)</th>
+                                <td>8 GB RAM</td>
+                                <td>16 GB or higher (for sets with 300+ vector paths)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Display Resolution</th>
+                                <td>1280 × 800 display</td>
+                                <td>1920 × 1080 or higher display</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Network Access</th>
+                                <td>Active internet connection required for initial device activation and cryptographic module compilation into local session cache.</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="requirements-note">Choose an OS and Illustrator version that support each other. These specifications do not imply that every listed OS can run every listed Illustrator version.</p>
+
+				<h3 id="installation">Installation</h3>
 
                 <h4 id="install-windows">Windows Installer (Recommended)</h4>
                 <p>For Windows users, the easiest and most reliable way to install Arrange Master is by using the provided installer.</p>
@@ -214,7 +262,7 @@
 					</a>
 				</div>
 
-                <h3 id="uninstallation">2. Upgrading & Complete Uninstallation</h3>
+                <h3 id="uninstallation">Upgrading & Complete Uninstallation</h3>
                 <p>When installing a new major version of Arrange Master, it is strictly recommended to completely remove the old version first to prevent file conflicts within the Adobe CEP engine.</p>
 
                 <h4>For Windows Installer Users:</h4>
@@ -240,7 +288,7 @@
                     </li>
                 </ul>
 
-                <h3 id="introduction">3. Introduction</h3>
+                <h3 id="introduction">Introduction</h3>
                 <p>Arrange Master is a professional True-Shape Nesting Plugin for <strong>Adobe Illustrator (CC 2018+)</strong>. This guide explains how to operate the software to transform raw design elements into structured compositions for print production, CNC, and Laser Cutting preparation.</p>
                 
                 <h4>Core Principles:</h4>
@@ -250,7 +298,7 @@
                     <li><strong>Non-Destructive Environment:</strong> The plugin operates within a strict Session-Based Workflow. Original vectors remain intact while calculations execute entirely on generated instances.</li>
                 </ul>
 
-                <h3 id="activation">4. Activation & Connectivity Requirements</h3>
+                <h3 id="activation">Activation & Connectivity Requirements</h3>
                 <p>Arrange Master utilizes an external <strong>Chromium Math Engine</strong> to calculate True-Shape Nesting coordinates without freezing Illustrator. Due to the proprietary nature of this algorithm, the core mathematics module is fetched from a secure cloud server upon initialization.</p>
                 
 				<div class="screenshot-wrapper">
@@ -266,7 +314,7 @@
                     <li>Once activated, the algorithm remains cached securely on your machine for the duration of the Illustrator session.</li>
                 </ul>
 
-                <h3 id="the-main-interface">5. The Main Interface</h3>
+                <h3 id="the-main-interface">The Main Interface</h3>
                 <p>The interface is modular, exposing parameters relevant only to the active layout method. Panel states are clearly mapped with designated color themes.</p>
 				<div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_003.png" class="screenshot-preview">
@@ -279,7 +327,7 @@
                     <li><strong>Action Buttons & Status Bar:</strong> The bottom section contains the main control buttons (<code>Arrange</code>, <code>Randomize</code>, <code>Ok</code>, <code>Cancel</code>) and a status bar that provides progress feedback.</li>
                 </ol>
 
-                <h3 id="the-container-tool">6. The Container as an Active Tool</h3>
+                <h3 id="the-container-tool">The Container as an Active Tool</h3>
                 <p>One of the most important concepts to understand in Arrange Master is that the container is not a passive artboard boundary.  It is an active mechanical component of the nesting process, functioning identically to a <strong>piston</strong>.</p>
                 
                 <div class="screenshot-wrapper">
@@ -294,7 +342,7 @@
                     <li><strong>Relaxing the Layout:</strong> Expanding the container reduces pressure, allowing objects to spread out naturally or accommodating previously rejected overflow items.</li>
                 </ul>
 
-                <h3 id="preparing-for-arrangement">7. Preparing Items for Arrangement</h3>
+                <h3 id="preparing-for-arrangement">Preparing Items for Arrangement</h3>
                 <p>The efficiency of the material optimization depends on how your artwork is structured before initialization.</p>
                 
                 <div class="screenshot-wrapper">
@@ -339,7 +387,7 @@
                     <li><strong>Layer Restoration:</strong> When you finalize the layout (clicking <code>Ok</code>) or cancel the session, Arrange Master automatically unpacks the clusters and distributes each child object back to its originating layer while maintaining relative stacking order.</li>
                 </ul>
 
-                <h3 id="the-arrangement-workflow">8. The Arrangement Workflow: Understanding Sessions</h3>
+                <h3 id="the-arrangement-workflow">The Arrangement Workflow: Understanding Sessions</h3>
                 <p>Arrange Master uses a <strong>Session-Based Workflow</strong> to protect your original objects and maintain stability during complex calculations.</p>
                 
                 <h4>Starting a Session:</h4>
@@ -372,7 +420,7 @@
 
                 <p><em>Note: Switching to a different Illustrator document will force the plugin to auto-terminate the session to prevent data corruption.</em></p>
 
-                <h3 id="layout-methods">9. Layout Methods</h3>
+                <h3 id="layout-methods">Layout Methods</h3>
 
                 <h4 id="dense-packing">Dense Packing (True-Shape Nesting)</h4>
                 <p>Available as a checkbox in both <strong>Greedy Layout</strong> and <strong>Shape Respect Layout</strong>, this activates Arrange Master's flagship feature: the <strong>Chromium Math Engine</strong>. This transitions the plugin from a simple bounding box arranger into a professional True-Shape Nesting tool.</p>
@@ -397,14 +445,14 @@
 					</a>
 				</div>
 
-                <p><strong>Dense Packing Specific Parameters:</strong></p>
+                <p><strong>Dense Packing Settings:</strong></p>
                 <ul>
-                    <li><strong>Evolution Stepper (1-50):</strong> Controls the <strong>Genetic Algorithm (GA)</strong>. Higher values instruct the engine to evolve the packing sequence over more generations, mathematically searching for the highest density score. Values above 20 take longer but yield tighter interlocking geometry.</li>
+                    <li><strong>Evolution Stepper (1-50):</strong> Controls the <strong>Genetic Algorithm (GA)</strong>. Start low and compare results before increasing it. More generations take longer and do not guarantee a denser layout on every run.</li>
                     <li><strong>Vector Gravity Control:</strong> Dense Packing allows you to control how gravity pulls items into position during placement.
                         <ul>
-                            <li><strong>X-Gravity</strong> pulls items vertically (perpendicular to the X-axis).</li>
-                            <li><strong>Y-Gravity</strong> pulls items horizontally (perpendicular to the Y-axis), which is recommended for long, rolled media workflows.</li>
-                            <li><strong>X/Y-Gravity (Dual)</strong> pulls items diagonally at a 45-degree angle toward the origin corner. This produces very tight and dense clusters. Resize the container to compensate for the diagonal edge created by dual gravity.</li>
+                            <li><strong>X-Gravity</strong> pulls items vertically (perpendicular to the X-axis). Recommended for optimizing vertical layouts.</li>
+                            <li><strong>Y-Gravity</strong> pulls items horizontally (perpendicular to the Y-axis), which is recommended for optimizing horizontally elongated layouts.</li>
+                            <li><strong>X/Y-Gravity (Dual)</strong> pulls items diagonally at a 45-degree angle toward the origin corner. Automatically aligns the final beveled edge of the objects array. The result and computational speed still depends of the container height, item shapes, spacing, and allowed rotations.</li>
                         </ul>
                     </li>
                     <li><strong>90° Turn:</strong> Orthogonal placement (0°, 90°, 180°, 270°). Recommended for rectangular or regular shaped objects.</li>
@@ -418,17 +466,14 @@
 					</a>
 				</div>
 
-                <p><strong>Understanding the Genetic Algorithm (Evolution Stepper)</strong></p>
-                <p>Arrange Master performs True-Shape Nesting using a genetic algorithm directly within the Chromium math engine. Instead of stopping at the first valid location, the nesting algorithm generates multiple placement sequences (generations), mutates them, and calculates the density of each generation using exact vector path analysis. The sequence resulting in the maximum material optimization is selected for the final output.</p>
-
-                <p>Finding the optimal layout for CNC/Laser Cutting preparation requires an iterative approach. Use the <code>Evolution Stepper</code> in the panel as follows:</p>
+                <p><strong>Choosing the Generation Count</strong></p>
+                <p>The Evolution Stepper controls how much search effort is spent comparing placements. It is a practical tuning control, not a guarantee of the mathematical optimum.</p>
                 <ol>
-                    <li>Begin with a low value, such as <strong>3</strong> or <strong>5</strong> generations.</li>
-                    <li>If objects are pushed to the Overflow area, or if the layout contains noticeable gaps, increase the parameter to <strong>7–10</strong>.</li>
-                    <li>Observe the output. If the visual result stops changing around <strong>10–15</strong> generations, the algorithm has reached the optimal placement limit for the current settings.</li>
+                    <li>Start with <strong>1–3 generations</strong>, especially for a large or complex selection.</li>
+                    <li>Check placed item count, spacing, and unused space. Increase the value if the result warrants a longer calculation.</li>
+                    <li>Compare gravity, rotation, and container dimensions as well as generation count. If additional generations make little difference, a different setting may help more.</li>
                 </ol>
-                <p>To improve the layout beyond this mathematical limit, you must alter the physical boundaries. Change the Vector Gravity controls (switching between X-Gravitation, Y-Gravitation, or enabling both simultaneously) or manually resize the container shape. This resets the coordinate limits and forces the engine to build completely new structural patterns.</p>
-                <p>It is not recommended to use high Evolution Stepper values for complex layouts containing <strong>300-600</strong> or more objects, as this significantly increases processing time. For large datasets of this scale, setting the Evolution Stepper on <strong>2 or 3</strong> is entirely sufficient to achieve an optimized layout without unnecessary delays.</p>
+                <p>For hundreds of detailed objects, test a representative sample first. Stable-looking results do not prove that the best possible arrangement has been found.</p>
 
 				<div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_022.png" class="screenshot-preview">
@@ -436,10 +481,10 @@
 					</a>
 				</div>
 
-                <p><strong>Hidden Engine Capabilities:</strong></p>
+                <p><strong>Performance and Repeated Runs</strong></p>
                 <ul>
-                    <li><strong>Adaptive Memory Lock:</strong> The Chromium Math Engine dynamically analyzes container dimensions. For exceptionally large artboards (e.g., 5000pt+ car wrap files), it automatically downscales the internal matrix resolution. This guarantees processing stability and prevents RAM overflow while strictly enforcing the requested <code>Min. Spacing</code> parameter.</li>
-                    <li><strong>Smart Caching:</strong> Once the initial <code>Arrange</code> execution compiles, the detailed pixel matrix (RLE) representation of your vectors is preserved in a local memory cache. Subsequent clicks on <code>Arrange</code> or <code>Randomize</code> bypass the heavy vector path extraction process, allowing you to iterate instantly with different packing sequences or genetic generations without any computational delays.</li>
+                    <li><strong>Memory use:</strong> large containers and detailed contours require more memory. Internal geometry resolution can be adjusted for large jobs, but this does not remove practical memory limits. Inspect small gaps at the intended output scale.</li>
+                    <li><strong>Geometry cache:</strong> repeated calculations can reuse geometry from the current session. Placement and applying the result still take time; edits that change the geometry may require new preparation.</li>
                 </ul>
 
                 <div class="screenshot-wrapper">
@@ -448,8 +493,32 @@
                     </a>
                 </div>
 
+                <h4 id="dense-single-item-fill">Single Item Fill in Dense Packing</h4>
+                <p>Select the container and one source item, choose Greedy Layout or Shape Respect, and enable <strong>Dense Packing</strong> and <strong>Single Item</strong>. The mode creates repeated copies and searches for a layout that fits the selected boundary.</p>
+                
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_024.png" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_024.png" alt="Single Item Fill with a regular source shape">
+					</a>
+				</div>
+
+                <p>The source shape passes through a <strong>morphological filter</strong>: the engine evaluates its outline to choose a suitable repetition pattern. This is a placement analysis, not an effect applied to the artwork. The final arrangement depends on the object's shape as well as spacing, rotation permissions, gravity, and the container. Different shapes can produce aligned rows, staggered arrangements, or interlocking placements instead of the same undifferentiated cluster.</p>
+                <ul>
+                    <li><strong>Prepare the source:</strong> group the parts that should repeat together and check the vector contour used for nesting.</li>
+                    <li><strong>Set the constraints:</strong> choose the Min. Spacing and the rotations permitted by the job.</li>
+                    <li><strong>Compare the result:</strong> changing the source outline can change the arrangement pattern and the number of copies that fit.</li>
+                    <li><strong>Finish the session:</strong> use OK to keep the result or Cancel to restore the source selection.</li>
+                </ul>
+
+				<div class="screenshot-wrapper">
+					<a href="assets/screenshots/documentation_screenshot_025.png" class="screenshot-preview">
+						<img src="assets/screenshots/documentation_screenshot_025.png" alt="Single Item Fill examples">
+					</a>
+				</div>
+
                 <h4 id="grid-layout">Grid Layout</h4>
                 <p>Divides the container into a structured grid, centering items within designated cells. Ideal for object sets and icon sheets.</p>
+                
 				<div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_006.png" class="screenshot-preview">
 						<img src="assets/screenshots/documentation_screenshot_006.png" alt="Grid Layout">
@@ -467,11 +536,13 @@
                 </ul>
 
                 <p><strong>Special Mode: Single Item Fill</strong></p>
+
 				<div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_015.png" class="screenshot-preview">
 						<img src="assets/screenshots/documentation_screenshot_015.png" alt="Single Item Fill">
 					</a>
 				</div>
+
                 <p>When the <strong>Single Item Fill</strong> checkbox is enabled, the panel switches to a specialized mode. Instead of arranging a selection of different objects, it calculates the maximum capacity and fills the container with copies of one selected item.</p>
                 <p><strong>Common mistake:</strong> If Arrange Master unexpectedly creates many new copies, turn <strong>Single Item Fill</strong> off. This behavior is intentional and is not the normal multi-object arrangement workflow.</p>
                 <ul>
@@ -481,7 +552,8 @@
 
                 <h4 id="knolling-layout">Knolling Layout</h4>
                 <p>Based on the "Maximal Empty Rectangles" algorithm, this method packs bounding boxes efficiently. It places large items first, then executes a second pass to fill remaining cavities with smaller details.</p>
-				<div class="screenshot-wrapper">
+				
+                <div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_007.png" class="screenshot-preview">
 						<img src="assets/screenshots/documentation_screenshot_007.png" alt="Knolling Layout">
 					</a>
@@ -510,7 +582,7 @@
                 <ul>
                     <li><strong>Fill Direction:</strong> Sets the vertical packing priority (<code>Top-Down</code> or <code>Bottom-Up</code>).</li>
                     <li><strong>Min. Spacing:</strong> Distance between items.</li>
-                    <li><strong>X-Gravity / Y-Gravity / X/Y-Gravity:</strong> Controls the primary pull direction. X/Y-Gravity pulls items diagonally.</li>
+                    <li><strong>X-Gravity / Y-Gravity / X/Y-Gravity:</strong> Controls the compaction direction. X/Y-Gravity combines compaction in both directions.</li>
                     <li><strong>Rotation (90° / 180° / 360°):</strong> Enables orthogonal, flipped, or free rotation. <em>Note: 180° Turn and 360° Turn require Dense Packing to be active in this mode, as they provide no mathematical benefit to static bounding boxes.</em></li>
                     <li><strong>Outer Pad Off:</strong> Disables container edge padding.</li>
                     <li><strong>Single Item:</strong> Calculates bounds and fills the container with copies of a single selected item. Unplaced copies are automatically deleted to keep the artboard clean.</li>
@@ -518,15 +590,15 @@
                 </ul>
 
                 <h4 id="shape-respect-layout">Shape Respect Layout</h4>
-                <p><strong>Container requirement:</strong> For predictable custom-boundary results, use one clean Path or Compound Path as the container. If the visible container is actually a Group, ungroup/clean it first and rebuild the final boundary as a Compound Path when appropriate.</p>
-                <p>This layout operates inside <strong>custom vector shapes</strong>, such as text outlines, angled polygons, or containers with internal holes.</p>
-				
-				<div class="screenshot-wrapper">
-					<a href="assets/screenshots/documentation_screenshot_010.png" class="screenshot-preview">
-						<img src="assets/screenshots/documentation_screenshot_010.png" alt="Shape Respect Layout">
-					</a>
-				</div>
-
+                <p><strong>Supported containers:</strong> closed Paths, Compound Paths, groups of supported closed contours, and clipping groups, including supported compound clipping masks. Holes and overlapping group components are accounted for. Grouping alone is no longer a reason to ungroup the container.</p>
+                <p>This layout operates inside <strong>custom vector shapes</strong>, such as outlined letters, angled polygons, or containers with holes and islands. In ordinary Accurate mode (triggers when Dense Packing is disabled), each item’s bounding rectangle must fit within the valid area. Dense Packing uses the item’s contour for a closer fit. The selected container shape is retained; automatic working-height reduction is not applied.</p>
+                
+                <div class="screenshot-wrapper">
+                    <a href="assets/screenshots/documentation_screenshot_010.png" class="screenshot-preview">
+                        <img src="assets/screenshots/documentation_screenshot_010.png" alt="Shape Respect Layout">
+                    </a>
+                </div>
+                
                 <p><strong>Settings:</strong></p>
                 <ul>
                     <li><strong>Fill Direction:</strong> <code>Top-Down</code> or <code>Bottom-Up</code> placement priority.</li>
@@ -535,7 +607,7 @@
                     <li><strong>Rotation (90° / 180° / 360°):</strong> Evaluates orientations during placement. <em>Note: 180° Turn requires Dense Packing. 360° Turn is supported natively in both Bounding Box and Dense Packing modes.</em></li>
                     <li><strong>Outer Pad Off:</strong> Disables edge margins.</li>
                     <li><strong>Single Item:</strong> Fills the custom container geometry with copies of one selected item. Unplaced copies are deleted.</li>
-                    <li><strong>Chaotic:</strong> Uses a random placement coordinate algorithm instead of an ordered grid, generating natural, organic dispersion patterns.</li>
+                    <li><strong>Chaotic:</strong> Creates random placement in ordinary Accurate mode. Handling and uses the valid container area. Chaotic mode is separate from Dense Packing.</li>
                 </ul>
 
 				<div class="screenshot-wrapper">
@@ -544,7 +616,7 @@
 					</a>
 				</div>
 
-                <h3 id="overflow-placement">10. Overflow Placement: Handling Unplaced Items</h3>
+                <h3 id="overflow-placement">Overflow Placement: Handling Unplaced Items</h3>
                 <p>If an item cannot fit inside the container, it is processed as an "overflow" item.</p>
 
 				<div class="screenshot-wrapper">
@@ -561,21 +633,65 @@
                 </ul>
                 <p>To fit remaining items, increase the container size, lower the "Min. Spacing", or activate Dense Packing, then click <code>Arrange</code> again.</p>
 
-                <h3 id="common-features">11. Common Features &amp; Best Practices</h3>
+                <h3 id="best-practices-and-troubleshooting">Best Practices & Troubleshooting</h3>
+                <p>To ensure reliable nesting results and prevent production delays, review the operational rules, preflight checklist, and diagnostic solutions below.</p>
+
+                <h4>Production Preflight Checklist:</h4>
+                <p>Work through these verification steps before sending nested layouts to cutting or printing:</p>
                 <ul>
-                    <li><strong>Dynamic Document Units:</strong> The <code>Min. Spacing</code> parameter automatically reads and displays the active measurement units of your current Illustrator document (e.g., pt, mm, cm).</li>
-                    <li><strong>Automatic Container Detection:</strong> You don't need to manually assign the container. The plugin automatically identifies the object with the largest area in your selection to act as the boundary.</li>
-                    <li><strong>Automatic Z-Order:</strong> The container is automatically sent to the back of the layer stack, ensuring all arranged items remain visible on top.</li>
-                    <li><strong>Freedom during a Session:</strong> While a session is active, your Illustrator document remains fully interactive. You can:
-                        <ul>
-                            <li><strong>Deselect everything</strong> to get an unobstructed view of the layout.</li>
-                            <li><strong>Zoom and pan</strong> around your artboard to inspect details.</li>
-                            <li><strong>Manually resize or recolor the container object.</strong> After making changes, simply click <code>Arrange</code> again to immediately recalculate the layout within the updated parameters.</li>
-                        </ul>
-                    </li>
+                    <li><strong>Method Verification:</strong> Verify that the active panel corresponds to your production requirements (Grid, Knolling, Greedy, or Shape Respect).</li>
+                    <li><strong>Single Item Fill Status:</strong> Ensure <strong>Single Item</strong> / <strong>Single Item Fill</strong> is turned OFF when arranging multi-object jobs. This mode deliberately creates duplicates to calculate maximum capacity.</li>
+                    <li><strong>Check the container:</strong> the intended boundary must be the largest selected object. Shape Respect accepts the supported paths, compound paths, groups, and clipping groups described above.</li>
+                    <li><strong>Collision Contour Integrity:</strong> Dense Packing evaluates closed vector path data. For stickers, CNC, and laser cutting, verify that each item possesses a closed outer cut line free of stray points and unexpanded strokes.</li>
+                    <li><strong>Ruler Units & Spacing:</strong> Confirm that the displayed <code>Min. Spacing</code> metric matches active document ruler units before starting large calculations.</li>
+                    <li><strong>Rotation Constraints:</strong> Select <strong>180° Turn</strong> when directional material properties (fabric grain, brushed aluminum, lenticular media) prohibit 90° quarter-turns.</li>
+                    <li><strong>Representative Batch Testing:</strong> On large production runs (hundreds of items), test 10–20 sample objects first to verify clearances, Z-order, and layer restoration.</li>
+                    <li><strong>Document Safety:</strong> Always save your Adobe Illustrator document prior to initiating heavy nesting runs.</li>
                 </ul>
 
-                <h3 id="prepress-splitter">12. Prepress Splitter Script</h3>
+                <h4>Vector Geometry & Collision Integrity:</h4>
+                <ul>
+                    <li><strong>Dense Packing Collision Rules:</strong> Collision analysis evaluates mathematical path geometry, not visual raster appearance. Open cut strokes, unexpanded typography, decorative paths, or bleeding raster images inside a clipping mask do not act as safety boundaries unless accompanied by a closed outer vector contour.</li>
+                    <li><strong>Clipping Mask Evaluation:</strong> Arrange Master reads the true visible boundary of clipping masks, ignoring bleeding artwork outside the mask perimeter. If parts appear misaligned, ensure the clipping path itself is a clean, closed shape.</li>
+                    <li><strong>Problematic Geometry:</strong> Avoid using groups containing live Opacity Masks or Gradient Meshes as containers or primary items. The Illustrator API misreports coordinates for these elements. Expand them to standard vector paths before nesting.</li>
+                </ul>
+
+                <h4>Session Workflow & Interactive Container Control:</h4>
+                <ul>
+                    <li><strong>The Container as an Active Piston:</strong> The container is a dynamic boundary tool. Narrowing the container width and clicking <code>Arrange</code> increases transverse pressure, pushing parts into internal cavities. Expanding the container relaxes pressure and allows dense clusters to disperse.</li>
+                    <li><strong>Canvas Interactivity:</strong> While a session is active, the Illustrator canvas remains interactive. You can zoom, pan, inspect clearances, or manually adjust container dimensions. Clicking <code>Arrange</code> immediately recalculates the layout with updated parameters.</li>
+                    <li><strong>Automatic Container & Z-Order Management:</strong> The plugin identifies the object with the largest visual area as the container and sends it to the back of the layer stack automatically, keeping nested items visible on top.</li>
+                    <li><strong>Finalizing via OK and Cancel:</strong> A session must be concluded deliberately. Clicking <code>Ok</code> removes original hidden items and commits working instances to their native layers. Clicking <code>Cancel</code> discards working instances and restores original artwork to its exact initial coordinates.</li>
+                </ul>
+
+                <h4>Heuristic Optimization & Parameter Guidance:</h4>
+                <ul>
+                    <li><strong>Heuristic Stepping:</strong> Dense Packing uses a genetic algorithm heuristic. Higher generation counts provide more search opportunities but do not guarantee monotonic improvement on every individual run. For high-value materials, run several passes and select the densest layout.</li>
+                    <li><strong>Escaping Local Optima:</strong> If a layout stops improving at 10–15 generations, change boundary constraints: toggle between X-Gravity and Y-Gravity, enable X/Y-Gravity, or adjust container width slightly. This resets coordinate limits and allows the engine to discover new packing structures.</li>
+                </ul>
+
+                <h4>Technical Troubleshooting & Diagnostics:</h4>
+                <ul>
+                    <li><strong>Blank Panel on macOS:</strong> A blank extension panel is typically caused by macOS Gatekeeper quarantine flags or missing PlayerDebugMode permissions. Quit Illustrator, open Terminal, and execute the following command:
+                        <div class="faq-code-block">
+                        for v in {8..20}; do defaults write com.adobe.CSXS.$v PlayerDebugMode 1; done && killall -u `whoami` cfprefsd && sudo xattr -cr ~/Library/Application\ Support/Adobe/CEP/extensions/ && sudo xattr -cr /Library/Application\ Support/Adobe/CEP/extensions/ && rm -rf ~/Library/Caches/CSXS/*
+                        </div>
+                    </li>
+                    <li><strong>Blank Panel on Windows:</strong> Close Illustrator and reinstall Arrange Master using the provided Windows setup executable, which applies the required registry settings. If you installed an unsigned copy manually, open Registry Editor and navigate to <code>HKEY_CURRENT_USER\Software\Adobe\CSXS.&lt;version&gt;</code>, replacing <code>&lt;version&gt;</code> with the CEP version used by your Illustrator installation. Create or edit the string value <code>PlayerDebugMode</code> and set it to <code>1</code>, then restart Illustrator. This setting bypasses extension signature checks for unsigned extensions; it is not a general requirement for correctly signed ZXP packages.</li>
+                    <li><strong>Activation & Startup Errors (EACCES / ECONNREFUSED):</strong> Check the error code and any file path or connection address included in the message:
+                        <ul>
+                            <li><strong>EACCES — Access denied:</strong> Check whether the error identifies a local file or folder. Confirm that your user account has the required read or write access to that location, and review antivirus protection history for blocked operations. If the affected path belongs to the Arrange Master installation, close Illustrator and reinstall the plugin using the provided installer. Changing networks will not resolve a local file permission problem.</li>
+                            <li><strong>ECONNREFUSED — Connection refused:</strong> Check whether a firewall, proxy, or local security application is refusing the connection. On Windows, allow network access for <code>Illustrator.exe</code> and <code>CEPHtmlEngine.exe</code> where required.</li>
+                            <li><strong>Proxy configuration:</strong> If using a proxy client such as Clash or V2Ray, confirm that it is running and accepts connections at the configured address and port. If application traffic is not routed through the proxy, temporarily test <strong>Global Mode</strong> or <strong>TUN Mode (Virtual Network Adapter)</strong>.</li>
+                            <li><strong>Network isolation:</strong> For connection errors, temporarily try a mobile hotspot to determine whether the problem is specific to the current network. If the error persists, contact support with the complete error message, your operating system, and Illustrator version.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Shape Respect rejects or misreads a container:</strong> confirm it is the intended largest selected object and inspect its closed contours, holes, and clipping mask. Remove unrelated hidden or stray components. Shape Respect Layout supports groups; convert to a clean Compound Path only when simplifying the file is useful, not as a mandatory step for every group.</li>
+                    <li><strong>Document Units Display Issue:</strong> If ruler units are changed in Illustrator while the panel is open, close and reopen the Arrange Master panel to re-synchronize display labels.</li>
+                    <li><strong>Purchase, Key, or Invoice Inquiries:</strong> Check Spam/Junk folders for order emails. If a license key or download link is missing, contact support at <a href="mailto:info@andrewr.online">info@andrewr.online</a> with your checkout email, purchase date, and payment confirmation. Include business billing details if a formal invoice is required.</li>
+                </ul>
+
+                <h3 id="prepress-splitter">Prepress Splitter Script</h3>
                 <p>The <a href="assets/downloads/Prepress-Splitter.zip" target="_blank"><strong>Prepress Splitter.jsx</strong></a> is a specialized script designed to bridge the gap between automated nesting and wide-format printing production. It distributes nested components into dedicated layers based on object type and Z-order.</p>
                 
                 <div class="screenshot-wrapper">
@@ -612,66 +728,18 @@
                     </a>
                 </div>
 
+                <h3 id="changelog">Changelog</h3>
 
-                <h3 id="troubleshooting-preflight">13. Troubleshooting &amp; Production Preflight</h3>
-                <p>This section consolidates the problems most often seen in real customer files and support requests. Work through the checklist before sending a production job.</p>
-
-                <h4>Dense Packing overlaps artwork or ignores the expected cut boundary</h4>
-                <ol>
-                    <li>Identify the exact vector path that should act as the physical collision/safety boundary.</li>
-                    <li>Make sure that boundary is closed and free of stray points, duplicated paths, hidden objects, and accidental internal geometry.</li>
-                    <li>If your artwork contains raster images, text, marks, or several production layers, do not assume their visible appearance automatically defines the Dense Packing contour.</li>
-                    <li>Test with Dense Packing disabled. If the bounding-box result is correct, the issue is almost certainly in the vector collision geometry rather than basic placement.</li>
-                </ol>
-
-                <h4>Shape Respect does not follow the visible custom shape</h4>
-                <p>Check the Layers panel: the container should be a single Path or Compound Path, not a Group that merely looks like one object. Ungroup it, delete hidden/stray elements, create a clean Compound Path if needed, then retry.</p>
-
-                <h4>Unexpected duplication of one item</h4>
-                <p>Disable <strong>Single Item Fill</strong>. This mode intentionally creates copies to calculate maximum capacity and is easy to enable accidentally when returning to a previous panel state.</p>
-
-                <h4>Rotation constraints are production-critical</h4>
-                <p>Use <strong>180° Turn</strong> when an item may be flipped but must not be quarter-turned (for example, directional print, fabric grain, or other orientation-sensitive production). Use 90° or 360° only when those orientations are acceptable for the job.</p>
-
-                <h4>Higher Evolution Stepper does not always look better</h4>
-                <p>This is expected for heuristic nesting. A larger value increases search effort; it does not guarantee monotonic improvement on every run. For high-value material, compare multiple results and retain the best layout. A generated nest is not guaranteed to be the mathematical global optimum.</p>
-
-                <h4>Activation: “servers unreachable”, ECONNREFUSED, EACCES, or regional access problems</h4>
+                <h4>Version 1.5.0 (September 12, 2026)</h4>
+                <p>Major architectural and algorithmic update.</p>
                 <ul>
-                    <li>Confirm that Illustrator and its CEP background process are allowed through the firewall/antivirus.</li>
-                    <li>Try a different network or mobile hotspot to distinguish a local/ISP routing problem from an application problem.</li>
-                    <li>In regions where Adobe background traffic does not follow the normal system proxy, temporarily use a VPN/proxy mode that routes all application traffic (for example, TUN/global mode), then retry initialization.</li>
-                    <li>If a device-limit/HWID message appears after hardware, OS, or machine changes, contact support for a license-device reset instead of repeatedly reinstalling.</li>
+                    <li><strong>Dense Packing:</strong> Improved packing performance, directional compaction, and block-edge formation with X, Y, and X/Y-Gravity.</li>
+                    <li><strong>Greedy Layout:</strong> Added working-height reduction during X- or Y-Gravity searches to reduce unused space in rectangular layouts.</li>
+                    <li><strong>Single Item Fill:</strong> Repeated layouts now adapt to the source shape, spacing, and allowed rotations.</li>
+                    <li><strong>Shape Respect:</strong> Expanded container support for groups and compound clipping masks, with improved handling of holes and overlapping contours.</li>
+                    <li><strong>360° Turn:</strong> Angle adjustments are now triggered only when spatial interlocking requires it to achieve tighter nesting.</li>
+                    <li><strong>Interface:</strong> Updated the Min. Spacing stepper to use increments between 1 and 0.01 in the current document units. The same steps apply when increasing or decreasing the value.</li>
                 </ul>
-                <p><strong>Connectivity note:</strong> An active connection is required when the license/engine is initialized as described in the Activation section. Do not plan a production workflow around permanent offline availability unless your specific license arrangement explicitly supports it.</p>
-
-                <h4>Blank panel after an Illustrator or macOS update</h4>
-                <ol>
-                    <li>Completely remove the old Arrange Master extension.</li>
-                    <li>Install the newest available Arrange Master build and restart Illustrator.</li>
-                    <li>If the panel is still blank on macOS, apply the PlayerDebugMode/Gatekeeper/cache steps from the website FAQ.</li>
-                    <li>If an older Illustrator build works but the newest one does not, report the exact Illustrator version, macOS version, Mac model/CPU, and Arrange Master version. Treat an Illustrator rollback as a diagnostic test, not the default permanent fix.</li>
-                </ol>
-
-                <h4>Panel scale or document units look wrong</h4>
-                <p>After changing Illustrator UI scaling, display scaling, or document ruler units, close and reopen the Arrange Master panel (or restart Illustrator) before a production run. Verify the displayed Min. Spacing value against a known object measurement before nesting a large job.</p>
-
-                <h4>Purchase delivery, download, key, or invoice problem</h4>
-                <p>Check Spam/Junk and the email used at checkout. If the purchase portal cannot load the download or a key did not arrive, contact support with the checkout email, purchase date, and payment/order confirmation. Include billing details when requesting an invoice.</p>
-
-                <h4>Production preflight checklist</h4>
-                <ul>
-                    <li>Correct layout method selected (Grid / Knolling / Greedy / Shape Respect).</li>
-                    <li>Single Item Fill is ON only when duplication is intentional.</li>
-                    <li>Container is the intended largest object; Shape Respect container is a clean Path/Compound Path.</li>
-                    <li>Dense Packing items use clean vector collision contours; raster-only artwork uses a standard mode.</li>
-                    <li>Min. Spacing and document units are verified.</li>
-                    <li>Rotation permissions match production constraints.</li>
-                    <li>A small representative sample has been tested before a large batch.</li>
-                    <li>Keep the Illustrator document saved before starting a heavy calculation.</li>
-                </ul>
-
-                <h3 id="changelog">14. Changelog</h3>
 
                 <h4>Version 1.4.6 (September 8, 2026)</h4>
                 <p>Maintenance update.</p>

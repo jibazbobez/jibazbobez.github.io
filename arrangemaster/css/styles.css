@@ -2184,22 +2184,10 @@ section,
    DOCUMENTATION / DEMO — STICKY TABLE OF CONTENTS
    ========================================================== */
 
-/*
- * Внешний контейнер становится шире только на страницах,
- * где присутствует .doc-layout.
- *
- * Сам текст при этом остается максимум 800px,
- * как в оригинальном дизайне.
- */
 .doc-page:has(.doc-layout) > .container {
     max-width: 1180px;
 }
 
-/*
- * В исходном CSS .doc-page использует overflow: hidden,
- * что может блокировать position: sticky.
- * Сохраняем горизонтальное обрезание, но разрешаем sticky по вертикали.
- */
 .doc-page:has(.doc-layout) {
     overflow-x: clip;
     overflow-y: visible;
@@ -2434,19 +2422,10 @@ section,
    STICKY TOC — FIXED POSITIONING BEHAVIOR
    ========================================================== */
 
-/*
- * The original .doc-page uses overflow: hidden. Any non-visible
- * overflow on an ancestor can prevent position: sticky from tracking
- * the viewport correctly, so it is disabled only on pages using the TOC.
- */
 .doc-page:has(.doc-layout) {
     overflow: visible !important;
 }
 
-/*
- * Make the grid item itself sticky. Keeping sticky on .doc-toc-inner
- * constrains it to the short height of its parent and prevents movement.
- */
 .doc-toc {
     position: sticky;
     top: 105px;
@@ -2465,4 +2444,52 @@ section,
         top: auto;
         z-index: auto;
     }
+}
+
+/* =======================
+   DOCUMENTATION: SYSTEM REQUIREMENTS
+   ======================== */
+.requirements-table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+}
+
+.requirements-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.requirements-table th,
+.requirements-table td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--surface-border);
+}
+
+.requirements-table thead {
+    background: var(--surface-color);
+    color: var(--text-primary);
+}
+
+.requirements-table tbody th {
+    width: 24%;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.requirements-table tbody tr:last-child th,
+.requirements-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.doc-page .requirements-note {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
 }

@@ -27,45 +27,53 @@
 
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "SoftwareApplication",
-          "name": "Arrange Master Demo",
-          "url": "https://andrewr.online/arrangemaster/demo",
-          "applicationCategory": "DesignApplication",
-          "operatingSystem": "Windows, macOS",
-          "softwareVersion": "1.4.6",
-          "description": "A free evaluation version of the Arrange Master Professional Adobe Illustrator Plugin. Test the True-Shape Nesting algorithm, Vector Path Analysis, and Material Optimization capabilities for CNC/Laser Cutting Preparation.",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
-        },
-        {
-          "@type": "HowTo",
-          "name": "How to Install the Arrange Master Demo in Adobe Illustrator",
-          "description": "Step-by-step instructions for installing the Arrange Master Demo CEP Extension on Windows and macOS.",
-          "step": [
+        "@context": "https://schema.org",
+        "@graph": [
             {
-              "@type": "HowToStep",
-              "name": "Windows Installation",
-              "text": "Extract the downloaded ZIP archive and double-click the ArrangeMasterDemo-Setup.exe file to run the automated installer."
+                "@type": "SoftwareApplication",
+                "name": "Arrange Master Demo",
+                "url": "https://andrewr.online/arrangemaster/demo.html",
+                "applicationCategory": "DesignApplication",
+                "operatingSystem": "Windows, macOS",
+                "softwareVersion": "1.5.0",
+                "description": "Free evaluation of Arrange Master 1.5.0 for desktop Adobe Illustrator. Dense Packing supports up to 100 objects and 15 generations with 96 PPI watermarked raster output. Standard layouts, including ordinary Accurate, retain editable artwork.",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                },
+                "softwareRequirements": "Desktop Adobe Illustrator CC 2018 or later with CEP support; an OS supported by that Illustrator version; internet for initialization.",
+                "featureList": [
+                    "Grid, Knolling, Greedy, and Shape Respect with demo settings",
+                    "Dense Packing: up to 100 objects and 15 generations",
+                    "X or Y gravity; XY and Free Rotation disabled",
+                    "Supported groups, compound paths, clipping containers, and holes in Shape Respect",
+                    "Watermarked 96 PPI raster output for Dense Packing only"
+                ]
             },
             {
-              "@type": "HowToStep",
-              "name": "macOS Installation",
-              "text": "Open a third-party ZXP manager (such as Anastasiy's Extension Manager or ZXPinstaller) and drag-and-drop the provided .zxp file into the application."
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Launch the Plugin",
-              "text": "Restart Adobe Illustrator. Navigate to the top menu and click Window > Extensions > Arrange Master Demo to open the panel."
+                "@type": "HowTo",
+                "name": "How to Install the Arrange Master Demo in Adobe Illustrator",
+                "description": "Step-by-step instructions for installing the Arrange Master Demo CEP Extension on Windows and macOS.",
+                "step": [
+                    {
+                        "@type": "HowToStep",
+                        "name": "Windows Installation",
+                        "text": "Extract the downloaded ZIP archive and double-click the ArrangeMasterDemo-Setup.exe file to run the automated installer."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "name": "macOS Installation",
+                        "text": "Open a third-party ZXP manager (such as Anastasiy's Extension Manager or ZXPinstaller) and drag-and-drop the provided .zxp file into the application."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "name": "Launch the Plugin",
+                        "text": "Restart Adobe Illustrator. Navigate to the top menu and click Window > Extensions > Arrange Master Demo to open the panel."
+                    }
+                ]
             }
-          ]
-        }
-      ]
+        ]
     }
     </script>
 
@@ -154,7 +162,7 @@
                 <ul>
                     <li><strong>Dense Packing is vector-based:</strong> use clean vector paths for true-shape collision analysis. Raster-only artwork should be evaluated with the standard bounding-box modes.</li>
                     <li><strong>For stickers / CNC / laser work:</strong> use a clean, closed outer or cut contour if that contour is the safety boundary you need. Open strokes, text outlines, and decorative internal paths may not represent the envelope you expect.</li>
-                    <li><strong>For Shape Respect:</strong> use one clean Path or Compound Path as the custom container, not a Group that only looks like one shape.</li>
+                    <li><strong>For Shape Respect:</strong> use a supported closed Path, Compound Path, group of closed contours, or clipping group. Shape Respect Layout supports compound clipping masks with holes and islands; check for unrelated or stray components.</li>
                     <li><strong>Start small:</strong> test 5–20 representative objects before a large job. Confirm spacing, rotation, and container behavior first.</li>
                     <li><strong>Demo output:</strong> Dense Packing is intentionally rasterized/watermarked in the demo; use it to evaluate geometry, speed, and compatibility rather than final production output.</li>
                 </ul>
@@ -200,10 +208,10 @@
                     <li>A value of <code>1</code> executes a single, fast pass.</li>
                     <li>Increasing the value forces the algorithm to compute more generations, finding tighter interlocking coordinates for material optimization.</li>
                     <li><strong>In the demo version, the Evolution Stepper is capped at <code>15</code> generations.</strong></li>
-                    <li><strong>Object Limit:</strong> True-Shape Nesting in the demo restricts the selection to a maximum of 70 objects per run.</li>
+                    <li><strong>Object Limit:</strong> True-Shape Nesting in the demo restricts the selection to a maximum of 100 objects per run.</li>
                 </ul>
                 <p>
-                    <em>Note: To protect the proprietary nesting algorithm, Dense Packing results in the demo version are finalized as a 150 PPI raster image with a watermark. Standard layout methods (Grid, Knolling) remain as editable vectors.</em>
+                    <em>Note: To protect the proprietary nesting algorithm, Dense Packing results in the demo version are finalized as a 96 PPI raster image with a watermark. Standard layout methods (with Dense Packing disabled) remain as editable vectors.</em>
                 </p>
 
                 <div class="offer-banner">
@@ -254,7 +262,7 @@
                     <li><strong>Advanced Vector Gravity:</strong> Combined X/Y-Gravity (diagonal packing for maximum density) is disabled.</li>
                     <li><strong>360° Turn:</strong> Stepless free rotation during nesting is disabled.</li>
                     <li><strong>Automation Modes:</strong> Single Item Fill (Grid, Greedy, Shape Respect), Chaotic Mode (Shape Respect), Align Edge (Greedy), and Fit to Container scaling (Knolling) are disabled.</li>
-                    <li><strong>Limits Removed:</strong> The full version removes the 70-object limit and expands the Evolution Stepper to 50 generations.</li>
+                    <li><strong>Limits Removed:</strong> The full version removes the 100-object limit and expands the Evolution Stepper to 50 generations.</li>
                 </ul>
 
                 <h3 id="installation">Installation & Removal</h3>
