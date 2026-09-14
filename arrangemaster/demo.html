@@ -136,7 +136,6 @@
 
                         <ol>
                             <li><a href="#demo-purpose">The Purpose of the Demo</a></li>
-                            <li><a href="#preflight">Before You Test: 60-Second Preflight</a></li>
                             <li><a href="#features">Available Functionality</a></li>
                             <li><a href="#genetic-algorithm">Dense Packing & The Evolution Stepper</a></li>
                             <li><a href="#hidden-capabilities">Hidden Capabilities</a></li>
@@ -153,19 +152,8 @@
                 <div class="doc-content">
 
                 <h3 id="demo-purpose">The Purpose of the Demo</h3>
-                <p>
-                    The Arrange Master Demo provides a hands-on trial of our True-Shape Nesting Plugin for <strong>Adobe Illustrator (CC 2018+)</strong>. Previously distributed as a basic JSX script, the demo is now a fully integrated CEP panel. It allows users to test the performance of the True-Shape Nesting algorithm, verify compatibility with complex prepress vector files, and understand the core session workflow.
-                </p>
-
-                <h3 id="preflight">Before You Test: 60-Second Preflight</h3>
-                <p>The demo is most useful when you test the same type of production geometry you plan to use after purchase. Before clicking <strong>Arrange</strong>:</p>
-                <ul>
-                    <li><strong>Dense Packing is vector-based:</strong> use clean vector paths for true-shape collision analysis. Raster-only artwork should be evaluated with the standard bounding-box modes.</li>
-                    <li><strong>For stickers / CNC / laser work:</strong> use a clean, closed outer or cut contour if that contour is the safety boundary you need. Open strokes, text outlines, and decorative internal paths may not represent the envelope you expect.</li>
-                    <li><strong>For Shape Respect:</strong> use a supported closed Path, Compound Path, group of closed contours, or clipping group. Shape Respect Layout supports compound clipping masks with holes and islands; check for unrelated or stray components.</li>
-                    <li><strong>Start small:</strong> test 5–20 representative objects before a large job. Confirm spacing, rotation, and container behavior first.</li>
-                    <li><strong>Demo output:</strong> Dense Packing is intentionally rasterized/watermarked in the demo; use it to evaluate geometry, speed, and compatibility rather than final production output.</li>
-                </ul>
+                <p>The Arrange Master Demo provides a hands-on trial of our True-Shape Nesting Plugin for <strong>Adobe Illustrator (CC 2018+)</strong>. Previously distributed as a basic JSX script, the demo is now a fully integrated CEP panel. It allows users to test the performance of the True-Shape Nesting algorithm, verify compatibility with complex prepress vector files, and understand the core session workflow.</p>
+                <p>For the first test, use 5–20 representative objects. Check the spacing, rotations, and container behaviour before trying a larger selection.</p>
 
                 <h3 id="features">Available Functionality</h3>
 
@@ -175,12 +163,12 @@
 					</a>
 				</div>
                 
-                <p>The demo provides access to four primary layout engines with restricted parameters:</p>
+                <p>The demo includes four layout methods with selected controls enabled:</p>
                 <ul>
-                    <li><strong>Grid Layout:</strong> Distributes objects into a structured grid. Controls for Rows, Columns, Size Limit OFF, and Square Cells (proportional centering) are active.</li>
-                    <li><strong>Knolling Layout:</strong> Evaluates bounding boxes using the Maximal Empty Rectangles heuristic. Fill Direction, Min. Spacing, Allow 90° turn, and Outer Padding OFF are active.</li>
-                    <li><strong>Greedy Layout:</strong> Sequential placement algorithm. Active parameters: Fill Direction, Min. Spacing, Dense Packing/Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, and Outer Pad Off.</li>
-                    <li><strong>Shape Respect Layout:</strong> Places items within non-rectangular vector containers. Active parameters: Fill Direction, Min. Spacing, Dense Packing/Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, and Outer Pad Off.</li>
+                    <li><strong>Grid Layout:</strong> Distributes objects in rows and columns. Rows, Columns, Size Limit OFF, and Square Cells are available.</li>
+                    <li><strong>Knolling Layout:</strong> Arranges object bounding boxes. Fill Direction, Min. Spacing, 90° Turn, and Outer Padding OFF are available.</li>
+                    <li><strong>Greedy Layout:</strong> Packs objects in a rectangular area. Fill Direction, Min. Spacing, Dense Packing, Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, and Outer Pad Off are available.</li>
+                    <li><strong>Shape Respect Layout:</strong> Places objects inside a non-rectangular vector container. It supports closed paths, compound paths, supported groups, and clipping groups. The same enabled controls as Greedy Layout are available.</li>
                 </ul>
 
                 <div class="offer-banner">
@@ -191,12 +179,8 @@
                 </div>
 
                 <h3 id="genetic-algorithm">Dense Packing & The Evolution Stepper</h3>
-                <p>
-                    When the <strong>Dense Packing</strong> checkbox is enabled, the plugin shifts from standard bounding-box calculations to exact True-Shape Nesting. This process is handled by the <strong>Chromium Math Engine</strong> running in the background.
-                </p>
-                <p>
-                    The <strong>Evolution Stepper</strong> parameter controls the Genetic Algorithm used for this task. Instead of accepting the first valid placement, the engine generates multiple placement sequences, mutates them, and evaluates the density of each layout using Vector Path Analysis.
-                </p>
+                <p>Dense Packing is Arrange Master’s true-shape nesting mode. The <strong>Chromium Math Engine</strong> performs Vector Path Analysis, so the nesting algorithm evaluates the actual vector outlines instead of only their bounding boxes.</p>
+                <p>Use clean, closed vector contours when you need to test Material Optimization, CNC preparation, laser cutting preparation, or print-and-cut artwork. Raster-only artwork can still be evaluated with the standard layout methods, but it is not used as true-shape collision geometry.</p>
 
 				<div class="screenshot-wrapper">
 					<a href="assets/screenshots/demo-generations.png" class="screenshot-preview">
@@ -205,14 +189,12 @@
 				</div>
 
                 <ul>
-                    <li>A value of <code>1</code> executes a single, fast pass.</li>
-                    <li>Increasing the value forces the algorithm to compute more generations, finding tighter interlocking coordinates for material optimization.</li>
-                    <li><strong>In the demo version, the Evolution Stepper is capped at <code>15</code> generations.</strong></li>
-                    <li><strong>Object Limit:</strong> True-Shape Nesting in the demo restricts the selection to a maximum of 100 objects per run.</li>
+                    <li><strong>Evolution Stepper:</strong> a value of <code>1</code> performs one fast search pass. Higher values evaluate more placement options and take longer.</li>
+                    <li><strong>Demo limit:</strong> the Evolution Stepper is limited to <code>15</code> generations.</li>
+                    <li><strong>Object limit:</strong> Dense Packing accepts up to <code>100</code> objects per run in the demo.</li>
+                    <li><strong>Demo output:</strong> Dense Packing creates a 96 PPI raster result with a watermark. Use it to evaluate nesting behaviour and compatibility; it is not intended for final production output.</li>
                 </ul>
-                <p>
-                    <em>Note: To protect the proprietary nesting algorithm, Dense Packing results in the demo version are finalized as a 96 PPI raster image with a watermark. Standard layout methods (with Dense Packing disabled) remain as editable vectors.</em>
-                </p>
+                <p>Standard layouts, including ordinary Accurate mode, keep the arranged artwork editable.</p>
 
                 <div class="offer-banner">
                     <h4>Video demonstration of Dense Packing (True-Shape Nesting)</h4>
@@ -234,35 +216,33 @@
                 </div>
 
                 <h3 id="hidden-capabilities">Hidden Capabilities</h3>
-                <p>While the interface parameters are restricted, the core engine processes files with the exact same logic as the full version. The demo actively supports:</p>
+                <p>The demo also supports the following production-oriented file behaviour:</p>
                 <ul>
-                    <li><strong>Multi-Layer Retention:</strong> The engine temporarily groups objects that overlap across different layers (e.g., CUT, PRINT, and MARKS layers). It moves them as a single unit during the nesting process and restores them to their specific original layers upon finalization. You can test the <strong>Multi-Layer Retention</strong> feature in Knolling Layout.</li>
-                    <li><strong>Clipping Mask Detection:</strong> The algorithm correctly reads the true visible boundaries of clipping masks, ignoring hidden bleeding paths.</li>
+                    <li><strong>Multi-Layer Retention:</strong> Arrange Master can move related objects across layers as one unit and restore them to their original layers (e.g., PRINT, CUT, and MARKS) when the session is completed. Test this feature in Knolling Layout.</li>
+                    <li><strong>Clipping Mask Detection:</strong> the plugin reads the visible boundary of a clipping mask and ignores artwork outside the clipping path.</li>
                 </ul>
 
                 <h3 id="session-workflow">The Session Workflow: Why you must click "OK"</h3>
-                <p>
-                    Arrange Master operates entirely on a non-destructive session model. When you click the <strong>Arrange</strong> button, the plugin hides your original selected vectors and creates a temporary working layer. This allows you to adjust spacing, change settings, and recalculate the layout instantly without permanently modifying the document.
-                </p>
+                <p>Arrange Master works in a temporary session. After you click <strong>Arrange</strong>, the original selection is hidden while the plugin creates a working group. You can change settings and calculate again before making the result permanent.</p>
                 
                 <div class="offer-banner">
                     <h4>Finalizing the Session</h4>
                     <p>
-                        To complete the process, you must click the <strong>Ok</strong> button. This action deletes the hidden original files and commits the arranged results to the canvas. If you click <strong>Cancel</strong>, the plugin deletes the temporary layout and unhides your original selection exactly as it was.
+                        Click <strong>OK</strong> to keep the arranged result. Click <strong>Cancel</strong> to remove the temporary layout and restore the original selection.
                     </p>
                 </div>
+
                 <p>
-                    <em>Security Note: The demo actively monitors the session state. Any attempt to bypass the workflow (e.g., copying temporary items to the clipboard or closing the document before clicking "Ok") will trigger an automatic abort, clearing the temporary results.</em>
+                    <em>Do not close or change document while a session is active. Arrange Master ends the temporary session automatically to protect the document state.</em>
                 </p>
 
                 <h3 id="disabled-features">Disabled Features (Available in Full Version)</h3>
-                <p>The following features are visually disabled in the demo panel to indicate what is unlocked in the full commercial release:</p>
+                <p>The following options are disabled in the demo and available in the full version:</p>
                 <ul>
-                    <li><strong>Vector Output for Dense Packing:</strong> The full version retains exact, editable vector paths after True-Shape Nesting.</li>
-                    <li><strong>Advanced Vector Gravity:</strong> Combined X/Y-Gravity (diagonal packing for maximum density) is disabled.</li>
-                    <li><strong>360° Turn:</strong> Stepless free rotation during nesting is disabled.</li>
-                    <li><strong>Automation Modes:</strong> Single Item Fill (Grid, Greedy, Shape Respect), Chaotic Mode (Shape Respect), Align Edge (Greedy), and Fit to Container scaling (Knolling) are disabled.</li>
-                    <li><strong>Limits Removed:</strong> The full version removes the 100-object limit and expands the Evolution Stepper to 50 generations.</li>
+                    <li><strong>Vector output for Dense Packing:</strong> the full version keeps nested results as editable vector artwork.</li>
+                    <li><strong>X/Y-Gravity and 360° Turn:</strong> these Dense Packing controls are disabled in the demo.</li>
+                    <li><strong>Additional automation:</strong> Single Item Fill, Chaotic in Shape Respect, Align Edge in Greedy, and Fit to Container scaling in Knolling are disabled.</li>
+                    <li><strong>Higher limits:</strong> the full version removes the 100-object Dense Packing limit and supports an Evolution Stepper value up to 50.</li>
                 </ul>
 
                 <h3 id="installation">Installation & Removal</h3>

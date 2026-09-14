@@ -698,10 +698,7 @@
                             <div class="faq-answer-content">
                                 <p>Connection errors during license activation or demo initialization are typically caused by regional firewall restrictions, ISP routing conflicts, or proxy settings. Follow these steps to resolve the issue:</p>
 
-                                <p><strong>1. Check Service Status</strong></p>
-                                <p>Arrange Master distributes endpoint lists and secure engine modules via Cloudflare and GitHub. Check <a href="https://www.cloudflarestatus.com/" target="_blank" rel="nofollow noopener noreferrer">Cloudflare Status</a> and <a href="https://www.githubstatus.com/" target="_blank" rel="nofollow noopener noreferrer">GitHub Status</a>. If an outage is active, wait until services recover and try again. Otherwise, proceed to steps 2 and 3.</p>
-
-                                <p><strong>2. Configure VPN / Proxy (Mainland China &amp; Restricted Regions)</strong></p>
+                                <p><strong>1. Configure VPN / Proxy (Mainland China &amp; Restricted Regions)</strong></p>
                                 <p>Standard system proxies often do not route internal network traffic from Adobe Illustrator. If you are using a proxy client (such as Clash or V2Ray):</p>
                                 <ul>
                                     <li>Temporarily switch your proxy client to <strong>Global Mode</strong> or enable <strong>TUN Mode (Virtual Network Adapter)</strong>. This forces Illustrator to route all traffic through the proxy.</li>
@@ -709,7 +706,7 @@
                                     <li>After the current Illustrator session has initialized successfully, you may return the proxy client to its normal mode. A future Illustrator session may require network access again to authenticate and load the Dense Packing engine.</li>
                                 </ul>
 
-                                <p><strong>3. Temporarily Pause Antivirus / Firewall</strong></p>
+                                <p><strong>2. Temporarily Pause Antivirus / Firewall</strong></p>
                                 <p>Third-party security software (such as Kaspersky, Avast, Bitdefender, McAfee, or 360 Security) or strict local firewall rules can block Illustrator's background network process (<code>CEPHtmlEngine.exe</code>), returning an <code>EACCES</code> connection error:</p>
                                 <ul>
                                     <li>Temporarily pause your antivirus web/real-time protection for 5 minutes.</li>
@@ -717,7 +714,7 @@
                                     <li>Click <strong>Activate Device</strong> (or reopen the demo panel). Once activated, the license is cached permanently and you can turn your antivirus back on.</li>
                                 </ul>
 
-                                <p><strong>4. Resolve IPv6 Routing Conflicts (EACCES Error)</strong></p>
+                                <p><strong>3. Resolve IPv6 Routing Conflicts (EACCES Error)</strong></p>
                                 <p>An error like <code>EACCES [2606:4700:...]</code> indicates that your local ISP has an IPv6 routing issue with Cloudflare edge nodes (common in Southeast Asia). If the connection fails because the Adobe CEP process cannot reach the authentication/engine endpoints, use one of these quick diagnostics:</p>
                                 <ul>
                                     <li><strong>Option A (Fastest):</strong> Connect your computer temporarily to a mobile hotspot (4G/5G) or a VPN, open Illustrator, and click <strong>Activate Device</strong>. Once activated, return to your regular Wi-Fi.</li>

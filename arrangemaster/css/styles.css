@@ -2459,6 +2459,7 @@ section,
 .requirements-table {
     width: 100%;
     min-width: 560px;
+    table-layout: fixed;
     border-collapse: collapse;
     color: var(--text-secondary);
     font-size: 0.95rem;
@@ -2478,15 +2479,16 @@ section,
     color: var(--text-primary);
 }
 
+.requirements-table thead th:first-child,
 .requirements-table tbody th {
     width: 24%;
     color: var(--text-primary);
     font-weight: 500;
 }
 
-.requirements-table tbody tr:last-child th,
-.requirements-table tbody tr:last-child td {
-    border-bottom: none;
+.requirements-table thead th:nth-child(2),
+.requirements-table thead th:nth-child(3) {
+    width: 38%;
 }
 
 .doc-page .requirements-note {
