@@ -494,7 +494,7 @@
                 </div>
 
                 <h4 id="dense-single-item-fill">Single Item Fill in Dense Packing</h4>
-                <p>Select the container and one source item, choose Greedy Layout or Shape Respect, and enable <strong>Dense Packing</strong> and <strong>Single Item</strong>. The mode creates repeated copies and searches for a layout that fits the selected boundary.</p>
+                <p>Single Item Fill creates copies of one source item and places them in the selected container. In <strong>Greedy Layout</strong>, the container is rectangular. In <strong>Shape Respect Layout</strong>, it can be a container of arbitrary shape.</p>
                 
 				<div class="screenshot-wrapper">
 					<a href="assets/screenshots/documentation_screenshot_024.png" class="screenshot-preview">
@@ -504,10 +504,11 @@
 
                 <p>The source item passes through a <strong>morphological filter</strong>: the engine evaluates its outline to choose a suitable repetition pattern. The final arrangement depends on the object's shape as well as Min. Spacing, rotation settings, gravity vector and the container size. Different shapes can produce aligned rows, staggered arrangements or interlocking placements instead of chaotic filling.</p>
                 <ul>
-                    <li><strong>Prepare the source:</strong> group the parts that should repeat together and check the vector contour used for nesting.</li>
-                    <li><strong>Set the constraints:</strong> choose the Min. Spacing and the suitable rotations setting.</li>
-                    <li><strong>Compare the result:</strong> use different settings and choose the one that gives the highest number of copies.</li>
-                    <li><strong>Finish the session:</strong> click OK to keep the result or Cancel to restore the source item.</li>
+                    <li>Select the container and the source item.</li>
+                    <li>Choose Greedy Layout or Shape Respect Layout, then enable <strong>Dense Packing</strong>/<strong>Single Item</strong>.</li>
+                    <li>If you need to arrange copies of a raster object, select the corresponding mode in Grid Layout.</li>
+                    <li>Set Min. Spacing and the rotations permitted for the item.</li>
+                    <li>Click <code>Arrange</code>. Keep the result with <code>OK</code> or restore the original item with <code>Cancel</code>.</li>
                 </ul>
 
 				<div class="screenshot-wrapper">
@@ -639,6 +640,7 @@
                 <h4>Production Preflight Checklist:</h4>
                 <p>Work through these verification steps before sending nested layouts to cutting or printing:</p>
                 <ul>
+                    <li><strong>Document Safety:</strong> Always save your Adobe Illustrator document prior to initiating heavy nesting runs.</li>
                     <li><strong>Method Verification:</strong> Verify that the active panel corresponds to your production requirements (Grid, Knolling, Greedy, or Shape Respect).</li>
                     <li><strong>Single Item Fill Status:</strong> Ensure <strong>Single Item</strong> / <strong>Single Item Fill</strong> is turned OFF when arranging multi-object jobs. This mode deliberately creates duplicates to calculate maximum capacity.</li>
                     <li><strong>Check the container:</strong> the intended boundary must be the largest selected object. Shape Respect accepts the supported paths, compound paths, groups, and clipping groups described above.</li>
@@ -646,7 +648,6 @@
                     <li><strong>Ruler Units & Spacing:</strong> Confirm that the displayed <code>Min. Spacing</code> metric matches active document ruler units before starting large calculations.</li>
                     <li><strong>Rotation Constraints:</strong> Select <strong>180° Turn</strong> when directional material properties (fabric grain, brushed aluminum, lenticular media) prohibit 90° quarter-turns.</li>
                     <li><strong>Representative Batch Testing:</strong> On large production runs (hundreds of items), test 10–20 sample objects first to verify clearances, Z-order, and layer restoration.</li>
-                    <li><strong>Document Safety:</strong> Always save your Adobe Illustrator document prior to initiating heavy nesting runs.</li>
                 </ul>
 
                 <h4>Vector Geometry & Collision Integrity:</h4>
@@ -733,10 +734,10 @@
                 <h4>Version 1.5.0 (September 12, 2026)</h4>
                 <p>Major architectural and algorithmic update.</p>
                 <ul>
-                    <li><strong>Dense Packing:</strong> Improved packing performance, directional compaction, and block-edge formation with X, Y, and X/Y-Gravity.</li>
-                    <li><strong>Greedy Layout:</strong> Added working-height reduction during X- or Y-Gravity searches to reduce unused space in rectangular layouts.</li>
-                    <li><strong>Single Item Fill:</strong> Repeated layouts now adapt to the source shape, spacing, and allowed rotations.</li>
-                    <li><strong>Shape Respect:</strong> Expanded container support for groups and compound clipping masks, with improved handling of holes and overlapping contours.</li>
+                    <li><strong>Dense Packing:</strong> Updated contour analysis and gravity-based compaction in Greedy and Shape Respect layouts.</li>
+                    <li><strong>Greedy Layout:</strong> Added working-height reduction during X or Y-Gravity searches to reduce unused space in rectangular layouts.</li>
+                    <li><strong>Single Item Fill:</strong> Copies of the same object are now arranged according to the shape of the original object, choosing the best packing order.</li>
+                    <li><strong>Shape Respect:</strong> Added support for different types of containers: Compaund Path, Clipping Mask, groups of objects, including containers with holes and separated subpaths.</li>
                     <li><strong>360° Turn:</strong> Angle adjustments are now triggered only when spatial interlocking requires it to achieve tighter nesting.</li>
                     <li><strong>Interface:</strong> Updated the Min. Spacing stepper to use increments between 1 and 0.01 in the current document units. The same steps apply when increasing or decreasing the value.</li>
                 </ul>
@@ -985,10 +986,6 @@
                 </a>
 
             </div>
-
-            <p class="modal-refund-note">
-                Refund Policy: In case of a refund, 8% of the payment will be retained by Lava.Top as a transaction fee.
-            </p>
 
         </div>
     </div>

@@ -1622,15 +1622,6 @@ section {
     text-decoration: underline;
 }
 
-.modal-refund-note {
-    font-size: 0.78rem;
-    color: var(--text-tertiary);
-    text-align: center;
-    margin-top: 18px;
-    margin-bottom: 0;
-    line-height: 1.45;
-}
-
 .payment-modal {
     display: none;
     position: fixed;
