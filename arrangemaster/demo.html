@@ -35,8 +35,8 @@
                 "url": "https://andrewr.online/arrangemaster/demo.html",
                 "applicationCategory": "DesignApplication",
                 "operatingSystem": "Windows, macOS",
-                "softwareVersion": "1.5.0",
-                "description": "Free evaluation of Arrange Master 1.5.0 for desktop Adobe Illustrator. Dense Packing supports up to 100 objects and 15 generations with 96 PPI watermarked raster output. Standard layouts, including ordinary Accurate, retain editable artwork.",
+                "softwareVersion": "1.5.1",
+                "description": "Free evaluation of Arrange Master 1.5.1 for desktop Adobe Illustrator. Dense Packing supports up to 50 objects and 15 generations with 96 PPI watermarked raster output. 360 Turn is available in Dense Packing for Greedy and Shape Respect; combined X/Y gravity remains disabled. Standard layouts, including ordinary Accurate, retain editable artwork.",
                 "offers": {
                     "@type": "Offer",
                     "price": "0",
@@ -45,8 +45,8 @@
                 "softwareRequirements": "Desktop Adobe Illustrator CC 2018 or later with CEP support; an OS supported by that Illustrator version; internet for initialization.",
                 "featureList": [
                     "Grid, Knolling, Greedy, and Shape Respect with demo settings",
-                    "Dense Packing: up to 100 objects and 15 generations",
-                    "X or Y gravity; XY and Free Rotation disabled",
+                    "Dense Packing: up to 50 objects and 15 generations",
+                    "X or Y gravity; X/Y-Gravity disabled; 90°, 180°, and 360° rotation available only in Dense Packing for Greedy and Shape Respect",
                     "Supported groups, compound paths, clipping containers, and holes in Shape Respect",
                     "Watermarked 96 PPI raster output for Dense Packing only"
                 ]
@@ -166,9 +166,9 @@
                 <p>The demo includes four layout methods with selected controls enabled:</p>
                 <ul>
                     <li><strong>Grid Layout:</strong> Distributes objects in rows and columns. Rows, Columns, Size Limit OFF, and Square Cells are available.</li>
-                    <li><strong>Knolling Layout:</strong> Arranges object bounding boxes. Fill Direction, Min. Spacing, 90° Turn, and Outer Padding OFF are available.</li>
-                    <li><strong>Greedy Layout:</strong> Packs objects in a rectangular area. Fill Direction, Min. Spacing, Dense Packing, Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, and Outer Pad Off are available.</li>
-                    <li><strong>Shape Respect Layout:</strong> Places objects inside a non-rectangular vector container. It supports closed paths, compound paths, supported groups, and clipping groups. The same enabled controls as Greedy Layout are available.</li>
+                    <li><strong>Knolling Layout:</strong> Arranges object bounding boxes. Fill Direction, Min. Spacing, and Outer Padding OFF are available.</li>
+                    <li><strong>Greedy Layout:</strong> Packs objects in a rectangular area. Fill Direction, Min. Spacing, Dense Packing, Evolution Stepper, X-Gravity, Y-Gravity, 90° Turn, 180° Turn, 360° Turn, and Outer Pad Off are available only with Dense Packing. 360° Turn tests 15° increments.</li>
+                    <li><strong>Shape Respect Layout:</strong> Places objects inside a non-rectangular vector container. It supports closed paths, compound paths, supported groups, and clipping groups. The same enabled controls as Greedy Layout are available; all rotation controls require Dense Packing.</li>
                 </ul>
 
                 <div class="offer-banner">
@@ -191,7 +191,7 @@
                 <ul>
                     <li><strong>Evolution Stepper:</strong> a value of <code>1</code> performs one fast search pass. Higher values evaluate more placement options and take longer.</li>
                     <li><strong>Demo limit:</strong> the Evolution Stepper is limited to <code>15</code> generations.</li>
-                    <li><strong>Object limit:</strong> Dense Packing accepts up to <code>100</code> objects per run in the demo.</li>
+                    <li><strong>Object limit:</strong> Dense Packing accepts up to <code>50</code> objects per run in the demo.</li>
                     <li><strong>Demo output:</strong> Dense Packing creates a 96 PPI raster result with a watermark. Use it to evaluate nesting behaviour and compatibility; it is not intended for final production output.</li>
                 </ul>
                 <p>Standard layouts, including ordinary Accurate mode, keep the arranged artwork editable.</p>
@@ -240,9 +240,9 @@
                 <p>The following options are disabled in the demo and available in the full version:</p>
                 <ul>
                     <li><strong>Vector output for Dense Packing:</strong> the full version keeps nested results as editable vector artwork.</li>
-                    <li><strong>X/Y-Gravity and 360° Turn:</strong> these Dense Packing controls are disabled in the demo.</li>
+                    <li><strong>X/Y-Gravity:</strong> combined X/Y gravity remains disabled in the demo. In Greedy and Shape Respect, 90°, 180°, and 360° rotation controls are available only while Dense Packing is enabled.</li>
                     <li><strong>Additional automation:</strong> Single Item Fill, Chaotic in Shape Respect, Align Edge in Greedy, and Fit to Container scaling in Knolling are disabled.</li>
-                    <li><strong>Higher limits:</strong> the full version removes the 100-object Dense Packing limit and supports an Evolution Stepper value up to 50.</li>
+                    <li><strong>Higher limits:</strong> the full version removes the 50-object Dense Packing limit and supports an Evolution Stepper value up to 50.</li>
                 </ul>
 
                 <h3 id="installation">Installation & Removal</h3>
