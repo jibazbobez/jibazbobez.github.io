@@ -70,6 +70,7 @@
     src: url('https://andrewr.online/assets/fonts/roboto-v50-cyrillic_latin-700.woff2') format('woff2');
 }
 
+
 /* =======================
    GLOBAL STYLES AND VARIABLES
    ======================== */
@@ -136,6 +137,7 @@ body {
     background: var(--primary-accent);
 }
 
+
 /* =======================
    UTILITIES
    ======================== */
@@ -201,6 +203,7 @@ section {
     z-index: -1;
 }
 
+
 /* =======================
    BUTTONS
    ======================== */
@@ -256,6 +259,7 @@ section {
     font-size: 1.25rem;
     border-radius: var(--radius-md);
 }
+
 
 /* =======================
    DYNAMIC IMAGE GLOW EFFECT
@@ -318,6 +322,7 @@ section {
     border: 1px solid var(--surface-border);
 }
 
+
 /* =======================
    SCREENSHOT PLACEHOLDERS
    ======================== */
@@ -352,6 +357,7 @@ section {
     line-height: 1.4;
     margin-bottom: 0;
 }
+
 
 /* =======================
    NAVIGATION
@@ -434,6 +440,15 @@ section {
     padding: 10px 24px;
     font-size: 0.9rem;
 }
+
+.logo-text,
+.logo-container,
+.nav-links a,
+.nav-links li,
+.main-header .cta-button {
+    white-space: nowrap !important;
+}
+
 
 /* =======================
    HERO SECTION
@@ -551,6 +566,7 @@ section {
     transform: translateX(-62%) rotate(-45deg) translateY(5px);
 }
 
+
 /* =======================
    FEATURES SECTION
    ======================== */
@@ -667,6 +683,7 @@ section {
     border-color: transparent;
 }
 
+
 /* =======================
    WHAT IS IT?
    ======================== */
@@ -738,6 +755,7 @@ section {
     color: #ffffff;
 }
 
+
 /* =======================
    INTERFACE SHOWCASE
    ======================== */
@@ -792,6 +810,7 @@ section {
     object-fit: contain;
     border-radius: 8px;
 }
+
 
 /* =======================
    USE CASES
@@ -851,6 +870,7 @@ section {
     color: #d1d5db;
 }
 
+
 /* =======================
    LOGO WALL
    ======================== */
@@ -895,6 +915,7 @@ section {
     opacity: 1;
 }
 
+
 /* =======================
    INSPIRATION GALLERY
    ======================== */
@@ -938,6 +959,7 @@ section {
     grid-column: span 2;
 }
 
+
 /* =======================
    INFO BANNER BOX
    ======================== */
@@ -968,9 +990,10 @@ section {
     margin-bottom: 0; 
 }
 
-/* =======================
-   PRICING
-   ======================== */
+
+/* ============================================================================
+   PRICING — LICENSE CARDS
+   ============================================================================ */
 .pricing-section {
     position: relative;
     padding-bottom: 80px;
@@ -979,99 +1002,112 @@ section {
 .pricing-section::before {
     content: '';
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    width: 800px; height: 500px;
-    background: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, transparent 70%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.025) 0%, transparent 70%);
     z-index: -1;
     pointer-events: none;
 }
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
     align-items: stretch;
     margin-top: 40px;
 }
 
+/* Shared card layout also supports the existing payment modal. */
 .pricing-card {
     position: relative;
     width: 100%;
-    background: rgba(20, 20, 30, 0.6);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: var(--radius-lg);
-    padding: 40px 30px;
-    text-align: left;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
+    padding: 40px 30px;
+    text-align: left;
+    background: rgba(20, 20, 30, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.pricing-card h3, .pricing-card .price {
+/* Only the three public pricing cards are downsized; modal styles are intact. */
+.pricing-section .pricing-card {
+    min-height: 525px;
+    padding: 30px 28px 26px;
+    background: rgba(20, 20, 30, 0.65);
+    border-color: rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    box-shadow: 0 16px 32px -20px rgba(0, 0, 0, 0.55);
+}
+
+.pricing-section .card-personal:hover,
+.pricing-section .card-personal:focus-within {
+    border-color: #2680EB;
+}
+
+.pricing-section .card-team:hover,
+.pricing-section .card-team:focus-within {
+    border-color: #6254A9;
+}
+
+.pricing-section .card-extended:hover,
+.pricing-section .card-extended:focus-within {
+    border-color: #E69358;
+}
+
+.pricing-card h3,
+.pricing-card .price {
     text-align: center;
 }
 
-.pricing-card.highlighted {
-    border-color: rgba(38, 128, 235, 0.5); /* Blue matching Personal */
-    box-shadow: 0 0 40px rgba(38, 128, 235, 0.15);
-    transform: scale(1.05); /* Permanent slight zoom for the center card */
-    background: rgba(25, 25, 40, 0.8);
-    z-index: 2;
-}
-
-/* --- Border-Color Hover Effects matching the brand palette --- */
-.pricing-card.card-team:hover {
-    border-color: #6254A9; /* Purple */
-}
-.pricing-card.card-personal.highlighted:hover {
-    border-color: #2680EB; /* Bright Blue */
-}
-.pricing-card.card-extended:hover {
-    border-color: #E69358; /* Orange */
-}
-
-.pricing-card h3 {
-    font-size: 1.3rem;
-    color: var(--text-secondary);
+.pricing-section .pricing-card h3 {
+    min-height: 1.5em;
+    margin-bottom: 0;
+    font-size: 1.22rem;
     font-weight: 500;
+    color: var(--text-secondary);
 }
 
-.price {
-    margin: 25px 0;
+.pricing-section .price {
     display: flex;
-    justify-content: center;
     align-items: baseline;
+    justify-content: center;
     gap: 10px;
+    margin: 14px 0 24px;
 }
 
-.current-price {
-    font-family: 'Rubik', sans-serif;
-    font-size: 4rem;
+.pricing-section .current-price {
+    font-family: var(--font-heading);
+    font-size: clamp(3.1rem, 4vw, 3.5rem);
     font-weight: 600;
+    letter-spacing: -0.03em;
     background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -0.03em;
 }
 
-.pricing-features {
-    list-style: none;
-    margin-bottom: 40px;
+.pricing-section .pricing-features {
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    margin: 0 0 28px;
+    list-style: none;
 }
 
 .pricing-features li {
+    position: relative;
+    padding-left: 28px;
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.5;
-    position: relative;
-    padding-left: 28px;
 }
 
 .pricing-features li strong {
@@ -1081,24 +1117,47 @@ section {
 .pricing-features li::before {
     content: '✔';
     position: absolute;
-    left: 0;
     top: 2px;
+    left: 0;
     color: var(--primary-accent);
     font-weight: bold;
     filter: drop-shadow(0 0 5px var(--primary-glow));
 }
 
+/* The CTA aligns at the bottom without an oversized button or fixed glow. */
 .pricing-card .cta-button {
     margin-top: auto;
+}
+
+.pricing-section .pricing-card .pricing-cta {
+    width: 100%;
+    min-height: 54px;
+    padding: 13px 16px;
+    border-radius: 13px;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    box-shadow: none;
+}
+
+.pricing-section .card-personal .pricing-cta { background: #2680EB; }
+.pricing-section .card-team .pricing-cta { background: #6254A9; }
+.pricing-section .card-extended .pricing-cta { background: #E69358; }
+
+.pricing-section .pricing-card .pricing-cta:hover,
+.pricing-section .pricing-card .pricing-cta:focus-visible {
+    box-shadow: none;
+    filter: brightness(1.12);
 }
 
 .pricing-card.modal-override {
     text-align: center;
 }
+
 .pricing-card.modal-override h2 {
     text-align: center;
     margin-bottom: 10px;
 }
+
 
 /* =======================
    FOOTER
@@ -1198,6 +1257,36 @@ section {
 .social-text {
     font-weight: 500;
 }
+
+
+/* =======================
+   SECTION BACKGROUNDS / SEAMLESS LAYOUT
+   ======================== */
+
+.logo-wall-section {
+    border-top: none !important;
+    border-bottom: none !important;
+    background: transparent !important;
+    padding: 60px 0;
+}
+
+.main-footer-bottom {
+    border-top: none !important;
+    background-color: transparent !important;
+    margin-top: 0 !important;
+    padding-top: 40px;
+}
+
+section, 
+.section-bg-surface {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.section-bg-surface::before {
+    display: none !important;
+}
+
 
 /* =======================
    DOCS / FAQ / DEMO PAGES
@@ -1352,6 +1441,7 @@ section {
 .screenshot-preview:hover img {
     transform: scale(1.02);
 }
+
 
 /* =======================
    FAQ ACCORDION SECTION
@@ -1533,15 +1623,6 @@ section {
     overflow-x: auto;
 }
 
-@media (max-width: 768px) {
-    .faq-question {
-        padding: 18px 20px;
-        font-size: 1.05rem;
-    }
-    .faq-answer-content {
-        padding: 0 20px 20px 20px;
-    }
-}
 
 /* =======================
    MODALS & LIGHTBOX
@@ -1743,434 +1824,7 @@ section {
     box-shadow: 0 8px 30px rgba(230, 147, 88, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-/* =======================
-   SEO HIDDEN BLOCK
-   ======================== */
-.seo-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
 
-/* =======================
-   PRINT STYLES
-   ======================== */
-@media print {
-    @page {
-        margin: 1.5cm 1.5cm;
-    }
-
-    .main-header, 
-    .main-footer-bottom, 
-    .cta-button {
-        display: none !important;
-    }
-
-    .pricing-card, .feature-card, .testimonial-card {
-        box-shadow: none !important;
-        background-color: transparent !important;
-        border: 1px solid #ccc !important;
-    }
-
-    body {
-        background-color: #fff !important;
-        background-image: none !important;
-        color: #000 !important;
-    }
-
-    h1, h2, h3, h4, p, li, strong, .logo-text {
-        color: #000 !important;
-        background: none !important;
-        -webkit-text-fill-color: initial !important;
-        text-shadow: none !important;
-    }
-    
-    .text-secondary, .text-tertiary {
-        color: #444 !important;
-    }
-
-    a {
-        color: #000 !important;
-        text-decoration: underline !important;
-    }
-
-    code {
-        background: transparent !important;
-        border: 1px solid #ccc !important;
-        color: #000 !important;
-        font-weight: bold;
-    }
-
-    .screenshot-preview {
-        border: 1px solid #000 !important;
-        page-break-inside: avoid;
-        background: transparent !important;
-    }
-
-    .doc-page h3 {
-        page-break-before: always;
-        margin-top: 0 !important;
-        border-bottom: 1px solid #000 !important;
-    }
-
-    h1, h2, h3, h4 {
-        page-break-after: avoid;
-    }
-
-    .screenshot-wrapper, .screenshot-preview {
-        page-break-inside: avoid;
-    }
-
-    .feature-card, .testimonial-card {
-        page-break-inside: avoid;
-    }
-
-    .container, .doc-page .container {
-        max-width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-
-    .offer-banner {
-        background-color: #fff !important;
-        border: 1px solid #000 !important;
-        border-left: 4px solid #000 !important;
-        border-radius: var(--radius-md) !important;
-        box-shadow: none !important;
-        page-break-inside: avoid;
-        padding: 5px 30px !important;
-    }
-
-    .offer-banner::after {
-        display: none !important;
-    }
-
-    .offer-banner h4, 
-    .offer-banner p {
-        color: #000 !important;
-    }
-
-    .screenshot-placeholder {
-        border: 1px dashed #000;
-        background: transparent;
-        page-break-inside: avoid;
-    }
-    .placeholder-label, .placeholder-desc {
-        color: #000;
-    }
-    .faq-code-block,
-    .code-block,
-    code {
-        background-color: #ffffff !important;
-        border: 1px solid #000000 !important;
-        color: #000000 !important;
-        page-break-inside: avoid;
-    }
-}
-
-/* =======================
-   SEAMLESS FIX
-   ======================== */
-
-.logo-wall-section {
-    border-top: none !important;
-    border-bottom: none !important;
-    background: transparent !important;
-    padding: 60px 0;
-}
-
-.main-footer-bottom {
-    border-top: none !important;
-    background-color: transparent !important;
-    margin-top: 0 !important;
-    padding-top: 40px;
-}
-
-section, 
-.section-bg-surface {
-    background-color: transparent !important;
-    border: none !important;
-}
-
-.section-bg-surface::before {
-    display: none !important;
-}
-
-/* =======================
-   ANIMATIONS
-   ======================== */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes zoomIn { from { transform: scale(0.9); } to { transform: scale(1); } }
-
-/* =======================
-   MEDIA QUERIES
-   ======================== */
-.logo-text,
-.logo-container,
-.nav-links a,
-.nav-links li,
-.main-header .cta-button {
-    white-space: nowrap !important;
-}
-
-@media (max-width: 1180px) {
-    .main-header {
-        top: 10px;
-        width: 95%;
-        padding: 10px 16px;
-        border-radius: 20px;
-    }
-
-    .main-header .container {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px 0;
-    }
-
-    .logo-container {
-        order: 1;
-        margin-right: 0;
-    }
-
-    .main-header .cta-button {
-        order: 2;
-        padding: 8px 18px;
-        font-size: 0.85rem;
-        white-space: nowrap !important;
-    }
-
-    .nav-links {
-        order: 3;
-        width: 100%;
-        margin: 6px 0 0 0;
-        padding: 0 !important;
-        background: transparent !important;
-        border: none !important;
-        overflow-x: visible;
-        white-space: normal;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .nav-links li {
-        display: inline-flex;
-        flex-shrink: 0;
-    }
-
-    .nav-links a {
-        white-space: nowrap !important;
-        font-size: 0.8rem;
-        padding: 6px 14px !important;
-        background: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        border-radius: 50px !important;
-        color: var(--text-secondary) !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-        background: rgba(255, 255, 255, 0.12) !important;
-        color: var(--text-primary) !important;
-        border-color: rgba(255, 255, 255, 0.2) !important;
-    }
-
-    .hero-section {
-        min-height: 85vh;
-        padding-top: 180px !important;
-        padding-bottom: 60px;
-        margin-top: 0;
-    }
-
-    .features-grid, .use-cases-gallery { 
-        grid-template-columns: 1fr; 
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    .knolling-gallery {
-        grid-template-columns: repeat(3, 1fr);
-        grid-auto-rows: 180px;
-    }
-
-    .pricing-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-        margin: 0 auto;
-        gap: 40px;
-    }
-    
-    .pricing-card.highlighted {
-        transform: scale(1);
-    }
-    .doc-page {
-        padding-top: 150px !important;
-    }
-
-    .doc-page h1 {
-        margin-top: 10px !important;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-header {
-        top: 8px;
-        width: 96%;
-        padding: 8px 12px;
-    }
-
-    .nav-links {
-        gap: 6px;
-        margin-top: 6px;
-    }
-
-    .nav-links a {
-        font-size: 0.78rem;
-        padding: 5px 12px !important;
-    }
-
-    .hero-section {
-        padding-top: 175px !important;
-    }
-
-    .doc-page {
-        padding-top: 180px !important;
-    }
-
-    .logo-text { font-size: 1.05rem; }
-    .logo-icon { height: 26px; }
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 1.75rem; }
-    
-    .hero-cta-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .feature-card {
-        background: transparent;
-        border: none;
-        overflow: visible;
-    }
-
-    .feature-visual {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        aspect-ratio: unset;
-        background: transparent;
-        overflow: visible; 
-    }
-
-    .feature-preview, 
-    .feature-video {
-        order: 1;
-        width: 100%;
-        aspect-ratio: 4 / 3;
-        border-radius: 12px;
-        overflow: hidden;
-    }
-
-    .play-button-overlay {
-        order: 1;
-        top: 35%;
-        aspect-ratio: 1 / 1;
-    }
-
-    .feature-overlay {
-        position: relative;
-        order: 2;
-        background: transparent; 
-        background-image: none;
-        padding: 30px 30px 10px; 
-        opacity: 1 !important;
-        pointer-events: auto;
-        text-align: left;
-    }
-
-    .feature-overlay h3 {
-        font-size: 1.4rem;
-        margin-top: 0;
-        margin-bottom: 5px;
-    }
-    
-    .feature-overlay p {
-        font-size: 0.95rem;
-        color: var(--text-secondary);
-        margin: 0;
-    }
-    
-    .knolling-gallery {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .knolling-gallery .gallery-item:nth-child(n) {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-    .knolling-gallery .gallery-item:nth-child(3) {
-        grid-column: span 2;
-    }
-
-    .faq-question {
-        padding: 18px 20px;
-        font-size: 1.05rem;
-    }
-    .faq-answer-content {
-        padding: 0 20px 20px 20px;
-    }
-    .payment-modal {
-        padding: 15px;
-    }
-
-    .payment-modal .pricing-card {
-        padding: 28px 20px 22px;
-        width: 92%;
-        max-width: 420px;
-    }
-
-    .modal-close {
-        top: 12px;
-        right: 18px;
-        font-size: 24px;
-    }
-
-    .pricing-card.modal-override h2 {
-        font-size: 1.45rem;
-        margin-bottom: 8px;
-    }
-
-    .payment-modal .modal-description {
-        font-size: 0.95rem !important;
-        line-height: 1.4 !important;
-        margin-bottom: 16px !important;
-    }
-    
-    .payment-options {
-        gap: 12px;
-        margin-top: 0;
-    }
-
-    .payment-option-btn {
-        white-space: nowrap !important;
-        font-size: 0.95rem;
-        padding: 12px 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        letter-spacing: -0.01em;
-    }
-}
 /* ==========================================================
    DOCUMENTATION / DEMO — STICKY TABLE OF CONTENTS
    ========================================================== */
@@ -2180,8 +1834,7 @@ section,
 }
 
 .doc-page:has(.doc-layout) {
-    overflow-x: clip;
-    overflow-y: visible;
+    overflow: visible !important;
 }
 
 /* ----------------------------------------------------------
@@ -2211,14 +1864,17 @@ section,
    ---------------------------------------------------------- */
 
 .doc-toc {
-    position: relative;
+    position: sticky;
+    top: 105px;
+    align-self: start;
+    z-index: 5;
     width: 100%;
     min-width: 0;
 }
 
 .doc-toc-inner {
-    position: sticky;
-    top: 105px;
+    position: relative;
+    top: auto;
 
     max-height: calc(100vh - 130px);
     overflow-y: auto;
@@ -2358,84 +2014,9 @@ section,
     border-radius: 10px;
 }
 
-/* ==========================================================
-   Responsive
-   ========================================================== */
 
-@media (max-width: 1050px) {
 
-    .doc-page:has(.doc-layout) > .container {
-        max-width: 900px;
-    }
 
-    .doc-layout {
-        grid-template-columns: 220px minmax(0, 1fr);
-        gap: 30px;
-    }
-
-    .doc-toc-inner {
-        padding: 16px 14px;
-    }
-
-    .doc-page .doc-toc li {
-        font-size: 0.78rem;
-    }
-}
-
-@media (max-width: 780px) {
-
-    .doc-page:has(.doc-layout) > .container {
-        max-width: 800px;
-    }
-
-    .doc-layout {
-        display: block;
-    }
-
-    .doc-toc {
-        margin-bottom: 40px;
-    }
-
-    .doc-toc-inner {
-        position: relative;
-        top: auto;
-
-        max-height: none;
-        overflow: visible;
-    }
-
-    .doc-page .doc-toc li {
-        font-size: 0.88rem;
-    }
-}
-
-/* ==========================================================
-   STICKY TOC — FIXED POSITIONING BEHAVIOR
-   ========================================================== */
-
-.doc-page:has(.doc-layout) {
-    overflow: visible !important;
-}
-
-.doc-toc {
-    position: sticky;
-    top: 105px;
-    align-self: start;
-    z-index: 5;
-}
-
-.doc-toc-inner {
-    position: relative;
-    top: auto;
-}
-
-@media (max-width: 780px) {
-    .doc-toc {
-        position: relative;
-        top: auto;
-        z-index: auto;
-    }
-}
 
 /* =======================
    DOCUMENTATION: SYSTEM REQUIREMENTS
@@ -2485,4 +2066,452 @@ section,
 .doc-page .requirements-note {
     font-size: 0.9rem;
     color: var(--text-tertiary);
+}
+
+
+/* =======================
+   SEO HIDDEN BLOCK
+   ======================== */
+.seo-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* =======================
+   ANIMATIONS
+   ======================== */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes zoomIn { from { transform: scale(0.9); } to { transform: scale(1); } }
+
+/* ============================================================================
+   RESPONSIVE / MOBILE STYLES — wide to narrow
+   ============================================================================ */
+@media (max-width: 1180px) {
+    .main-header {
+        top: 10px;
+        width: 95%;
+        padding: 10px 16px;
+        border-radius: 20px;
+    }
+
+    .main-header .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px 0;
+    }
+
+    .logo-container {
+        order: 1;
+        margin-right: 0;
+    }
+
+    .main-header .cta-button {
+        order: 2;
+        padding: 8px 18px;
+        font-size: 0.85rem;
+        white-space: nowrap !important;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        margin: 6px 0 0 0;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        overflow-x: visible;
+        white-space: normal;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .nav-links li {
+        display: inline-flex;
+        flex-shrink: 0;
+    }
+
+    .nav-links a {
+        white-space: nowrap !important;
+        font-size: 0.8rem;
+        padding: 6px 14px !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 50px !important;
+        color: var(--text-secondary) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        background: rgba(255, 255, 255, 0.12) !important;
+        color: var(--text-primary) !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .hero-section {
+        min-height: 85vh;
+        padding-top: 180px !important;
+        padding-bottom: 60px;
+        margin-top: 0;
+    }
+
+    .features-grid, .use-cases-gallery { 
+        grid-template-columns: 1fr; 
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .knolling-gallery {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 180px;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+        gap: 24px;
+    }
+    
+    .doc-page {
+        padding-top: 150px !important;
+    }
+
+    .doc-page h1 {
+        margin-top: 10px !important;
+    }
+}
+
+@media (max-width: 1050px) {
+
+    .doc-page:has(.doc-layout) > .container {
+        max-width: 900px;
+    }
+
+    .doc-layout {
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 30px;
+    }
+
+    .doc-toc-inner {
+        padding: 16px 14px;
+    }
+
+    .doc-page .doc-toc li {
+        font-size: 0.78rem;
+    }
+}
+
+@media (max-width: 780px) {
+
+    .doc-page:has(.doc-layout) > .container {
+        max-width: 800px;
+    }
+
+    .doc-layout {
+        display: block;
+    }
+
+    .doc-toc {
+        position: relative;
+        top: auto;
+        z-index: auto;
+        margin-bottom: 40px;
+    }
+
+    .doc-toc-inner {
+        position: relative;
+        top: auto;
+
+        max-height: none;
+        overflow: visible;
+    }
+
+    .doc-page .doc-toc li {
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        top: 8px;
+        width: 96%;
+        padding: 8px 12px;
+    }
+
+    .nav-links {
+        gap: 6px;
+        margin-top: 6px;
+    }
+
+    .nav-links a {
+        font-size: 0.78rem;
+        padding: 5px 12px !important;
+    }
+
+    .hero-section {
+        padding-top: 175px !important;
+    }
+
+    .pricing-section .pricing-card {
+        min-height: 0;
+    }
+
+    .doc-page {
+        padding-top: 180px !important;
+    }
+
+    .logo-text { font-size: 1.05rem; }
+    .logo-icon { height: 26px; }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 1.75rem; }
+    
+    .hero-cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .feature-card {
+        background: transparent;
+        border: none;
+        overflow: visible;
+    }
+
+    .feature-visual {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        aspect-ratio: unset;
+        background: transparent;
+        overflow: visible; 
+    }
+
+    .feature-preview, 
+    .feature-video {
+        order: 1;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .play-button-overlay {
+        order: 1;
+        top: 35%;
+        aspect-ratio: 1 / 1;
+    }
+
+    .feature-overlay {
+        position: relative;
+        order: 2;
+        background: transparent; 
+        background-image: none;
+        padding: 30px 30px 10px; 
+        opacity: 1 !important;
+        pointer-events: auto;
+        text-align: left;
+    }
+
+    .feature-overlay h3 {
+        font-size: 1.4rem;
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+    
+    .feature-overlay p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+    
+    .knolling-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .knolling-gallery .gallery-item:nth-child(n) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .knolling-gallery .gallery-item:nth-child(3) {
+        grid-column: span 2;
+    }
+
+    .faq-question {
+        padding: 18px 20px;
+        font-size: 1.05rem;
+    }
+    .faq-answer-content {
+        padding: 0 20px 20px 20px;
+    }
+    .payment-modal {
+        padding: 15px;
+    }
+
+    .payment-modal .pricing-card {
+        padding: 28px 20px 22px;
+        width: 92%;
+        max-width: 420px;
+    }
+
+    .modal-close {
+        top: 12px;
+        right: 18px;
+        font-size: 24px;
+    }
+
+    .pricing-card.modal-override h2 {
+        font-size: 1.45rem;
+        margin-bottom: 8px;
+    }
+
+    .payment-modal .modal-description {
+        font-size: 0.95rem !important;
+        line-height: 1.4 !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .payment-options {
+        gap: 12px;
+        margin-top: 0;
+    }
+
+    .payment-option-btn {
+        white-space: nowrap !important;
+        font-size: 0.95rem;
+        padding: 12px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        letter-spacing: -0.01em;
+    }
+}
+
+
+/* =======================
+   PRINT STYLES
+   ======================== */
+@media print {
+    @page {
+        margin: 1.5cm 1.5cm;
+    }
+
+    .main-header, 
+    .main-footer-bottom, 
+    .cta-button {
+        display: none !important;
+    }
+
+    .pricing-card, .feature-card, .testimonial-card {
+        box-shadow: none !important;
+        background-color: transparent !important;
+        border: 1px solid #ccc !important;
+    }
+
+    body {
+        background-color: #fff !important;
+        background-image: none !important;
+        color: #000 !important;
+    }
+
+    h1, h2, h3, h4, p, li, strong, .logo-text {
+        color: #000 !important;
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        text-shadow: none !important;
+    }
+    
+    .text-secondary, .text-tertiary {
+        color: #444 !important;
+    }
+
+    a {
+        color: #000 !important;
+        text-decoration: underline !important;
+    }
+
+    code {
+        background: transparent !important;
+        border: 1px solid #ccc !important;
+        color: #000 !important;
+        font-weight: bold;
+    }
+
+    .screenshot-preview {
+        border: 1px solid #000 !important;
+        page-break-inside: avoid;
+        background: transparent !important;
+    }
+
+    .doc-page h3 {
+        page-break-before: always;
+        margin-top: 0 !important;
+        border-bottom: 1px solid #000 !important;
+    }
+
+    h1, h2, h3, h4 {
+        page-break-after: avoid;
+    }
+
+    .screenshot-wrapper, .screenshot-preview {
+        page-break-inside: avoid;
+    }
+
+    .feature-card, .testimonial-card {
+        page-break-inside: avoid;
+    }
+
+    .container, .doc-page .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .offer-banner {
+        background-color: #fff !important;
+        border: 1px solid #000 !important;
+        border-left: 4px solid #000 !important;
+        border-radius: var(--radius-md) !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        padding: 5px 30px !important;
+    }
+
+    .offer-banner::after {
+        display: none !important;
+    }
+
+    .offer-banner h4, 
+    .offer-banner p {
+        color: #000 !important;
+    }
+
+    .screenshot-placeholder {
+        border: 1px dashed #000;
+        background: transparent;
+        page-break-inside: avoid;
+    }
+    .placeholder-label, .placeholder-desc {
+        color: #000;
+    }
+    .faq-code-block,
+    .code-block,
+    code {
+        background-color: #ffffff !important;
+        border: 1px solid #000000 !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+    }
 }
