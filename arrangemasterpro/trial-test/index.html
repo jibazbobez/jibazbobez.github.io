@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Arrange Master PRO trial</title>
+        <meta name="robots" content="noindex" />
+        <script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+            defer
+        ></script>
+        <style>
+            /* Standalone PRO page; no changes to the original product's styles. */
+            :root {
+                color-scheme: dark;
+                font-family: system-ui, sans-serif;
+                color: #f4f6fa;
+                background: #0a0a12;
+                --accent: #36b2ff;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                padding: 32px 20px;
+                min-height: 100vh;
+                display: grid;
+                place-items: center;
+            }
+            main {
+                width: 100%;
+                max-width: 520px;
+                padding: 32px;
+                border: 1px solid #303442;
+                border-radius: 16px;
+                background: #15151f;
+            }
+            h1 {
+                margin: 0 0 12px;
+                font-size: 28px;
+                line-height: 1.2;
+            }
+            h1 span {
+                color: var(--accent);
+            }
+            p {
+                line-height: 1.6;
+                color: #b5bdcc;
+            }
+            fieldset {
+                border: 0;
+                padding: 0;
+                margin: 24px 0 16px;
+                display: grid;
+                gap: 16px;
+            }
+            [hidden] {
+                display: none !important;
+            }
+            label {
+                display: grid;
+                gap: 8px;
+                font-size: 14px;
+            }
+            input {
+                width: 100%;
+                min-height: 44px;
+                padding: 10px 12px;
+                border: 1px solid #414859;
+                border-radius: 8px;
+                background: #0f111a;
+                color: inherit;
+                font: inherit;
+            }
+            input:focus-visible,
+            button:focus-visible,
+            a:focus-visible {
+                outline: 2px solid var(--accent);
+                outline-offset: 3px;
+            }
+            button {
+                width: 100%;
+                min-height: 46px;
+                margin-top: 16px;
+                border: 0;
+                border-radius: 8px;
+                background: var(--accent);
+                color: #081b2a;
+                font: inherit;
+                font-weight: 600;
+                cursor: pointer;
+            }
+            button:hover:enabled {
+                background: #6cc7ff;
+            }
+            button:disabled {
+                background: #313743;
+                color: #c1c7d0;
+                cursor: default;
+            }
+            input:disabled {
+                opacity: 0.65;
+            }
+            #trial-message {
+                min-height: 48px;
+                margin-bottom: 0;
+                overflow-wrap: anywhere;
+            }
+            .fine-print,
+            footer {
+                font-size: 13px;
+            }
+            footer {
+                margin-top: 24px;
+                color: #b5bdcc;
+            }
+            a {
+                color: var(--accent);
+            }
+            @media (max-width: 400px) {
+                main {
+                    padding: 24px 16px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Keep registration closed until the release checklist is complete. -->
+        <main>
+            <h1>
+                Arrange Master
+                <span>PRO</span>
+            </h1>
+            <p>Try professional nesting in Adobe Illustrator on Windows and macOS.</p>
+            <p>
+                The full trial lasts 24 hours from first activation, on one computer. No payment
+                card is required.
+            </p>
+            <form id="trial-form">
+                <fieldset id="trial-fields" hidden disabled>
+                    <label>
+                        Name
+                        <input name="name" autocomplete="name" maxlength="200" required />
+                    </label>
+                    <label>
+                        Company
+                        <input
+                            name="company"
+                            autocomplete="organization"
+                            maxlength="200"
+                            required
+                        />
+                    </label>
+                    <label>
+                        Email
+                        <input
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            maxlength="254"
+                            required
+                        />
+                    </label>
+                </fieldset>
+                <p class="fine-print">
+                    We use these details to register your trial and deliver the license key.
+                    Cloudflare verifies the request; Brevo delivers the email.
+                </p>
+                <div id="turnstile-container"></div>
+                <button id="trial-submit" type="submit" disabled>
+                    Trial registration opens soon
+                </button>
+                <p id="trial-message" role="status" aria-live="polite">
+                    Private acceptance test. Registration is available only for the approved test address.
+                </p>
+            </form>
+            <noscript><p>Enable JavaScript to request a trial key.</p></noscript>
+            <footer>
+                © 2026 Andrew R. ·
+                <a href="https://andrewr.online/">andrewr.online</a>
+            </footer>
+        </main>
+        <script>
+            // Public settings only; no licensing or email service secrets belong here.
+            const TRIAL_INI = Object.freeze({
+                endpoint: 'https://arrange-master-pro-licensing.jibazbobez.workers.dev/trial',
+                siteKey: '0x4AAAAAAFLoxfG5a_7fo0fB',
+                registrationEnabled: true,
+                requestTimeoutMs: 15000
+            });
+            const form = document.getElementById('trial-form'),
+                fields = document.getElementById('trial-fields'),
+                button = document.getElementById('trial-submit'),
+                message = document.getElementById('trial-message');
+            let inFlight = false,
+                accepted = false,
+                token = '',
+                widgetId;
+
+            // No widget or requests run while the release is closed.
+            window.addEventListener('load', function () {
+                if (!TRIAL_INI.registrationEnabled) return;
+                if (!window.turnstile) {
+                    message.textContent = 'Verification could not load. Please reload this page.';
+                    return;
+                }
+                fields.disabled = false;
+                fields.hidden = false;
+                button.textContent = 'Request trial key';
+                message.textContent = 'Complete the verification to continue.';
+                widgetId = window.turnstile.render('#turnstile-container', {
+                    sitekey: TRIAL_INI.siteKey,
+                    action: 'amp-trial',
+                    theme: 'dark',
+                    size: 'flexible',
+                    callback: function (value) {
+                        token = typeof value === 'string' ? value : '';
+                        button.disabled = !token || inFlight || accepted;
+                    },
+                    'expired-callback': function () {
+                        token = '';
+                        button.disabled = true;
+                    },
+                    'error-callback': function () {
+                        token = '';
+                        button.disabled = true;
+                        if (!inFlight && !accepted)
+                            message.textContent = 'Verification failed. Please reload this page.';
+                    }
+                });
+            });
+
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                if (!TRIAL_INI.registrationEnabled || inFlight || accepted) return;
+                if (!form.reportValidity()) return;
+                if (!token) {
+                    message.textContent = 'Complete the verification to continue.';
+                    return;
+                }
+                const data = new FormData(form),
+                    controller = new AbortController();
+                inFlight = true;
+                button.disabled = true;
+                button.textContent = 'Submitting…';
+                message.textContent = 'Sending your request…';
+                const timer = setTimeout(function () {
+                    controller.abort();
+                }, TRIAL_INI.requestTimeoutMs);
+                try {
+                    const response = await fetch(TRIAL_INI.endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'omit',
+                        redirect: 'error',
+                        referrerPolicy: 'no-referrer',
+                        cache: 'no-store',
+                        signal: controller.signal,
+                        body: JSON.stringify({
+                            name: String(data.get('name') || '').trim(),
+                            company: String(data.get('company') || '').trim(),
+                            email: String(data.get('email') || '').trim(),
+                            turnstileToken: token
+                        })
+                    });
+                    if (!response.ok) {
+                        message.textContent =
+                            response.status === 503
+                                ? 'Trial registration is not open yet. Please try again later.'
+                                : response.status === 429
+                                  ? 'Too many requests. Please wait before trying again.'
+                                  : 'Could not submit the request. Verify your details and try again.';
+                        return;
+                    }
+                    const result = await response.json();
+                    if (!result || result.accepted !== true) throw Error('Invalid response');
+                    accepted = true;
+                    fields.disabled = true;
+                    message.textContent =
+                        'Request received. If eligible, your trial key will arrive by email. Check your spam folder too.';
+                } catch (error) {
+                    // Never show provider payloads or private data in an error.
+                    message.textContent =
+                        'The request could not be confirmed. Please try again later.';
+                } finally {
+                    clearTimeout(timer);
+                    inFlight = false;
+                    token = '';
+                    button.disabled = true;
+                    button.textContent = accepted ? 'Request received' : 'Request trial key';
+                    if (!accepted && window.turnstile && widgetId !== undefined)
+                        window.turnstile.reset(widgetId);
+                }
+            });
+        </script>
+    </body>
+</html>
