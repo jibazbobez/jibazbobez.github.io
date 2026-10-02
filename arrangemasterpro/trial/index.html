@@ -55,6 +55,9 @@
                 display: grid;
                 gap: 16px;
             }
+            [hidden] {
+                display: none !important;
+            }
             label {
                 display: grid;
                 gap: 8px;
@@ -135,7 +138,7 @@
                 card is required.
             </p>
             <form id="trial-form">
-                <fieldset id="trial-fields" disabled>
+                <fieldset id="trial-fields" hidden disabled>
                     <label>
                         Name
                         <input name="name" autocomplete="name" maxlength="200" required />
@@ -169,7 +172,7 @@
                     Trial registration opens soon
                 </button>
                 <p id="trial-message" role="status" aria-live="polite">
-                    Registration is being prepared. Please check back later.
+                    Trial registration is not open yet. The form will become available at launch.
                 </p>
             </form>
             <noscript><p>Enable JavaScript to request a trial key.</p></noscript>
@@ -203,6 +206,7 @@
                     return;
                 }
                 fields.disabled = false;
+                fields.hidden = false;
                 button.textContent = 'Request trial key';
                 message.textContent = 'Complete the verification to continue.';
                 widgetId = window.turnstile.render('#turnstile-container', {
