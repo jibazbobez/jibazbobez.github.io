@@ -265,12 +265,24 @@
                         })
                     });
                     if (!response.ok) {
+                        // Show only known public errors, never arbitrary server payloads.
+                        let errorCode = '';
+                        try {
+                            const failure = await response.json();
+                            errorCode = failure && failure.error;
+                        } catch (error) {
+                            // Keep the generic message for unavailable or malformed responses.
+                        }
                         message.textContent =
-                            response.status === 503
-                                ? 'Trial registration is not open yet. Please try again later.'
-                                : response.status === 429
-                                  ? 'Too many requests. Please wait before trying again.'
-                                  : 'Could not submit the request. Verify your details and try again.';
+                            errorCode === 'INVALID_EMAIL'
+                                ? 'Enter a valid email address.'
+                                : errorCode === 'INVALID_FORM'
+                                  ? 'Check the required fields and complete verification again.'
+                                  : response.status === 503
+                                    ? 'Trial registration is not open yet. Please try again later.'
+                                    : response.status === 429
+                                      ? 'Too many requests. Please wait before trying again.'
+                                      : 'Could not submit the request. Verify your details and try again.';
                         return;
                     }
                     const result = await response.json();
