@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="referrer" content="no-referrer" />
+        <title>Arrange Master PRO — verification check</title>
+        <script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+            defer
+        ></script>
+        <style>
+            :root {
+                color-scheme: dark;
+                font-family: Arial, sans-serif;
+                background: #202226;
+                color: #edf0f5;
+            }
+            body {
+                margin: 0;
+                padding: 24px;
+            }
+            main {
+                box-sizing: border-box;
+                max-width: 520px;
+                margin: 40px auto;
+                padding: 32px;
+                border: 1px solid #50545e;
+                border-radius: 12px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            h1 span,
+            a {
+                color: #36b2ff;
+            }
+            p {
+                line-height: 1.5;
+            }
+            button {
+                width: 100%;
+                margin-top: 20px;
+                padding: 12px;
+                border: 0;
+                border-radius: 6px;
+                background: #36b2ff;
+                color: #081b2a;
+                font: inherit;
+                cursor: pointer;
+            }
+            button:disabled {
+                background: #313743;
+                color: #c1c7d0;
+                cursor: default;
+            }
+            #check-message {
+                min-height: 48px;
+                overflow-wrap: anywhere;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>
+                Arrange Master
+                <span>PRO</span>
+            </h1>
+            <p>
+                Provisioning check: verify the connection between this website and the trial
+                protection service.
+            </p>
+            <p>
+                This check sends no name or email, creates no license and sends no mail. Cloudflare
+                processes the verification token and your connection IP.
+            </p>
+            <form id="check-form">
+                <div id="turnstile-container"></div>
+                <button id="check-submit" type="submit" disabled>Check verification</button>
+                <p id="check-message" role="status" aria-live="polite">
+                    Complete the verification to continue.
+                </p>
+            </form>
+            <a href="https://andrewr.online/arrangemasterpro/trial/">Trial registration</a>
+        </main>
+        <script>
+            // Public provisioning settings. This route closes automatically after release.
+            const CHECK_INI = Object.freeze({
+                endpoint:
+                    'https://arrange-master-pro-licensing.jibazbobez.workers.dev/setup/trial-check',
+                siteKey: '0x4AAAAAAFLoxfG5a_7fo0fB',
+                requestTimeoutMs: 15000
+            });
+            const form = document.getElementById('check-form'),
+                button = document.getElementById('check-submit'),
+                message = document.getElementById('check-message');
+            let token = '',
+                inFlight = false,
+                complete = false,
+                widgetId;
+            window.addEventListener('load', function () {
+                if (!window.turnstile) {
+                    message.textContent = 'Verification could not load. Please reload this page.';
+                    return;
+                }
+                widgetId = window.turnstile.render('#turnstile-container', {
+                    sitekey: CHECK_INI.siteKey,
+                    action: 'amp-trial',
+                    theme: 'dark',
+                    size: 'flexible',
+                    callback: function (value) {
+                        token = typeof value === 'string' ? value : '';
+                        button.disabled = !token || inFlight || complete;
+                    },
+                    'expired-callback': function () {
+                        token = '';
+                        button.disabled = true;
+                    },
+                    'error-callback': function () {
+                        token = '';
+                        button.disabled = true;
+                        if (!inFlight && !complete)
+                            message.textContent = 'Verification failed. Please reload this page.';
+                    }
+                });
+            });
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                if (!token || inFlight || complete) return;
+                inFlight = true;
+                button.disabled = true;
+                message.textContent = 'Checking verification…';
+                const controller = new AbortController();
+                const timer = setTimeout(function () {
+                    controller.abort();
+                }, CHECK_INI.requestTimeoutMs);
+                try {
+                    const response = await fetch(CHECK_INI.endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'omit',
+                        redirect: 'error',
+                        referrerPolicy: 'no-referrer',
+                        cache: 'no-store',
+                        signal: controller.signal,
+                        body: JSON.stringify({ turnstileToken: token })
+                    });
+                    if (!response.ok) {
+                        message.textContent =
+                            response.status === 429
+                                ? 'Too many checks. Please wait before retrying.'
+                                : 'Verification was not confirmed. Please verify again.';
+                        return;
+                    }
+                    const result = await response.json();
+                    if (
+                        !result ||
+                        result.product !== 'ArrangeMasterPRO' ||
+                        result.verified !== true ||
+                        result.issued !== false
+                    )
+                        throw Error();
+                    complete = true;
+                    message.textContent =
+                        'Verification passed. No license created and no email sent.';
+                    button.textContent = 'Verified';
+                } catch {
+                    // Provider errors and verification tokens never appear in the page or logs.
+                    message.textContent =
+                        'The check could not be confirmed. Please try again later.';
+                } finally {
+                    clearTimeout(timer);
+                    token = '';
+                    inFlight = false;
+                    button.disabled = true;
+                    if (!complete && window.turnstile && widgetId !== undefined)
+                        window.turnstile.reset(widgetId);
+                }
+            });
+        </script>
+    </body>
+</html>
