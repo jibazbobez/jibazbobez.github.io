@@ -6,188 +6,20 @@
         <meta name="robots" content="noindex" />
         <title>Arrange Master PRO subscription</title>
         <link rel="stylesheet" href="styles.css" />
-        <script
-            src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-            defer
-        ></script>
     </head>
     <body>
         <main>
-            <h1>
-                Arrange Master
-                <span>PRO</span>
-            </h1>
-            <p>
-                Choose your subscription. Lava.Top shows the current price and recurring payment
-                terms before you pay.
-            </p>
-            <form id="checkout-form">
-                <fieldset id="checkout-fields">
-                    <label>
-                        Email for your license key
-                        <input
-                            name="email"
-                            type="email"
-                            autocomplete="email"
-                            maxlength="254"
-                            required
-                        />
-                    </label>
-                    <label>
-                        Subscription
-                        <select name="planId">
-                            <option value="solo-monthly">Solo — monthly · 1 device</option>
-                            <option value="solo-annual">Solo — annual · 1 device</option>
-                            <option value="studio-monthly">Studio — monthly · 3 devices</option>
-                            <option value="studio-annual">Studio — annual · 3 devices</option>
-                            <option value="team-monthly">Team — monthly · 8 devices</option>
-                            <option value="team-annual">Team — annual · 8 devices</option>
-                        </select>
-                    </label>
-                    <label>
-                        Payment currency
-                        <select name="currency">
-                            <option value="EUR">EUR</option>
-                            <option value="USD">USD</option>
-                            <option value="RUB">RUB</option>
-                        </select>
-                    </label>
-                    <label>
-                        Promo code (optional)
-                        <input
-                            name="promoCode"
-                            maxlength="36"
-                            autocomplete="off"
-                            pattern="[A-Za-z0-9_\-]{3,36}"
-                        />
-                    </label>
-                </fieldset>
-                <p class="fine-print">
-                    Your email is sent to Lava.Top for checkout. After payment is confirmed, Brevo
-                    delivers your license key. Card details are entered only on Lava.Top.
-                </p>
-                <div id="turnstile-container"></div>
-                <button id="checkout-submit" type="submit" disabled>Continue to Lava.Top</button>
-                <p id="checkout-message" role="status" aria-live="polite">
-                    Complete verification to continue.
-                </p>
-            </form>
-            <noscript><p>Enable JavaScript to continue to checkout.</p></noscript>
-            <footer>
-                © 2026 Andrew R. ·
-                <a href="https://andrewr.online/">andrewr.online</a>
-            </footer>
+            <h1>Arrange Master <span>PRO</span></h1>
+            <p>Subscribe directly on Lava.Top. Open the Subscriptions tab and select your plan.</p>
+            <ul class="plans">
+                <li><strong>Solo</strong> — 1 device</li>
+                <li><strong>Studio</strong> — 3 devices</li>
+                <li><strong>Team</strong> — 8 devices</li>
+            </ul>
+            <p>Lava.Top shows the current price, billing period and renewal terms before payment.</p>
+            <a class="subscribe-link" href="https://app.lava.top/andrew-r-tools">Choose a subscription on Lava.Top</a>
+            <p class="fine-print">Your license key is emailed to the address used for the subscription, after the seller receives the payment notification.</p>
+            <footer>© 2026 Andrew R. · <a href="https://andrewr.online/">andrewr.online</a></footer>
         </main>
-        <script>
-            // Public settings only. The deployed PRO Worker creates unpaid invoices.
-            const CHECKOUT_INI = Object.freeze({
-                endpoint: 'https://arrange-master-pro-licensing.jibazbobez.workers.dev/checkout',
-                siteKey: '0x4AAAAAAFLoxfG5a_7fo0fB',
-                enabled: true,
-                requestTimeoutMs: 20000
-            });
-            const form = document.getElementById('checkout-form');
-            const fields = document.getElementById('checkout-fields');
-            const button = document.getElementById('checkout-submit');
-            const message = document.getElementById('checkout-message');
-            let token = '';
-            let widgetId;
-            let inFlight = false;
-
-            window.addEventListener('load', function () {
-                if (!CHECKOUT_INI.enabled) return;
-                if (!window.turnstile) {
-                    message.textContent = 'Verification could not load. Please reload this page.';
-                    return;
-                }
-                // A return URL is not payment proof; only the server confirms payment.
-                const result = new URLSearchParams(location.search).get('result');
-                message.textContent =
-                    result === 'success'
-                        ? 'Checkout returned from Lava.Top. Your key is emailed after payment confirmation. Please do not pay again while waiting.'
-                        : result === 'failed' || result === 'cancelled'
-                          ? 'Checkout was not completed. You can try again.'
-                          : 'Complete verification to continue.';
-                widgetId = window.turnstile.render('#turnstile-container', {
-                    sitekey: CHECKOUT_INI.siteKey,
-                    action: 'amp-checkout',
-                    theme: 'dark',
-                    size: 'flexible',
-                    callback: function (value) {
-                        token = typeof value === 'string' ? value : '';
-                        button.disabled = !token || inFlight;
-                    },
-                    'expired-callback': function () {
-                        token = '';
-                        button.disabled = true;
-                    },
-                    'error-callback': function () {
-                        token = '';
-                        button.disabled = true;
-                        message.textContent = 'Verification failed. Please reload this page.';
-                    }
-                });
-            });
-
-            form.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                if (!CHECKOUT_INI.enabled || inFlight || !token || !form.reportValidity()) return;
-                const values = new FormData(form);
-                const payload = {
-                    email: String(values.get('email')).trim(),
-                    planId: String(values.get('planId')),
-                    currency: String(values.get('currency')),
-                    promoCode: String(values.get('promoCode')).trim().toUpperCase(),
-                    language: navigator.language.toLowerCase().startsWith('ru') ? 'RU' : 'EN',
-                    turnstileToken: token
-                };
-                inFlight = true;
-                button.disabled = true;
-                fields.disabled = true;
-                message.textContent = 'Preparing checkout…';
-                const controller = new AbortController();
-                const timeout = setTimeout(() => controller.abort(), CHECKOUT_INI.requestTimeoutMs);
-                try {
-                    const response = await fetch(CHECKOUT_INI.endpoint, {
-                        method: 'POST',
-                        credentials: 'omit',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload),
-                        signal: controller.signal
-                    });
-                    const result = await response.json();
-                    if (!response.ok) {
-                        message.textContent =
-                            result.error === 'CHECKOUT_REJECTED'
-                                ? 'Lava.Top rejected checkout. Check the promo code and selected currency.'
-                                : result.error === 'RATE_LIMIT'
-                                  ? 'Too many attempts. Please wait a minute.'
-                                  : 'Checkout is temporarily unavailable. No payment was made on this page.';
-                        return;
-                    }
-                    const url = new URL(result.paymentUrl);
-                    if (
-                        url.protocol !== 'https:' ||
-                        url.username ||
-                        url.password ||
-                        url.port ||
-                        (url.hostname !== 'lava.top' && !url.hostname.endsWith('.lava.top'))
-                    )
-                        throw Error();
-                    message.textContent = 'Opening Lava.Top…';
-                    location.assign(url.href);
-                } catch {
-                    message.textContent =
-                        'Could not open checkout. No payment was made on this page. Please try again.';
-                } finally {
-                    clearTimeout(timeout);
-                    fields.disabled = false;
-                    inFlight = false;
-                    token = '';
-                    button.disabled = true;
-                    if (widgetId !== undefined) window.turnstile.reset(widgetId);
-                }
-            });
-        </script>
     </body>
 </html>

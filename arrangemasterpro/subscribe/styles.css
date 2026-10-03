@@ -1,116 +1,21 @@
-/* Standalone PRO page; no changes to the original product's styles. */
+/* Isolated PRO page. Payment forms and card entry belong to Lava.Top. */
 :root {
     color-scheme: dark;
     font-family: system-ui, sans-serif;
     color: #f4f6fa;
     background: #0a0a12;
-    --accent: #36b2ff;
+    --accent: #ce4350;
 }
-* {
-    box-sizing: border-box;
-}
-body {
-    margin: 0;
-    padding: 32px 20px;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-}
-main {
-    width: 100%;
-    max-width: 520px;
-    padding: 32px;
-    border: 1px solid #303442;
-    border-radius: 16px;
-    background: #15151f;
-}
-h1 {
-    margin: 0 0 12px;
-    font-size: 28px;
-    line-height: 1.2;
-}
-h1 span {
-    color: var(--accent);
-}
-p {
-    line-height: 1.6;
-    color: #b5bdcc;
-}
-fieldset {
-    border: 0;
-    padding: 0;
-    margin: 24px 0 16px;
-    display: grid;
-    gap: 16px;
-}
-[hidden] {
-    display: none !important;
-}
-label {
-    display: grid;
-    gap: 8px;
-    font-size: 14px;
-}
-input,
-select {
-    width: 100%;
-    min-height: 44px;
-    padding: 10px 12px;
-    border: 1px solid #414859;
-    border-radius: 8px;
-    background: #0f111a;
-    color: inherit;
-    font: inherit;
-}
-input:focus-visible,
-select:focus-visible,
-button:focus-visible,
-a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-}
-button {
-    width: 100%;
-    min-height: 46px;
-    margin-top: 16px;
-    border: 0;
-    border-radius: 8px;
-    background: var(--accent);
-    color: #081b2a;
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
-}
-button:hover:enabled {
-    background: #6cc7ff;
-}
-button:disabled {
-    background: #313743;
-    color: #c1c7d0;
-    cursor: default;
-}
-input:disabled,
-select:disabled {
-    opacity: 0.65;
-}
-#checkout-message {
-    min-height: 48px;
-    margin-bottom: 0;
-    overflow-wrap: anywhere;
-}
-.fine-print,
-footer {
-    font-size: 13px;
-}
-footer {
-    margin-top: 24px;
-    color: #b5bdcc;
-}
-a {
-    color: var(--accent);
-}
-@media (max-width: 400px) {
-    main {
-        padding: 24px 16px;
-    }
-}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 32px 20px; min-height: 100vh; display: grid; place-items: center; }
+main { width: 100%; max-width: 520px; padding: 32px; border: 1px solid #303442; border-radius: 16px; background: #15151f; }
+h1 { margin: 0 0 12px; font-size: 28px; line-height: 1.2; }
+h1 span, a { color: var(--accent); }
+p { line-height: 1.6; color: #b5bdcc; }
+.plans { padding-left: 24px; line-height: 2; }
+.subscribe-link { display: block; padding: 14px 16px; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 600; text-align: center; text-decoration: none; }
+.subscribe-link:hover { background: #b93140; }
+a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.fine-print, footer { font-size: 13px; }
+footer { margin-top: 24px; color: #b5bdcc; }
+@media (max-width: 400px) { main { padding: 24px 16px; } }
