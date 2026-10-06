@@ -17,3 +17,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://andrewr.online/sitemap.xml
+Sitemap: https://arrangemasterpro.andrewr.online/sitemap.xml
