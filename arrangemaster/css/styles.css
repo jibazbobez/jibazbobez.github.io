@@ -1890,17 +1890,26 @@ section,
 }
 
 /* 3. Arrange Master PRO — light button */
-.payment-option-btn.--pro-btn {
+.payment-option-btn.--pro-btn,
+.hero-pro-cta {
     background: #e3e3e3;
     color: #0587d1;
+    border-color: transparent;
+
     box-shadow:
         0 0 18px rgba(227, 227, 227, 0.24),
         0 6px 22px rgba(0, 0, 0, 0.18),
         inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
-.payment-option-btn.--pro-btn:hover {
+.payment-option-btn.--pro-btn:hover,
+.payment-option-btn.--pro-btn:focus-visible,
+.hero-pro-cta:hover,
+.hero-pro-cta:focus-visible {
+    background: #e3e3e3;
+    color: #0587d1;
     filter: brightness(1.04);
+
     box-shadow:
         0 0 24px rgba(227, 227, 227, 0.38),
         0 8px 30px rgba(0, 0, 0, 0.22),
