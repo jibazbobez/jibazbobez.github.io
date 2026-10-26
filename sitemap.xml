@@ -11,19 +11,16 @@
     <!-- 2. Подсайт Arrange Master -->
     <url>
         <loc>https://andrewr.online/arrangemaster/</loc>
-        <lastmod>2025-10-11</lastmod>
-        <priority>0.9</priority>
-    </url>
+        <lastmod>2026-10-26</lastmod>
+        </url>
     <url>
         <loc>https://andrewr.online/arrangemaster/documentation.html</loc>
-        <lastmod>2025-10-11</lastmod>
-        <priority>0.8</priority>
-    </url>
+        <lastmod>2026-10-26</lastmod>
+        </url>
     <url>
-        <loc>https://andrewr.online/arrangemaster/demo.html</loc>
-        <lastmod>2025-10-11</lastmod>
-        <priority>0.7</priority>
-    </url>
+        <loc>https://andrewr.online/arrangemaster/trial/</loc>
+        <lastmod>2026-10-26</lastmod>
+        </url>
     
     <!-- 3. Подсайт Nonsense Laboratory -->
     <url>
