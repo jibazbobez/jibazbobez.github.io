@@ -2,6 +2,78 @@
    Shared navigation, independent tab groups, galleries and license selection. */
 'use strict';
 document.addEventListener('DOMContentLoaded', () => {
+    // Preserve the archive's launch-year-to-current-year copyright range.
+    function updateCopyrightYear() {
+        const startYear = 2025;
+        const currentYear = new Date().getFullYear();
+        const yearText = currentYear > startYear ? `${startYear}–${currentYear}` : String(startYear);
+        document.querySelectorAll('#copyright-year').forEach((element) => {
+            element.textContent = yearText;
+        });
+    }
+    updateCopyrightYear();
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) updateCopyrightYear();
+    });
+
+    // Archive logo carousel: duplicate each row and measure one complete loop.
+    const logoViewport = document.querySelector('.logo-carousel-viewport');
+    if (logoViewport) {
+        const tracks = [...logoViewport.querySelectorAll('.logo-carousel-track')];
+        const rows = tracks.map((track) => {
+            const logos = [...track.children];
+            logos.forEach((logo) => {
+                const clone = logo.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                clone.setAttribute('tabindex', '-1');
+                clone.setAttribute('data-logo-clone', '');
+                clone.querySelector('img')?.setAttribute('alt', '');
+                track.appendChild(clone);
+            });
+            return { track, logos };
+        });
+        let resizeFrame = 0;
+        function measureLogoTracks() {
+            resizeFrame = 0;
+            rows.forEach(({ track, logos }) => {
+                const totalWidth = logos.reduce((width, logo) => {
+                    const style = getComputedStyle(logo);
+                    return width + logo.getBoundingClientRect().width +
+                        parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+                }, 0);
+                if (!totalWidth) return;
+                track.style.width = `${totalWidth * 2}px`;
+                track.style.setProperty('--logo-loop-width', `${totalWidth}px`);
+                track.style.animationName = 'scrollCustomerLogos';
+                track.style.animationDuration = `${totalWidth / 40}s`;
+                track.style.animationTimingFunction = 'linear';
+                track.style.animationIterationCount = 'infinite';
+            });
+        }
+        function scheduleLogoMeasure() {
+            if (!resizeFrame) resizeFrame = requestAnimationFrame(measureLogoTracks);
+        }
+        measureLogoTracks();
+        if (typeof ResizeObserver === 'function') {
+            new ResizeObserver(scheduleLogoMeasure).observe(logoViewport);
+        } else {
+            window.addEventListener('resize', scheduleLogoMeasure);
+        }
+        let logosInView = true;
+        function syncLogoPlayback() {
+            logoViewport.classList.toggle('is-paused', document.hidden || !logosInView);
+        }
+        if (typeof IntersectionObserver === 'function') {
+            new IntersectionObserver(([entry]) => {
+                logosInView = entry.isIntersecting;
+                syncLogoPlayback();
+            }, { rootMargin: '100px' }).observe(logoViewport);
+        }
+        document.addEventListener('visibilitychange', syncLogoPlayback);
+        syncLogoPlayback();
+    }
+
+
     const menu = document.querySelector('#site-nav');
     const menuButton = document.querySelector('.nav-toggle');
     function closeMenu() {
