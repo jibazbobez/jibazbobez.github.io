@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /trial-test/
+Disallow: /trial-check/
+Sitemap: https://arrangemasterpro.andrewr.online/sitemap.xml

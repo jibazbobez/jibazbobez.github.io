@@ -1,0 +1,14 @@
+{
+  "status": "prepared locally; not applied",
+  "publicHostname": "arrangemasterpro.andrewr.online",
+  "contentOrigin": "https://andrewr.online/arrangemasterpro/",
+  "originHosting": "GitHub Pages",
+  "publicRouting": "Cloudflare Workers Custom Domain",
+  "workerName": "arrange-master-pro-site",
+  "dnsAction": "Keep or attach this hostname as the Custom Domain of the existing site worker. Cloudflare manages its DNS record and HTTPS certificate.",
+  "rootCname": "Keep CNAME file at repository root set to andrewr.online.",
+  "doNotCreate": "A CNAME with a URL path, a second CNAME inside arrangemasterpro/, or a redirect from the public subdomain to the GitHub directory.",
+  "prerequisite": "Publish the local arrangemasterpro directory through GitHub Pages and pass verify-origin.mjs before deploying the proxy worker.",
+  "canonicalHost": "arrangemasterpro.andrewr.online",
+  "licensingServices": "unchanged"
+}

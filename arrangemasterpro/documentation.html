@@ -1,0 +1,1283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Documentation — Arrange Master PRO for Adobe Illustrator</title>
+    <meta
+      name="description"
+      content="Install and activate Arrange Master PRO for Illustrator on Windows and macOS. Windows 11 Smart App Control help, nesting settings, layer preparation and troubleshooting."
+    />
+    <link
+      rel="canonical"
+      href="https://arrangemasterpro.andrewr.online/documentation.html"
+    />
+    <meta name="theme-color" content="#eeeeee" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Documentation — Arrange Master PRO for Adobe Illustrator"
+    />
+    <meta
+      property="og:description"
+      content="Install and activate Arrange Master PRO for Illustrator on Windows and macOS. Windows 11 Smart App Control help, nesting settings, layer preparation and troubleshooting."
+    />
+    <meta
+      property="og:url"
+      content="https://arrangemasterpro.andrewr.online/documentation.html"
+    />
+    <meta
+      property="og:image"
+      content="https://arrangemasterpro.andrewr.online/assets/hero-vinyl-wide-v1.webp"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="assets/logos/logo.svg" />
+    <link
+      rel="preload"
+      href="assets/fonts/rubik-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/pro.css" />
+    <script defer src="js/site.js"></script>
+    <meta name="yandex-verification" content="d2068c1f5e63b39a" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VTJFJLZYYT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-VTJFJLZYYT');
+    </script>
+    <meta property="og:site_name" content="Arrange Master PRO" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image:width" content="1916" />
+    <meta property="og:image:height" content="821" />
+    <meta property="og:image:alt" content="Nested printed vinyl artwork for Arrange Master PRO" />
+    <meta name="twitter:title" content="Documentation — Arrange Master PRO for Adobe Illustrator" />
+    <meta name="twitter:description" content="Install and activate Arrange Master PRO for Illustrator on Windows and macOS. Windows 11 Smart App Control help, nesting settings, layer preparation and troubleshooting." />
+    <meta name="twitter:image" content="https://arrangemasterpro.andrewr.online/assets/hero-vinyl-wide-v1.webp" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="main-header">
+      <nav class="container" aria-label="Main navigation">
+        <a href="index.html" class="logo-container"
+          ><img
+            src="assets/logos/logo.svg"
+            alt=""
+            class="logo-icon"
+            width="32"
+            height="32"
+          /><span class="logo-text"
+            >Arrange Master <span class="accent">PRO</span></span
+          ></a
+        ><button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+        >
+          Menu <span aria-hidden="true">☰</span>
+        </button>
+        <ul class="nav-links" id="site-nav">
+          <li><a href="index.html#examples">Examples</a></li>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#pricing">Pricing</a></li>
+          <li><a href="trial/">Demo</a></li>
+          <li><a href="documentation.html">Documentation</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="https://blog.andrewr.online/" target="_blank" rel="noopener">Blog</a></li>
+        </ul>
+        <a class="cta-button primary" href="index.html#pricing">Get PRO</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="doc-page">
+        <div class="container">
+          <div class="doc-layout">
+            <aside class="doc-toc" aria-label="Table of contents">
+              <div class="doc-toc-inner">
+                <p class="doc-toc-title">On this page</p>
+                <ol>
+                  <li><a href="#requirements">System requirements</a></li>
+                  <li><a href="#installation">Installation</a></li>
+                  <li><a href="#removal">Upgrade & removal</a></li>
+                  <li><a href="#license">Activation & subscription</a></li>
+                  <li><a href="#principles">How it works</a></li>
+                  <li><a href="#workflow">Workflow &amp; sessions</a></li>
+                  <li><a href="#layers">Layer preparation</a></li>
+                  <li><a href="#containers">Containers & direction</a></li>
+                  <li><a href="#rotation">Rotation & spacing</a></li>
+                  <li><a href="#precision">Precision & countdown</a></li>
+                  <li><a href="#single">Single Item Fill</a></li>
+                  <li><a href="#appearance">Panel appearance</a></li>
+                  <li><a href="#practice">Production practices</a></li>
+                  <li><a href="#troubleshooting">Troubleshooting</a></li>
+                  <li><a href="#changelog">Changelog</a></li>
+                </ol>
+                <a class="cta-button primary" href="trial/"
+                  >Try the full demo</a
+                >
+              </div>
+            </aside>
+            <article class="doc-content">
+              <p class="eyebrow">Arrange Master PRO / User guide</p>
+              <h1>
+                Arrange Master PRO<br /><span class="accent">User guide.</span>
+              </h1>
+              <p class="doc-version-note">
+                Version 1.0.2 · Updated 13 October 2026 · By Andrew R.
+              </p>
+              <p>
+                Arrange Master PRO places artwork inside a container in Adobe
+                Illustrator. This guide covers the working constraints and
+                checks that matter before printing or cutting.
+              </p>
+              <h2 id="requirements">System requirements</h2>
+              <div class="requirements-table-wrapper">
+                <table class="requirements-table">
+                  <thead>
+                    <tr>
+                      <th>Component</th>
+                      <th>Requirement</th>
+                      <th>For larger jobs</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>Illustrator</th>
+                      <td>
+                        Illustrator CC 2018 (22.0) or later with CEP extension
+                        support
+                      </td>
+                      <td>
+                        A current Illustrator version supported by your
+                        operating system
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Windows</th>
+                      <td>64-bit Windows 10 or 11, Intel / AMD x64</td>
+                      <td>Windows 11, quad-core processor</td>
+                    </tr>
+                    <tr>
+                      <th>macOS</th>
+                      <td>
+                        A macOS version supported by your Illustrator release;
+                        use the supplied macOS package
+                      </td>
+                      <td>
+                        Check package compatibility with Intel or Apple Silicon
+                        before installation
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Memory</th>
+                      <td>8 GB RAM</td>
+                      <td>16 GB or more for complex artwork</td>
+                    </tr>
+                    <tr>
+                      <th>Display</th>
+                      <td>1280 × 800 or higher</td>
+                      <td>1920 × 1080 or higher</td>
+                    </tr>
+                    <tr>
+                      <th>Internet</th>
+                      <td colspan="2">
+                        Required for activation, license checks and engine
+                        loading
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="note">
+                The Illustrator version range is not a guarantee that every OS,
+                processor and Illustrator combination has been tested. Use the
+                24-hour demo on the workstation you intend to use.
+              </p>
+              <h2 id="installation">Installation</h2>
+              <p>
+                The download email contains a link to the Arrange Master PRO
+                package. Download the ZIP, extract it, and choose the
+                installation method for your operating system. Close Illustrator
+                before installing so it can load the new extension files on the
+                next launch.
+              </p>
+              <h3>Windows: the supplied EXE installer</h3>
+              <p>
+                The Windows installer places the panel in the Adobe extension
+                directory and applies the settings supplied with the release.
+                You do not need to copy individual plugin files.
+              </p>
+              <ol>
+                <li>Save open Illustrator documents and quit Illustrator.</li>
+                <li>
+                  Extract the downloaded ZIP to a normal folder. Do not run
+                  setup from inside the archive.
+                </li>
+                <li>
+                  Open the Windows installation folder and run the supplied
+                  Arrange Master PRO setup executable.
+                </li>
+                <li>
+                  Follow the installer steps. If another version of PRO is
+                  installed, follow the upgrade instructions below.
+                </li>
+                <li>
+                  Start Illustrator and open
+                  <strong>Window → Extensions → Arrange Master PRO</strong>. In
+                  some releases the menu is named <em>Extensions (Legacy)</em>.
+                </li>
+              </ol>
+              <h4 id="windows-smart-app-control">If Smart App Control blocks the installer</h4>
+              <p>On Windows 11, Smart App Control (SAC) can block the supplied
+                <em>ArrangeMasterPRO-1.0.1-Setup.exe</em>. It can also block the native
+                worker after installation: the panel opens, but Arrange fails with
+                <code>Cannot start the native worker: OS application control or execute permission blocked the binary.</code>
+                If the Windows notification identifies SAC, use these steps for the official PRO package:</p>
+              <ol>
+                <li>Save your documents and quit Illustrator. Open Start, search for <em>Windows Security</em>, and open it.</li>
+                <li>Choose <em>App &amp; browser control → Smart App Control settings</em>.</li>
+                <li>Select <em>Off</em> and confirm the change if Windows asks.</li>
+                <li>Run the supplied setup again. If PRO is already installed, restart Illustrator and retry Arrange.</li>
+              </ol>
+              <p class="note">SAC has no exception for an individual app. Turning it off removes this protection for all apps on the PC; it does not turn off your antivirus.
+                Recent Windows updates allow SAC to be enabled again without reinstalling Windows; older versions may require a reset or reinstall.
+                See <a href="https://support.microsoft.com/en-us/windows/security/threat-malware-protection/smart-app-control-frequently-asked-questions" target="_blank" rel="nofollow noopener noreferrer">Microsoft’s SAC FAQ</a>.</p>
+              <p>If SAC is already off, the setting is unavailable, or the error remains,
+                contact <a href="mailto:info@andrewr.online">info@andrewr.online</a> with the exact message.
+                On a managed workstation, ask your administrator to check the application-control policy.
+                This launch error does not mean your license has expired.</p>
+              <h3>macOS: Anastasiy’s Extension Manager</h3>
+              <p>
+                On macOS, install the supplied ZXP archive through an Adobe
+                extension manager. There is no separate macOS setup application
+                for PRO.
+              </p>
+              <ol>
+                <li>Quit Illustrator and extract the download ZIP.</li>
+                <li>
+                  Install and open
+                  <a
+                    href="https://install.anastasiy.com/"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    >Anastasiy’s Extension Manager</a
+                  >.
+                </li>
+                <li>
+                  Drag the supplied Arrange Master PRO ZXP file into its window.
+                  Follow the manager’s installation prompts and choose
+                  Illustrator if requested.
+                </li>
+                <li>
+                  Wait for installation to finish, then restart Illustrator.
+                </li>
+                <li>
+                  Open
+                  <strong>Window → Extensions → Arrange Master PRO</strong>.
+                </li>
+              </ol>
+              <h3>Alternative: ZXPInstaller</h3>
+              <p>
+                If you already use
+                <a
+                  href="https://zxpinstaller.com/"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  >ZXPInstaller</a
+                >, open it and drag the supplied ZXP file into its window.
+                Restart Illustrator after it reports that installation is
+                complete. Both managers install the same plugin; using a
+                different manager does not change your license.
+              </p>
+              <p>
+                If a manager cannot find Illustrator, check that Illustrator has
+                been installed and launched at least once. Confirm that the
+                manager supports your installed Adobe applications, then try the
+                other manager. Contact support with the manager’s exact error if
+                installation still fails.
+              </p>
+              <figure class="doc-figure">
+                <a href="assets/installation.png" class="screenshot-preview"
+                  ><img
+                    src="assets/installation.png"
+                    alt="Download, install the Windows EXE or macOS ZXP, restart Illustrator and open the PRO panel"
+                    loading="lazy"
+                    width="1000"
+                    height="640"
+                /></a>
+                <figcaption>
+                  Install the package for your platform, restart Illustrator,
+                  then open the extension panel.
+                </figcaption>
+              </figure>
+              <h3>Opening and docking the panel</h3>
+              <p>
+                Arrange Master PRO opens as an Illustrator panel. Dock it beside
+                your usual production tools or leave it floating. Keep enough
+                panel height to see the preview, settings, and Apply / Cancel
+                controls. The separate full-preview window can be resized for
+                inspection.
+              </p>
+              <p>
+                The original Arrange Master and Arrange Master PRO are separate
+                extensions. If both are installed, choose
+                <em>Arrange Master PRO</em> from the Extensions menu; a standard
+                Arrange Master key belongs to the standard plugin.
+              </p>
+
+              <h2 id="removal">Upgrading and complete uninstallation</h2>
+              <h3>Before replacing a version</h3>
+              <p>
+                Finish the current arrangement with Apply or Cancel, save your
+                document, and close Illustrator. For a major update or an
+                installation problem, remove the previous PRO package before
+                installing the replacement. This avoids leaving two copies of
+                the extension in different CEP locations.
+              </p>
+              <p>
+                Install the new version using the same platform method described
+                above. Keep your license email: reinstalling the panel does not
+                purchase another subscription or extend the paid period.
+              </p>
+              <h3>Windows installer users</h3>
+              <ol>
+                <li>Close Illustrator.</li>
+                <li>
+                  Open
+                  <strong>Windows Settings → Apps → Installed apps</strong>.
+                </li>
+                <li>
+                  Find <em>Arrange Master PRO</em> and choose
+                  <strong>Uninstall</strong>. You can also use the uninstaller
+                  supplied with its installation.
+                </li>
+                <li>
+                  After removal, install the new package if you are upgrading.
+                </li>
+              </ol>
+              <h3>ZXP manager users</h3>
+              <p>
+                In a manager that supports removal, select Arrange Master PRO
+                under Illustrator and choose Remove. If your manager only
+                installs ZXP files, remove the extension folder manually as
+                described below. Restart Illustrator after installation or
+                removal.
+              </p>
+              <h3>Manual cleanup when a panel remains installed</h3>
+              <p>
+                With Illustrator closed, look for the folder named
+                <code>com.andrewrybalko.arrangemasterpro</code> in these
+                locations. Remove that PRO folder only. Do not remove the entire
+                extensions directory or the original Arrange Master folder.
+              </p>
+              <dl class="doc-paths">
+                <dt>Windows — user</dt>
+                <dd><code>%APPDATA%\Adobe\CEP\extensions\</code></dd>
+                <dt>Windows — shared</dt>
+                <dd>
+                  <code
+                    >C:\Program Files (x86)\Common
+                    Files\Adobe\CEP\extensions\</code
+                  >
+                </dd>
+                <dt>macOS — user</dt>
+                <dd>
+                  <code
+                    >~/Library/Application Support/Adobe/CEP/extensions/</code
+                  >
+                </dd>
+                <dt>macOS — shared</dt>
+                <dd>
+                  <code
+                    >/Library/Application Support/Adobe/CEP/extensions/</code
+                  >
+                </dd>
+              </dl>
+              <p>
+                On macOS, Finder’s <strong>Go → Go to Folder</strong> command
+                can open the Library paths. On Windows, paste the user path into
+                File Explorer’s address bar. If PRO appears in both the user and
+                shared locations, remove the stale copy before reinstalling.
+              </p>
+              <h3>Uninstalling and subscriptions are separate</h3>
+              <p>
+                Removing local files does not cancel billing on Lava.Top or free
+                an activated device in the license database. Before moving to
+                another computer, open
+                <strong>Settings → License → Release this device</strong> while
+                the old computer is available. Manage subscription renewal on
+                Lava.Top. If you cannot access the old computer, contact support
+                to review its activation.
+              </p>
+
+              <h2 id="license">Activation and subscription</h2>
+              <p>
+                You receive a PRO key by requesting the full demo or purchasing
+                a PRO subscription on Lava.Top. Enter the key in the plugin,
+                rather than an order number or payment reference.
+              </p>
+              <figure class="doc-figure doc-figure--panel doc-float-panel">
+                <a href="assets/activation.png" class="screenshot-preview"
+                  ><img
+                    src="assets/activation.png"
+                    alt="Arrange Master PRO activation panel"
+                    loading="lazy"
+                    width="336"
+                    height="1014"
+                /></a>
+                <figcaption>
+                  Enter the PRO key from your email. The Activate button becomes
+                  available after a key is entered.
+                </figcaption>
+              </figure>
+              <h3>First activation</h3>
+              <ol>
+                <li>
+                  Open Arrange Master PRO with an internet connection available.
+                </li>
+                <li>
+                  Copy the complete key from your license email into the
+                  activation field. Remove accidental leading or trailing
+                  spaces.
+                </li>
+                <li>
+                  Click <strong>Activate</strong>. Wait for the license check
+                  and engine loading to complete.
+                </li>
+                <li>
+                  When the main panel appears, open a saved Illustrator document
+                  and start your first arrangement.
+                </li>
+              </ol>
+
+              <h3>The demo and the paid period</h3>
+              <p>
+                The demo contains all plugin features. It lasts 24 hours from
+                its first activation on one computer. Downloading the archive or
+                receiving the email does not start that timer.
+              </p>
+              <p>
+                A paid subscription follows the registered billing period. Its
+                start and end dates are not postponed by waiting to enter the
+                key. Solo allows 1 activated computer, Studio 3, and Team 8. All
+                three plans contain the same nesting features.
+              </p>
+              <p>
+                Keep internet access available for startup checks, periodic
+                license checks, and current engine loading. A saved activation
+                does not turn a time-limited subscription into a permanent
+                license.
+              </p>
+              <h3>Entering another key</h3>
+              <p>
+                Open the gear menu and choose <strong>License</strong>. You can
+                enter a paid key while a demo is still running. After successful
+                activation, the paid license replaces the current demo on that
+                computer; the demo’s unused hours are not added to the paid
+                period.
+              </p>
+              <p>
+                You can also enter a different subscription key from this
+                window. Check the dates and available device slots of that key
+                before changing licenses. A key does not acquire a new billing
+                period each time it is activated.
+              </p>
+              <h3>Moving a license to another computer</h3>
+              <ol>
+                <li>On the old computer, finish the active arrangement.</li>
+                <li>
+                  Open <strong>Settings → License</strong> and choose
+                  <strong>Release this device</strong>.
+                </li>
+                <li>
+                  Activate the key on the new computer, provided the
+                  subscription is valid and has an available slot.
+                </li>
+              </ol>
+              <p>
+                Releasing a device removes its license activation. It does not
+                change that computer’s hardware identity, erase its trial
+                history, or create another free demo.
+              </p>
+              <h3>Renewal and cancellation</h3>
+              <p>
+                When a successful renewal is registered, the paid period is
+                updated. Check the license status if the panel reports that the
+                period has expired. If you have a payment receipt but the new
+                period is missing, send the purchase email address, receipt
+                reference, and payment time to support.
+              </p>
+              <p>
+                Stopping automatic renewal prevents a later charge; it does not
+                itself extend the license or remove the already registered paid
+                period. Uninstalling the plugin is not a
+                subscription-cancellation method.
+              </p>
+
+              <h2 id="principles">How Arrange Master PRO works</h2>
+              <p>
+                Arrange Master PRO places selected artwork inside a container in
+                Illustrator. You choose the usable material boundary, the
+                objects to place, and the spacing and rotation allowed by the
+                job. The result stays in your Illustrator document for
+                inspection and production.
+              </p>
+              <h3>The container and the items</h3>
+              <p>
+                Select the intended container together with the items. Keep the
+                container larger than an individual item so it can be recognised
+                as the boundary. In Rectangle mode, use a rectangular sheet or
+                roll area. In Custom mode, use the intended vector boundary for
+                shaped stock or an offcut. Check the recognised container in the
+                preview before continuing.
+              </p>
+              <p>
+                Do not select unrelated artboards, page labels, background
+                rectangles, or marks that should remain outside the arrangement.
+                A boundary drawn in Illustrator represents usable material; it
+                does not include a machine’s unprintable or uncuttable margins
+                unless you account for them.
+              </p>
+              <h3>What should move as one item?</h3>
+              <p>
+                A sticker can contain print artwork, a contour-cut path, white
+                ink and a QR code. These parts must remain aligned. Prepare
+                related artwork as an intact item and keep its production layers
+                organised. The plugin recognises supported paths, compound
+                paths, groups, clipping masks, symbols and raster images; they
+                do not all need to be converted to one kind of object.
+              </p>
+              <p>
+                A raster image is placed by its rectangular boundary. A
+                clipping mask defines the visible boundary of clipped artwork.
+                For contour-cut work, use a clean closed cut outline. Check live
+                effects, open contours and opacity masks on a small selection
+                before running a large job.
+              </p>
+              <h3>The original artwork and the working arrangement</h3>
+              <p>
+                As in Arrange Master, the work is organised into a session. Your
+                starting artwork is retained while you inspect a working
+                arrangement. You can change the placement settings, compare
+                results, and then choose whether to commit or cancel. The
+                calculation finishing is not the same as applying the result.
+              </p>
+              <p>
+                Layer Structure Retention keeps recognised production elements
+                on their corresponding layers when the arrangement is applied.
+                It preserves an organised file; it does not repair print and cut
+                artwork that was already misaligned before the session began.
+              </p>
+
+              <h2 id="workflow">
+                The arrangement workflow: understanding sessions
+              </h2>
+              <p>
+                A session starts when you click Arrange for a prepared
+                selection. It belongs to the document where you started it. Save
+                the document first, and finish the session deliberately with
+                Apply or Cancel.
+              </p>
+              <h3>1. Prepare and select</h3>
+              <ol>
+                <li>Open a saved copy of the production file.</li>
+                <li>
+                  Confirm that related print and cut elements are aligned and
+                  that linked images are available.
+                </li>
+                <li>
+                  Select the container and the items. Leave unrelated references
+                  outside the selection.
+                </li>
+                <li>
+                  Turn off Single Item Fill for a mixed set of different
+                  objects.
+                </li>
+              </ol>
+              <h3>2. Set the production constraints</h3>
+              <p>
+                Choose Rectangle or Custom, the collection direction, permitted
+                rotation, and minimum spacing. Check the unit shown beside Min.
+                Spacing. Set these from the material and machine requirements
+                before judging how tightly the objects fit.
+              </p>
+              <h3>3. Run Arrange and inspect the preview</h3>
+              <p>
+                Click <strong>Arrange</strong>. The plugin prepares the
+                selection, searches for a placement and updates the preview. A
+                more complex selection can take longer to prepare than a set of
+                simple shapes. Use the preview to inspect the layout; do not
+                infer cutting safety only from how dense a small thumbnail
+                looks.
+              </p>
+              <p>
+                Open <strong>Open full preview</strong> for a larger view. If
+                the job uses additional containers, use the container arrows to
+                inspect each one. Check the parts near the boundary and inside
+                openings, not just the first sheet.
+              </p>
+              <h3>4. Compare another arrangement within the session</h3>
+              <p>
+                You can change spacing, rotation, collection direction or other
+                placement settings and click Arrange again. This keeps the
+                comparison within the same session. Compare results using the
+                same usable material dimensions unless changing those dimensions
+                is the intended test.
+              </p>
+              <p>
+                If you need a different source selection or a different
+                document, finish the current session first. Do not delete or
+                ungroup session artwork while the plugin is working.
+              </p>
+              <h3>5. Apply or Cancel</h3>
+              <table class="control-table">
+                <thead>
+                  <tr>
+                    <th>Control</th>
+                    <th>What it does</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Arrange</th>
+                    <td>
+                      Starts a session or recalculates the current selection
+                      with the chosen settings.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Apply</th>
+                    <td>
+                      Commits the inspected working arrangement to the document
+                      and finishes the session. Use it when the button is
+                      available and the result is ready.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cancel</th>
+                    <td>
+                      Stops the current work, discards the session’s arrangement
+                      and restores the starting artwork.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>
+                <em
+                  >Always finish with Apply or Cancel before closing the panel,
+                  replacing plugin files, or moving to another document.</em
+                >
+              </p>
+              <h3>If you switch documents or interrupt a session</h3>
+              <p>
+                If Illustrator is showing another document, return to the
+                document where Arrange was started before applying or
+                cancelling. PRO checks the active document; it does not apply
+                that session to another file.
+              </p>
+              <p>
+                After an interrupted session, reopen the original document and
+                the PRO panel, then inspect the recovered state. Avoid manually
+                removing unfamiliar temporary groups or hidden artwork. If the
+                state is unclear, keep a saved copy and contact support before
+                continuing.
+              </p>
+
+              <h2 id="layers">Prepare the layer structure</h2>
+              <p>
+                Retain separate print, cut, white-ink, engraving, guide and code
+                layers where the job needs them. Keep related elements aligned
+                before arranging. Use intact groups for multipart artwork that
+                must stay together.
+              </p>
+              <p>
+                PRO retains the recognised layer structure when applying
+                placement. It does not guess how to repair an already mismatched
+                print and cut file. After arranging, toggle the production
+                layers and inspect registration, spot colours, overprint
+                settings and locked reference elements in Illustrator.
+              </p>
+              <figure class="doc-figure">
+                <a href="assets/layers.png" class="screenshot-preview"
+                  ><img
+                    src="assets/layers.png"
+                    alt="Layered print and cut artwork retaining separate production layers after nesting"
+                    loading="lazy"
+                    decoding="async"
+                    class=""
+                    width="1000"
+                    height="640"
+                /></a>
+                <figcaption>
+                  Layer retention keeps the document usable for the next
+                  production step.
+                </figcaption>
+              </figure>
+              <h2 id="containers">Containers and direction</h2>
+              <p>
+                <strong>Rectangle</strong> is suitable for a sheet or
+                fixed-width strip. <strong>Custom</strong> uses a selected
+                vector boundary for shaped stock or offcuts. Choose a clear
+                closed path; inspect complex compound boundaries in the preview.
+              </p>
+              <p>
+                Direction selects the edge toward which the layout is collected:
+                down, up, right or left. For a roll, keep the usable width fixed
+                and compare occupied length. For sheets, compare the number of
+                containers and whether the leftover area is reusable.
+              </p>
+              <p>
+                <strong>Outer padding off</strong> changes whether spacing is
+                applied at the container edge. Turn it off only when the
+                material and machine permit the objects to approach that
+                boundary.
+              </p>
+              <p>
+                <strong>Create additional containers</strong> continues a job on
+                matching new containers when not all selected artwork fits.
+                Inspect each container rather than only the first preview.
+              </p>
+              <figure class="doc-figure">
+                <a href="assets/containers.png" class="screenshot-preview"
+                  ><img
+                    src="assets/containers.png"
+                    alt="A job continuing across three matching containers"
+                    loading="lazy"
+                    decoding="async"
+                    class=""
+                    width="1000"
+                    height="640"
+                /></a>
+                <figcaption>
+                  Extra containers handle the remaining selection; they do not
+                  change the material size.
+                </figcaption>
+              </figure>
+              <h2 id="rotation">Rotation and minimum spacing</h2>
+              <ul>
+                <li><strong>0°:</strong> preserve every item’s orientation.</li>
+                <li>
+                  <strong>180°:</strong> allow a half-turn while keeping its
+                  axis.
+                </li>
+                <li><strong>90°:</strong> allow orthogonal quarter-turns.</li>
+                <li>
+                  <strong>360°:</strong> allow free rotation when the material
+                  and artwork permit it.
+                </li>
+              </ul>
+              <p>
+                Textile grain, brushed finishes, directional prints and
+                lettering can restrict rotation. Use the narrowest permitted
+                set, not automatically 360°.
+              </p>
+              <p>
+                <strong>Min. Spacing</strong> uses the document’s units. The
+                control accepts values down to 0.001; this is an input limit,
+                not a safe cutting distance. Choose the clearance from your
+                production requirements, including tool width, bleed and
+                handling room.
+              </p>
+              <figure class="doc-figure">
+                <a href="assets/rotation.png" class="screenshot-preview"
+                  ><img
+                    src="assets/rotation.png"
+                    alt="Rotation constraints illustrated as no rotation, half-turn, quarter-turn and free rotation"
+                    loading="lazy"
+                    decoding="async"
+                    class=""
+                    width="1000"
+                    height="640"
+                /></a>
+                <figcaption>
+                  Set rotation to match the production job.
+                </figcaption>
+              </figure>
+              <h2 id="precision">Analysis precision and final countdown</h2>
+              <p>
+                Analysis Precision controls how closely the outline is analysed.
+                Start with a practical setting, then use finer analysis for
+                curved or detailed cut paths where the additional work is
+                useful.
+              </p>
+              <p>
+                Final countdown determines how long the search may continue
+                after the progress conditions trigger that phase. A longer
+                countdown can help difficult sets but should be judged against
+                the material improvement it actually produces. Use Apply when a
+                suitable result is ready; Cancel restores the starting
+                arrangement.
+              </p>
+              <h2 id="single">Single Item Fill</h2>
+              <p>
+                Select one source item and the container, then enable Single
+                Item Fill. The plugin creates repeated placements and evaluates
+                suitable patterns for that shape. Rotation settings still
+                matter: alternating copies require the corresponding turn to be
+                allowed.
+              </p>
+              <p>
+                Check copy count, spacing and bleed in the preview. Keep the
+                source artwork grouped if its print and cut elements must repeat
+                together. If this is the only feature you need,
+                <a href="https://andrewr.online/arrangemaster/"
+                  >Arrange Master</a
+                >
+                also provides Single Item Fill.
+              </p>
+              <figure class="doc-figure">
+                <a href="assets/patterns.png" class="screenshot-preview"
+                  ><img
+                    src="assets/patterns.png"
+                    alt="Grid, staggered and alternating repeat layouts for Single Item Fill"
+                    loading="lazy"
+                    decoding="async"
+                    class=""
+                    width="1000"
+                    height="640"
+                /></a>
+                <figcaption>
+                  Pattern diagrams show the principle; capacity depends on the
+                  shape and container.
+                </figcaption>
+              </figure>
+              <h2 id="appearance">Panel appearance and language</h2>
+              <p>
+                Open the gear menu. Choose Background, Accent color and Language
+                to suit your workspace. Open License at the top of the menu for
+                activation information. Reload local engine is available if
+                support asks you to refresh the local engine.
+              </p>
+              <figure class="doc-figure">
+                <a href="assets/panel-full.png" class="screenshot-preview"
+                  ><img
+                    src="assets/panel-full.png"
+                    alt="English Arrange Master PRO panel"
+                    loading="lazy"
+                    decoding="async"
+                    class=""
+                    width="1000"
+                    height="542"
+                /></a>
+                <figcaption>
+                  The same controls are available across supported interface
+                  languages.
+                </figcaption>
+              </figure>
+              <h2 id="practice">Production practices</h2>
+              <ul>
+                <li>
+                  <strong>Compare the same job.</strong> Keep scale, container,
+                  rotation and clearance identical when measuring an
+                  improvement.
+                </li>
+                <li>
+                  <strong>Keep cut contours simple.</strong> Remove stray
+                  points, accidental duplicate paths and unintended open ends.
+                </li>
+                <li>
+                  <strong>Plan bleed and weeding.</strong> The closest possible
+                  placement is not always the easiest to finish.
+                </li>
+                <li>
+                  <strong>Check references.</strong> Confirm registration marks,
+                  guides, QR codes and excluded reference objects before output.
+                </li>
+                <li>
+                  <strong>Keep linked images available.</strong> Resolve missing
+                  links before arranging a print job.
+                </li>
+                <li>
+                  <strong>Inspect problematic effects.</strong> Live opacity
+                  masks and gradient meshes can need preparation or expansion in
+                  a saved copy.
+                </li>
+                <li>
+                  <strong>Use the right output software.</strong> PRO prepares
+                  the layout. Your RIP and machine software still control print
+                  and cutting settings.
+                </li>
+              </ul>
+              <h2 id="troubleshooting">Troubleshooting and support</h2>
+              <p>
+                Start with the symptom you can see. A missing panel, a rejected
+                key, a local file-permission error and an unexpected arrangement
+                have different causes. Keep the exact message, including any
+                file path or error code.
+              </p>
+              <h3>The panel is absent from the Extensions menu</h3>
+              <ol>
+                <li>Quit and restart Illustrator after installation.</li>
+                <li>
+                  Check <strong>Window → Extensions</strong> and, where present,
+                  <strong>Extensions (Legacy)</strong>.
+                </li>
+                <li>
+                  Confirm that the manager installed Arrange Master PRO for the
+                  Illustrator version you are launching.
+                </li>
+                <li>
+                  Check for duplicate PRO folders in the user and shared CEP
+                  locations listed under removal.
+                </li>
+                <li>
+                  Reinstall using the supplied Windows setup or the macOS ZXP
+                  manager.
+                </li>
+              </ol>
+              <p>
+                If the panel is still absent, send support the Illustrator
+                version, operating system, installation method, and the
+                manager’s result. An old standard Arrange Master installation
+                does not replace the PRO package.
+              </p>
+              <h3>The CEP panel opens but stays blank</h3>
+              <p>
+                Close Illustrator and reinstall the complete package. Do not
+                copy only an HTML file or an executable into an existing
+                installation. Check whether your security software blocked one
+                of the installed files and whether your user account can read
+                the extension folder.
+              </p>
+              <p>
+                On macOS, if the extension manager or the system reports that a
+                package is quarantined or cannot be verified, keep that exact
+                message and contact support for the installation steps
+                appropriate to the supplied release. On Windows, use the
+                official setup rather than applying registry changes for an
+                unrelated CEP version.
+              </p>
+              <p>
+                If only PRO is blank, check its installation first. If every CEP
+                extension is affected, include that fact in your report: it
+                helps distinguish a plugin installation problem from an
+                Illustrator or CEP issue.
+              </p>
+              <h3>The activation key is rejected</h3>
+              <ol>
+                <li>
+                  Use the PRO key from the license email, not a standard Arrange
+                  Master key, Lava.Top invoice ID or email address.
+                </li>
+                <li>Copy the complete key and remove accidental spaces.</li>
+                <li>Check that its registered period has not ended.</li>
+                <li>
+                  For a device-limit message, release an old activation or
+                  contact support if that computer is unavailable.
+                </li>
+                <li>
+                  For a connection error, check internet access before trying
+                  the key again.
+                </li>
+              </ol>
+              <p>
+                Open <strong>Settings → License</strong> to retry or enter
+                another valid key. Reinstalling the panel does not reset demo
+                eligibility or add device slots.
+              </p>
+              <h3>Activation succeeds, but the engine will not load</h3>
+              <p>
+                Keep Illustrator connected while the plugin finishes loading.
+                Check the exact error rather than repeatedly activating another
+                key. If the package reports a file-integrity error, reinstall
+                the supplied release and do not modify files inside it. If a
+                local engine refresh is needed, finish the session first and use
+                <strong>Settings → Reload local engine</strong>.
+              </p>
+              <h3>EACCES: access denied</h3>
+              <p>
+                This normally identifies a local file or folder the current user
+                cannot access. Read the path in the message, check its
+                permissions and review security-software protection history. If
+                the affected location belongs to the plugin installation, close
+                Illustrator and reinstall with the supplied method. Switching
+                networks will not fix a local permission problem.
+              </p>
+              <h3>ECONNREFUSED or another connection error</h3>
+              <p>
+                Check whether a firewall, proxy or security application is
+                refusing the connection. Where required by your workstation
+                policy, allow Illustrator and its CEP process to make the
+                necessary connections. On Windows those applications include
+                <code>Illustrator.exe</code> and <code>CEPHtmlEngine.exe</code>.
+              </p>
+              <p>
+                If you use a proxy client, confirm that it is running and
+                accepting connections at its configured address and port.
+                Compare the result on another permitted network to identify a
+                network restriction. Keep the system clock correct, because an
+                incorrect date can also affect secure connections and license
+                checks.
+              </p>
+              <h3>The container or the layout is unexpected</h3>
+              <p>
+                Check the selected boundary, Rectangle / Custom mode, item
+                grouping, units, rotation and spacing. Remove unrelated selected
+                rectangles and reference objects. For Custom mode, inspect
+                closed contours, compound openings and the clipping path. A
+                smaller test selection often identifies the item causing the
+                problem.
+              </p>
+              <p>
+                For live opacity masks, meshes or complex effects, try a
+                prepared copy of the file rather than changing the only
+                production master. Resolve missing image links. If ruler units
+                change while the panel is open and its label is out of date,
+                finish the session and reopen the panel before entering a
+                clearance.
+              </p>
+              <h3>Some objects do not fit</h3>
+              <p>
+                Check whether an item is larger than the usable container under
+                every permitted rotation. Increasing search time cannot make an
+                oversized part fit. Review spacing and orientation against the
+                actual job, or enable
+                <strong>Create additional containers</strong> when the remaining
+                items should continue onto more material.
+              </p>
+              <h3>The license email or renewal is missing</h3>
+              <p>
+                Check spam and the address entered on Lava.Top or the demo form.
+                Contact
+                <a href="mailto:info@andrewr.online">info@andrewr.online</a>
+                with the purchase email, plan, payment time and receipt
+                reference. Do not buy another subscription just to retry
+                delivery.
+              </p>
+              <h3>What to send with a support request</h3>
+              <ul>
+                <li>
+                  Your OS and Illustrator version, plus the PRO version shown in
+                  the package.
+                </li>
+                <li>The exact message and a screenshot of the panel.</li>
+                <li>
+                  The steps that lead to the problem, including whether it
+                  happens in a new simple document.
+                </li>
+                <li>
+                  A small reproducible file you are allowed to share, if the
+                  issue concerns artwork.
+                </li>
+                <li>
+                  Your purchase email and receipt reference for a license issue.
+                  Do not include card details.
+                </li>
+              </ul>
+              <p class="note">
+                For help with a specific job, write to
+                <a href="mailto:info@andrewr.online">info@andrewr.online</a>.
+                Keep a saved copy of the affected document while the problem is
+                being checked.
+              </p>
+
+              <h2 id="changelog">Changelog</h2>
+              <h3>Version 1.0.2 · October 13, 2026</h3>
+              <p>
+                Maintenance update. Added support for correctly processing transparency masks.
+                Support for older versions of CEP 8 and CEP 9.
+              </p>
+              <h3>Version 1.0.1 · October 9, 2026</h3>
+              <p>
+                Maintenance update. Updated internal plugin support systems and
+                optimized temporary file creation and operation logging.
+              </p>
+              <h3>Version 1.0.0 · October 5, 2026</h3>
+              <p>
+                Initial public release of Arrange Master PRO for Adobe Illustrator on
+                Windows and macOS, with a native nesting engine.
+              </p>
+              <ul>
+                <li>
+                  True-shape nesting in rectangular or custom containers, with
+                  Layer Structure Retention to keep related print, cut and
+                  reference artwork together in its original layers.
+                </li>
+                <li>
+                  Single Item Fill for repeated designs and additional containers
+                  for jobs that need more than one sheet.
+                </li>
+                <li>
+                  A complete arrangement workflow with panel and full-window
+                  previews, Apply / Cancel controls, and a customisable interface
+                  with multiple languages.
+                </li>
+                <li>
+                  Full 24-hour demo and Solo, Studio or Team subscriptions,
+                  with activation and device management in Settings.
+                </li>
+              </ul>
+              <p class="note">
+                Need help with a specific file? Contact
+                <a href="mailto:info@andrewr.online">info@andrewr.online</a>
+                with a description and a small reproducible example you are
+                allowed to share.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://andrewr.online/#person",
+      "name": "Andrew R.",
+      "url": "https://andrewr.online/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://arrangemasterpro.andrewr.online/#website",
+      "name": "Arrange Master PRO",
+      "url": "https://arrangemasterpro.andrewr.online/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://andrewr.online/#person"
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://arrangemasterpro.andrewr.online/documentation.html#webpage",
+      "url": "https://arrangemasterpro.andrewr.online/documentation.html",
+      "name": "Documentation — Arrange Master PRO for Adobe Illustrator",
+      "headline": "Arrange Master PROUser guide.",
+      "description": "Install and activate Arrange Master PRO for Illustrator on Windows and macOS. Windows 11 Smart App Control help, nesting settings, layer preparation and troubleshooting.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://arrangemasterpro.andrewr.online/#website"
+      },
+      "about": {
+        "@id": "https://arrangemasterpro.andrewr.online/#software"
+      },
+      "author": {
+        "@id": "https://andrewr.online/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://arrangemasterpro.andrewr.online/documentation.html#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://arrangemasterpro.andrewr.online/documentation.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Arrange Master PRO",
+          "item": "https://arrangemasterpro.andrewr.online/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Documentation",
+          "item": "https://arrangemasterpro.andrewr.online/documentation.html"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <footer class="main-footer">
+      <div class="container">
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="index.html#examples">Examples</a>
+          <a href="index.html#features">Features</a>
+          <a href="index.html#pricing">Pricing</a>
+          <a href="trial/">Demo</a>
+          <strong class="footer-current" aria-current="page">Documentation</strong>
+          <a href="index.html#faq">FAQ</a>
+          <a href="https://andrewr.online/privacy.html">Privacy</a>
+          <a href="https://blog.andrewr.online/" target="_blank" rel="noopener">Blog</a>
+        </nav>
+        <div class="social-links">
+          <a
+            href="https://x.com/andrew_r_tools"
+            target="_blank"
+            rel="noopener noreferrer me nofollow"
+            class="social-link-item"
+            aria-label="X"
+            ><img
+              class="social-icon"
+              src="assets/logos/x-logo.svg"
+              alt=""
+              width="22"
+              height="22" /></a
+          ><a
+            href="https://t.me/andrew_r_tools"
+            target="_blank"
+            rel="noopener noreferrer me nofollow"
+            class="social-link-item"
+            aria-label="Telegram"
+            ><img
+              class="social-icon"
+              src="assets/logos/telegram-logo.svg"
+              alt=""
+              width="22"
+              height="22" /></a
+          ><a
+            href="https://www.instagram.com/andrewrtools/"
+            target="_blank"
+            rel="noopener noreferrer me nofollow"
+            class="social-link-item"
+            aria-label="Instagram"
+            ><img
+              class="social-icon"
+              src="assets/logos/instagram-logo.svg"
+              alt=""
+              width="22"
+              height="22" /></a
+          ><a
+            href="https://www.reddit.com/r/AndrewRTools/"
+            target="_blank"
+            rel="noopener noreferrer me nofollow"
+            class="social-link-item"
+            aria-label="Reddit"
+            ><img
+              class="social-icon"
+              src="assets/logos/reddit-logo.svg"
+              alt=""
+              width="22"
+              height="22" /></a
+          ><a
+            href="https://www.youtube.com/@andrewrtools"
+            target="_blank"
+            rel="noopener noreferrer me nofollow"
+            class="social-link-item"
+            aria-label="YouTube"
+            ><img
+              class="social-icon"
+              src="assets/logos/yt-logo.svg"
+              alt=""
+              width="22"
+              height="22" /></a
+          ><a href="mailto:info@andrewr.online" class="social-link-item"
+            ><img
+              class="social-icon"
+              src="assets/logos/email-icon.svg"
+              alt=""
+              width="22"
+              height="22"
+            /><span class="social-text">info@andrewr.online</span></a
+          >
+        </div>
+        <p>
+          © 2026 <a href="https://andrewr.online/">Andrew R. Tools</a>. All
+          rights reserved.
+        </p>
+        <p class="fine-print">
+          An independent plugin for Adobe Illustrator. Adobe and Illustrator are
+          trademarks of Adobe.
+        </p>
+      </div>
+    </footer>
+    <dialog id="image-dialog" aria-label="Image gallery"><button type="button" class="dialog-close" aria-label="Close image"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M6 6 L18 18 M18 6 L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg></button><button type="button" class="dialog-previous" aria-label="Previous image" hidden><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M15.5 5 L8.5 12 L15.5 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></button><figure class="dialog-figure"><img alt="" id="dialog-image" /><figcaption id="dialog-caption" aria-live="polite"></figcaption></figure><button type="button" class="dialog-next" aria-label="Next image" hidden><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M8.5 5 L15.5 12 L8.5 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></button></dialog>
+  </body>
+</html>

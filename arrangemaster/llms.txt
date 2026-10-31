@@ -1,0 +1,24 @@
+# Arrange Master
+
+Arrange Master is a true-shape nesting and layout plugin for Adobe Illustrator on Windows and macOS.
+
+## Current licenses
+
+Prices are in USD and are one-time purchases, not subscriptions. All three licenses include the same plugin features; usage rights and device limits differ.
+
+- Personal License: $39; 1 activated device. Personal use and freelance client projects.
+- Team License: $79; up to 3 activated devices. Commercial use for design teams and agencies.
+- Extended Commercial License: $159; up to 8 activated devices. Includes mass production and authorized digital resale under the license terms.
+- All three are lifetime licenses with free v1.x updates.
+
+## Product and official sources
+
+- [Product, pricing and FAQ](https://andrewr.online/arrangemaster/)
+- [Documentation](https://andrewr.online/arrangemaster/documentation.html)
+- [Full 24-hour trial](https://andrewr.online/arrangemaster/trial/)
+
+Methods include Grid Layout, Bounds Packing, Dense Packing and Shape Respect. Single Item Fill repeats one design; Disperse spreads objects across a container. Requires internet for activation, license checks and engine downloads.
+
+Arrange Master PRO is a separate subscription product. Its Solo, Studio and Team plans must not be confused with the lifetime licenses above. Its official address remains https://arrangemasterpro.andrewr.online/.
+
+License prices and device limits updated 31 October 2026.

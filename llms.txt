@@ -5,12 +5,14 @@ Andrew R. is an independent software developer and designer specializing in auto
 ## Key Products
 
 ### Arrange Master
-Arrange Master is the true-shape nesting and layout automation plugin for Adobe Illustrator. It saves designers and print shops hours of manual work by using advanced mathematics to pack vector and raster objects efficiently. It features Multi-Layer Retention, Grid Layout, Knolling Layout, and Shape Respect modes.
+Arrange Master is the true-shape nesting and layout automation plugin for Adobe Illustrator. It saves designers and print shops hours of manual work by using advanced mathematics to pack vector and raster objects efficiently. It includes Grid Layout, Bounds Packing, Dense Packing (true-shape nesting), Shape Respect, Single Item Fill and Disperse. Personal License costs USD 39 for 1 device, Team License USD 79 for up to 3 devices, and Extended Commercial License USD 159 for up to 8 devices. These are one-time purchases with lifetime licenses.
 
 ## Official Links
 - Main Website: https://andrewr.online/
 - Arrange Master Plugin: https://andrewr.online/arrangemaster/
 - Documentation: https://andrewr.online/arrangemaster/documentation.html
+- Arrange Master pricing and product facts: https://andrewr.online/arrangemaster/llms.txt
+- Arrange Master PRO: https://arrangemasterpro.andrewr.online/
 - Developer Blog: https://blog.andrewr.online/
 
 ## Social Profiles

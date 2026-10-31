@@ -1,0 +1,50 @@
+[
+  {
+    "id": "moto",
+    "label": "Motorcycle decals",
+    "title": "One kit. Print and cut layers still together.",
+    "description": "Nest an irregular motorcycle graphic kit on a fixed-width vinyl roll. Keep each print element aligned with its cut path, white-ink layer and reference marks. Compare the occupied length before sending the job to the RIP.",
+    "setting": "Mixed contours · free rotation · fixed roll width",
+    "type": "moto"
+  },
+  {
+    "id": "acrylic",
+    "label": "Acrylic keyrings",
+    "title": "Use the offcuts between the outlines.",
+    "description": "Fit rounded and irregular keyring designs onto cast acrylic. Leave the clearance your laser and material require. Keep engraving artwork and cut outlines registered, then inspect every edge before production.",
+    "setting": "Cast acrylic · engraving + cut · safety clearance",
+    "type": "acrylic"
+  },
+  {
+    "id": "stickers",
+    "label": "Sticker sets",
+    "title": "Different stickers. One production sheet.",
+    "description": "Arrange a mixed sticker order without reducing artwork to rectangles. Keep bleed and cut contours together; allow extra clearance for weeding and cutting. Dense placement is useful only when the finished sheet is still practical to handle.",
+    "setting": "Mixed sizes · print + contour cut · bleed clearance",
+    "type": "stickers"
+  },
+  {
+    "id": "jersey",
+    "label": "Football shirts",
+    "title": "Keep the grain direction. Turn only 180°.",
+    "description": "Nest the front, back and sleeve pieces of football shirts at their original size. Keep the fabric grain aligned instead of allowing arbitrary rotation. Select 180° when the material allows reversing the piece along the same axis. Use 0° for one-way prints, directional surfaces or a nap that must stay consistent.",
+    "setting": "Textile · 180° rotation · no scaling",
+    "type": "jersey"
+  },
+  {
+    "id": "parts",
+    "label": "Industrial parts",
+    "title": "Quarter turns. Openings become usable space.",
+    "description": "Use orthogonal rotation for parts that may turn by 90°. Arrange Master PRO can place a smaller part inside a usable opening in another part. The schematic also shows what happens when a packing approach treats openings as solid.",
+    "setting": "90° rotation · compound paths · usable holes",
+    "type": "parts"
+  },
+  {
+    "id": "posters",
+    "label": "Product images",
+    "title": "Bottles, tubes and jars. One print layout.",
+    "description": "Arrange raster images of cosmetic and household-product bottles, tubes and jars on a print sheet. Keep the original image artwork while comparing the occupied area. Raster images use their bounds or a clipping mask; for contour-cut output, prepare a closed cut outline. Keep 0° for upright artwork or allow 90° when orientation is flexible.",
+    "setting": "Raster artwork · visible bounds · 0° or 90°",
+    "type": "posters"
+  }
+]

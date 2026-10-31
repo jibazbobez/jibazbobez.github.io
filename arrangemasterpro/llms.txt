@@ -1,0 +1,14 @@
+# Arrange Master PRO
+
+> True-shape nesting plugin for Adobe Illustrator by Andrew R. Tools. Production workflows: print shops, signs, stickers, acrylic and laser cutting.
+
+- [Product and plans](https://arrangemasterpro.andrewr.online/): True-shape nesting, layer retention, Single Item Fill and additional containers. Solo 1, Studio 3, Team 8 devices. Solo $24/month, Studio $49/month, Team $99/month. Final terms on Lava.Top.
+- [Documentation](https://arrangemasterpro.andrewr.online/documentation.html): Requirements, installation, activation, production settings, limitations and troubleshooting.
+- [Full 24-hour trial](https://arrangemasterpro.andrewr.online/trial/): All features, one computer, 24 hours from first activation. Key and package link by email only.
+- [Standard Arrange Master](https://andrewr.online/arrangemaster/): Separate one-time-purchase plugin for individual designers and workshops; also offers Single Item Fill.
+
+## Limitations
+Illustrated comparisons are schematics, not measured benchmarks. Material calculator values are editable estimates. PRO does not replace a RIP or machine control software. Requires internet for activation, license checks and engine loading.
+
+## Support
+Andrew R.: https://andrewr.online/ ; email: info@andrewr.online. Updated 2026-10-06, plugin 1.0.0.
